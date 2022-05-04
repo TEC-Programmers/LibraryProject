@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Database\Entities\" />
     <Folder Include="DTO%27s\" />
-    <Folder Include="Database\" />
   </ItemGroup>
 
 </Project>
