@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.Tests.Services
 {
-    internal class AuthorServicTests
+    internal class ReservationServiceTests
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LibraryProject.DTO_s
 {
-    public class AuthorRequest
+    public class ReservationResponse
     {
     }
 }

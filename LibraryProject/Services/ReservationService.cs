@@ -5,7 +5,7 @@ namespace LibraryProject.Services
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthorService : ControllerBase
+    public class ReservationService : ControllerBase
     {
     }
 }

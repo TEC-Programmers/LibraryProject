@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.Tests.Repositories
 {
-    internal class AuthorRepositoryTests
+    internal class ReservationRepositoryTests
     {
     }
 }

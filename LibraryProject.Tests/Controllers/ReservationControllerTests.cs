@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.Tests.Controllers
 {
-    internal class AuthorControllerTests
+    internal class ReservationControllerTests
     {
     }
 }
