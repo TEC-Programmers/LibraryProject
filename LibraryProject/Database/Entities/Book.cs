@@ -13,13 +13,13 @@ namespace LibraryProject.Database.Entities
         public string Title { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]
-        public decimal Language { get; set; }
+        public string Language { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]
         public string Description { get; set; }
 
-        [Column(TypeName = "nvarchar(32)")]
-        public string PublishYear { get; set; }
+        [Column(TypeName = "smallint")]
+        public int PublishYear { get; set; }
 
         public int CategoryId { get; set; }
         
@@ -27,13 +27,13 @@ namespace LibraryProject.Database.Entities
         public Category Category { get; set; }
         public int AuthorId { get; set; }
 
-        [ForeignKey("AuhtorId")]
-        public Author Author { get; set; }
+        //[ForeignKey("AuhtorId")]
+        //public Author Author { get; set; }
 
-        public int PublisherId { get; set; }
+        //public int PublisherId { get; set; }
 
-        [ForeignKey("PublisherId")]
-        public Publisher  Publisher{ get; set; }
+        //[ForeignKey("PublisherId")]
+        //public Publisher  Publisher{ get; set; }
 
 
     }

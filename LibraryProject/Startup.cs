@@ -1,3 +1,4 @@
+using LibraryProject.API.Repositories;
 using LibraryProject.API.Services;
 using LibraryProject.Database;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +20,9 @@ namespace LibraryProject
 {
     public class Startup
     {
+        private readonly string CORSRules = "_CORSRules";
+        //private readonly IWebHostEnvironment _env;
+        //private readonly IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +34,10 @@ namespace LibraryProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IBookService, BookService>();
+            
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -52,6 +60,7 @@ namespace LibraryProject
 
             app.UseHttpsRedirection();
 
+            app.UseCors(CORSRules);
             app.UseRouting();
 
             app.UseAuthorization();
