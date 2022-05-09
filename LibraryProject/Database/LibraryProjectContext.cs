@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LibraryProject.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryProject.Database
 {
@@ -6,5 +7,8 @@ namespace LibraryProject.Database
     {
         public LibraryProjectContext() { }
         public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }
+
+        public DbSet<Book> Book { get; set; }
+        public DbSet<Category> Category { get; set; }
     }
 }
