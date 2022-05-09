@@ -1,4 +1,6 @@
 using LibraryProject.Database;
+using LibraryProject.Repositories;
+using LibraryProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static LibraryProject.Services.ReservationService;
 
 namespace LibraryProject
 {
@@ -31,11 +34,15 @@ namespace LibraryProject
             services.AddDbContext<LibraryProjectContext>(
                 x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
 
+            
+            services.AddScoped<IReservationService, ReservationService>();
+            services.AddScoped<IReservationRepository, ReservationRepository >();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LibraryProject", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LibraryProject.API", Version = "v1" });
             });
         }
 
@@ -46,7 +53,7 @@ namespace LibraryProject
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LibraryProject v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LibraryProject.API v1"));
             }
 
             app.UseHttpsRedirection();
