@@ -36,15 +36,15 @@ namespace LibraryProject.API.Services
             /**/
             List<User> users = await _userRepository.GetAll();
 
-            return users == null ? null : users.Select(c => new UserResponse
+            return users == null ? null : users.Select(u => new UserResponse
             {
-                Id = c.Id,
-                Email = c.Email,
-                FirstName = c.FirstName,
-                MiddleName = c.MiddleName,
-                LastName = c.LastName,
-                Password = c.Password,
-                Role = c.Role
+                Id = u.Id,
+                Email = u.Email,
+                FirstName = u.FirstName,
+                MiddleName = u.MiddleName,
+                LastName = u.LastName,
+                Password = u.Password,
+                Role = u.Role
             }).ToList();
         }
 

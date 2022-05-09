@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using LibraryProject.API.Repositories;
 using System.Threading.Tasks;
+using LibraryProject.API.Helpers;
+using System.Collections.Generic;
 
 namespace LibraryProject.API.Controllers
 {
@@ -22,6 +24,36 @@ namespace LibraryProject.API.Controllers
             _userService = userService;
         }
 
+        // [Authorize(Role.Admin)] // only admins are allowed entry to this endpoint
+        [AllowAnonymous]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                List<UserResponse> users = await _userService.GetAll();
+
+                if (users == null)
+                {
+                    return Problem("Got no data, not even an empty list, this is unexpected");
+                }
+
+                if (users.Count == 0)
+                {
+                    return NoContent();
+                }
+
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
 
 
         [AllowAnonymous]
@@ -44,6 +76,7 @@ namespace LibraryProject.API.Controllers
             }
         }
 
+      
 
     }
 }
