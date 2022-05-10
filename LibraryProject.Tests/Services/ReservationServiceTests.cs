@@ -109,7 +109,7 @@ namespace LibraryProject.Tests.Services
 
             //Asser
             Assert.NotNull(result);
-            Assert.IsType<List<ReservationResponse>>(result);
+            Assert.IsType<ReservationResponse>(result);
             Assert.Equal(reservation.Id,result.reservationId);
             Assert.Equal(reservation.userId,result.userId);
             Assert.Equal(reservation.bookId,result.bookId);
@@ -275,6 +275,7 @@ namespace LibraryProject.Tests.Services
 
             Reservation deletedReservation = new()
             {
+                Id = 1,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
