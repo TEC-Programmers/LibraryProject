@@ -37,7 +37,7 @@ namespace LibraryProject.Tests.Repositories
 
             _context.reservation.Add(new()
             {
-                reservationId = 1,
+                Id = 1,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -46,7 +46,7 @@ namespace LibraryProject.Tests.Repositories
 
             _context.reservation.Add(new()
             {
-                reservationId = 2,
+                Id = 2,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -92,7 +92,7 @@ namespace LibraryProject.Tests.Repositories
 
             _context.reservation.Add(new()
             {
-                reservationId = reservationId,
+                Id = reservationId,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -107,7 +107,7 @@ namespace LibraryProject.Tests.Repositories
             //Assert
             Assert.NotNull(result);
             Assert.IsType<Reservation>(result);
-            Assert.Equal(reservationId, result.reservationId);
+            Assert.Equal(reservationId, result.Id);
         }
 
 
@@ -135,7 +135,7 @@ namespace LibraryProject.Tests.Repositories
 
             Reservation reservation = new()
             {
-                reservationId = 1,
+                Id = 1,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -150,7 +150,7 @@ namespace LibraryProject.Tests.Repositories
 
             Assert.NotNull(result);
             Assert.IsType<Reservation>(result);
-            Assert.Equal(expectedId, result.reservationId);
+            Assert.Equal(expectedId, result.Id);
         }
 
         [Fact]
@@ -162,7 +162,7 @@ namespace LibraryProject.Tests.Repositories
 
             Reservation reservation = new()
             {
-                reservationId = 1,
+                Id = 1,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -190,7 +190,7 @@ namespace LibraryProject.Tests.Repositories
 
             Reservation reservation = new()
             {
-                reservationId = reservationId,
+                Id = reservationId,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -202,7 +202,7 @@ namespace LibraryProject.Tests.Repositories
 
             Reservation updateReservation = new()
             {
-                reservationId = reservationId,
+                Id = reservationId,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -210,12 +210,12 @@ namespace LibraryProject.Tests.Repositories
             };
 
             //Act
-            var result = await _reservationRepository.UpdateReservation(reservationId, updateReservation);
+            var result = await _reservationRepository.UpdateExistingReservation(reservationId, updateReservation);
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<Reservation>(result);
-            Assert.Equal(reservationId, result.reservationId);
+            Assert.Equal(reservationId, result.Id);
             Assert.Equal(updateReservation.userId, result.userId);
             Assert.Equal(updateReservation.bookId, result.bookId);
             Assert.Equal(updateReservation.reserved_At, result.reserved_At);
@@ -234,7 +234,7 @@ namespace LibraryProject.Tests.Repositories
 
             Reservation updatedReservation = new()
             {
-                reservationId = reservationId,
+                Id = reservationId,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -245,7 +245,7 @@ namespace LibraryProject.Tests.Repositories
 
 
         //Act
-        var result = await _reservationRepository.UpdateReservation(reservationId, updatedReservation);
+        var result = await _reservationRepository.UpdateExistingReservation(reservationId, updatedReservation);
 
         //Assert
         Assert.Null(result);
@@ -256,8 +256,50 @@ namespace LibraryProject.Tests.Repositories
         [Fact]
         public async void DeleteReservationById_ShouldReturnDeletedReservation_WhenReservationIsDeleted()
         {
+            //Arrange
 
+            await _context.Database.EnsureDeletedAsync();
+
+            int reservationId = 1;
+
+            Reservation newReservation = new()
+            {
+                Id = reservationId,
+                userId = 1,
+                bookId = 1,
+                reserved_At = "09/05/22",
+                reserved_To = "25/05/22"
+            };
+
+            _context.reservation.Add(newReservation);
+            await _context.SaveChangesAsync();
+
+            //Act
+            var result = await _reservationRepository.DeleteReservationById(reservationId);
+            var reservation = await _reservationRepository.SelectReservationById(reservationId);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<Reservation>(result);
+            Assert.Equal(reservationId, result.Id);
+            Assert.Null(reservation);
         }
+
+
+        [Fact]
+        public async void DeleteReservationById_ShouldReturnNull_WhenReservationDoesNotExist()
+        {
+            //Arrange
+           await _context.Database.EnsureDeletedAsync();
+
+            //Act
+            var result = await _reservationRepository.DeleteReservationById(1);
+
+            //Assert
+            Assert.Null(result);
+        }
+
+
 
 
     }
