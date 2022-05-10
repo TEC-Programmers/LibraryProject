@@ -45,6 +45,15 @@ namespace LibraryProject.API.Services
                     Id = book.Category.Id,
                     CategoryName =book.Category.CategoryName
 
+                },
+                AuthorId=book.AuthorId,
+                Author= new BookAuthorResponse
+                {
+                    Id=book.AuthorId,
+                    FirstName=book.Author.FirstName,
+                    MiddleName=book.Author.MiddleName,
+                    LastName=book.Author.LastName
+
                 }
             };
         }

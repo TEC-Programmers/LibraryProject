@@ -7,6 +7,21 @@ namespace LibraryProject.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Author",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(32)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Author", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -36,6 +51,12 @@ namespace LibraryProject.API.Migrations
                 {
                     table.PrimaryKey("PK_Book", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Book_Author_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Author",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Book_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
@@ -44,24 +65,37 @@ namespace LibraryProject.API.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Category",
-                columns: new[] { "Id", "CategoryName" },
-                values: new object[] { 1, "KidsBook" });
+                table: "Author",
+                columns: new[] { "Id", "FirstName", "LastName", "MiddleName" },
+                values: new object[,]
+                {
+                    { 1, "Astrid", " Lindgrens", "" },
+                    { 2, "Helle", "Helle", "" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Category",
                 columns: new[] { "Id", "CategoryName" },
-                values: new object[] { 2, "Roman" });
+                values: new object[,]
+                {
+                    { 1, "KidsBook" },
+                    { 2, "Roman" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Language", "PublishYear", "Title" },
-                values: new object[] { 1, 0, 1, "BØg for børn", "Danish", (short)1945, " Pippi Langstrømper" });
+                values: new object[] { 1, 1, 1, "BØg for børn", "Danish", (short)1945, " Pippi Langstrømper" });
 
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Language", "PublishYear", "Title" },
-                values: new object[] { 2, 0, 2, "Romaner for voksen2", "Danish", (short)2005, "Rødby-Puttgarden" });
+                values: new object[] { 2, 2, 2, "Romaner for voksen2", "Danish", (short)2005, "Rødby-Puttgarden" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Book_AuthorId",
+                table: "Book",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Book_CategoryId",
@@ -73,6 +107,9 @@ namespace LibraryProject.API.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Book");
+
+            migrationBuilder.DropTable(
+                name: "Author");
 
             migrationBuilder.DropTable(
                 name: "Category");

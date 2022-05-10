@@ -27,6 +27,24 @@ namespace LibraryProject.Database
                    CategoryName = "Roman"
                }
               );
+            modelBuilder.Entity<Author>().HasData(
+              new()
+              {
+                  Id = 1,
+                  FirstName = "Astrid",
+                  MiddleName = "",
+                  LastName = " Lindgrens"
+
+
+              },
+               new()
+               {
+                   Id = 2,
+                   FirstName = "Helle",
+                   MiddleName = "",
+                   LastName = "Helle"
+               }
+              );
             modelBuilder.Entity<Book>().HasData(
                 new()
                 {
@@ -35,7 +53,8 @@ namespace LibraryProject.Database
                     Description = "BØg for børn",
                     Language ="Danish",
                     PublishYear=1945,
-                    CategoryId = 1
+                    CategoryId = 1,
+                    AuthorId = 1
 
                 },
                 new()
@@ -45,9 +64,11 @@ namespace LibraryProject.Database
                     Description = "Romaner for voksen2",
                     Language = "Danish",
                     PublishYear = 2005,
-                    CategoryId = 2
+                    CategoryId = 2,
+                    AuthorId = 2
                 }
                 );
+            
         }
 
     }

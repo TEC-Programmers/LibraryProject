@@ -17,6 +17,8 @@ namespace LibraryProject.API.DTO_s
 
         [Required]
         public int CategoryId { get; set; }
+        [Required]
+        public int AuthorId { get; set; }
 
     }
 }

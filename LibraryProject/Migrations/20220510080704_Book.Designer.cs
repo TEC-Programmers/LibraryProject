@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220510062202_Book")]
+    [Migration("20220510080704_Book")]
     partial class Book
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,6 +19,43 @@ namespace LibraryProject.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("LibraryProject.Database.Entities.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(32)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Author");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Astrid",
+                            LastName = " Lindgrens",
+                            MiddleName = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Helle",
+                            LastName = "Helle",
+                            MiddleName = ""
+                        });
+                });
 
             modelBuilder.Entity("LibraryProject.Database.Entities.Book", b =>
                 {
@@ -47,6 +84,8 @@ namespace LibraryProject.API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Book");
@@ -55,7 +94,7 @@ namespace LibraryProject.API.Migrations
                         new
                         {
                             Id = 1,
-                            AuthorId = 0,
+                            AuthorId = 1,
                             CategoryId = 1,
                             Description = "BØg for børn",
                             Language = "Danish",
@@ -65,7 +104,7 @@ namespace LibraryProject.API.Migrations
                         new
                         {
                             Id = 2,
-                            AuthorId = 0,
+                            AuthorId = 2,
                             CategoryId = 2,
                             Description = "Romaner for voksen2",
                             Language = "Danish",
@@ -103,11 +142,19 @@ namespace LibraryProject.API.Migrations
 
             modelBuilder.Entity("LibraryProject.Database.Entities.Book", b =>
                 {
+                    b.HasOne("LibraryProject.Database.Entities.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LibraryProject.Database.Entities.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Category");
                 });

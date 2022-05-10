@@ -7,5 +7,6 @@ namespace LibraryProject.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
+
     }
 }

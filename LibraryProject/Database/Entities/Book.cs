@@ -25,9 +25,10 @@ namespace LibraryProject.Database.Entities
         
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
+
         public int AuthorId { get; set; }
 
-        [ForeignKey("AuhtorId")]
+        [ForeignKey("AuthorId")]
         public Author Author { get; set; }
 
         //public int PublisherId { get; set; }
