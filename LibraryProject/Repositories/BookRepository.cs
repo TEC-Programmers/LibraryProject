@@ -27,7 +27,8 @@ namespace LibraryProject.API.Repositories
             return await _context.Book
                 .Include(a => a.Category)
                 .OrderBy(a => a.CategoryId)
-
+                .Include(b => b.Author)
+                .OrderBy(b => b.AuthorId)
                 .ToListAsync();
         }
     }

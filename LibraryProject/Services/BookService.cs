@@ -39,8 +39,13 @@ namespace LibraryProject.API.Services
                 Description = book.Description,
                 Language=book.Language,
                 PublishYear = book.PublishYear,
-                CategoryId = book.CategoryId
+                CategoryId = book.CategoryId,
+                Category = new BookCategoryResponse
+                {
+                    Id = book.Category.Id,
+                    CategoryName =book.Category.CategoryName
 
+                }
             };
         }
     }

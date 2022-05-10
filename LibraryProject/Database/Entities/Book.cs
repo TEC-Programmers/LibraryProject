@@ -27,8 +27,8 @@ namespace LibraryProject.Database.Entities
         public Category Category { get; set; }
         public int AuthorId { get; set; }
 
-        //[ForeignKey("AuhtorId")]
-        //public Author Author { get; set; }
+        [ForeignKey("AuhtorId")]
+        public Author Author { get; set; }
 
         //public int PublisherId { get; set; }
 
