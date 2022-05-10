@@ -18,7 +18,7 @@ namespace LibraryProject.Database
             modelBuilder.Entity<Loan>().HasData(
             new()
             {
-                loanId = 1,
+                Id = 1,
                 userID = 2,
                 bookId = 2,
                 loaned_At = "06/05/22",
@@ -29,7 +29,7 @@ namespace LibraryProject.Database
             },
             new()
             {
-                loanId = 3,
+                Id = 3,
                 userID = 4,
                 bookId = 5,
                 loaned_At = "27/06/22",

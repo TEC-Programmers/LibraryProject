@@ -5,7 +5,7 @@ namespace LibraryProject.Database.Entities
     public class Loan
     {
         [Key]
-        public int loanId { get; set; }
+        public int Id { get; set; }
         public int userID { get; set; }
         public int bookId { get; set; }
         public  string loaned_At { get; set; }
