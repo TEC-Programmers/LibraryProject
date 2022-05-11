@@ -59,11 +59,11 @@ namespace LibraryProject.Repositories
 
     public async Task<Reservation> UpdateExistingReservation(int reservationId, Reservation reservation)
     {
-        Reservation updateReservation = await _context.reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
+        Reservation updateReservation = await _context.reservation
+                .FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
 
         if (updateReservation != null)
-        {
-            updateReservation.Id = reservation.Id;
+            {
             updateReservation.userId = reservation.userId;
             updateReservation.bookId = reservation.bookId;
             updateReservation.reserved_At = reservation.reserved_At;
