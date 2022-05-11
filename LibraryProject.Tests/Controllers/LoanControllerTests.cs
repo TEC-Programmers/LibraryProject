@@ -25,7 +25,7 @@ namespace LibraryProject.Tests.Controllers
         }
 
         [Fact]
-        public void GetAll_shouldReturnStatusCode200_WhenLoansExists()
+        public async void GetAll_shouldReturnStatusCode200_WhenLoansExists()
         {
             //Arrange
             List<LoanResponse> loans = new();
@@ -51,59 +51,62 @@ namespace LibraryProject.Tests.Controllers
             });
             _mockLoanService
                 .Setup(x => x.GetAllLoans())
-                .Returns(loans);
+                .ReturnsAsync(loans);
 
 
             //Act
-            var result = _loanController.GetAll();
+            var result = await _loanController.GetAll();
             ////Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(200, statusCodeResult.StatusCode);
         }
         [Fact]
-        public void GetAll_shouldReturnStatusCode204_WhenNoLoansExists()
+        public async void GetAll_shouldReturnStatusCode204_WhenNoLoansExists()
         {
             //Arrange
             List<LoanResponse> loans = new();
+
+            //loans.Add(new());
+            //loans.Add(new());
             _mockLoanService
                 .Setup(x => x.GetAllLoans())
-                .Returns(loans);
+                .ReturnsAsync(loans);
 
 
             //Act
-            var result = _loanController.GetAll();
+            var result = await _loanController.GetAll();
             ////Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(204, statusCodeResult.StatusCode);
         }
 
         [Fact]
-        public void GetAll_shouldReturnStatusCode500_WhenNullIsReturnedFromService()
+        public async void GetAll_shouldReturnStatusCode500_WhenNullIsReturnedFromService()
         {
             //Arrange
             _mockLoanService
                 .Setup(x => x.GetAllLoans())
-                .Returns(() => null);
+                .ReturnsAsync(() => null);
 
 
             //Act
-            var result = _loanController.GetAll();
+            var result = await _loanController.GetAll();
             ////Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(500, statusCodeResult.StatusCode);
         }
 
         [Fact]
-        public void GetAll_shouldReturnStatusCode500_WhenExceptionIsRaised()
+        public async void GetAll_shouldReturnStatusCode500_WhenExceptionIsRaised()
         {
             //Arrange
             _mockLoanService
                 .Setup(x => x.GetAllLoans())
-                .Returns(() => throw new System.Exception("This is an exception"));
+                .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
 
             //Act
-            var result = _loanController.GetAll();
+            var result = await _loanController.GetAll();
             ////Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(500, statusCodeResult.StatusCode);

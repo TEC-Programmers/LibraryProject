@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LibraryProject.Controllers
 {
@@ -17,11 +18,11 @@ namespace LibraryProject.Controllers
             _loanService = loanService;
         }
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                List<LoanResponse> loans = _loanService.GetAllLoans();
+                List<LoanResponse> loans = await  _loanService.GetAllLoans();
                 if (loans == null)
                 {
                     return Problem("Got no data, not even an empty list, this is unexpected");

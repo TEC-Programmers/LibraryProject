@@ -1,43 +1,41 @@
-﻿using LibraryProject.Database.Entities;
+﻿
+using LibraryProject.Database.Entities;
 using LibraryProject.DTO_s;
 using LibraryProject.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LibraryProject.Services
 {
     public interface ILoanService
     {
-        List<LoanResponse> GetAllLoans();
+       Task<List<LoanResponse>> GetAllLoans();
     }
 
     public class LoanService : ILoanService
     {
-        private readonly ILoanService _loanService;
         private readonly ILoanRepository _loanRepository;
         public LoanService(ILoanRepository loanRepository)
         {
             _loanRepository = loanRepository;
         }
 
-        public LoanService(ILoanService loanService)
+        public  async Task<List<LoanResponse>> GetAllLoans()
         {
-            _loanService = loanService;
-        }
-        public List<LoanResponse> GetAllLoans()
-        {
-            List<LoanResponse> loans = new();
+            List<Loan> loans =  await _loanRepository.SelectAllLoans();
 
-            loans.Add(new()
+            return loans.Select(loan => new LoanResponse
             {
-                Id = 1,
-                userID = 1,
-                bookId = 1,
-                loaned_At = "10/05/22",
-                return_date = "10/06/22"
-            });
-            return loans;
+                Id = loan.Id,
+                userID = loan.userID,
+                bookId = loan.bookId,
+                loaned_At = loan.loaned_At,
+                return_date = loan.return_date,
+            }).ToList();
+            
         }
     }
 }

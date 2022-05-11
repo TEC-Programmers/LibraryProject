@@ -2,15 +2,22 @@
 using LibraryProject.Database.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LibraryProject.Repositories
 {
 
     public interface ILoanRepository
     {
-        List<Loan> SelectAllLoans();
+        Task<List<Loan>> SelectAllLoans();
+        Task<Loan> SelectLoanById(int loanId);
+        Task<Loan> InsertNewLoan(Loan loan);
+        Task<Loan> UpdateExistingLoan(int loanId, Loan loan);
+        Task<Loan> DeleteLoanById(int loanId);
+
     }
     public class LoanRepository : ILoanRepository
     {
@@ -20,9 +27,33 @@ namespace LibraryProject.Repositories
             _context = context;
         }
 
-        public List<Loan> SelectAllLoans()
+        public Task<Loan> DeleteLoanById(int loanId)
         {
-            return _context.loan.ToList();
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Loan> InsertNewLoan(Loan loan)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<List<Loan>> SelectAllLoans()
+        {
+            return await _context.loan.ToListAsync();
+        }
+        public async Task<Loan> SelectLoanById(string loanId)
+        {
+            return null;
+        }
+
+        public Task<Loan> SelectLoanById(int loanId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Loan> UpdateExistingLoan(int loanId, Loan loan)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
