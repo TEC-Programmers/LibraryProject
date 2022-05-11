@@ -3,7 +3,7 @@
     //For at definere enums enumbruges nøgleordet.
     public enum Role
     {
-        Admin,
-        Customer
+        Administrator = 0,
+        Customer = 1
     }
 }

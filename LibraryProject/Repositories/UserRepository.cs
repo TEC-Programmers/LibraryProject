@@ -1,22 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LibraryProject.Database;
 using LibraryProject.Database.Entities;
-using Microsoft.AspNetCore.Mvc;
-using LibraryProject.Database;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LibraryProject.API.Repositories
 {
     public interface IUserRepository
     {
         Task<List<User>> GetAll();
-        Task<User> Create(User customer);
-        // Task<User> GetByEmail(string email);
-        // Task<User> GetById(int customerId);
-        //  Task<User> Update(int customerId, User customer);
-        // Task<User> Delete(int customerId);
+        Task<User> Create(User user);
+        Task<User> GetByEmail(string email);
+        Task<User> GetById(int userId);
+        //  Task<User> Update(int userId, User user);
+        // Task<User> Delete(int userId);
     }
 
     public class UserRepository : IUserRepository
@@ -34,13 +31,23 @@ namespace LibraryProject.API.Repositories
 
         }
 
-        public async Task<User> Create(User customer)
+        public async Task<User> Create(User user)
         {
 
 
-            _context.User.Add(customer);
+            _context.User.Add(user);
             await _context.SaveChangesAsync();
-            return customer;
+            return user;
+        }
+
+        public async Task<User> GetById(int userId)
+        {
+            return await _context.User.FirstOrDefaultAsync(u => u.Id == userId);
+        }
+
+        public async Task<User> GetByEmail(string Email)
+        {
+            return await _context.User.FirstOrDefaultAsync(u => u.Email == Email);
         }
 
     }

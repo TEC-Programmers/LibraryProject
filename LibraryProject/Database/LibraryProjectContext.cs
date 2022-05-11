@@ -22,8 +22,8 @@ namespace LibraryProject.Database
                     MiddleName = "Per.",
                     LastName = "Aksten",
                     Email = "peter@abc.com",
-                    Password = "password",
-                    Role = Role.Admin
+                    Password = "password",                
+                    Role = Role.Administrator
                 },
                 new()
                 {
@@ -32,7 +32,7 @@ namespace LibraryProject.Database
                     MiddleName = "R.R",
                     LastName = "Mustafa",
                     Email = "riz@abc.com",
-                    Password = "password",
+                    Password = "password",              
                     Role = Role.Customer
                 }
                 
