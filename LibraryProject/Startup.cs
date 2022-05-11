@@ -31,12 +31,25 @@ namespace LibraryProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<LibraryProjectContext>(
-                x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: " _CORSRules",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+
+
 
             
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<IReservationRepository, ReservationRepository >();
+
+            services.AddDbContext<LibraryProjectContext>(
+                x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
 
 
             services.AddControllers();
@@ -58,6 +71,8 @@ namespace LibraryProject
 
             app.UseHttpsRedirection();
 
+            app.UseCors("_CORSRules");
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -66,6 +81,8 @@ namespace LibraryProject
             {
                 endpoints.MapControllers();
             });
+
+            app.UseDeveloperExceptionPage();
         }
     }
 }

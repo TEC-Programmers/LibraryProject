@@ -49,7 +49,7 @@ namespace LibraryProject.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("{reservationId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -101,7 +101,7 @@ namespace LibraryProject.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{reservationId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -127,7 +127,7 @@ namespace LibraryProject.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{reservationId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
