@@ -1,10 +1,9 @@
 ﻿using LibraryProject.API.DTO_s;
 using LibraryProject.API.Services;
-using Microsoft.AspNetCore.Authorization;
+using LibraryProject.API.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using LibraryProject.API.Repositories;
 using System.Threading.Tasks;
 using LibraryProject.API.Helpers;
 using System.Collections.Generic;
@@ -24,12 +23,12 @@ namespace LibraryProject.API.Controllers
             _userService = userService;
         }
 
-        // [Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
-        [AllowAnonymous]
+         [Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
+        //[AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
@@ -102,7 +101,7 @@ namespace LibraryProject.API.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Role.Administrator)]
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using LibraryProject.API.Authorization;
+using LibraryProject.API.Authorization;
 using LibraryProject.API.DTO_s;
 using  LibraryProject.API.Repositories;
 using LibraryProject.Database.Entities;
@@ -22,11 +22,12 @@ namespace LibraryProject.API.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IJwtUtils _jwtUtils;
 
-
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IJwtUtils jwtUtils)
         {
             _userRepository = userRepository;
+            _jwtUtils = jwtUtils;
 
         }
 
@@ -99,7 +100,7 @@ namespace LibraryProject.API.Services
                     LastName = user.LastName,              
                     Password = user.Password,
                     Role = user.Role,
-                  //  Token = _jwtUtils.GenerateJwtToken(user)
+                   Token = _jwtUtils.GenerateJwtToken(user)
                 };
                 return response;
             }

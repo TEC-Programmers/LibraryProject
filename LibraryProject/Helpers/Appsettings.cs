@@ -1,7 +1,8 @@
 ﻿namespace LibraryProject.API.Helpers
 {
-    public class Appsettings
+    public class AppSettings
     {
         public string Secret { get; set; }
     }
+
 }

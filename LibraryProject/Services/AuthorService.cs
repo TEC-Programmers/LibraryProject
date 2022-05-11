@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LibraryProject.Services
+namespace LibraryProject.API.Services
 {
     [Route("api/[controller]")]
     [ApiController]
