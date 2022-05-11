@@ -3,14 +3,16 @@ using LibraryProject.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    partial class LibraryProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220510085437_Book")]
+    partial class Book
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,16 +20,12 @@ namespace LibraryProject.API.Migrations
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("LibraryProject.Database.Entities.User", b =>
             modelBuilder.Entity("LibraryProject.Database.Entities.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(32)");
@@ -38,11 +36,8 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(32)");
                     b.HasKey("Id");
 
-                    b.Property<int>("Role")
                     b.ToTable("Author");
 
                     b.HasData(
@@ -89,7 +84,6 @@ namespace LibraryProject.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
                     b.HasIndex("AuthorId");
 
                     b.HasIndex("CategoryId");
@@ -100,12 +94,6 @@ namespace LibraryProject.API.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "peter@abc.com",
-                            FirstName = "Peter",
-                            LastName = "Aksten",
-                            MiddleName = "Per.",
-                            Password = "password",
-                            Role = 0
                             AuthorId = 1,
                             CategoryId = 1,
                             Description = "BØg for børn",
@@ -148,12 +136,6 @@ namespace LibraryProject.API.Migrations
                         new
                         {
                             Id = 2,
-                            Email = "riz@abc.com",
-                            FirstName = "Rizwanah",
-                            LastName = "Mustafa",
-                            MiddleName = "R.R",
-                            Password = "password",
-                            Role = 1
                             CategoryName = "Roman"
                         });
                 });
