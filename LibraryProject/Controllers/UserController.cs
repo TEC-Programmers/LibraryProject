@@ -24,7 +24,7 @@ namespace LibraryProject.API.Controllers
         }
 
          [Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
-        //[AllowAnonymous]
+       // [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
