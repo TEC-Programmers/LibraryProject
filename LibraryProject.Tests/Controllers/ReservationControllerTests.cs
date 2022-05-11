@@ -112,5 +112,224 @@ namespace LibraryProject.Tests.Controllers
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(500, statusCodeResult.StatusCode);
         }
+
+        [Fact]
+        public async void Create_ShouldReturnStatusCode200_WhenReservationIsSuccessfullyCreated()
+        {
+            //Arrange
+
+            Reservationrequest newRerservation = new()
+            {
+                userId = 1,
+                bookId = 1,
+                reserved_At = "09/05/22",
+                reserved_To = "25/05/22"
+            };
+
+            int reservationId = 1;
+
+            ReservationResponse reservationResponse = new()
+            {
+                reservationId = reservationId,
+                userId = 2,
+                bookId = 2,
+                reserved_At = "11/05/22",
+                reserved_To = "27/05/22"
+            };
+
+            _mockReservationService
+                .Setup(x => x.CreateReservation(It.IsAny<Reservationrequest>()))
+                .ReturnsAsync(reservationResponse);
+
+            //Act
+            var esult = await _reservationController.Create(newRerservation);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)esult;
+            Assert.Equal(200, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void Create_ShouldReturnStatusCode500_WhenExceptionIsRaised()
+        {
+            //Arrange
+
+            Reservationrequest newRerservation = new()
+            {
+                userId = 1,
+                bookId = 1,
+                reserved_At = "09/05/22",
+                reserved_To = "25/05/22"
+            };
+
+            _mockReservationService
+                .Setup(x => x.CreateReservation(It.IsAny<Reservationrequest>()))
+                .ReturnsAsync(() => throw new System.Exception("This is an exception"));
+
+            //Act
+            var result = await _reservationController.Create(newRerservation);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(500, statusCodeResult.StatusCode);
+        }
+
+
+        [Fact]
+        public async void Update_ShouldReturnStatusCode200_WhenReservationIsSuccessfullyUpdated()
+        {
+            //Arrange
+
+            Reservationrequest updateRerservation = new()
+            {
+                userId = 1,
+                bookId = 1,
+                reserved_At = "09/05/22",
+                reserved_To = "25/05/22"
+            };
+
+            int reservationId = 1;
+
+            ReservationResponse reservationResponse = new()
+            {
+                reservationId = reservationId,
+                userId = 2,
+                bookId = 2,
+                reserved_At = "11/05/22",
+                reserved_To = "27/05/22"
+            };
+
+            _mockReservationService
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .ReturnsAsync(reservationResponse);
+
+            //Act
+            var result = await _reservationController.Update(reservationId,updateRerservation);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(200, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void Update_ShouldReturnStatusCode404_WhenTryingToUpdateReservationWhichDoesNotExist()
+        {
+            //Arrange
+
+            Reservationrequest updateRerservation = new()
+            {
+                userId = 1,
+                bookId = 1,
+                reserved_At = "09/05/22",
+                reserved_To = "25/05/22"
+            };
+
+            int reservationId = 1;
+
+            _mockReservationService
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .ReturnsAsync(() => null);
+
+            //Act
+            var result = await _reservationController.Update(reservationId, updateRerservation);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(404, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void Update_ShouldReturnStatusCode500_WhenExceptionIsRaised()
+        {
+            //Arrange
+
+            Reservationrequest updateRerservation = new()
+            {
+                userId = 1,
+                bookId = 1,
+                reserved_At = "09/05/22",
+                reserved_To = "25/05/22"
+            };
+
+            int reservationId = 1;
+
+            _mockReservationService
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .ReturnsAsync(() => throw new System.Exception("This is an exception"));
+
+            //Act
+            var result = await _reservationController.Update(reservationId, updateRerservation);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(500, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void Delete_ShouldReturnStatusCode200_WhenReservationIsDeleted()
+        {
+            //Arrange
+
+            int reservationId = 1;
+
+
+            ReservationResponse reservationResponse = new()
+            {
+                reservationId = reservationId,
+                userId = 2,
+                bookId = 2,
+                reserved_At = "11/05/22",
+                reserved_To = "27/05/22"
+            };
+
+            _mockReservationService
+                .Setup(x => x.DeleteReservation(It.IsAny<int>()))
+                .ReturnsAsync(reservationResponse);
+
+            //Act
+            var result = await _reservationController.Delete(reservationId);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(200, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void Delete_ShouldReturnStatusCode404_WhenTryingToDeleteReservationWhichDoesNotExist()
+        {
+            //Arrange
+
+            int reservationId = 1;
+
+            _mockReservationService
+                .Setup(x => x.DeleteReservation(It.IsAny<int>()))
+                .ReturnsAsync(() => null);
+
+            //Act
+            var result = await _reservationController.Delete(reservationId);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(404, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void Delete_ShouldReturnStatusCode500_WhenExceptionIsRaised()
+        {
+            //Arrange
+
+            int reservationId = 1;
+
+            _mockReservationService
+                .Setup(x => x.DeleteReservation(It.IsAny<int>()))
+                .ReturnsAsync(() => throw new System.Exception("this is an exceoption"));
+
+            //Act
+            var result = await _reservationController.Delete(reservationId);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(500, statusCodeResult.StatusCode);
+        }
     }
 }
