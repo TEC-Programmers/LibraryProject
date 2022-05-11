@@ -48,5 +48,62 @@ namespace LibraryProject.API.Controllers
 
 
         }
+
+        // https://localhost:5001/api/Product/derp
+        [HttpGet("{bookId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetById([FromRoute] int bookId)
+        {
+            try
+            {
+                BookResponse bookResponse = await _bookService.GetBookById(bookId);
+
+                if (bookResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(bookResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+        // https://localhost:5001/api/Product/derp
+
+        [HttpGet("Category/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllBooksByCategoryId([FromRoute] int categoryId)
+        {
+            try
+            {
+                List<BookResponse> productResponse = await _bookService.GetBooksByCategoryId(categoryId);
+                if (productResponse == null)
+                {
+                    return Problem("Got no data, not even an empty list, this is unexpected");
+                }
+                if (productResponse.Count == 0)
+                {
+                    return NoContent();
+                }
+                return Ok(productResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+
+            }
+
+
+        }
+
     }
 }

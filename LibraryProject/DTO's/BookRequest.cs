@@ -8,12 +8,12 @@ namespace LibraryProject.API.DTO_s
         public string Title { get; set; }
 
         [Required]
-        public decimal Language { get; set; }
+        public string Language { get; set; }
         [Required]
         public string Description { get; set; }
 
         [Required]
-        public string PublishYear { get; set; }
+        public int PublishYear { get; set; }
 
         [Required]
         public int CategoryId { get; set; }
