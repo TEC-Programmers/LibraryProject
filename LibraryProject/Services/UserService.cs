@@ -1,21 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using LibraryProject.API.Authorization;
 using LibraryProject.API.DTO_s;
-using  LibraryProject.API.Repositories;
+using LibraryProject.API.Helpers;
+using LibraryProject.API.Repositories;
 using LibraryProject.Database.Entities;
 
 namespace LibraryProject.API.Services
 {
     public interface IUserService
     {
-        Task<List<UserResponse>> GetAll();
+        Task<List<UserResponse>> GetCustomers();
+        // Task<List<UserResponse>> GetAdmins();
         Task<UserResponse> GetById(int UserId);
         Task<LoginResponse> Authenticate(LoginRequest login);
-        Task<UserResponse> Register(RegisterUserRequest newUser);
-        //  Task<UserResponse> Update(int UserId, RegisterUserRequest updateUser);
-        // Task<UserResponse> Delete(int UserId);
+        Task<UserResponse> Register(UserRequest newUser);
+        Task<UserResponse> Update(int UserId, UserRequest updateUser);
+        Task<UserResponse> Delete(int UserId);
 
     }
 
@@ -31,11 +35,14 @@ namespace LibraryProject.API.Services
 
         }
 
+      
 
-        public async Task<List<UserResponse>> GetAll()
+
+        public async Task<List<UserResponse>> GetCustomers()
         {
-            /**/
-            List<User> users = await _userRepository.GetAll();
+
+            List<User> users = await _userRepository.GetCustomers();
+          
 
             return users == null ? null : users.Select(u => new UserResponse
             {
@@ -44,13 +51,31 @@ namespace LibraryProject.API.Services
                 FirstName = u.FirstName,
                 MiddleName = u.MiddleName,
                 LastName = u.LastName,
-                Password = u.Password,             
+                Password = u.Password,
                 Role = u.Role
-             }).ToList();
+            }).ToList();
 
         }
 
-        public async Task<UserResponse> Register(RegisterUserRequest newuser)
+        //public async Task<List<UserResponse>> GetAdmins()
+        //{
+        //    List<User> users = await _userRepository.GetCustomers();
+
+        //    return users == null ? null : users.Select(u => new UserResponse
+        //    {
+        //        Id = u.Id,
+        //        Email = u.Email,
+        //        FirstName = u.FirstName,
+        //        MiddleName = u.MiddleName,
+        //        LastName = u.LastName,
+        //        Password = u.Password,
+        //        Role = Helpers.Role.Administrator
+        //    }).ToList();
+
+        //}
+
+
+        public async Task<UserResponse> Register(UserRequest newuser)
         {
             User user = new User
             {
@@ -97,12 +122,50 @@ namespace LibraryProject.API.Services
                     Email = user.Email,
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
-                    LastName = user.LastName,              
+                    LastName = user.LastName,
                     Password = user.Password,
                     Role = user.Role,
-                   Token = _jwtUtils.GenerateJwtToken(user)
+                    Token = _jwtUtils.GenerateJwtToken(user)
                 };
                 return response;
+            }
+
+            return null;
+        }
+        public async Task<UserResponse> Update(int UserId, UserRequest updateUser)
+        {
+            User user = new User
+            {
+                FirstName = updateUser.FirstName,
+                MiddleName = updateUser.MiddleName,
+                LastName = updateUser.LastName,
+                Email = updateUser.Email,
+                Password = updateUser.Password,
+
+            };
+
+            user = await _userRepository.Update(UserId, user);
+
+            return user == null ? null : new UserResponse
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                Role = user.Role
+            };
+        }
+
+        public async Task<UserResponse> Delete(int userId)
+
+        {
+            User user = await _userRepository.Delete(userId);
+
+            if (user != null)
+            {
+                return MapUserToUserResponse(user);
             }
 
             return null;
@@ -111,6 +174,7 @@ namespace LibraryProject.API.Services
 
         private UserResponse MapUserToUserResponse(User user)
         {
+           
             return user == null ? null : new UserResponse
             {
                 Id = user.Id,
@@ -119,10 +183,10 @@ namespace LibraryProject.API.Services
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,
                 Password = user.Password,
-                Role = user.Role             
+                Role = user.Role
 
             };
-            
+
         }
 
 

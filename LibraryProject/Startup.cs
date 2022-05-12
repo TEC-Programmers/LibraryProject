@@ -1,3 +1,8 @@
+using LibraryProject.API.Authorization;
+using LibraryProject.API.Helpers;
+using LibraryProject.API.Repositories;
+using LibraryProject.API.Services;
+using LibraryProject.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,15 +18,17 @@ namespace LibraryProject.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly string CORSRules = "_CORSRules";
+        private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _configuration;
+
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             _env = env;
-           _configuration = configuration;
+            _configuration = configuration;
         }
 
-      //  public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -44,6 +51,12 @@ namespace LibraryProject.API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookService, BookService>();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
             services.AddDbContext<LibraryProjectContext>(
               o => o.UseSqlServer(_configuration.GetConnectionString("Default")));
 
@@ -55,12 +68,6 @@ namespace LibraryProject.API
             });
 
 
-
-            services.AddScoped<IBookService, BookService>();
-            
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IBookRepository, BookRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -87,11 +94,9 @@ namespace LibraryProject.API
                             }
                         },
                         new string[] {}
-
                     }
 
                     });
-
             });
         }
 
@@ -108,9 +113,10 @@ namespace LibraryProject.API
 
 
             app.UseHttpsRedirection();
+            app.UseCors(CORSRules);
 
             app.UseRouting();
-            //app.UseAuthorization();
+       
             //app.UseAuthorization();
             app.UseMiddleware<JwtMiddleware>();
             app.UseEndpoints(endpoints =>
