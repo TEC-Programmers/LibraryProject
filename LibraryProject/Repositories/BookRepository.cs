@@ -86,7 +86,7 @@ namespace LibraryProject.API.Repositories
             return updateBook;
         }
 
-        public async Task<Book> DeleteProductById(int bookId)
+        public async Task<Book> DeleteBookById(int bookId)
         {
             Book deleteBook = await _context.Book.FirstOrDefaultAsync(book => book.Id == bookId);
 
