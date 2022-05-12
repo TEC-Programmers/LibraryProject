@@ -12,6 +12,9 @@ namespace LibraryProject.API.Repositories
         Task<List<Category>> SelectAllCategories();
         Task<Category> SelectCategoryById(int categoryId);
         Task<List<Category>> SelectAllCategoriesWithoutBooks();
+        Task<Category> InsertNewCategory(Category category);
+        Task<Category> UpdateExistingCategory(int categoryId, Category category);
+        Task<Category> DeleteCategoryById(int categoryId);
 
 
     }
@@ -41,6 +44,35 @@ namespace LibraryProject.API.Repositories
         {
             return await _context.Category
                         .ToListAsync();
+        }
+
+        public async Task<Category> InsertNewCategory(Category category)
+        {
+            _context.Category.Add(category);
+            await _context.SaveChangesAsync();
+            return category;
+        }
+        public async Task<Category> UpdateExistingCategory(int categoryId, Category category)
+        {
+            Category updateCategory = await _context.Category.FirstOrDefaultAsync(category => category.Id == categoryId);
+            if (updateCategory != null)
+            {
+                updateCategory.CategoryName = category.CategoryName;
+
+                await _context.SaveChangesAsync();
+            }
+            return updateCategory;
+        }
+        public async Task<Category> DeleteCategoryById(int categoryId)
+        {
+            Category deleteCategory = await _context.Category.FirstOrDefaultAsync(category => category.Id == categoryId);
+            if (deleteCategory != null)
+            {
+
+                _context.Remove(deleteCategory);
+                await _context.SaveChangesAsync();
+            }
+            return deleteCategory;
         }
 
     }
