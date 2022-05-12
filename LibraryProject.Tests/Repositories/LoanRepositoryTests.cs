@@ -40,11 +40,11 @@ namespace LibraryProject.Tests.Repositories
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
-                
+
             });
             _context.loan.Add(new()
             {
-                Id= 2,
+                Id = 2,
                 userID = 2,
                 bookId = 2,
                 loaned_At = "24/6/2022",
@@ -67,7 +67,209 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<List<Loan>>(result);
             Assert.Empty(result);
-            
+
+        }
+        [Fact]
+        public async void SelectLoanById_ShouldReturnLoan_WhenLoanExists()
+        {
+            //Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            int loanId = 1;
+
+            _context.loan.Add(new()
+            {
+                Id = loanId,
+                userID = 1,
+                bookId = 1,
+                loaned_At = "11/5/22",
+                return_date = "11/6/22"
+            });
+            await _context.SaveChangesAsync();
+
+            //Act
+            var result = await _loanRepository.SelectLoanById(loanId);
+
+            //Assert
+            Assert.NotNull(_context.loan);
+            Assert.IsType<Loan>(result);
+            Assert.Equal(loanId, result.Id);
+        }
+
+        [Fact]
+        public async void SelectLoanById_ShouldReturnNull_WhenLoanDoesNotExist()
+        {
+            //Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            //Act
+            var result = await _loanRepository.SelectLoanById(1);
+
+            //Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async void InsertNewLoan_ShouldAddnewIdToLoan_WhenSavingToDatabase()
+        {
+            //Arrange 
+            await _context.Database.EnsureDeletedAsync();
+            int expectedNewId = 1;
+
+            Loan loan = new()
+            {
+                bookId = 1,
+                userID = 1,
+                loaned_At = "11/5/2022",
+                return_date = "11/6/2022"
+            };
+
+            //Act
+            var result = await _loanRepository.InsertNewLoan(loan);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<Loan>(result);
+            Assert.Equal(expectedNewId, result.Id);
+        }
+
+        [Fact]
+        public async void InsertNewLoan_ShouldFailToAddNewLoan_WhenLoanIdAlreadyExists()
+        {
+            //Arrange 
+            await _context.Database.EnsureDeletedAsync();
+          
+            Loan loan = new()
+            {
+                Id = 1,
+                bookId = 1,
+                userID = 1,
+                loaned_At = "11/5/2022",
+                return_date = "11/6/2022"
+            };
+
+            _context.loan.Add(loan);
+            await _context.SaveChangesAsync();
+
+            //Act
+            async Task action() => await _loanRepository.InsertNewLoan(loan);
+
+            //Assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(action);
+            Assert.Contains("An item with the same key has already been added.", ex.Message);
+
+
+        }
+
+        [Fact]
+        public async void UpdateExistingLoan_ShouldChangeValuesOnLoan_WhenLoanExists()
+        {
+            //Arrange 
+            await _context.Database.EnsureDeletedAsync();
+
+            int loanId = 1;
+
+            Loan newloan = new()
+            {
+                Id = loanId,
+                bookId = 1,
+                userID = 1,
+                loaned_At = "11/5/2022",
+                return_date = "11/6/2022"
+            };
+
+            _context.loan.Add(newloan);
+            await _context.SaveChangesAsync();
+
+            Loan updateloan = new()
+            {
+                Id = loanId,
+                bookId = 1,
+                userID = 1,
+                loaned_At = "updated 11/5/2022",
+                return_date = " updated 11/6/2022"
+            };
+
+            //Act
+            var result = await _loanRepository.UpdateExistingLoan(loanId, updateloan);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<Loan>(result);
+            Assert.Equal(loanId, result.Id);
+            Assert.Equal(updateloan.bookId, result.bookId);
+            Assert.Equal(updateloan.userID, result.userID);
+            Assert.Equal(updateloan.loaned_At, result.loaned_At);
+            Assert.Equal(updateloan.return_date, result.return_date);
+
+        }
+        [Fact]
+        public async void UpdateExistingLoan_ShouldReturnNull_WhenLoanDoesNotExists()
+        {
+            // Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            int LoanId = 1;
+
+            Loan updateLoan = new()
+            {
+                Id = LoanId,
+                bookId = 1,
+                userID = 1,
+                loaned_At = "11/5/2022",
+                return_date = "11/6/2022",
+                new List<Loan>()
+                
+            };
+
+            // Act
+            var result = await _loanRepository.UpdateExistingLoan(LoanId, updateLoan);
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async void DeleteLoanById_ShouldReturnDeletedLoan_WhenLoanIsDeleted()
+        {
+            // Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            int LoanId = 1;
+
+            Loan newLoan = new()
+            {
+                Id = LoanId,
+                bookId = 1,
+                userID = 1,
+                loaned_At = "11/5/2022",
+                return_date = "11/6/2022"
+            };
+
+            _context.loan.Add(newLoan);
+            await _context.SaveChangesAsync();
+
+            // Act
+            var result = await _loanRepository.(LoanId);
+            var Loan = await _loanRepository.SelectLoanById(LoanId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsType<Loan>(result);
+            Assert.Equal(LoanId, result.Id);
+            Assert.Null(Loan);
+        }
+        [Fact]
+        public async void DeleteLoanById_ShouldReturnNull_WhenLoanDoesNotExist()
+        {
+            // Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            // Act
+            var result = await _loanRepository.(1);
+
+            // Assert
+            Assert.Null(result);
         }
 
 
