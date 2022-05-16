@@ -7,6 +7,10 @@ namespace LibraryProject.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
-
+        [HttpGet]
+        public IActionResult getall()
+        {
+            return Ok("Hello");
+        }
     }
 }
