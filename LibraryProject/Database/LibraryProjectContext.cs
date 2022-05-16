@@ -10,6 +10,7 @@ namespace LibraryProject.Database
 
         public DbSet<Book> Book { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<Author> Author { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -17,7 +18,7 @@ namespace LibraryProject.Database
               new()
               {
                   Id = 1,
-                  CategoryName = "KidsBook"
+                  CategoryName = "Børnebog"
 
 
               },
@@ -51,7 +52,7 @@ namespace LibraryProject.Database
                     Id = 1,
                     Title = " Pippi Langstrømper",
                     Description = "BØg for børn",
-                    Language ="Danish",
+                    Language ="Dansk",
                     PublishYear=1945,
                     CategoryId = 1,
                     AuthorId = 1

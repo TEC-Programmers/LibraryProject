@@ -34,10 +34,11 @@ namespace LibraryProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IBookService, BookService>();
-            
-            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBookRepository, BookRepository>();
+
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
