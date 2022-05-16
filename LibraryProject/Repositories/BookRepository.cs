@@ -12,12 +12,9 @@ namespace LibraryProject.API.Repositories
     {
         Task<List<Book>> SelectAllBooks();
         Task<Book> SelectBookById(int bookId);
-
         Task<List<Book>> SelectAllBooksByCategoryId(int categoryId);
-
         Task<Book> InsertNewBook(Book product);
         Task<Book> UpdateExistingBook(int bookId, Book book);
-
         Task<Book> DeleteBookById(int bookId);
     }
     public class BookRepository : IBookRepository
@@ -37,6 +34,8 @@ namespace LibraryProject.API.Repositories
                 .OrderBy(a => a.CategoryId)
                 .Include(b => b.Author)
                 .OrderBy(b => b.AuthorId)
+                .Include(p => p.Publisher)
+                .OrderBy(p => p.PublisherId)
                 .ToListAsync();
         }
 
@@ -44,9 +43,11 @@ namespace LibraryProject.API.Repositories
         {
             return await _context.Book
                 .Include(b => b.Category)
-                .OrderBy(c=> c.CategoryId)
+                .OrderBy(c => c.CategoryId)
                 .Include(b => b.Author)
                 .OrderBy(b => b.AuthorId)
+                .Include(p => p.Publisher)
+                .OrderBy(p => p.PublisherId)
                 .FirstOrDefaultAsync(book => book.Id == bookId);
         }
 
@@ -57,6 +58,8 @@ namespace LibraryProject.API.Repositories
                .OrderBy(a => a.CategoryId)
                .Include(b => b.Author)
                .OrderBy(b => b.AuthorId)
+               .Include(p => p.Publisher)
+               .OrderBy(p => p.PublisherId)
                .Where(a => a.CategoryId == categoryId)
                .ToListAsync();
 
@@ -82,7 +85,6 @@ namespace LibraryProject.API.Repositories
                 await _context.SaveChangesAsync();
 
             }
-
             return updateBook;
         }
 
@@ -98,6 +100,4 @@ namespace LibraryProject.API.Repositories
             return deleteBook;
         }
     }
-
-
 }

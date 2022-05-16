@@ -53,7 +53,6 @@ namespace LibraryProject.Tests.Controllers
             Assert.Equal(200, statusCodeResult.StatusCode);
 
         }
-
         [Fact]
         public async void GetAll_ShouldReturnStatusCode204_WhenNoCategoriesExists()
         {
@@ -168,7 +167,6 @@ namespace LibraryProject.Tests.Controllers
             Assert.Equal(404, statusCodeResult.StatusCode);
 
         }
-
         [Fact]
         public async void GetById_ShouldReturnStatusCode500_WhenExceptionIsRaised()
         {
@@ -226,7 +224,6 @@ namespace LibraryProject.Tests.Controllers
             Assert.Equal(200, statusCodeResult.StatusCode);
 
         }
-
         [Fact]
         public async void Create_ShouldReturnStatusCode500_WhenExceptionIsRaised()
         {
@@ -256,7 +253,6 @@ namespace LibraryProject.Tests.Controllers
             Assert.Equal(500, statusCodeResult.StatusCode);
 
         }
-
         [Fact]
         public async void Update_ShouldReturnStatusCode200_WhenCategoryIsSuccessfullyUpdated()
         {
@@ -353,7 +349,6 @@ namespace LibraryProject.Tests.Controllers
             Assert.Equal(500, statusCodeResult.StatusCode);
 
         }
-
         [Fact]
         public async void Delete_ShouldReturnStatusCode200_WhenCategoryIsDeleted()
         {
@@ -425,6 +420,5 @@ namespace LibraryProject.Tests.Controllers
             Assert.Equal(500, statusCodeResult.StatusCode);
 
         }
-
     }
 }

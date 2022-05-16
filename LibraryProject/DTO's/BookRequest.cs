@@ -9,6 +9,7 @@ namespace LibraryProject.API.DTO_s
 
         [Required]
         public string Language { get; set; }
+
         [Required]
         public string Description { get; set; }
 
@@ -17,8 +18,11 @@ namespace LibraryProject.API.DTO_s
 
         [Required]
         public int CategoryId { get; set; }
+
         [Required]
         public int AuthorId { get; set; }
 
+        [Required]
+        public int PublisherId { get; set; }
     }
 }

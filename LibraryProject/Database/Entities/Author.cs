@@ -12,7 +12,7 @@ namespace LibraryProject.Database.Entities
         public string FirstName { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]
-        public string? MiddleName { get; set; }
+        public string MiddleName { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]
         public string LastName { get; set; }

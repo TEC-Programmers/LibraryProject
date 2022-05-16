@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.API.Repositories
 {
-
     public interface ICategoryRepository
     {
         Task<List<Category>> SelectAllCategories();
@@ -15,8 +14,6 @@ namespace LibraryProject.API.Repositories
         Task<Category> InsertNewCategory(Category category);
         Task<Category> UpdateExistingCategory(int categoryId, Category category);
         Task<Category> DeleteCategoryById(int categoryId);
-
-
     }
     public class CategoryRepository:ICategoryRepository
     {
@@ -26,11 +23,11 @@ namespace LibraryProject.API.Repositories
         {
             _context = context;
         }
+
         public async Task<List<Category>> SelectAllCategories()
         {
             return await _context.Category
                 .Include(b => b.Books)
-
                 .ToListAsync();
         }
         public async Task<Category> SelectCategoryById(int categoryId)
@@ -39,13 +36,11 @@ namespace LibraryProject.API.Repositories
                 .Include(a => a.Books)
                 .FirstOrDefaultAsync(category => category.Id == categoryId);
         }
-
         public async Task<List<Category>> SelectAllCategoriesWithoutBooks()
         {
             return await _context.Category
                         .ToListAsync();
         }
-
         public async Task<Category> InsertNewCategory(Category category)
         {
             _context.Category.Add(category);
@@ -74,6 +69,5 @@ namespace LibraryProject.API.Repositories
             }
             return deleteCategory;
         }
-
     }
 }

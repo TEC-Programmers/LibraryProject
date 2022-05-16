@@ -15,12 +15,11 @@ namespace LibraryProject.API.Controllers
 
         private readonly IBookService _bookService;
 
-
-
         public BookController(IBookService bookService)
         {
             _bookService = bookService;
         }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -101,8 +100,6 @@ namespace LibraryProject.API.Controllers
                 return Problem(ex.Message);
 
             }
-
-
         }
 
         [HttpPost]

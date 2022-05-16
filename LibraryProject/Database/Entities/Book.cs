@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LibraryProject.API.Database.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryProject.Database.Entities
@@ -31,11 +32,9 @@ namespace LibraryProject.Database.Entities
         [ForeignKey("AuthorId")]
         public Author Author { get; set; }
 
-        //public int PublisherId { get; set; }
+        public int PublisherId { get; set; }
 
-        //[ForeignKey("PublisherId")]
-        //public Publisher  Publisher{ get; set; }
-
-
+        [ForeignKey("PublisherId")]
+        public Publisher Publisher { get; set; }
     }
 }

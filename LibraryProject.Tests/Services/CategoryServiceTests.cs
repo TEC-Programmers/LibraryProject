@@ -52,7 +52,6 @@ namespace LibraryProject.Tests.Services
             Assert.Equal(2, result.Count);
             Assert.IsType<List<CategoryResponse>>(result);
         }
-
         [Fact]
         public async void GetAllCategories_ShouldReturnEmptyListOfCategoryResponses_WhenNoCategoriesExists()
         {
@@ -145,7 +144,6 @@ namespace LibraryProject.Tests.Services
             Assert.Equal(newCategory.CategoryName, result.CategoryName);
 
         }
-
         [Fact]
         public async void CreateCategory_ShouldReturnNull_WhenRepositoryReturnsNull()
         {
@@ -165,7 +163,6 @@ namespace LibraryProject.Tests.Services
             // Assert
             Assert.Null(result);
         }
-
         [Fact]
         public async void UpdateCategory_ShouldReturnCategoryResponse_WhenUpdateIsSuccess()
         {
@@ -199,8 +196,6 @@ namespace LibraryProject.Tests.Services
             Assert.Equal(categoryRequest.CategoryName, result.CategoryName);
 
         }
-
-
         [Fact]
         public async void UpdateCategory_ShouldReturnNull_WhenCategoryDoesNotExist()
         {
@@ -246,7 +241,6 @@ namespace LibraryProject.Tests.Services
             Assert.IsType<CategoryResponse>(result);
             Assert.Equal(categoryId, result.Id);
         }
-
         [Fact]
         public async void DeleteCategory_ShouldReturnNull_WhenCategoryDoesNotExist()
         {
@@ -263,6 +257,5 @@ namespace LibraryProject.Tests.Services
             // Assert
             Assert.Null(result);
         }
-
     }
 }
