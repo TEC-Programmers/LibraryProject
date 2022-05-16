@@ -24,9 +24,16 @@ namespace LibraryProject.API.Repositories
             _context = context;
         }
 
-        public Task<Reservation> DeleteReservation(int reservationId)
+        public async Task<Reservation> DeleteReservation(int reservationId)
         {
-            throw new System.NotImplementedException();
+            Reservation deleteReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
+            if (deleteReservation != null)
+            {
+                _context.Reservation.Remove(deleteReservation);
+                await _context.SaveChangesAsync();
+            }
+
+            return deleteReservation;
         }
 
         public async Task<Reservation> InsertNewReservation(Reservation reservation)
@@ -44,16 +51,16 @@ namespace LibraryProject.API.Repositories
         public async Task<Reservation> SelectReservationById(int reservationId)
         {
             return await _context.Reservation
-                .FirstOrDefaultAsync(reservation => reservation.reservationId == reservationId);
+                .FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
         }
 
         public async Task<Reservation> UpdateReservation(int reservationId, Reservation reservation)
         {
-            Reservation updateReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.reservationId == reservationId);
+            Reservation updateReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
 
             if (updateReservation != null)
             {
-                updateReservation.reservationId = reservation.reservationId;
+                updateReservation.Id = reservation.Id;
                 updateReservation.userId = reservation.userId;
                 updateReservation.bookId = reservation.bookId;
                 updateReservation.reserved_At = reservation.reserved_At;
@@ -61,7 +68,6 @@ namespace LibraryProject.API.Repositories
 
                 await _context.SaveChangesAsync();
             }
-
             return updateReservation;
         }
     }
