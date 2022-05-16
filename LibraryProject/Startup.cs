@@ -34,6 +34,7 @@ namespace LibraryProject
             services.AddDbContext<LibraryProjectContext>(
                 x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
             
+            
             services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<ILoanRepository, LoanRepository>();
 

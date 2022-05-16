@@ -173,7 +173,10 @@ namespace LibraryProject.Tests.Services
             // Arrange 
             LoanRequest newloan = new()
             {
-
+                userID = 1,
+                bookId=1,
+                loaned_At = "11/5/2022",
+                return_date= "11/6/2022"
             };
 
             _mockloanServiceRepository
@@ -190,7 +193,7 @@ namespace LibraryProject.Tests.Services
         [Fact]
         public async void UpdateLoan_ShouldReturnLoanResponse_WhenUpdateIsSuccess()
         {
-            LoanRequest loan = new()
+            LoanRequest loanRequest = new()
             {
                userID = 1,
                bookId = 1,
@@ -200,109 +203,86 @@ namespace LibraryProject.Tests.Services
 
             };
 
+            int loanId = 1;
+
+            Loan loan = new()
+            {
+                Id = loanId,
+                userID= 1,
+                bookId= 1,
+                loaned_At = "11/5/2022",
+                return_date = "11/6/2022" 
+            };
+
         }
 
 
 
         [Fact]
-        public async void UpdateloanService_ShouldReturnNull_WhenloanServiceDoesNotExist()
+        public async void UpdateLoan_ShouldReturnNull_WhenLoanDoesNotExist()
         {
             // Arrange 
             LoanRequest loanRequest = new()
             {
-               i
+               userID=1,
+               bookId=1,
+               loaned_At= "11/5/2022",
+                return_date = "11/6/2022"
             };
 
-            int loanServiceId = 1;
+            int loanId = 1;
 
             _mockloanServiceRepository
-                .Setup(x => x.UpdateExistingloanService(It.IsAny<int>(), It.IsAny<loanService>()))
+                .Setup(x => x.UpdateExistingLoan(It.IsAny<int>(), It.IsAny<Loan>()))
                 .ReturnsAsync(() => null);
 
             // Act
-            var result = await _loanService.UpdateloanService(loanServiceId, LoanRequest);
+            var result = await _loanService.UpdateLoan(loanId, loanRequest);
 
             // Assert
             Assert.Null(result);
         }
 
+       
         [Fact]
-        public async void UpdateloanService_ShouldReturnloanServiceResponse_WhenUpdateIsSuccess()
-        {
-            //Arrange
-            LoanRequest LoanRequest = new()
-            {
-                FirstName = "George",
-                LastName = "Martin",
-                MiddleName = "R.R",
-                BirthYear = 1948
-            };
-            int loanServiceId = 1;
-
-            LoanService loanService = new()
-            {
-                Id = loanServiceId,
-                FirstName = "George",
-                LastName = "Martin",
-                MiddleName = "R.R",
-                BirthYear = 1948
-            };
-
-            _mockloanServiceRepository
-                 .Setup(x => x.UpdateExistingloanService(It.IsAny<int>(), It.IsAny<LoanService>()))
-                 .ReturnsAsync(loanService);
-
-            //Act 
-            var result = await _loanService.UpdateloanService(loanServiceId, LoanRequest);
-
-            //Assert
-            Assert.NotNull(result);
-            Assert.IsType<loanServiceResponse>(result);
-            Assert.Equal(loanServiceId, result.Id);
-            Assert.Equal(LoanRequest.FirstName, result.FirstName);
-            Assert.Equal(LoanRequest.LastName, result.LastName);
-            Assert.Equal(LoanRequest.MiddleName, result.MiddleName);
-        }
-
-        [Fact]
-        public async void DeleteloanService_ShouldReturnloanServiceResponse_WhenDeleteIsSuccess()
+        public async void DeleteLoan_ShouldReturnLoanResponse_WhenDeleteIsSuccess()
         {
             // Arrange
-            int loanServiceId = 1;
+            int loanId = 1;
 
-            LoanService deletedloanService = new()
+            Loan deletedloan = new()
             {
-                Id = 1,
-                FirstName = "George",
-                LastName = "Martin",
-                MiddleName = "R.R",
-                BirthYear = 1948
+                Id= 1,
+                userID= 1,
+                bookId = 1,
+                loaned_At = "11/5/2022",
+                return_date = "11/6/2022"
             };
 
             _mockloanServiceRepository
-                .Setup(x => x.DeleteloanService(It.IsAny<int>()))
-                .ReturnsAsync(deletedloanService);
+                .Setup(x => x.DeleteLoanById(It.IsAny<int>()))
+                .ReturnsAsync(deletedloan);
 
             // Act
-            var result = await _loanService.DeleteloanService(loanServiceId);
+            var result = await _loanService.DeleteLoan(loanId);
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<loanServiceResponse>(result);
-            Assert.Equal(loanServiceId, result.Id);
+            Assert.IsType<LoanResponse>(result);
+            Assert.Equal(loanId, result.Id);
         }
         [Fact]
-        public async void DeleteloanService_ShouldReturnNull_WhenloanServiceDoesNotExist()
+        public async void DeleteLoan_ShouldReturnNull_WhenLoanDoesNotExist()
         {
             // Arrange
-            int loanServiceId = 1;
+            int loanId = 1;
 
             _mockloanServiceRepository
-                .Setup(x => x.DeleteloanService(It.IsAny<int>()))
+                .Setup(x => x.DeleteLoanById(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act
-            var result = await _loanService.DeleteloanService(loanServiceId);
+            var result = await _loanService.DeleteLoan(loanId);
 
             // Assert
             Assert.Null(result);

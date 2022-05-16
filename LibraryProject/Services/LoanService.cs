@@ -83,8 +83,10 @@ namespace LibraryProject.Services
                     return_date = insertedLoan.return_date,
 
                 };
+               
             }
-            return null;
+            loan = await _loanRepository.InsertNewLoan(loan);
+            return MapLoanToLoanResponse(loan);
 
         }
 
@@ -133,6 +135,17 @@ namespace LibraryProject.Services
               
             return null;
 
+        }
+        private static LoanResponse MapLoanToLoanResponse(Loan loan)
+        {
+            return loan == null ? null : new LoanResponse()
+            {
+                Id = loan.Id,
+                userID = loan.userID,
+                bookId=loan.bookId,
+                loaned_At=loan.loaned_At,
+                return_date=loan.return_date,
+            };
         }
 
 

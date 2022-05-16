@@ -218,8 +218,6 @@ namespace LibraryProject.Tests.Repositories
                 userID = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022",
-                new List<Loan>()
-                
             };
 
             // Act
@@ -250,7 +248,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             // Act
-            var result = await _loanRepository.(LoanId);
+            var result = await _loanRepository.DeleteLoanById(LoanId);
             var Loan = await _loanRepository.SelectLoanById(LoanId);
 
             // Assert
@@ -266,7 +264,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             // Act
-            var result = await _loanRepository.(1);
+            var result = await _loanRepository.DeleteLoanById(1);
 
             // Assert
             Assert.Null(result);
