@@ -108,10 +108,11 @@ namespace LibraryProject.API.Services
                 Description = bookRequest.Description,
                 Language = bookRequest.Language,
                 PublishYear = bookRequest.PublishYear,
-                CategoryId = bookRequest.CategoryId
+                CategoryId = bookRequest.CategoryId,
+                AuthorId= bookRequest.AuthorId
             };
         }
-        private BookResponse MapBookToBookResponse(Book book)
+        private static BookResponse MapBookToBookResponse(Book book)
         {
 
             return new BookResponse
