@@ -8,8 +8,8 @@ namespace LibraryProject.API.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetCustomers();
-        Task<List<User>> GetAdmins();
+        Task<List<User>> GetAll();
+       // Task<List<User>> GetAdmins();
         Task<User> Create(User user);
         Task<User> GetByEmail(string email);
         Task<User> GetById(int userId);
@@ -26,18 +26,14 @@ namespace LibraryProject.API.Repositories
             _context = context;
         }
 
-        public async Task<List<User>> GetCustomers()
+        public async Task<List<User>> GetAll()
         {
 
             return await _context.User.ToListAsync();
 
         }
 
-        public async Task<List<User>> GetAdmins()
-        {
-            return await _context.User.ToListAsync();
-
-        }
+       
 
         public async Task<User> Create(User user)
         {

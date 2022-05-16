@@ -13,7 +13,7 @@ namespace LibraryProject.API.Services
 {
     public interface IUserService
     {
-        Task<List<UserResponse>> GetCustomers();
+        Task<List<UserResponse>> GetAll();
         // Task<List<UserResponse>> GetAdmins();
         Task<UserResponse> GetById(int UserId);
         Task<LoginResponse> Authenticate(LoginRequest login);
@@ -38,10 +38,10 @@ namespace LibraryProject.API.Services
       
 
 
-        public async Task<List<UserResponse>> GetCustomers()
+        public async Task<List<UserResponse>> GetAll()
         {
 
-            List<User> users = await _userRepository.GetCustomers();
+            List<User> users = await _userRepository.GetAll();
           
 
             return users == null ? null : users.Select(u => new UserResponse
@@ -172,7 +172,7 @@ namespace LibraryProject.API.Services
         }
 
 
-        private UserResponse MapUserToUserResponse(User user)
+        private static UserResponse MapUserToUserResponse(User user)
         {
            
             return user == null ? null : new UserResponse
