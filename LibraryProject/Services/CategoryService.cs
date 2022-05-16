@@ -12,9 +12,9 @@ namespace LibraryProject.API.Services
         Task<List<CategoryResponse>> GetAllCategories();
         Task<CategoryResponse> GetCategoryById(int categoryId);
         Task<List<CategoryResponse>> GetAllCategoriesWithoutBooks();
-        //Task<CategoryResponse> CreateCategory(CategoryRequest newCategory);
-        //Task<CategoryResponse> UpdateCategory(int categoryId, CategoryRequest updateCategory);
-        //Task<CategoryResponse> DeleteCategory(int categoryId);
+        Task<CategoryResponse> CreateCategory(CategoryRequest newCategory);
+        Task<CategoryResponse> UpdateCategory(int categoryId, CategoryRequest updateCategory);
+        Task<CategoryResponse> DeleteCategory(int categoryId);
 
 
     }
@@ -61,6 +61,53 @@ namespace LibraryProject.API.Services
             return null;
         }
 
+        public async Task<CategoryResponse> CreateCategory(CategoryRequest newCategory)
+        {
+            Category category = MapCategoryRequestToCategory(newCategory);
+
+            Category insertedCategory = await _categoryRepository.InsertNewCategory(category);
+
+            if (insertedCategory != null)
+            {
+                return MapCategoryToCategoryResponse(insertedCategory);
+
+            }
+            return null;
+        }
+
+        public async Task<CategoryResponse> UpdateCategory(int categoryId, CategoryRequest updateCategory)
+        {
+            Category category = MapCategoryRequestToCategory(updateCategory);
+
+            Category updatedCategory = await _categoryRepository.UpdateExistingCategory(categoryId, category);
+
+            if (updatedCategory != null)
+            {
+                return MapCategoryToCategoryResponse(updatedCategory);
+            }
+            return null;
+        }
+
+        public async Task<CategoryResponse> DeleteCategory(int categoryId)
+        {
+            Category deletedCategory = await _categoryRepository.DeleteCategoryById(categoryId);
+
+            if (deletedCategory != null)
+            {
+                return MapCategoryToCategoryResponse(deletedCategory);
+            }
+            return null;
+        }
+
+
+        public static Category MapCategoryRequestToCategory(CategoryRequest category)
+        {
+            return new Category()
+            {
+                CategoryName = category.CategoryName,
+
+            };
+        }
         private CategoryResponse MapCategoryToCategoryResponse(Category categories)
         {
             return new CategoryResponse

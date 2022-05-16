@@ -105,5 +105,80 @@ namespace LibraryProject.API.Controllers
 
         }
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Create([FromBody] BookRequest newBook)
+        {
+            try
+            {
+                BookResponse bookResponse = await _bookService.CreateBook(newBook);
+
+                if (bookResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(bookResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+        [HttpPut("{bookId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update([FromRoute] int bookId, [FromBody] BookRequest updateBook)
+        {
+            try
+            {
+                BookResponse bookResponse = await _bookService.UpdateBook(bookId, updateBook);
+
+                if (bookResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(bookResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+
+
+        [HttpDelete("{bookId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete([FromRoute] int bookId)
+        {
+            try
+            {
+                BookResponse bookResponse = await _bookService.DeleteBook(bookId);
+
+                if (bookResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(bookResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+
     }
 }

@@ -13,6 +13,9 @@ namespace LibraryProject.API.Services
         Task<List<BookResponse>> GetAllBooks();
         Task<BookResponse> GetBookById(int bookId);
         Task<List<BookResponse>> GetBooksByCategoryId(int categoryId);
+        Task<BookResponse> CreateBook(BookRequest newBook);
+        Task<BookResponse> UpdateBook(int BookId, BookRequest updateBook);
+        Task<BookResponse> DeleteBook(int bookId);
     }
 
     public class BookService:IBookService
@@ -51,6 +54,50 @@ namespace LibraryProject.API.Services
 
 
             return books.Select(book => MapBookToBookResponse(book)).ToList();
+        }
+
+
+        public async Task<BookResponse> CreateBook(BookRequest newBook)
+        {
+            Book book = MapBookRequestToBook(newBook);
+
+            Book insertedBook = await _bookRepository.InsertNewBook(book);
+
+            if (insertedBook != null)
+            {
+                insertedBook.Category = await _categoryRepository.SelectCategoryById(insertedBook.CategoryId);
+                return MapBookToBookResponse(insertedBook);
+            }
+
+            return null;
+        }
+
+        public async Task<BookResponse> UpdateBook(int bookId, BookRequest updateBook)
+        {
+            Book book = MapBookRequestToBook(updateBook);
+
+            Book updatedBook = await _bookRepository.UpdateExistingBook(bookId, book);
+
+            if (updatedBook != null)
+            {
+                updatedBook.Category = await _categoryRepository.SelectCategoryById(updatedBook.CategoryId);
+                return MapBookToBookResponse(updatedBook);
+            }
+
+            return null;
+        }
+
+        public async Task<BookResponse> DeleteBook(int bookId)
+        {
+           Book book = await _bookRepository.DeleteBookById(bookId);
+
+            if (book != null)
+            {
+                book.Category = await _categoryRepository.SelectCategoryById(book.CategoryId);
+                return MapBookToBookResponse(book);
+            }
+
+            return null;
         }
         private static Book MapBookRequestToBook(BookRequest bookRequest)
         {

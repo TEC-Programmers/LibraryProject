@@ -99,5 +99,83 @@ namespace LibraryProject.API.Controllers
 
 
         }
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Create([FromBody] CategoryRequest newCategory)
+        {
+            try
+            {
+                CategoryResponse categoryResponse = await _categoryService.CreateCategory(newCategory);
+
+                if (categoryResponse == null)
+                {
+                    return Problem("Category Was not created, something went wrong");
+                }
+
+                return Ok(categoryResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+
+
+        [HttpPut("{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update([FromRoute] int categoryId, [FromBody] CategoryRequest updateAuthor)
+        {
+            try
+            {
+                CategoryResponse categoryResponse = await _categoryService.UpdateCategory(categoryId, updateAuthor);
+
+                if (categoryResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(categoryResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+
+
+        [HttpDelete("{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete([FromRoute] int categoryId)
+        {
+            try
+            {
+                CategoryResponse categoryResponse = await _categoryService.DeleteCategory(categoryId);
+
+                if (categoryResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(categoryResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+
+
     }
 }

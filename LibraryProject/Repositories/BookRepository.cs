@@ -14,6 +14,11 @@ namespace LibraryProject.API.Repositories
         Task<Book> SelectBookById(int bookId);
 
         Task<List<Book>> SelectAllBooksByCategoryId(int categoryId);
+
+        Task<Book> InsertNewBook(Book product);
+        Task<Book> UpdateExistingBook(int bookId, Book book);
+
+        Task<Book> DeleteBookById(int bookId);
     }
     public class BookRepository : IBookRepository
     {
@@ -55,6 +60,42 @@ namespace LibraryProject.API.Repositories
                .Where(a => a.CategoryId == categoryId)
                .ToListAsync();
 
+        }
+        public async Task<Book> InsertNewBook(Book book)
+        {
+            _context.Book.Add(book);
+            await _context.SaveChangesAsync();
+            return book;
+        }
+        public async Task<Book> UpdateExistingBook(int bookId, Book book)
+        {
+            Book updateBook = await _context.Book.FirstOrDefaultAsync(book => book.Id == bookId);
+
+            if (updateBook != null)
+            {
+                updateBook.Title = book.Title;
+                updateBook.Description = book.Description;
+                updateBook.Language = book.Language;
+                updateBook.PublishYear = book.PublishYear;
+                
+
+                await _context.SaveChangesAsync();
+
+            }
+
+            return updateBook;
+        }
+
+        public async Task<Book> DeleteBookById(int bookId)
+        {
+            Book deleteBook = await _context.Book.FirstOrDefaultAsync(book => book.Id == bookId);
+
+            if (deleteBook != null)
+            {
+                _context.Book.Remove(deleteBook);
+                await _context.SaveChangesAsync();
+            }
+            return deleteBook;
         }
     }
 
