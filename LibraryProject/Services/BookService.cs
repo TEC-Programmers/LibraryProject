@@ -109,10 +109,11 @@ namespace LibraryProject.API.Services
                 Language = bookRequest.Language,
                 PublishYear = bookRequest.PublishYear,
                 CategoryId = bookRequest.CategoryId,
-                AuthorId= bookRequest.AuthorId
+                AuthorId = bookRequest.AuthorId,
+                PublisherId = bookRequest.PublisherId,
             };
         }
-        private static BookResponse MapBookToBookResponse(Book book)
+        private BookResponse MapBookToBookResponse(Book book)
         {
 
             return new BookResponse
@@ -120,23 +121,28 @@ namespace LibraryProject.API.Services
                 Id = book.Id,
                 Title = book.Title,
                 Description = book.Description,
-                Language=book.Language,
+                Language = book.Language,
                 PublishYear = book.PublishYear,
+
                 CategoryId = book.CategoryId,
                 Category = new BookCategoryResponse
                 {
                     Id = book.Category.Id,
-                    CategoryName =book.Category.CategoryName
-
+                    CategoryName = book.Category.CategoryName
                 },
-                AuthorId=book.AuthorId,
-                Author= new BookAuthorResponse
+                AuthorId = book.AuthorId,
+                Author = new BookAuthorResponse
                 {
-                    Id=book.AuthorId,
-                    FirstName=book.Author.FirstName,
-                    MiddleName=book.Author.MiddleName,
-                    LastName=book.Author.LastName
-
+                    Id = book.AuthorId,
+                    FirstName = book.Author.FirstName,
+                    MiddleName = book.Author.MiddleName,
+                    LastName = book.Author.LastName
+                },
+                PublisherId = book.PublisherId,
+                Publisher = new BookPublisherResponse
+                {
+                    Id = book.PublisherId,
+                    Name = book.Publisher.Name,               
                 }
             };
         }
