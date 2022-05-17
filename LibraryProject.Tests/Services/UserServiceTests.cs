@@ -1,4 +1,5 @@
 ﻿using LibraryProject.API.Authorization;
+using LibraryProject.API.Database.Entities;
 using LibraryProject.API.DTO_s;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;

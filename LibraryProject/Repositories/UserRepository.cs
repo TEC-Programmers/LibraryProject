@@ -1,4 +1,5 @@
-﻿using LibraryProject.API.Helpers;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.Helpers;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

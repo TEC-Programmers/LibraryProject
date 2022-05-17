@@ -89,7 +89,7 @@ namespace LibraryProject.API.Migrations
 
             modelBuilder.Entity("LibraryProject.API.Database.Entities.Reservation", b =>
                 {
-                    b.Property<int>("reservationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -106,14 +106,14 @@ namespace LibraryProject.API.Migrations
                     b.Property<int>("userId")
                         .HasColumnType("int");
 
-                    b.HasKey("reservationId");
+                    b.HasKey("Id");
 
                     b.ToTable("Reservation");
 
                     b.HasData(
                         new
                         {
-                            reservationId = 1,
+                            Id = 1,
                             bookId = 1,
                             reserved_At = "06/05/22",
                             reserved_To = "13/05/22",
@@ -121,63 +121,11 @@ namespace LibraryProject.API.Migrations
                         },
                         new
                         {
-                            reservationId = 2,
+                            Id = 2,
                             bookId = 2,
                             reserved_At = "14/05/22",
                             reserved_To = "21/05/22",
                             userId = 2
-                        });
-                });
-
-            modelBuilder.Entity("LibraryProject.API.Database.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(32)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(32)");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(32)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(32)");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "peter@abc.com",
-                            FirstName = "Peter",
-                            LastName = "Aksten",
-                            MiddleName = "Per.",
-                            Password = "password",
-                            Role = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "riz@abc.com",
-                            FirstName = "Rizwanah",
-                            LastName = "Mustafa",
-                            MiddleName = "R.R",
-                            Password = "password",
-                            Role = 1
                         });
                 });
 

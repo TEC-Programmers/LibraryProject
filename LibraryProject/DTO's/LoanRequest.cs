@@ -1,4 +1,4 @@
-﻿namespace LibraryProject.API.DTO_s
+﻿namespace LibraryProject.API.DTO
 {
     public class LoanRequest
     {
