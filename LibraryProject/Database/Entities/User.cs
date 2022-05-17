@@ -1,12 +1,12 @@
-﻿using LibraryProject.API.Helpers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using LibraryProject.API.Helpers;
 
-namespace LibraryProject.API.Database.Entities
+namespace LibraryProject.Database.Entities
 {
     public class User
     {
-        [Key]   //[Key]fortæller EntityFrameworket Idegenskaben skal være den primære nøgle.
+        [Key]   //[Key]fortæller EntityFramworkat Idegenskaben skal være den primære nøgle.
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]
@@ -23,8 +23,8 @@ namespace LibraryProject.API.Database.Entities
         [Column(TypeName = "nvarchar(32)")]
         public string Password { get; set; }
 
-
+   
         // Role er en enum datatype, der består af integrerede konstanter. Her bruges vi enum for at sætter role(Admin eller Kunder)
-        public Role Role { get; set; }
+        public Role Role { get; set; } 
     }
 }

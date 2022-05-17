@@ -1,9 +1,8 @@
-﻿using LibraryProject.API.Database.Entities;
-using LibraryProject.API.Helpers;
-using LibraryProject.Database.Entities;
+﻿using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using LibraryProject.Database.Entities;
 
-namespace LibraryProject.Database
+namespace LibraryProject
 {
     public class LibraryProjectContext : DbContext
     {
@@ -12,6 +11,8 @@ namespace LibraryProject.Database
 
         public DbSet<Book> Book { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<User> User { get; set; }
+
         public DbSet<Author> Author { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
@@ -67,8 +68,8 @@ namespace LibraryProject.Database
                     Id = 1,
                     Title = "Pippi Langstrømper",
                     Description = "BØg for børn",
-                    Language ="Danish",
-                    PublishYear=1945,
+                    Language = "Danish",
+                    PublishYear = 1945,
                     CategoryId = 1,
                     AuthorId = 1,
                     PublisherId = 1,
@@ -143,7 +144,7 @@ namespace LibraryProject.Database
                     reserved_To = "21/05/22"
                 }
                 );
-
+            
         }
 
     }
