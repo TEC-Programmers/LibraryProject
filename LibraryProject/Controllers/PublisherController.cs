@@ -1,22 +1,22 @@
-﻿using LibraryProject.API.Services;
-using LibraryProject.DTO_s;
+﻿using LibraryProject.API.DTO_s;
+using LibraryProject.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LibraryProject.Controllers
+namespace LibraryProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthorController : ControllerBase
+    public class PublisherController : ControllerBase
     {
-        private readonly IAuthorService _authorservice;
+        private readonly IPublisherService _publisherService;
 
-        public AuthorController(IAuthorService authorService)
+        public PublisherController(IPublisherService PublisherService)
         {
-            _authorservice = authorService;
+            _publisherService = PublisherService;
         }
 
         [HttpGet]
@@ -27,19 +27,19 @@ namespace LibraryProject.Controllers
         {
             try
             {
-                List<AuthorResponse> authors = await _authorservice.GetAllAuthors();
+                List<PublisherResponse> Publishers = await _publisherService.GetAllPublishers();
 
-                if (authors == null)
+                if (Publishers == null)
                 {
                     return Problem("Got no data, not even empty list, this is unexpected");
                 }
 
-                if (authors.Count == 0)
+                if (Publishers.Count == 0)
                 {
                     return NoContent();
                 }
 
-                return Ok(authors);
+                return Ok(Publishers);
             }
             catch (Exception ex)
             {
@@ -48,23 +48,23 @@ namespace LibraryProject.Controllers
 
         }
 
-        [HttpGet("{authorId}")]
+        [HttpGet("{publisherId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetById([FromRoute] int authorId)
+        public async Task<IActionResult> GetById([FromRoute] int publisherId)
         {
             try
             {
-                AuthorResponse authorResponse = await _authorservice.GetAuthorById(authorId);
+                PublisherResponse PublisherResponse = await _publisherService.GetPublisherById(publisherId);
 
-                if (authorResponse == null)
+                if (PublisherResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(authorResponse);
+                return Ok(PublisherResponse);
 
             }
             catch (Exception ex)
@@ -79,18 +79,18 @@ namespace LibraryProject.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Create([FromBody] AuthorRequest newAuthor)
+        public async Task<ActionResult> Create([FromBody] PublisherRequest newPublisher)
         {
             try
             {
-                AuthorResponse authorResponse = await _authorservice.CreateAuthor(newAuthor);
+                PublisherResponse PublisherResponse = await _publisherService.CreatePublisher(newPublisher);
 
-                if (authorResponse == null)
+                if (PublisherResponse == null)
                 {
-                    return Problem(" Author was NOT created, something went wrong");
+                    return Problem(" Publisher was NOT created, something went wrong");
                 }
 
-                return Ok(authorResponse);
+                return Ok(PublisherResponse);
             }
             catch (Exception ex)
             {
@@ -98,23 +98,23 @@ namespace LibraryProject.Controllers
             }
         }
 
-        [HttpPut("{authorId}")]
+        [HttpPut("{publisherId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Update([FromRoute] int authorId, [FromBody] AuthorRequest updateAuthor)
+        public async Task<IActionResult> Update([FromRoute] int publisherId, [FromBody] PublisherRequest updatePublisher)
         {
             try
             {
-                AuthorResponse authorResponse = await _authorservice.UpdateAuthor(authorId, updateAuthor);
+                PublisherResponse PublisherResponse = await _publisherService.UpdatePublisher(publisherId, updatePublisher);
 
-                if (authorResponse == null)
+                if (PublisherResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(authorResponse);
+                return Ok(PublisherResponse);
             }
             catch (Exception ex)
             {
@@ -122,23 +122,23 @@ namespace LibraryProject.Controllers
             }
         }
 
-        [HttpDelete("{authorId}")]
+        [HttpDelete("{publisherId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete([FromRoute] int authorId)
+        public async Task<IActionResult> Delete([FromRoute] int publisherId)
         {
             try
             {
-                AuthorResponse authorResponse = await _authorservice.DeleteAuthor(authorId);
+                PublisherResponse PublisherResponse = await _publisherService.DeletePublisher(publisherId);
 
-                if (authorResponse == null)
+                if (PublisherResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(authorResponse);
+                return Ok(PublisherResponse);
             }
             catch (Exception ex)
             {

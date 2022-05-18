@@ -1,4 +1,5 @@
-﻿using LibraryProject.API.Helpers;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -160,9 +161,11 @@ namespace LibraryProject.Tests.Repositories
             };
 
 
+
             //Act
 
             var result = await _userRepository.Create(newUser);
+
 
             //Assert
             Assert.NotNull(result);

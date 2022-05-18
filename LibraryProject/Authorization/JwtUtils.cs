@@ -7,6 +7,7 @@ using System.Text;
 using System.Security.Claims;
 using System.Linq;
 using LibraryProject.API.Helpers;
+using LibraryProject.API.Database.Entities;
 
 namespace LibraryProject.API.Authorization
 {

@@ -18,12 +18,10 @@ namespace LibraryProject.API.DTO_s
 
         [Required]
         [StringLength(32, ErrorMessage = "MiddleName must be less than 32 chars")]
-        public string MiddleName{ get; set; }
+        public string MiddleName { get; set; }
 
         [Required]
         [StringLength(32, ErrorMessage = "LastName must be less than 32 chars")]
         public string LastName { get; set; }
-
-        
     }
 }

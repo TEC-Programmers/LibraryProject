@@ -2,11 +2,8 @@ using LibraryProject.API.Authorization;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.API.Services;
-using LibraryProject.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,21 +45,34 @@ namespace LibraryProject.API
 
             services.AddScoped<IJwtUtils, JwtUtils>();
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
 
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBookService, BookService>();
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+            /*
+            services.AddScoped<ILoanRepository, LoanRepository>();
+            services.AddScoped<ILoanService, LoanService>();
+            */
+            services.AddScoped<IPublisherRepository, PublisherRepository>();
+            services.AddScoped<IPublisherService, PublisherService>();
+
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IReservationService, ReservationService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
 
             services.AddDbContext<LibraryProjectContext>(
               o => o.UseSqlServer(_configuration.GetConnectionString("Default")));
 
             services.AddControllers().AddJsonOptions(x =>
             {
-                // serialize enums as strings in api responses (e.g. Role)
+                // serialize enums as strings in api responses (se.g. Role)
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
             });
@@ -117,7 +127,7 @@ namespace LibraryProject.API
 
             app.UseRouting();
        
-            //app.UseAuthorization();
+            app.UseAuthorization();
             app.UseMiddleware<JwtMiddleware>();
             app.UseEndpoints(endpoints =>
             {

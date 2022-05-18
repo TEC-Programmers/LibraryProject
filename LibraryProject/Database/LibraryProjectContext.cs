@@ -1,6 +1,8 @@
-﻿using LibraryProject.API.Helpers;
+﻿using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using LibraryProject.Database.Entities;
+
+using LibraryProject.API.Database.Entities;
+using LibraryProject.API.Helpers;
 
 namespace LibraryProject
 {
@@ -13,6 +15,12 @@ namespace LibraryProject
         public DbSet<Category> Category { get; set; }
         public DbSet<User> User { get; set; }
 
+        public DbSet<Author> Author { get; set; }
+        public DbSet<Publisher> Publisher { get; set; }
+        public DbSet<Reservation> Reservation { get; set; }
+        public DbSet<Loan> Loan { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -21,8 +29,6 @@ namespace LibraryProject
               {
                   Id = 1,
                   CategoryName = "KidsBook"
-
-
               },
                new()
                {
@@ -30,7 +36,18 @@ namespace LibraryProject
                    CategoryName = "Roman"
                }
               );
-            
+            modelBuilder.Entity<Publisher>().HasData(
+               new()
+               {
+                   Id = 1,
+                   Name = "Gyldendal",                 
+               },
+               new()
+               {
+                   Id = 2,
+                   Name = "Rosinante",
+               }
+               );
             modelBuilder.Entity<Author>().HasData(
               new()
               {
@@ -38,8 +55,6 @@ namespace LibraryProject
                   FirstName = "Astrid",
                   MiddleName = "",
                   LastName = " Lindgrens"
-
-
               },
                new()
                {
@@ -53,13 +68,13 @@ namespace LibraryProject
                 new()
                 {
                     Id = 1,
-                    Title = " Pippi Langstrømper",
-                    Description = "BØg for børn",
+                    Title = "Pippi Langstrømper",
+                    Description = "Bog for børn",
                     Language = "Danish",
                     PublishYear = 1945,
                     CategoryId = 1,
-                    AuthorId = 1
-
+                    AuthorId = 1,
+                    PublisherId = 1,
                 },
                 new()
                 {
@@ -69,11 +84,10 @@ namespace LibraryProject
                     Language = "Danish",
                     PublishYear = 2005,
                     CategoryId = 2,
-                    AuthorId = 2
+                    AuthorId = 2,
+                    PublisherId = 2,
                 }
                 );
-
-
             modelBuilder.Entity<User>().HasData(
                 new()
                 {
@@ -95,15 +109,45 @@ namespace LibraryProject
                     Password = "password",
                     Role = Role.Customer
                 }
+                );
+            modelBuilder.Entity<Loan>().HasData(
+                new()
+                {
+                    Id = 1,
+                    userID = 2,
+                    bookId = 2,
+                    loaned_At = "06/05/22",
+                    return_date = "13/05/22"
+                },
+                new()
+                {
+                    Id = 3,
+                    userID = 4,
+                    bookId = 5,
+                    loaned_At = "27/06/22",
+                    return_date = "27/07/22"
+                }
+                );
+            modelBuilder.Entity<Reservation>().HasData(
+                new()
+                {
+                    Id = 1,
+                    userId = 1,
+                    bookId = 1,
+                    reserved_At = "06/05/22",
+                    reserved_To = "13/05/22"
+                },
+                new()
+                {
+                    Id = 2,
+                    userId = 2,
+                    bookId = 2,
+                    reserved_At = "14/05/22",
+                    reserved_To = "21/05/22"
+                }
+                );
+            
+        }
 
-                
-            );
-
-        } 
-        
-
-       
-
-   
     }
 }
