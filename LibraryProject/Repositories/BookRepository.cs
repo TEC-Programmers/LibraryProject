@@ -80,7 +80,9 @@ namespace LibraryProject.API.Repositories
                 updateBook.Description = book.Description;
                 updateBook.Language = book.Language;
                 updateBook.PublishYear = book.PublishYear;
-                
+                updateBook.AuthorId = book.AuthorId;
+               updateBook.PublisherId = book.PublisherId;
+                updateBook.CategoryId = book.CategoryId;
 
                 await _context.SaveChangesAsync();
 
