@@ -55,7 +55,7 @@ namespace LibraryProject.API.Services
 
         public async Task<ReservationResponse> DeleteReservation(int reservationId)
         {
-            Reservation deletedReservation = await _reservationRepository.DeleteReservation(reservationId);
+            Reservation deletedReservation = await _reservationRepository.DeleteReservationById(reservationId);
 
             if (deletedReservation != null)
             {

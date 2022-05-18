@@ -1,21 +1,12 @@
-<<<<<<< HEAD
 ﻿using LibraryProject.API.DTO_s;
 using LibraryProject.API.Services;
-=======
-﻿using LibraryProject.DTO_s;
-using LibraryProject.Services;
->>>>>>> Fahim's-Branch
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-<<<<<<< HEAD
 namespace LibraryProject.API.Controllers
-=======
-namespace LibraryProject.Controllers
->>>>>>> Fahim's-Branch
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -89,11 +80,7 @@ namespace LibraryProject.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-<<<<<<< HEAD
         public async Task<IActionResult> Create([FromBody] ReservationRequest newReservation)
-=======
-        public async Task<IActionResult> Create([FromBody] Reservationrequest newReservation)
->>>>>>> Fahim's-Branch
         {
 
             try
@@ -119,11 +106,7 @@ namespace LibraryProject.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-<<<<<<< HEAD
         public async Task<IActionResult> Update([FromRoute] int reservationId, [FromBody] ReservationRequest updateReservation)
-=======
-        public async Task<IActionResult> Update([FromRoute] int reservationId, [FromBody] Reservationrequest updateReservation)
->>>>>>> Fahim's-Branch
         {
 
             try

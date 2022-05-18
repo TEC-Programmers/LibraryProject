@@ -1,6 +1,6 @@
-﻿using LibraryProject.Controllers;
-using LibraryProject.DTO_s;
-using LibraryProject.Services;
+﻿using LibraryProject.API.Controllers;
+using LibraryProject.API.DTO_s;
+using LibraryProject.API.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Moq;
 using System;
@@ -29,7 +29,7 @@ namespace LibraryProject.Tests.Controllers
 
             Reservations.Add(new()
             {
-                reservationId = 1,
+                Id = 1,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -38,7 +38,7 @@ namespace LibraryProject.Tests.Controllers
 
             Reservations.Add(new()
             {
-                reservationId = 2,
+                Id = 2,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -118,7 +118,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest newRerservation = new()
+            ReservationRequest newRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -126,11 +126,11 @@ namespace LibraryProject.Tests.Controllers
                 reserved_To = "25/05/22"
             };
 
-            int reservationId = 1;
+            int Id = 1;
 
             ReservationResponse reservationResponse = new()
             {
-                reservationId = reservationId,
+                Id = Id,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -138,7 +138,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockReservationService
-                .Setup(x => x.CreateReservation(It.IsAny<Reservationrequest>()))
+                .Setup(x => x.CreateReservation(It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(reservationResponse);
 
             //Act
@@ -154,7 +154,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest newRerservation = new()
+            ReservationRequest newRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -163,7 +163,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockReservationService
-                .Setup(x => x.CreateReservation(It.IsAny<Reservationrequest>()))
+                .Setup(x => x.CreateReservation(It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act
@@ -174,13 +174,74 @@ namespace LibraryProject.Tests.Controllers
             Assert.Equal(500, statusCodeResult.StatusCode);
         }
 
+        [Fact]
+        public async Task GetById_ShouldReturnStatusCode200_WhenDataExists()
+        {
+            //Arrange
+            int ReservationId = 1;
+
+            ReservationResponse Reservation = new()
+            {
+                Id = ReservationId,
+                userId = 1,
+                bookId = 1,
+                reserved_At = "06/05/22",
+                reserved_To = "13/05/22"
+            };
+
+            _mockReservationService
+                .Setup(x => x.GetReservationById(It.IsAny<int>()))
+                .ReturnsAsync(Reservation);
+
+            //Act
+            var result = await _reservationController.GetById(ReservationId);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(200, statusCodeResult.StatusCode);
+
+        }
+
+        [Fact]
+        public async Task GetById_ShouldReturnStatusCode404_WhenReservationDoesNotExist()
+        {
+            //Arrange
+            int ReservationId = 1;
+
+            _mockReservationService
+                .Setup(x => x.GetReservationById(It.IsAny<int>()))
+                .ReturnsAsync(() => null);
+
+            //Act
+            var result = await _reservationController.GetById(ReservationId);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(404, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetById_ShouldReturnStatusCode500_WhenExceptionIsRaised()
+        {
+            //Arrange
+            _mockReservationService
+                .Setup(x => x.GetReservationById(It.IsAny<int>()))
+                .ReturnsAsync(() => throw new System.Exception("This is an exception"));
+
+            //Act
+            var result = await _reservationController.GetById(1);
+
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(500, statusCodeResult.StatusCode);
+        }
 
         [Fact]
         public async void Update_ShouldReturnStatusCode200_WhenReservationIsSuccessfullyUpdated()
         {
             //Arrange
 
-            Reservationrequest updateRerservation = new()
+            ReservationRequest updateRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -188,11 +249,11 @@ namespace LibraryProject.Tests.Controllers
                 reserved_To = "25/05/22"
             };
 
-            int reservationId = 1;
+            int Id = 1;
 
             ReservationResponse reservationResponse = new()
             {
-                reservationId = reservationId,
+                Id = Id,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -200,11 +261,11 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockReservationService
-                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(reservationResponse);
 
             //Act
-            var result = await _reservationController.Update(reservationId,updateRerservation);
+            var result = await _reservationController.Update(Id,updateRerservation);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -216,7 +277,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest updateRerservation = new()
+            ReservationRequest updateRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -224,14 +285,14 @@ namespace LibraryProject.Tests.Controllers
                 reserved_To = "25/05/22"
             };
 
-            int reservationId = 1;
+            int Id = 1;
 
             _mockReservationService
-                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _reservationController.Update(reservationId, updateRerservation);
+            var result = await _reservationController.Update(Id, updateRerservation);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -243,7 +304,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest updateRerservation = new()
+            ReservationRequest updateRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -251,14 +312,14 @@ namespace LibraryProject.Tests.Controllers
                 reserved_To = "25/05/22"
             };
 
-            int reservationId = 1;
+            int Id = 1;
 
             _mockReservationService
-                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act
-            var result = await _reservationController.Update(reservationId, updateRerservation);
+            var result = await _reservationController.Update(Id, updateRerservation);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -270,12 +331,12 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            int reservationId = 1;
+            int Id = 1;
 
 
             ReservationResponse reservationResponse = new()
             {
-                reservationId = reservationId,
+                Id = Id,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -287,7 +348,7 @@ namespace LibraryProject.Tests.Controllers
                 .ReturnsAsync(reservationResponse);
 
             //Act
-            var result = await _reservationController.Delete(reservationId);
+            var result = await _reservationController.Delete(Id);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -299,14 +360,14 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            int reservationId = 1;
+            int Id = 1;
 
             _mockReservationService
                 .Setup(x => x.DeleteReservation(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _reservationController.Delete(reservationId);
+            var result = await _reservationController.Delete(Id);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -318,14 +379,14 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            int reservationId = 1;
+            int Id = 1;
 
             _mockReservationService
                 .Setup(x => x.DeleteReservation(It.IsAny<int>()))
                 .ReturnsAsync(() => throw new System.Exception("this is an exceoption"));
 
             //Act
-            var result = await _reservationController.Delete(reservationId);
+            var result = await _reservationController.Delete(Id);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;

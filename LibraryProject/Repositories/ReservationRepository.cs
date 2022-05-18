@@ -12,7 +12,7 @@ namespace LibraryProject.API.Repositories
         Task<Reservation> SelectReservationById(int reservationId);
         Task<Reservation> InsertNewReservation(Reservation reservation);
         Task<Reservation> UpdateReservation(int reservationId, Reservation reservation);
-        Task<Reservation> DeleteReservation(int reservationId);
+        Task<Reservation> DeleteReservationById(int reservationId);
 
     }
     public class ReservationRepository : IReservationRepository
@@ -24,7 +24,7 @@ namespace LibraryProject.API.Repositories
             _context = context;
         }
 
-        public async Task<Reservation> DeleteReservation(int reservationId)
+        public async Task<Reservation> DeleteReservationById(int reservationId)
         {
             Reservation deleteReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
             if (deleteReservation != null)
