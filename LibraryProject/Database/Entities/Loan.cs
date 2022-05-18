@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+<<<<<<< HEAD
 namespace LibraryProject.API.Database.Entities
+=======
+namespace LibraryProject.Database.Entities
+>>>>>>> Bilal_Branch
 {
     public class Loan
     {
