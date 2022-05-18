@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LibraryProject.API.Migrations
+namespace LibraryProject.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220510090426_Reservation")]
-    partial class Reservation
+    [Migration("20220518104507_Loan")]
+    partial class Loan
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace LibraryProject.API.Migrations
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("LibraryProject.Database.Entities.Reservation", b =>
+            modelBuilder.Entity("LibraryProject.Database.Entities.Loan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,35 +30,35 @@ namespace LibraryProject.API.Migrations
                     b.Property<int>("bookId")
                         .HasColumnType("int");
 
-                    b.Property<string>("reserved_At")
+                    b.Property<string>("loaned_At")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("reserved_To")
+                    b.Property<string>("return_date")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
+                    b.Property<int>("userID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("reservation");
+                    b.ToTable("loan");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             bookId = 1,
-                            reserved_At = "06/05/22",
-                            reserved_To = "13/05/22",
-                            userId = 1
+                            loaned_At = "06/05/22",
+                            return_date = "13/05/22",
+                            userID = 1
                         },
                         new
                         {
                             Id = 2,
                             bookId = 2,
-                            reserved_At = "14/05/22",
-                            reserved_To = "21/05/22",
-                            userId = 2
+                            loaned_At = "27/06/22",
+                            return_date = "27/07/22",
+                            userID = 2
                         });
                 });
 #pragma warning restore 612, 618

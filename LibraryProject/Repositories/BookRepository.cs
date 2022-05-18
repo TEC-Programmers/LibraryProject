@@ -13,7 +13,7 @@ namespace LibraryProject.API.Repositories
         Task<List<Book>> SelectAllBooks();
         Task<Book> SelectBookById(int bookId);
         Task<List<Book>> SelectAllBooksByCategoryId(int categoryId);
-        Task<Book> InsertNewBook(Book product);
+        Task<Book> InsertNewBook(Book book);
         Task<Book> UpdateExistingBook(int bookId, Book book);
         Task<Book> DeleteBookById(int bookId);
     }
