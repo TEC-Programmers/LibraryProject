@@ -47,15 +47,7 @@ namespace LibraryProject.Services
 
             if (loan != null)
             {
-                return new LoanResponse()
-                {
-                    Id = loan.Id,
-                    userID = loan.userID,
-                    bookId = loan.bookId,
-                    loaned_At = loan.loaned_At,
-                    return_date = loan.return_date,
-
-                };
+                return MapLoanToLoanResponse(loan);
 
             }
             return null;
@@ -63,30 +55,15 @@ namespace LibraryProject.Services
 
         public async Task<LoanResponse> CreateLoan(LoanRequest newLoan)
         {
-            Loan loan = new()
-            {
-                userID = newLoan.userID,
-                bookId = newLoan.bookId,
-                loaned_At = newLoan.loaned_At,
-                return_date = newLoan.return_date,
-            };
+            Loan loan = MapLoanRequestToLoan(newLoan);
 
             Loan insertedLoan = await _loanRepository.InsertNewLoan(loan);
+
             if (insertedLoan != null)
             {
-                return new LoanResponse()
-                {
-                    Id = insertedLoan.Id,
-                    userID = insertedLoan.userID,
-                    bookId = insertedLoan.bookId,
-                    loaned_At = insertedLoan.loaned_At,
-                    return_date = insertedLoan.return_date,
-
-                };
-               
+                return MapLoanToLoanResponse(insertedLoan);
             }
-            loan = await _loanRepository.InsertNewLoan(loan);
-            return MapLoanToLoanResponse(loan);
+            return null;
 
         }
 
@@ -136,15 +113,27 @@ namespace LibraryProject.Services
             return null;
 
         }
-        private static LoanResponse MapLoanToLoanResponse(Loan loan)
+
+        private Loan MapLoanRequestToLoan(LoanRequest loanRequest)
         {
-            return loan == null ? null : new LoanResponse()
+            return new Loan()
+            {
+               userID = loanRequest.userID,
+               bookId= loanRequest.bookId,
+               loaned_At= loanRequest.loaned_At,
+               return_date= loanRequest.return_date,
+
+            };
+        }
+        private LoanResponse MapLoanToLoanResponse(Loan loan)
+        {
+            return new LoanResponse()
             {
                 Id = loan.Id,
                 userID = loan.userID,
-                bookId=loan.bookId,
-                loaned_At=loan.loaned_At,
-                return_date=loan.return_date,
+                bookId = loan.bookId,
+                loaned_At = loan.loaned_At,
+                return_date = loan.return_date,
             };
         }
 

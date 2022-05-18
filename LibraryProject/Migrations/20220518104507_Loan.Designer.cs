@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220518083930_Loan")]
+    [Migration("20220518104507_Loan")]
     partial class Loan
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

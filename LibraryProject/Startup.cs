@@ -39,6 +39,7 @@ namespace LibraryProject
             services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<ILoanRepository, LoanRepository>();
 
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

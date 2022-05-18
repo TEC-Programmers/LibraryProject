@@ -10,8 +10,6 @@ namespace LibraryProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
-
     public class LoanController : ControllerBase
     {
         private readonly ILoanService _loanService;
@@ -48,7 +46,7 @@ namespace LibraryProject.Controllers
             }
 
         }
-        [HttpGet("{loanId}")]
+        [HttpGet("{loanid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -80,7 +78,7 @@ namespace LibraryProject.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromRoute] LoanRequest newLoan)
+        public async Task<IActionResult> Create([FromBody] LoanRequest newLoan)
         {
             try
             {
@@ -125,7 +123,7 @@ namespace LibraryProject.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpDelete("{loanId}")]
+        [HttpDelete("{loanid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
