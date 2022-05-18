@@ -39,7 +39,7 @@ namespace LibraryProject
             services.AddScoped<IPublisherRepository, PublisherRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
             //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<ILoanRepository, LoanRepository>();
+            services.AddScoped<ILoanRepository, LoanRepository>();
 
 
             services.AddScoped<IBookService, BookService>();
@@ -48,8 +48,8 @@ namespace LibraryProject
             services.AddScoped<IPublisherService, PublisherService>();
             services.AddScoped<IReservationService, ReservationService>();
             //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<ILoan, LoanService>();
-   
+            services.AddScoped<ILoanService, LoanService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
