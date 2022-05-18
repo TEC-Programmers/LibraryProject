@@ -128,7 +128,7 @@ namespace LibraryProject.Database
             modelBuilder.Entity<Reservation>().HasData(
                 new()
                 {
-                    reservationId = 1,
+                    Id = 1,
                     userId = 1,
                     bookId = 1,
                     reserved_At = "06/05/22",
@@ -136,7 +136,7 @@ namespace LibraryProject.Database
                 },
                 new()
                 {
-                    reservationId = 2,
+                    Id = 2,
                     userId = 2,
                     bookId = 2,
                     reserved_At = "14/05/22",

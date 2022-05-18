@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220516105422_db")]
-    partial class db
+    [Migration("20220518081241_database")]
+    partial class database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,7 +91,7 @@ namespace LibraryProject.API.Migrations
 
             modelBuilder.Entity("LibraryProject.API.Database.Entities.Reservation", b =>
                 {
-                    b.Property<int>("reservationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -108,14 +108,14 @@ namespace LibraryProject.API.Migrations
                     b.Property<int>("userId")
                         .HasColumnType("int");
 
-                    b.HasKey("reservationId");
+                    b.HasKey("Id");
 
                     b.ToTable("Reservation");
 
                     b.HasData(
                         new
                         {
-                            reservationId = 1,
+                            Id = 1,
                             bookId = 1,
                             reserved_At = "06/05/22",
                             reserved_To = "13/05/22",
@@ -123,7 +123,7 @@ namespace LibraryProject.API.Migrations
                         },
                         new
                         {
-                            reservationId = 2,
+                            Id = 2,
                             bookId = 2,
                             reserved_At = "14/05/22",
                             reserved_To = "21/05/22",

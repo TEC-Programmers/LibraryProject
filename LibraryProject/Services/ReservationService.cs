@@ -15,7 +15,7 @@ namespace LibraryProject.API.Services
         Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation);
         Task<ReservationResponse> DeleteReservation(int reservationId);
     }
-    public class ReservationService
+    public class ReservationService : IReservationService
     {
         private readonly IReservationRepository _reservationRepository;
 
@@ -74,15 +74,7 @@ namespace LibraryProject.API.Services
         public async Task<List<ReservationResponse>> GetAllReservations()
         {
             List<Reservation> reservations = await _reservationRepository.SelectAllReservations();
-
-            return reservations.Select(reservation => new ReservationResponse
-            {
-                Id = reservation.Id,
-                userId = reservation.userId,
-                bookId = reservation.bookId,
-                reserved_At = reservation.reserved_At,
-                reserved_To = reservation.reserved_To
-            }).ToList();
+            return reservations.Select(reservation => MapReservationToReservationResponse(reservation)).ToList();           
         }
 
         public async Task<ReservationResponse> GetReservationById(int reservationId)
@@ -129,6 +121,30 @@ namespace LibraryProject.API.Services
             }
 
             return null;
+        }
+
+
+        private Reservation MapReservationRequestToReservation(ReservationRequest ReservationRequest)
+        {
+            return new Reservation()
+            {
+                userId = ReservationRequest.userId,
+                bookId = ReservationRequest.bookId,
+                reserved_At = ReservationRequest.reserved_At,
+                reserved_To = ReservationRequest.reserved_To
+            };
+        }
+
+        private ReservationResponse MapReservationToReservationResponse(Reservation Reservation)
+        {
+            return new ReservationResponse()
+            {
+                Id = Reservation.Id,
+                userId = Reservation.userId,
+                bookId = Reservation.bookId,
+                reserved_At = Reservation.reserved_At,
+                reserved_To = Reservation.reserved_To
+            };
         }
     }
 }

@@ -59,7 +59,7 @@ namespace LibraryProject.API.Controllers
 
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.Get(reservationId);
+                ReservationResponse reservationResponse = await _reservationService.GetReservationById(reservationId);
 
                 if (reservationResponse == null)
                 {
@@ -80,7 +80,7 @@ namespace LibraryProject.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] Reservationrequest newReservation)
+        public async Task<IActionResult> Create([FromBody] ReservationRequest newReservation)
         {
 
             try
@@ -106,7 +106,7 @@ namespace LibraryProject.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Update([FromRoute] int reservationId, [FromBody] Reservationrequest updateReservation)
+        public async Task<IActionResult> Update([FromRoute] int reservationId, [FromBody] ReservationRequest updateReservation)
         {
 
             try

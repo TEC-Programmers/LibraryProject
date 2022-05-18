@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class db : Migration
+    public partial class database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,7 +67,7 @@ namespace LibraryProject.API.Migrations
                 name: "Reservation",
                 columns: table => new
                 {
-                    reservationId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
@@ -76,7 +76,7 @@ namespace LibraryProject.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservation", x => x.reservationId);
+                    table.PrimaryKey("PK_Reservation", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,7 +172,7 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reservation",
-                columns: new[] { "reservationId", "bookId", "reserved_At", "reserved_To", "userId" },
+                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "userId" },
                 values: new object[,]
                 {
                     { 1, 1, "06/05/22", "13/05/22", 1 },
