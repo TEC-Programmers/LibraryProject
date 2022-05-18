@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class Library : Migration
+    public partial class DbDone : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,8 +42,8 @@ namespace LibraryProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userID = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
-                    loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -61,22 +61,6 @@ namespace LibraryProject.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Publisher", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reservation",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<int>(type: "int", nullable: false),
-                    bookId = table.Column<int>(type: "int", nullable: false),
-                    reserved_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    reserved_To = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reservation", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,6 +118,34 @@ namespace LibraryProject.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Reservation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    userId = table.Column<int>(type: "int", nullable: false),
+                    bookId = table.Column<int>(type: "int", nullable: false),
+                    reserved_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    reserved_To = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reservation_Book_bookId",
+                        column: x => x.bookId,
+                        principalTable: "Book",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reservation_User_userId",
+                        column: x => x.userId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Author",
                 columns: new[] { "Id", "FirstName", "LastName", "MiddleName" },
@@ -171,15 +183,6 @@ namespace LibraryProject.API.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Reservation",
-                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "userId" },
-                values: new object[,]
-                {
-                    { 1, 1, "06/05/22", "13/05/22", 1 },
-                    { 2, 2, "14/05/22", "21/05/22", 2 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "MiddleName", "Password", "Role" },
                 values: new object[,]
@@ -191,12 +194,22 @@ namespace LibraryProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Language", "PublishYear", "PublisherId", "Title" },
-                values: new object[] { 1, 1, 1, "BØg for børn", "Danish", (short)1945, 1, "Pippi Langstrømper" });
+                values: new object[] { 1, 1, 1, "Bog for børn", "Danish", (short)1945, 1, "Pippi Langstrømper" });
 
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Language", "PublishYear", "PublisherId", "Title" },
                 values: new object[] { 2, 2, 2, "Romaner for voksen2", "Danish", (short)2005, 2, "Rødby-Puttgarden" });
+
+            migrationBuilder.InsertData(
+                table: "Reservation",
+                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "userId" },
+                values: new object[] { 1, 1, "06/05/22", "13/05/22", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Reservation",
+                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "userId" },
+                values: new object[] { 2, 2, "14/05/22", "21/05/22", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Book_AuthorId",
@@ -212,18 +225,28 @@ namespace LibraryProject.API.Migrations
                 name: "IX_Book_PublisherId",
                 table: "Book",
                 column: "PublisherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservation_bookId",
+                table: "Reservation",
+                column: "bookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservation_userId",
+                table: "Reservation",
+                column: "userId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Book");
-
-            migrationBuilder.DropTable(
                 name: "Loan");
 
             migrationBuilder.DropTable(
                 name: "Reservation");
+
+            migrationBuilder.DropTable(
+                name: "Book");
 
             migrationBuilder.DropTable(
                 name: "User");

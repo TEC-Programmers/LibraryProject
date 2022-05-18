@@ -14,9 +14,9 @@ namespace LibraryProject.API.Services
         Task<ReservationResponse> GetReservationById(int reservationId);
         Task<ReservationResponse> CreateReservation(ReservationRequest newReservation);
         Task<ReservationResponse> UpdateExistingReservation(int reservationId, ReservationRequest updateReservation);
-        Task<ReservationResponse> DeleteReservation(int reservationId);
+        Task<ReservationResponse> DeleteReservationById(int reservationId);
     }
-    public class ReservationService
+    public class ReservationService : IReservationService
     {
         private readonly IReservationRepository _reservationRepository;
 
@@ -54,7 +54,7 @@ namespace LibraryProject.API.Services
 
         }
 
-        public async Task<ReservationResponse> DeleteReservation(int reservationId)
+        public async Task<ReservationResponse> DeleteReservationById(int reservationId)
         {
             Reservation deletedReservation = await _reservationRepository.DeleteReservationById(reservationId);
 

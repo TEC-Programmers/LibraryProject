@@ -288,7 +288,7 @@ namespace LibraryProject.Tests.Services
                    .ReturnsAsync(deletedReservation);
 
             //Act
-            var result = await _reservationService.DeleteReservation(reservationId);
+            var result = await _reservationService.DeleteReservationById(reservationId);
 
             //Assert
             Assert.NotNull(result);
@@ -308,7 +308,7 @@ namespace LibraryProject.Tests.Services
                   .ReturnsAsync(() => null);
 
             //Act
-            var result = await _reservationService.DeleteReservation(reservationId);
+            var result = await _reservationService.DeleteReservationById(reservationId);
 
             //Assert
             Assert.Null(result);

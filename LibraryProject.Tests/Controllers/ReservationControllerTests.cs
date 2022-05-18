@@ -282,7 +282,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockReservationService
-                .Setup(x => x.DeleteReservation(It.IsAny<int>()))
+                .Setup(x => x.DeleteReservationById(It.IsAny<int>()))
                 .ReturnsAsync(reservationResponse);
 
             //Act
@@ -301,7 +301,7 @@ namespace LibraryProject.Tests.Controllers
             int reservationId = 1;
 
             _mockReservationService
-                .Setup(x => x.DeleteReservation(It.IsAny<int>()))
+                .Setup(x => x.DeleteReservationById(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
@@ -320,7 +320,7 @@ namespace LibraryProject.Tests.Controllers
             int reservationId = 1;
 
             _mockReservationService
-                .Setup(x => x.DeleteReservation(It.IsAny<int>()))
+                .Setup(x => x.DeleteReservationById(It.IsAny<int>()))
                 .ReturnsAsync(() => throw new System.Exception("this is an exceoption"));
 
             //Act
