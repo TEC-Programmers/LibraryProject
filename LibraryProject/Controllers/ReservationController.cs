@@ -111,7 +111,7 @@ namespace LibraryProject.API.Controllers
 
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.UpdateReservation(reservationId, updateReservation);
+                ReservationResponse reservationResponse = await _reservationService.UpdateExistingReservation(reservationId, updateReservation);
 
                 if (reservationResponse == null)
                 {

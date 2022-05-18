@@ -11,11 +11,13 @@ namespace LibraryProject.Database.Entities
         public int Id { get; set; }
 
         public int userId { get; set; }
-        [ForeignKey("userId")] 
- 
+        [ForeignKey("userId")]
+        public User User { get; set; }
+
 
         public int bookId { get; set; }
-        [ForeignKey("bookId")] 
+        [ForeignKey("bookId")]
+        public Book Book { get; set; }
 
 
         public string reserved_At { get; set; }

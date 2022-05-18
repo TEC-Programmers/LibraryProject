@@ -1,6 +1,6 @@
-﻿using LibraryProject.Controllers;
-using LibraryProject.DTO_s;
-using LibraryProject.Services;
+﻿using LibraryProject.API.Controllers;
+using LibraryProject.API.DTO_s;
+using LibraryProject.API.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Moq;
 using System;
@@ -29,7 +29,7 @@ namespace LibraryProject.Tests.Controllers
 
             Reservations.Add(new()
             {
-                reservationId = 1,
+                Id = 1,
                 userId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
@@ -38,7 +38,7 @@ namespace LibraryProject.Tests.Controllers
 
             Reservations.Add(new()
             {
-                reservationId = 2,
+                Id = 2,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -118,7 +118,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest newRerservation = new()
+            ReservationRequest newRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -130,7 +130,7 @@ namespace LibraryProject.Tests.Controllers
 
             ReservationResponse reservationResponse = new()
             {
-                reservationId = reservationId,
+                Id = reservationId,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -138,7 +138,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockReservationService
-                .Setup(x => x.CreateReservation(It.IsAny<Reservationrequest>()))
+                .Setup(x => x.CreateReservation(It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(reservationResponse);
 
             //Act
@@ -154,7 +154,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest newRerservation = new()
+            ReservationRequest newRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -163,7 +163,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockReservationService
-                .Setup(x => x.CreateReservation(It.IsAny<Reservationrequest>()))
+                .Setup(x => x.CreateReservation(It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act
@@ -180,7 +180,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest updateRerservation = new()
+            ReservationRequest updateRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -192,7 +192,7 @@ namespace LibraryProject.Tests.Controllers
 
             ReservationResponse reservationResponse = new()
             {
-                reservationId = reservationId,
+               Id= reservationId,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
@@ -200,7 +200,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockReservationService
-                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .Setup(x => x.UpdateExistingReservation(It.IsAny<int>(), It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(reservationResponse);
 
             //Act
@@ -216,7 +216,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest updateRerservation = new()
+            ReservationRequest updateRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -227,7 +227,7 @@ namespace LibraryProject.Tests.Controllers
             int reservationId = 1;
 
             _mockReservationService
-                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .Setup(x => x.UpdateExistingReservation(It.IsAny<int>(), It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(() => null);
 
             //Act
@@ -243,7 +243,7 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            Reservationrequest updateRerservation = new()
+            ReservationRequest updateRerservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -254,7 +254,7 @@ namespace LibraryProject.Tests.Controllers
             int reservationId = 1;
 
             _mockReservationService
-                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservationrequest>()))
+                .Setup(x => x.UpdateExistingReservation(It.IsAny<int>(), It.IsAny<ReservationRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act
@@ -274,8 +274,7 @@ namespace LibraryProject.Tests.Controllers
 
 
             ReservationResponse reservationResponse = new()
-            {
-                reservationId = reservationId,
+            {Id = reservationId,
                 userId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",

@@ -1,5 +1,6 @@
 ﻿using LibraryProject.API.Database.Entities;
 using LibraryProject.Database;
+using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,8 +12,8 @@ namespace LibraryProject.API.Repositories
         Task<List<Reservation>> SelectAllReservations();
         Task<Reservation> SelectReservationById(int reservationId);
         Task<Reservation> InsertNewReservation(Reservation reservation);
-        Task<Reservation> UpdateReservation(int reservationId, Reservation reservation);
-        Task<Reservation> DeleteReservation(int reservationId);
+        Task<Reservation> UpdateExistingReservation(int reservationId, Reservation reservation);
+        Task<Reservation> DeleteReservationById(int reservationId);
 
     }
     public class ReservationRepository : IReservationRepository
@@ -24,7 +25,7 @@ namespace LibraryProject.API.Repositories
             _context = context;
         }
 
-        public async Task<Reservation> DeleteReservation(int reservationId)
+        public async Task<Reservation> DeleteReservationById(int reservationId)
         {
             Reservation deleteReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
             if (deleteReservation != null)
@@ -54,21 +55,23 @@ namespace LibraryProject.API.Repositories
                 .FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
         }
 
-        public async Task<Reservation> UpdateReservation(int reservationId, Reservation reservation)
+        public async Task<Reservation> UpdateExistingReservation(int reservationId, Reservation reservation)
         {
-            Reservation updateReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
+           
+                Reservation updateReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
 
-            if (updateReservation != null)
-            {
-                updateReservation.Id = reservation.Id;
-                updateReservation.userId = reservation.userId;
-                updateReservation.bookId = reservation.bookId;
-                updateReservation.reserved_At = reservation.reserved_At;
-                updateReservation.reserved_To = reservation.reserved_To;
+                if (updateReservation != null)
+                {
+                    updateReservation.Id = reservation.Id;
+                    updateReservation.userId = reservation.userId;
+                    updateReservation.bookId = reservation.bookId;
+                    updateReservation.reserved_At = reservation.reserved_At;
+                    updateReservation.reserved_To = reservation.reserved_To;
 
-                await _context.SaveChangesAsync();
-            }
-            return updateReservation;
+                    await _context.SaveChangesAsync();
+                }
+                return updateReservation;
+            
         }
     }
 }

@@ -69,7 +69,7 @@ namespace LibraryProject
                 {
                     Id = 1,
                     Title = "Pippi Langstrømper",
-                    Description = "BØg for børn",
+                    Description = "Bog for børn",
                     Language = "Danish",
                     PublishYear = 1945,
                     CategoryId = 1,

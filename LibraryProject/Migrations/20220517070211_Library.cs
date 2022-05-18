@@ -42,8 +42,8 @@ namespace LibraryProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userID = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
-                    loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,8 +71,8 @@ namespace LibraryProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
-                    reserved_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    reserved_To = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    reserved_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    reserved_To = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

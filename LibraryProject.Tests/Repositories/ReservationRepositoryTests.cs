@@ -1,6 +1,6 @@
-﻿using LibraryProject.Database;
+﻿using LibraryProject.API.Repositories;
+using LibraryProject.Database;
 using LibraryProject.Database.Entities;
-using LibraryProject.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            _context.reservation.Add(new()
+            _context.Reservation.Add(new()
             {
                 Id = 1,
                 userId = 1,
@@ -44,7 +44,7 @@ namespace LibraryProject.Tests.Repositories
                 reserved_To = "25/05/22"
             });
 
-            _context.reservation.Add(new()
+            _context.Reservation.Add(new()
             {
                 Id = 2,
                 userId = 2,
@@ -90,7 +90,7 @@ namespace LibraryProject.Tests.Repositories
 
             int reservationId = 1;
 
-            _context.reservation.Add(new()
+            _context.Reservation.Add(new()
             {
                 Id = reservationId,
                 userId = 1,
@@ -169,7 +169,7 @@ namespace LibraryProject.Tests.Repositories
                 reserved_To = "25/05/22"
             };
 
-            _context.reservation.Add(reservation);
+            _context.Reservation.Add(reservation);
             await _context.SaveChangesAsync();
 
             //Act
@@ -197,7 +197,7 @@ namespace LibraryProject.Tests.Repositories
                 reserved_To = "25/05/22"
             };
 
-            _context.reservation.Add(reservation);
+            _context.Reservation.Add(reservation);
             await _context.SaveChangesAsync();
 
             Reservation updateReservation = new()
@@ -271,7 +271,7 @@ namespace LibraryProject.Tests.Repositories
                 reserved_To = "25/05/22"
             };
 
-            _context.reservation.Add(newReservation);
+            _context.Reservation.Add(newReservation);
             await _context.SaveChangesAsync();
 
             //Act

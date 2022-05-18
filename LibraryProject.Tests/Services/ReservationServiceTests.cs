@@ -1,8 +1,9 @@
-﻿using LibraryProject.Database;
+﻿using LibraryProject.API.DTO_s;
+using LibraryProject.API.Repositories;
+using LibraryProject.API.Services;
+using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using LibraryProject.DTO_s;
-using LibraryProject.Repositories;
-using LibraryProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -110,7 +111,7 @@ namespace LibraryProject.Tests.Services
             //Asser
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
-            Assert.Equal(reservation.Id,result.reservationId);
+            Assert.Equal(reservation.Id,result.Id);
             Assert.Equal(reservation.userId,result.userId);
             Assert.Equal(reservation.bookId,result.bookId);
             Assert.Equal(reservation.reserved_At, result.reserved_At);
@@ -137,7 +138,7 @@ namespace LibraryProject.Tests.Services
         [Fact]
         public async void CreateReservation_ShouldReturnReservationResponse_WhenCreateIsSuccess()
         {
-            Reservationrequest newReservation = new()
+            ReservationRequest newReservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -166,7 +167,7 @@ namespace LibraryProject.Tests.Services
             //Assert
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
-            Assert.Equal(reservationId, result.reservationId);
+            Assert.Equal(reservationId, result.Id);
             Assert.Equal(newReservation.userId, result.userId);
             Assert.Equal(newReservation.bookId, result.bookId);
             Assert.Equal(newReservation.reserved_At, result.reserved_At);
@@ -178,7 +179,7 @@ namespace LibraryProject.Tests.Services
         public async void CreateReservation_ShouldReturnNull_WhenRepositoryReturnsNull()
         {
             //Arrange
-            Reservationrequest newReservation = new()
+            ReservationRequest newReservation = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -205,7 +206,7 @@ namespace LibraryProject.Tests.Services
 
             //Arrange
 
-            Reservationrequest reservationRequest = new()
+            ReservationRequest reservationRequest = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -229,13 +230,13 @@ namespace LibraryProject.Tests.Services
                 .ReturnsAsync(reservation);
 
             //Act
-            var result = await _reservationService.UpdateReservation(reservationId, reservationRequest);
+            var result = await _reservationService.UpdateExistingReservation(reservationId, reservationRequest);
 
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
-            Assert.Equal(reservationId, result.reservationId);
+            Assert.Equal(reservationId, result.Id);
             Assert.Equal(reservationRequest.userId, result.userId);
             Assert.Equal(reservationRequest.bookId, result.bookId);
             Assert.Equal(reservationRequest.reserved_At, result.reserved_At);
@@ -246,7 +247,7 @@ namespace LibraryProject.Tests.Services
         public async void UpdateReservation_ShouldReturnNull_WhenReservationDoesNotExist()
         {
             //Arrange
-            Reservationrequest reservationRequest = new()
+            ReservationRequest reservationRequest = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -262,7 +263,7 @@ namespace LibraryProject.Tests.Services
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _reservationService.UpdateReservation(reservationId, reservationRequest);
+            var result = await _reservationService.UpdateExistingReservation(reservationId, reservationRequest);
 
             //Assert
             Assert.Null(result);
@@ -292,7 +293,7 @@ namespace LibraryProject.Tests.Services
             //Assert
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
-            Assert.Equal(reservationId, result.reservationId);
+            Assert.Equal(reservationId, result.Id);
 
         }
 

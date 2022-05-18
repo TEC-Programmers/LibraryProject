@@ -1,6 +1,7 @@
 ﻿using LibraryProject.API.Database.Entities;
 using LibraryProject.API.DTO_s;
 using LibraryProject.API.Repositories;
+using LibraryProject.Database.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace LibraryProject.API.Services
         Task<List<ReservationResponse>> GetAllReservations();
         Task<ReservationResponse> GetReservationById(int reservationId);
         Task<ReservationResponse> CreateReservation(ReservationRequest newReservation);
-        Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation);
+        Task<ReservationResponse> UpdateExistingReservation(int reservationId, ReservationRequest updateReservation);
         Task<ReservationResponse> DeleteReservation(int reservationId);
     }
     public class ReservationService
@@ -55,7 +56,7 @@ namespace LibraryProject.API.Services
 
         public async Task<ReservationResponse> DeleteReservation(int reservationId)
         {
-            Reservation deletedReservation = await _reservationRepository.DeleteReservation(reservationId);
+            Reservation deletedReservation = await _reservationRepository.DeleteReservationById(reservationId);
 
             if (deletedReservation != null)
             {
@@ -103,7 +104,7 @@ namespace LibraryProject.API.Services
             return null;
         }
 
-        public async Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation)
+        public async Task<ReservationResponse> UpdateExistingReservation(int reservationId, ReservationRequest updateReservation)
         {
             Reservation reservation = new()
             {
@@ -114,7 +115,7 @@ namespace LibraryProject.API.Services
             };
 
 
-            Reservation updatedReservation = await _reservationRepository.UpdateReservation(reservationId, reservation);
+            Reservation updatedReservation = await _reservationRepository.UpdateExistingReservation(reservationId, reservation);
 
             if (updatedReservation != null)
             {
