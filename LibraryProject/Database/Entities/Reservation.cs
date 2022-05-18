@@ -9,8 +9,6 @@ namespace LibraryProject.Database.Entities
     {
         [Key]
         public int Id { get; set; }
-        public int userId { get; set; }
-        public int bookId { get; set; }
 
         public int userId { get; set; }
         [ForeignKey("userId")] 
