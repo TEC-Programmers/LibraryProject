@@ -2,12 +2,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 
+
 namespace LibraryProject.Database.Entities
 {
     public class Reservation
     {
         [Key]
         public int Id { get; set; }
+        public int userId { get; set; }
+        public int bookId { get; set; }
 
         public int userId { get; set; }
         [ForeignKey("userId")] 
