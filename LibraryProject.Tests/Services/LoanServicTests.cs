@@ -214,9 +214,24 @@ namespace LibraryProject.Tests.Services
                 return_date = "11/6/2022" 
             };
 
+
+        
+          _mockloanServiceRepository.Setup(x => x.UpdateExistingLoan(It.IsAny<int>(), It.IsAny<Loan>()))
+                .ReturnsAsync(loan);
+
+        //Act
+        var result = await _loanService.UpdateLoan(loanId, loanRequest);
+
+
+        //Assert
+        Assert.NotNull(result);
+            Assert.IsType<LoanResponse>(result);
+            Assert.Equal(loanId, result.Id);
+            Assert.Equal(loanRequest.userID, result.userID);
+            Assert.Equal(loanRequest.bookId, result.bookId);
+            Assert.Equal(loanRequest.loaned_At, result.return_date);
+            Assert.Equal(loanRequest.loaned_At, result.return_date);
         }
-
-
 
         [Fact]
         public async void UpdateLoan_ShouldReturnNull_WhenLoanDoesNotExist()

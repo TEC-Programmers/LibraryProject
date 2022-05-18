@@ -48,7 +48,7 @@ namespace LibraryProject.Controllers
             }
 
         }
-        [HttpGet("{authorId}")]
+        [HttpGet("{loanId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -101,7 +101,7 @@ namespace LibraryProject.Controllers
         }
 
 
-        [HttpPut("{authorId}")]
+        [HttpPut("{loanId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -125,7 +125,7 @@ namespace LibraryProject.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpDelete("{authorId}")]
+        [HttpDelete("{loanId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220510101845_Loan")]
+    [Migration("20220518083930_Loan")]
     partial class Loan
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,18 +47,18 @@ namespace LibraryProject.Migrations
                         new
                         {
                             Id = 1,
-                            bookId = 2,
+                            bookId = 1,
                             loaned_At = "06/05/22",
                             return_date = "13/05/22",
-                            userID = 2
+                            userID = 1
                         },
                         new
                         {
-                            Id = 3,
-                            bookId = 5,
+                            Id = 2,
+                            bookId = 2,
                             loaned_At = "27/06/22",
                             return_date = "27/07/22",
-                            userID = 4
+                            userID = 2
                         });
                 });
 #pragma warning restore 612, 618

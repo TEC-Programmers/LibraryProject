@@ -19,22 +19,18 @@ namespace LibraryProject.Database
             new()
             {
                 Id = 1,
-                userID = 2,
-                bookId = 2,
+                userID = 1,
+                bookId = 1,
                 loaned_At = "06/05/22",
                 return_date = "13/05/22"
-
-
-
             },
             new()
             {
-                Id = 3,
-                userID = 4,
-                bookId = 5,
+                Id = 2,
+                userID = 2,
+                bookId = 2,
                 loaned_At = "27/06/22",
                 return_date = "27/07/22"
-
             }
             );
         }

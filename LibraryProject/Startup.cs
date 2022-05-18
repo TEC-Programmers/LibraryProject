@@ -20,6 +20,7 @@ namespace LibraryProject
 {
     public class Startup
     {
+        private readonly string CORSRules = "_CORSRules";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -57,6 +58,7 @@ namespace LibraryProject
 
             app.UseHttpsRedirection();
 
+            app.UseCors(CORSRules);
             app.UseRouting();
 
             app.UseAuthorization();
