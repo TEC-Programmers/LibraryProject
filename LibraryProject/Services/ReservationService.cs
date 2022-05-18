@@ -15,7 +15,7 @@ namespace LibraryProject.API.Services
         Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation);
         Task<ReservationResponse> DeleteReservation(int reservationId);
     }
-    public class ReservationService
+    public class ReservationService: IReservationService
     {
         private readonly IReservationRepository _reservationRepository;
 
