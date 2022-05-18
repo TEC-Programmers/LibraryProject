@@ -1,5 +1,5 @@
-﻿using LibraryProject.DTO_s;
-using LibraryProject.Services;
+﻿using LibraryProject.API.DTO;
+using LibraryProject.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

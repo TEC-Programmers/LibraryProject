@@ -1,6 +1,5 @@
-﻿using LibraryProject.Database;
-using LibraryProject.Database.Entities;
-using LibraryProject.Repositories;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ namespace LibraryProject.Tests.Repositories
         {
             //arrange
             await _context.Database.EnsureDeletedAsync();
-            _context.loan.Add(new()
+            _context.Loan.Add(new()
             {
                 Id = 1,
                 userID = 1,
@@ -42,7 +41,7 @@ namespace LibraryProject.Tests.Repositories
                 return_date = "11/6/2022"
 
             });
-            _context.loan.Add(new()
+            _context.Loan.Add(new()
             {
                 Id = 2,
                 userID = 2,
@@ -77,7 +76,7 @@ namespace LibraryProject.Tests.Repositories
 
             int loanId = 1;
 
-            _context.loan.Add(new()
+            _context.Loan.Add(new()
             {
                 Id = loanId,
                 userID = 1,
@@ -91,7 +90,7 @@ namespace LibraryProject.Tests.Repositories
             var result = await _loanRepository.SelectLoanById(loanId);
 
             //Assert
-            Assert.NotNull(_context.loan);
+            Assert.NotNull(_context.Loan);
             Assert.IsType<Loan>(result);
             Assert.Equal(loanId, result.Id);
         }
@@ -148,7 +147,7 @@ namespace LibraryProject.Tests.Repositories
                 return_date = "11/6/2022"
             };
 
-            _context.loan.Add(loan);
+            _context.Loan.Add(loan);
             await _context.SaveChangesAsync();
 
             //Act
@@ -178,7 +177,7 @@ namespace LibraryProject.Tests.Repositories
                 return_date = "11/6/2022"
             };
 
-            _context.loan.Add(newloan);
+            _context.Loan.Add(newloan);
             await _context.SaveChangesAsync();
 
             Loan updateloan = new()
@@ -244,7 +243,7 @@ namespace LibraryProject.Tests.Repositories
                 return_date = "11/6/2022"
             };
 
-            _context.loan.Add(newLoan);
+            _context.Loan.Add(newLoan);
             await _context.SaveChangesAsync();
 
             // Act

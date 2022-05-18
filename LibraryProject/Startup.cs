@@ -1,19 +1,10 @@
-<<<<<<< HEAD
+
 using LibraryProject.API.Authorization;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-=======
-using LibraryProject.Database;
-using LibraryProject.Repositories;
-using LibraryProject.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
->>>>>>> Bilal_Branch
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,14 +17,10 @@ namespace LibraryProject.API
     public class Startup
     {
         private readonly string CORSRules = "_CORSRules";
-<<<<<<< HEAD
         private readonly IWebHostEnvironment _env;
         private readonly IConfiguration _configuration;
 
         public Startup(IWebHostEnvironment env, IConfiguration configuration)
-=======
-        public Startup(IConfiguration configuration)
->>>>>>> Bilal_Branch
         {
             _env = env;
             _configuration = configuration;
@@ -67,10 +54,10 @@ namespace LibraryProject.API
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
-            /*
+            
             services.AddScoped<ILoanRepository, LoanRepository>();
             services.AddScoped<ILoanService, LoanService>();
-            */
+            
             services.AddScoped<IPublisherRepository, PublisherRepository>();
             services.AddScoped<IPublisherService, PublisherService>();
 
@@ -90,14 +77,6 @@ namespace LibraryProject.API
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
             });
-
-
-            services.AddDbContext<LibraryProjectContext>(
-                x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
-            
-            
-            services.AddScoped<ILoanService, LoanService>();
-            services.AddScoped<ILoanRepository, LoanRepository>();
 
 
             services.AddControllers();

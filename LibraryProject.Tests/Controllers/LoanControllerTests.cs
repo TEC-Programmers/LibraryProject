@@ -1,6 +1,6 @@
-﻿using LibraryProject.Controllers;
-using LibraryProject.DTO_s;
-using LibraryProject.Services;
+﻿using LibraryProject.API.DTO;
+using LibraryProject.API.Services;
+using LibraryProject.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Moq;
 using System;

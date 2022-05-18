@@ -1,12 +1,8 @@
-﻿using LibraryProject.Database;
-using LibraryProject.Database.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using LibraryProject.API.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-namespace LibraryProject.Repositories
+namespace LibraryProject.API.Repositories
 {
 
     public interface ILoanRepository
@@ -28,22 +24,22 @@ namespace LibraryProject.Repositories
 
         public async Task<List<Loan>> SelectAllLoans()
         {
-            return await _context.loan.ToListAsync();
+            return await _context.Loan.ToListAsync();
         }
         public async Task<Loan> SelectLoanById(int loanId)
         {
-            return await _context.loan
+            return await _context.Loan
                 .FirstOrDefaultAsync(loan => loan.Id == loanId);
         }
         public async Task<Loan> InsertNewLoan(Loan loan)
         {
-            _context.loan.Add(loan);
+            _context.Loan.Add(loan);
             await _context.SaveChangesAsync();
             return loan;
         }
         public async Task<Loan> UpdateExistingLoan(int loanId, Loan loan)
         {
-            Loan updateLoan = await _context.loan.FirstOrDefaultAsync(loan=>loan.Id == loanId);
+            Loan updateLoan = await _context.Loan.FirstOrDefaultAsync(loan=>loan.Id == loanId);
             if (updateLoan != null)
             {
                 updateLoan.userID = loan.userID;
@@ -58,11 +54,11 @@ namespace LibraryProject.Repositories
         }
         public async Task<Loan> DeleteLoanById(int loanId)
         {
-            Loan deleteLoan = await _context.loan.FirstOrDefaultAsync(loan => loan.Id == loanId);
+            Loan deleteLoan = await _context.Loan.FirstOrDefaultAsync(loan => loan.Id == loanId);
             if (deleteLoan != null)
             {
                
-                _context.loan.Remove(deleteLoan);
+                _context.Loan.Remove(deleteLoan);
                 await _context.SaveChangesAsync();
             }
             return deleteLoan;

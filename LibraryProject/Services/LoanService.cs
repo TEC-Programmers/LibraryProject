@@ -1,14 +1,11 @@
-﻿
-using LibraryProject.Database.Entities;
-using LibraryProject.DTO_s;
-using LibraryProject.Repositories;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.DTO;
+using LibraryProject.API.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LibraryProject.Services
+namespace LibraryProject.API.Services
 {
     public interface ILoanService
     {
@@ -69,26 +66,13 @@ namespace LibraryProject.Services
 
         public async Task<LoanResponse> UpdateLoan(int loanId, LoanRequest updateLoan)
         {
-            Loan loan = new()
-            {
-                userID = updateLoan.userID,
-                bookId = updateLoan.bookId,
-                loaned_At = updateLoan.loaned_At,
-                return_date = updateLoan.return_date,
-            };
+            Loan loan = MapLoanRequestToLoan(updateLoan);
 
-            Loan updatedLoan = await _loanRepository.UpdateExistingLoan(loanId,loan);
-            if (updatedLoan != null)
-            {
-                return new LoanResponse()
-                {
-                    Id = updatedLoan.Id,
-                    userID = updatedLoan.userID,
-                    bookId = updatedLoan.bookId,
-                    loaned_At = updatedLoan.loaned_At,
-                    return_date = updatedLoan.return_date,
+            Loan updatedLoan = await _loanRepository.UpdateExistingLoan(loanId, loan);
 
-                };
+            if (updateLoan != null)
+            {
+                return MapLoanToLoanResponse(updatedLoan);
             }
             return null;
 
@@ -121,7 +105,7 @@ namespace LibraryProject.Services
                userID = loanRequest.userID,
                bookId= loanRequest.bookId,
                loaned_At= loanRequest.loaned_At,
-               return_date= loanRequest.return_date,
+               return_date = loanRequest.return_date
 
             };
         }
