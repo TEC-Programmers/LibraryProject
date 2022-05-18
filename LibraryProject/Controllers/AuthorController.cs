@@ -1,46 +1,45 @@
-﻿using LibraryProject.API.DTO_s;
-using LibraryProject.API.Services;
+﻿using LibraryProject.API.Services;
+using LibraryProject.DTO_s;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LibraryProject.API.Controllers
+namespace LibraryProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReservationController : ControllerBase
+    public class AuthorController : ControllerBase
     {
-        private readonly IReservationService _reservationService;
+        private readonly IAuthorService _authorservice;
 
-        public ReservationController(IReservationService reservationService)
+        public AuthorController(IAuthorService authorService)
         {
-            _reservationService = reservationService;
+            _authorservice = authorService;
         }
-
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> getAll()
         {
             try
             {
-                List<ReservationResponse> reservationResponses = await _reservationService.GetAllReservations();
+                List<AuthorResponse> authors = await _authorservice.GetAllAuthors();
 
-                if (reservationResponses == null)
+                if (authors == null)
                 {
-                    return Problem("No data");
+                    return Problem("Got no data, not even empty list, this is unexpected");
                 }
 
-                if (reservationResponses.Count == 0)
+                if (authors.Count == 0)
                 {
                     return NoContent();
                 }
 
-                return Ok(reservationResponses);
+                return Ok(authors);
             }
             catch (Exception ex)
             {
@@ -49,24 +48,24 @@ namespace LibraryProject.API.Controllers
 
         }
 
-        [HttpGet("{reservationId}")]
+        [HttpGet("{authorId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetById([FromRoute] int reservationId)
+        public async Task<IActionResult> GetById([FromRoute] int authorId)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.GetReservationById(reservationId);
+                AuthorResponse authorResponse = await _authorservice.GetAuthorById(authorId);
 
-                if (reservationResponse == null)
+                if (authorResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(reservationResponse);
+                return Ok(authorResponse);
+
             }
             catch (Exception ex)
             {
@@ -80,75 +79,69 @@ namespace LibraryProject.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] ReservationRequest newReservation)
+        public async Task<ActionResult> Create([FromBody] AuthorRequest newAuthor)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.CreateReservation(newReservation);
+                AuthorResponse authorResponse = await _authorservice.CreateAuthor(newAuthor);
 
-                if (reservationResponse == null)
+                if (authorResponse == null)
                 {
-                    return Problem("Reservation could not be created, something went wrong");
+                    return Problem(" Author was NOT created, something went wrong");
                 }
 
-                return Ok(reservationResponse);
+                return Ok(authorResponse);
             }
             catch (Exception ex)
             {
-
                 return Problem(ex.Message);
             }
         }
 
-        [HttpPut("{reservationId}")]
+        [HttpPut("{authorId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Update([FromRoute] int reservationId, [FromBody] ReservationRequest updateReservation)
+        public async Task<IActionResult> Update([FromRoute] int authorId, [FromBody] AuthorRequest updateAuthor)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.UpdateReservation(reservationId, updateReservation);
+                AuthorResponse authorResponse = await _authorservice.UpdateAuthor(authorId, updateAuthor);
 
-                if (reservationResponse == null)
+                if (authorResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(reservationResponse);
+                return Ok(authorResponse);
             }
             catch (Exception ex)
             {
-
                 return Problem(ex.Message);
             }
         }
 
-        [HttpDelete("{reservationId}")]
+        [HttpDelete("{authorId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete([FromRoute] int reservationId)
+        public async Task<IActionResult> Delete([FromRoute] int authorId)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.DeleteReservation(reservationId);
+                AuthorResponse authorResponse = await _authorservice.DeleteAuthor(authorId);
 
-                if (reservationResponse == null)
+                if (authorResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(reservationResponse);
+                return Ok(authorResponse);
             }
             catch (Exception ex)
             {
-
                 return Problem(ex.Message);
             }
         }

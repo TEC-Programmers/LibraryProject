@@ -10,37 +10,36 @@ namespace LibraryProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReservationController : ControllerBase
+    public class PublisherController : ControllerBase
     {
-        private readonly IReservationService _reservationService;
+        private readonly IPublisherService _publisherService;
 
-        public ReservationController(IReservationService reservationService)
+        public PublisherController(IPublisherService PublisherService)
         {
-            _reservationService = reservationService;
+            _publisherService = PublisherService;
         }
-
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> getAll()
         {
             try
             {
-                List<ReservationResponse> reservationResponses = await _reservationService.GetAllReservations();
+                List<PublisherResponse> Publishers = await _publisherService.GetAllPublishers();
 
-                if (reservationResponses == null)
+                if (Publishers == null)
                 {
-                    return Problem("No data");
+                    return Problem("Got no data, not even empty list, this is unexpected");
                 }
 
-                if (reservationResponses.Count == 0)
+                if (Publishers.Count == 0)
                 {
                     return NoContent();
                 }
 
-                return Ok(reservationResponses);
+                return Ok(Publishers);
             }
             catch (Exception ex)
             {
@@ -49,24 +48,24 @@ namespace LibraryProject.API.Controllers
 
         }
 
-        [HttpGet("{reservationId}")]
+        [HttpGet("{publisherId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetById([FromRoute] int reservationId)
+        public async Task<IActionResult> GetById([FromRoute] int publisherId)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.GetReservationById(reservationId);
+                PublisherResponse PublisherResponse = await _publisherService.GetPublisherById(publisherId);
 
-                if (reservationResponse == null)
+                if (PublisherResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(reservationResponse);
+                return Ok(PublisherResponse);
+
             }
             catch (Exception ex)
             {
@@ -80,75 +79,69 @@ namespace LibraryProject.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] ReservationRequest newReservation)
+        public async Task<ActionResult> Create([FromBody] PublisherRequest newPublisher)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.CreateReservation(newReservation);
+                PublisherResponse PublisherResponse = await _publisherService.CreatePublisher(newPublisher);
 
-                if (reservationResponse == null)
+                if (PublisherResponse == null)
                 {
-                    return Problem("Reservation could not be created, something went wrong");
+                    return Problem(" Publisher was NOT created, something went wrong");
                 }
 
-                return Ok(reservationResponse);
+                return Ok(PublisherResponse);
             }
             catch (Exception ex)
             {
-
                 return Problem(ex.Message);
             }
         }
 
-        [HttpPut("{reservationId}")]
+        [HttpPut("{publisherId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Update([FromRoute] int reservationId, [FromBody] ReservationRequest updateReservation)
+        public async Task<IActionResult> Update([FromRoute] int publisherId, [FromBody] PublisherRequest updatePublisher)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.UpdateReservation(reservationId, updateReservation);
+                PublisherResponse PublisherResponse = await _publisherService.UpdatePublisher(publisherId, updatePublisher);
 
-                if (reservationResponse == null)
+                if (PublisherResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(reservationResponse);
+                return Ok(PublisherResponse);
             }
             catch (Exception ex)
             {
-
                 return Problem(ex.Message);
             }
         }
 
-        [HttpDelete("{reservationId}")]
+        [HttpDelete("{publisherId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete([FromRoute] int reservationId)
+        public async Task<IActionResult> Delete([FromRoute] int publisherId)
         {
-
             try
             {
-                ReservationResponse reservationResponse = await _reservationService.DeleteReservation(reservationId);
+                PublisherResponse PublisherResponse = await _publisherService.DeletePublisher(publisherId);
 
-                if (reservationResponse == null)
+                if (PublisherResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(reservationResponse);
+                return Ok(PublisherResponse);
             }
             catch (Exception ex)
             {
-
                 return Problem(ex.Message);
             }
         }

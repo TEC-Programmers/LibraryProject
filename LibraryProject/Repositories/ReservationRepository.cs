@@ -1,21 +1,18 @@
-﻿using LibraryProject.Database;
-using LibraryProject.Database.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace LibraryProject.Repositories
+namespace LibraryProject.API.Repositories
 {
     public interface IReservationRepository
     {
         Task<List<Reservation>> SelectAllReservations();
         Task<Reservation> SelectReservationById(int reservationId);
         Task<Reservation> InsertNewReservation(Reservation reservation);
-        Task<Reservation> UpdateExistingReservation(int reservationId, Reservation reservation);
-        Task<Reservation> DeleteReservationById(int reservationId);
+        Task<Reservation> UpdateReservation(int reservationId, Reservation reservation);
+        Task<Reservation> DeleteReservation(int reservationId);
 
     }
     public class ReservationRepository : IReservationRepository
@@ -27,12 +24,12 @@ namespace LibraryProject.Repositories
             _context = context;
         }
 
-        public async Task<Reservation> DeleteReservationById(int reservationId)
+        public async Task<Reservation> DeleteReservation(int reservationId)
         {
-            Reservation deleteReservation = await _context.reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
+            Reservation deleteReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
             if (deleteReservation != null)
             {
-                _context.reservation.Remove(deleteReservation);
+                _context.Reservation.Remove(deleteReservation);
                 await _context.SaveChangesAsync();
             }
 
@@ -41,41 +38,37 @@ namespace LibraryProject.Repositories
 
         public async Task<Reservation> InsertNewReservation(Reservation reservation)
         {
-            _context.reservation.Add(reservation);
+            _context.Reservation.Add(reservation);
             await _context.SaveChangesAsync();
             return reservation;
         }
 
         public async Task<List<Reservation>> SelectAllReservations()
         {
-            return await _context.reservation.ToListAsync();
+            return await _context.Reservation.ToListAsync();
         }
 
         public async Task<Reservation> SelectReservationById(int reservationId)
         {
-            return await _context.reservation
+            return await _context.Reservation
                 .FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
         }
 
-    public async Task<Reservation> UpdateExistingReservation(int reservationId, Reservation reservation)
-    {
-        Reservation updateReservation = await _context.reservation
-                .FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
+        public async Task<Reservation> UpdateReservation(int reservationId, Reservation reservation)
+        {
+            Reservation updateReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
 
-        if (updateReservation != null)
+            if (updateReservation != null)
             {
-            updateReservation.userId = reservation.userId;
-            updateReservation.bookId = reservation.bookId;
-            updateReservation.reserved_At = reservation.reserved_At;
-            updateReservation.reserved_To = reservation.reserved_To;
+                updateReservation.Id = reservation.Id;
+                updateReservation.userId = reservation.userId;
+                updateReservation.bookId = reservation.bookId;
+                updateReservation.reserved_At = reservation.reserved_At;
+                updateReservation.reserved_To = reservation.reserved_To;
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+            }
+            return updateReservation;
         }
-
-        return updateReservation;
-
-    }
-
-       
     }
 }
