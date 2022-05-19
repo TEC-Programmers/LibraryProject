@@ -16,6 +16,7 @@ namespace LibraryProject.Database
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Loan> Loan { get; set; }
+        public DbSet<User> User { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

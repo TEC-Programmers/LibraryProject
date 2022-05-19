@@ -1,6 +1,6 @@
-﻿using LibraryProject.Database;
-using LibraryProject.Database.Entities;
-using LibraryProject.Repositories;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.Repositories;
+using LibraryProject.Database;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,7 +33,7 @@ namespace LibraryProject.Tests.Repositories
         {
             //arrange
             await _context.Database.EnsureDeletedAsync();
-            _context.loan.Add(new()
+            _context.Loan.Add(new()
             {
                 Id = 1,
                 userID = 1,
@@ -42,7 +42,7 @@ namespace LibraryProject.Tests.Repositories
                 return_date = "11/6/2022"
 
             });
-            _context.loan.Add(new()
+            _context.Loan.Add(new()
             {
                 Id = 2,
                 userID = 2,
@@ -75,11 +75,11 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int loanId = 1;
+            int LoanId = 1;
 
-            _context.loan.Add(new()
+            _context.Loan.Add(new()
             {
-                Id = loanId,
+                Id = LoanId,
                 userID = 1,
                 bookId = 1,
                 loaned_At = "11/5/22",
@@ -88,12 +88,12 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _loanRepository.SelectLoanById(loanId);
+            var result = await _loanRepository.SelectLoanById(LoanId);
 
             //Assert
-            Assert.NotNull(_context.loan);
+            Assert.NotNull(_context.Loan);
             Assert.IsType<Loan>(result);
-            Assert.Equal(loanId, result.Id);
+            Assert.Equal(LoanId, result.Id);
         }
 
         [Fact]
@@ -139,7 +139,7 @@ namespace LibraryProject.Tests.Repositories
             //Arrange 
             await _context.Database.EnsureDeletedAsync();
           
-            Loan loan = new()
+            Loan Loan = new()
             {
                 Id = 1,
                 bookId = 1,
@@ -148,11 +148,11 @@ namespace LibraryProject.Tests.Repositories
                 return_date = "11/6/2022"
             };
 
-            _context.loan.Add(loan);
+            _context.Loan.Add(Loan);
             await _context.SaveChangesAsync();
 
             //Act
-            async Task action() => await _loanRepository.InsertNewLoan(loan);
+            async Task action() => await _loanRepository.InsertNewLoan(Loan);
 
             //Assert
             var ex = await Assert.ThrowsAsync<ArgumentException>(action);
@@ -167,23 +167,23 @@ namespace LibraryProject.Tests.Repositories
             //Arrange 
             await _context.Database.EnsureDeletedAsync();
 
-            int loanId = 1;
+            int LoanId = 1;
 
-            Loan newloan = new()
+            Loan newLoan = new()
             {
-                Id = loanId,
+                Id = LoanId,
                 bookId = 1,
                 userID = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
             };
 
-            _context.loan.Add(newloan);
+            _context.Loan.Add(newLoan);
             await _context.SaveChangesAsync();
 
-            Loan updateloan = new()
+            Loan updateLoan = new()
             {
-                Id = loanId,
+                Id = LoanId,
                 bookId = 1,
                 userID = 1,
                 loaned_At = "updated 11/5/2022",
@@ -191,16 +191,16 @@ namespace LibraryProject.Tests.Repositories
             };
 
             //Act
-            var result = await _loanRepository.UpdateExistingLoan(loanId, updateloan);
+            var result = await _loanRepository.UpdateExistingLoan(LoanId, updateLoan);
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<Loan>(result);
-            Assert.Equal(loanId, result.Id);
-            Assert.Equal(updateloan.bookId, result.bookId);
-            Assert.Equal(updateloan.userID, result.userID);
-            Assert.Equal(updateloan.loaned_At, result.loaned_At);
-            Assert.Equal(updateloan.return_date, result.return_date);
+            Assert.Equal(LoanId, result.Id);
+            Assert.Equal(updateLoan.bookId, result.bookId);
+            Assert.Equal(updateLoan.userID, result.userID);
+            Assert.Equal(updateLoan.loaned_At, result.loaned_At);
+            Assert.Equal(updateLoan.return_date, result.return_date);
 
         }
         [Fact]
@@ -244,7 +244,7 @@ namespace LibraryProject.Tests.Repositories
                 return_date = "11/6/2022"
             };
 
-            _context.loan.Add(newLoan);
+            _context.Loan.Add(newLoan);
             await _context.SaveChangesAsync();
 
             // Act

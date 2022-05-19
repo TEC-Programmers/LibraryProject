@@ -1,4 +1,5 @@
 ﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.DTO;
 using LibraryProject.API.DTO_s;
 using LibraryProject.API.Repositories;
 using System.Collections.Generic;

@@ -1,3 +1,4 @@
+using LibraryProject.API.Authorization;
 using LibraryProject.API.Repositories;
 using LibraryProject.API.Services;
 using LibraryProject.Database;
@@ -33,12 +34,14 @@ namespace LibraryProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IJwtUtils, JwtUtils>();
+
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IPublisherRepository, PublisherRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
-            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoanRepository, LoanRepository>();
 
 
@@ -47,7 +50,7 @@ namespace LibraryProject
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IPublisherService, PublisherService>();
             services.AddScoped<IReservationService, ReservationService>();
-            //services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILoanService, LoanService>();
 
             services.AddControllers();

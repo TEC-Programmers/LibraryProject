@@ -1,7 +1,10 @@
-﻿using LibraryProject.Database.Entities;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.DTO;
+using LibraryProject.API.DTO_s;
+using LibraryProject.API.Repositories;
+using LibraryProject.API.Services;
+using LibraryProject.Database.Entities;
 using LibraryProject.DTO_s;
-using LibraryProject.Repositories;
-using LibraryProject.Services;
 using Moq;
 using System;
 using System.Collections.Generic;

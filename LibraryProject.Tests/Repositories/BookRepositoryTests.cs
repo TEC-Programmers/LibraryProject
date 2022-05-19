@@ -71,9 +71,6 @@ namespace LibraryProject.Tests.Repositories
                 PublishYear = 2022,
                 CategoryId = 1,
                 AuthorId= 1
-               
-
-
             });
 
             await _context.SaveChangesAsync();
@@ -85,8 +82,8 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<List<Book>>(result);
             Assert.Equal(2, result.Count);
-            // Assert.Empty(result);
         }
+
         [Fact]
         public async void SelectAllBooks_ShouldReturnEmptyListOfBooks_WhenNoBookExists()
         {
@@ -105,6 +102,7 @@ namespace LibraryProject.Tests.Repositories
 
             Assert.Empty(result);
         }
+
         [Fact]
         public async void SelectBookById_ShouldReturnBook_WhenBookExists()
         {
@@ -153,6 +151,7 @@ namespace LibraryProject.Tests.Repositories
             Assert.Equal(bookId, result.Id);
             // Assert.Empty(result);
         }
+
         [Fact]
         public async void SelectBookById_ShouldReturnNull_WhenBookDoesNotExist()
         {
@@ -356,6 +355,7 @@ namespace LibraryProject.Tests.Repositories
             Assert.Equal(bookId, result.Id);
             Assert.Null(book);
         }
+
         [Fact]
         public async void DeleteBookById_ShouldReturnNull_WhenBookDoesNotExist()
         {
@@ -363,15 +363,11 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
 
-
-
-
             //Act
             var result = await _bookRepository.DeleteBookById(1);
 
 
             //Assert
-
             Assert.Null(result);
         }
     }
