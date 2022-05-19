@@ -15,12 +15,12 @@ namespace LibraryProject.Tests.Services
 
         private readonly Mock<IBookRepository> _mockBookRepository = new();
         private readonly Mock<ICategoryRepository> _mockCategoryRepository = new();
+        private readonly Mock<IAuthorRepository> _mockAuthorRepository = new();
+        private readonly Mock<IPublisherRepository> _mockPublisherRepository = new();
 
         public BookServiceTests()
         {
-            _bookService = new BookService(_mockBookRepository.Object, _mockCategoryRepository.Object);
+            _bookService = new BookService(_mockBookRepository.Object, _mockCategoryRepository.Object, _mockAuthorRepository.Object, _mockPublisherRepository.Object);
         }
-
-
     }
 }

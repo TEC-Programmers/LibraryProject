@@ -44,7 +44,7 @@ namespace LibraryProject.API
 
             });
 
-            services.Configure<AppSettings>(_configuration.GetSection("AppSettings"));//den henter appsettings fra json 
+            services.Configure<AppSettings>(_configuration.GetSection("AppSettings")); // henter appsettings fra json 
 
             services.AddScoped<IJwtUtils, JwtUtils>();
 
@@ -76,7 +76,6 @@ namespace LibraryProject.API
             {
                 // serialize enums as strings in api responses (e.g. Role)
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-
             });
 
 
@@ -107,8 +106,7 @@ namespace LibraryProject.API
                         },
                         new string[] {}
                     }
-
-                    });
+                });
             });
         }
 

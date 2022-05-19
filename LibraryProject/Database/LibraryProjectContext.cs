@@ -69,7 +69,7 @@ namespace LibraryProject.Database
                     Title = "Pippi Langstrømper",
                     Description = "BØg for børn",
                     Language ="Danish",
-                    PublishYear=1945,
+                    PublishYear = 1945,
                     CategoryId = 1,
                     AuthorId = 1,
                     PublisherId = 1,
