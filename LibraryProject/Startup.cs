@@ -63,8 +63,8 @@ namespace LibraryProject.API
             services.AddScoped<IPublisherRepository, PublisherRepository>();
             services.AddScoped<IPublisherService, PublisherService>();
 
-            //services.AddScoped<ILoanRepository, LoanRepository>();
-            //services.AddScoped<ILoanService, LoanService>();
+            services.AddScoped<ILoanRepository, LoanRepository>();
+            services.AddScoped<ILoanService, LoanService>();
 
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IReservationService, ReservationService>();
