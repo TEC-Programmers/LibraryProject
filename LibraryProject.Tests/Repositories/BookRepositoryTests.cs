@@ -85,7 +85,6 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<List<Book>>(result);
             Assert.Equal(2, result.Count);
-            // Assert.Empty(result);
         }
         [Fact]
         public async void SelectAllBooks_ShouldReturnEmptyListOfBooks_WhenNoBookExists()
@@ -131,7 +130,7 @@ namespace LibraryProject.Tests.Repositories
 
             _context.Book.Add(new()
             {
-                Id = 1,
+                Id = bookId,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
                 Language = "Dansk",
@@ -151,7 +150,6 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<Book>(result);
             Assert.Equal(bookId, result.Id);
-            // Assert.Empty(result);
         }
         [Fact]
         public async void SelectBookById_ShouldReturnNull_WhenBookDoesNotExist()

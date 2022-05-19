@@ -1,0 +1,10 @@
+<p>
+    Author forside
+</p>
+
+<ul *ngIf="authors.length > 0">
+
+    <li *ngFor="let author of authors">
+        {{author.id}} - {{author.firstName}} - {{author.lastName}}
+    </li>
+</ul>

@@ -1,0 +1,8 @@
+<p>frontpage works!</p>
+
+<ul *ngIf="loans.length > 0">
+    <li *ngFor="let loan of loans">
+        <!-- <button (click)="edit(loan)">Ret</button> // <button (click)="delete(loan)">Ret</button> --->
+        {{loan.Id }} - {{loan.userID}}
+    </li>
+</ul>
