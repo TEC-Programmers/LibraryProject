@@ -197,8 +197,8 @@ namespace LibraryProject.Tests.Services
             {
                userID = 1,
                bookId = 1,
-               loaned_At = "10/5/2022",
-               return_date = "11/6/2022"
+               loaned_At = "11/5/2022",
+               return_date = "11/5/2022"
                
 
             };
@@ -210,12 +210,10 @@ namespace LibraryProject.Tests.Services
                 Id = loanId,
                 userID= 1,
                 bookId= 1,
-                loaned_At = "10/5/2022",
-                return_date = "11/6/2022" 
+                loaned_At = "11/5/2022",
+                return_date = "11/5/2022" 
             };
 
-
-        
                 _mockloanServiceRepository
                 .Setup(x => x.UpdateExistingLoan(It.IsAny<int>(), It.IsAny<Loan>()))
                 .ReturnsAsync(loan);

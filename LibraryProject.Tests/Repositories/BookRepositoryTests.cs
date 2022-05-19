@@ -34,7 +34,6 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = 1,
                 CategoryName = "Børnebog"
-
             });
 
        
@@ -44,7 +43,6 @@ namespace LibraryProject.Tests.Repositories
                 FirstName = "Astrid",
                 MiddleName = "",
                 LastName = " Lindgrens"
-
             });
 
             _context.Book.Add(new()
@@ -57,13 +55,9 @@ namespace LibraryProject.Tests.Repositories
                 PublishYear = 1945,
                 CategoryId = 1,
                 AuthorId = 1
-               
-
-
             });
             _context.Book.Add(new()
             {
-
                 Id = 2,
                 Title = "Karen begynder næsten i skole",
                 Description = "Bøg for Børn",
@@ -92,9 +86,6 @@ namespace LibraryProject.Tests.Repositories
         {
             //Arrange 
             await _context.Database.EnsureDeletedAsync();
-
-
-
 
             //Act
             var result = await _bookRepository.SelectAllBooks();

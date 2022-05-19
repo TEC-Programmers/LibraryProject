@@ -70,7 +70,7 @@ namespace LibraryProject.API.Services
 
             Loan updatedLoan = await _loanRepository.UpdateExistingLoan(loanId, loan);
 
-            if (updateLoan != null)
+            if (updatedLoan != null)
             {
                 return MapLoanToLoanResponse(updatedLoan);
             }
