@@ -47,6 +47,12 @@ namespace LibraryProject.Tests.Repositories
 
             });
 
+            _context.Publisher.Add(new()
+            {
+                Id = 1,
+                Name ="hhfj"
+
+            });
             _context.Book.Add(new()
             {
 
@@ -56,7 +62,8 @@ namespace LibraryProject.Tests.Repositories
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
-                AuthorId = 1
+                AuthorId = 1,
+                PublisherId = 1
                
 
 
@@ -70,7 +77,8 @@ namespace LibraryProject.Tests.Repositories
                 Language = "Dansk",
                 PublishYear = 2022,
                 CategoryId = 1,
-                AuthorId= 1
+                AuthorId= 1,
+                PublisherId= 1
                
 
 
@@ -126,6 +134,13 @@ namespace LibraryProject.Tests.Repositories
 
             });
 
+            _context.Publisher.Add(new()
+            {
+                Id = 1,
+                Name = "hhfj"
+
+            });
+
             _context.Book.Add(new()
             {
 
@@ -135,7 +150,8 @@ namespace LibraryProject.Tests.Repositories
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
-                AuthorId = 1
+                AuthorId = 1,
+                PublisherId = 1
 
 
 
