@@ -10,5 +10,6 @@ namespace LibraryProject.API.Database.Entities
 
         [Column(TypeName = "nvarchar(62)")]
         public string Name { get; set; }
+
     }
 }

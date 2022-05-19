@@ -24,6 +24,8 @@ namespace LibraryProject.API.Services
         private readonly ICategoryRepository  _categoryRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly IPublisherRepository _publisherRepository;
+
+      
         public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository, 
             IAuthorRepository auhtorRepository, IPublisherRepository publisherRepository)
         {
@@ -34,6 +36,8 @@ namespace LibraryProject.API.Services
 
             _publisherRepository = publisherRepository;
         }
+
+
         public async Task<List<BookResponse>> GetAllBooks()
         {
             List<Book> books = await _bookRepository.SelectAllBooks();
@@ -104,6 +108,8 @@ namespace LibraryProject.API.Services
             if (book != null)
             {
                 book.Category = await _categoryRepository.SelectCategoryById(book.CategoryId);
+               book.Author = await _authorRepository.SelectAuthorById(book.AuthorId);
+               book.Publisher = await _publisherRepository.SelectPublisherById(book.PublisherId);
                 return MapBookToBookResponse(book);
             }
 

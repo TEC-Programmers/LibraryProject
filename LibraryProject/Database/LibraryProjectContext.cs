@@ -52,6 +52,7 @@ namespace LibraryProject
               new()
               {
                   Id = 1,
+               
                   FirstName = "Astrid",
                   MiddleName = "",
                   LastName = " Lindgrens"
@@ -59,6 +60,7 @@ namespace LibraryProject
                new()
                {
                    Id = 2,
+                 
                    FirstName = "Helle",
                    MiddleName = "",
                    LastName = "Helle"

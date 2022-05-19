@@ -19,9 +19,11 @@ namespace LibraryProject.API.Services
     {
         private readonly IAuthorRepository _authorRepository;
 
-        public AuthorService(IAuthorRepository authorRepository)
+        private readonly IBookRepository _bookRepository;
+        public AuthorService(IAuthorRepository authorRepository, IBookRepository bookRepository)
         {
             _authorRepository = authorRepository;
+            _bookRepository = bookRepository;
         }
 
         public async Task<AuthorResponse> CreateAuthor(AuthorRequest newAuthor)
@@ -32,6 +34,7 @@ namespace LibraryProject.API.Services
 
             if (insertedAuthor != null)
             {
+                
                 return MapAuthorToAuthorResponse(insertedAuthor);
             }
             return null;
@@ -43,6 +46,7 @@ namespace LibraryProject.API.Services
 
             if (deletedAuthor != null)
             {
+               
                 return MapAuthorToAuthorResponse(deletedAuthor);
             }
             return null;
@@ -72,6 +76,7 @@ namespace LibraryProject.API.Services
 
             if (updatedAuthor != null)
             {
+                
                 return MapAuthorToAuthorResponse(updatedAuthor);
             }
             return null;
