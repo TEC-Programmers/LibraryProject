@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace LibraryProject.API.Database.Entities
-
 {
     public class Loan
     {

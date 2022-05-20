@@ -1,7 +1,10 @@
 ﻿using LibraryProject.API.Database.Entities;
 using LibraryProject.API.DTO;
+using LibraryProject.API.DTO_s;
 using LibraryProject.API.Repositories;
 using LibraryProject.API.Services;
+using LibraryProject.Database.Entities;
+using LibraryProject.DTO_s;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -15,10 +18,10 @@ namespace LibraryProject.Tests.Services
     public class loanServiceServicTests
     {
         private readonly LoanService _loanService;
-        private readonly Mock<ILoanRepository> _mockloanRepository = new();
+        private readonly Mock<ILoanRepository> _mockloanServiceRepository = new();
         public loanServiceServicTests()
         {
-            _loanService = new LoanService(_mockloanRepository.Object);
+            _loanService = new LoanService(_mockloanServiceRepository.Object);
         }
 
         [Fact]
@@ -45,7 +48,7 @@ namespace LibraryProject.Tests.Services
                 return_date= "24/7/2022"
             });
 
-            _mockloanRepository
+            _mockloanServiceRepository
              .Setup(x => x.SelectAllLoans())
              .ReturnsAsync(loans);
 
@@ -64,7 +67,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             List<Loan> loans = new();
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.SelectAllLoans())
                 .ReturnsAsync(loans);
 
@@ -94,7 +97,7 @@ namespace LibraryProject.Tests.Services
                 return_date = "11/6/2022"
             };
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.SelectLoanById(It.IsAny<int>()))
                 .ReturnsAsync(loan);
 
@@ -116,7 +119,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             int loanId = 1;
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.SelectLoanById(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
@@ -151,7 +154,7 @@ namespace LibraryProject.Tests.Services
                 
             };
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.InsertNewLoan(It.IsAny<Loan>()))
                 .ReturnsAsync(createloan);
 
@@ -179,7 +182,7 @@ namespace LibraryProject.Tests.Services
                 return_date= "11/6/2022"
             };
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.InsertNewLoan(It.IsAny<Loan>()))
                 .ReturnsAsync(() => null);
 
@@ -198,7 +201,7 @@ namespace LibraryProject.Tests.Services
                userID = 1,
                bookId = 1,
                loaned_At = "11/5/2022",
-               return_date = "11/5/2022"
+               return_date = "11/6/2022"
                
 
             };
@@ -211,21 +214,20 @@ namespace LibraryProject.Tests.Services
                 userID= 1,
                 bookId= 1,
                 loaned_At = "11/5/2022",
-                return_date = "11/5/2022" 
+                return_date = "11/6/2022" 
             };
 
 
         
-                _mockloanRepository
-                .Setup(x => x.UpdateExistingLoan(It.IsAny<int>(), It.IsAny<Loan>()))
+          _mockloanServiceRepository.Setup(x => x.UpdateExistingLoan(It.IsAny<int>(), It.IsAny<Loan>()))
                 .ReturnsAsync(loan);
 
-            //Act
-             var result = await _loanService.UpdateLoan(loanId, loanRequest);
+        //Act
+        var result = await _loanService.UpdateLoan(loanId, loanRequest);
 
 
-            //Assert
-            Assert.NotNull(result);
+        //Assert
+        Assert.NotNull(result);
             Assert.IsType<LoanResponse>(result);
             Assert.Equal(loanId, result.Id);
             Assert.Equal(loanRequest.userID, result.userID);
@@ -240,15 +242,15 @@ namespace LibraryProject.Tests.Services
             // Arrange 
             LoanRequest loanRequest = new()
             {
-               userID = 1,
-               bookId = 1,
+               userID=1,
+               bookId=1,
                loaned_At= "11/5/2022",
                 return_date = "11/6/2022"
             };
 
             int loanId = 1;
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.UpdateExistingLoan(It.IsAny<int>(), It.IsAny<Loan>()))
                 .ReturnsAsync(() => null);
 
@@ -275,7 +277,7 @@ namespace LibraryProject.Tests.Services
                 return_date = "11/6/2022"
             };
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.DeleteLoanById(It.IsAny<int>()))
                 .ReturnsAsync(deletedloan);
 
@@ -293,7 +295,7 @@ namespace LibraryProject.Tests.Services
             // Arrange
             int loanId = 1;
 
-            _mockloanRepository
+            _mockloanServiceRepository
                 .Setup(x => x.DeleteLoanById(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
