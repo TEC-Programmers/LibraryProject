@@ -46,16 +46,24 @@ namespace LibraryProject.Tests.Repositories
 
             });
 
+            _context.Publisher.Add(new()
+            {
+                Id = 1,
+                Name ="hhfj"
+
+            });
             _context.Book.Add(new()
             {
 
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
-                AuthorId = 1
+                AuthorId = 1,
+                PublisherId = 1
                
 
 
@@ -67,10 +75,12 @@ namespace LibraryProject.Tests.Repositories
                 Id = 2,
                 Title = "Karen begynder næsten i skole",
                 Description = "Bøg for Børn",
+                Image = "Book2.jpg",
                 Language = "Dansk",
                 PublishYear = 2022,
                 CategoryId = 1,
-                AuthorId= 1
+                AuthorId= 1,
+                PublisherId= 1
                
 
 
@@ -128,15 +138,24 @@ namespace LibraryProject.Tests.Repositories
 
             });
 
+            _context.Publisher.Add(new()
+            {
+                Id = 1,
+                Name = "hhfj"
+
+            });
+
             _context.Book.Add(new()
             {
                 Id = bookId,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
-                AuthorId = 1
+                AuthorId = 1,
+                PublisherId = 1
 
             });
 
@@ -182,6 +201,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -217,6 +237,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -248,6 +269,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -264,6 +286,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = bookId,
                 Title = "Updated Pipi Langstrømper",
                 Description = " updated Kids bog ",
+                Image = "Book1.jpg",
                 Language = " updatedDansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -303,6 +326,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = bookId,
                 Title = "Updated Pipi Langstrømper",
                 Description = " updated Kids bog ",
+                Image = "Book1.jpg",
                 Language = " updatedDansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -331,6 +355,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = bookId,
                 Title = "Updated Pipi Langstrømper",
                 Description = " updated Kids bog ",
+                Image = "Book1.jpg",
                 Language = " updatedDansk",
                 PublishYear = 1945,
                 CategoryId = 1,

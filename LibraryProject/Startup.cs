@@ -67,6 +67,18 @@ namespace LibraryProject.API
             services.AddScoped<IUserService, UserService>();
 
 
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
+
+            services.AddScoped<IPublisherRepository, PublisherRepository>();
+            services.AddScoped<IPublisherService, PublisherService>();
+
+            //services.AddScoped<ILoanRepository, LoanRepository>();
+            //services.AddScoped<ILoanService, LoanService>();
+
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IReservationService, ReservationService>();
+
             services.AddDbContext<LibraryProjectContext>(
               o => o.UseSqlServer(_configuration.GetConnectionString("Default")));
 
