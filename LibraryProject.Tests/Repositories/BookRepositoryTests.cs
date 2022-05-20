@@ -35,7 +35,6 @@ namespace LibraryProject.Tests.Repositories
                 Id = 1,
                 CategoryName = "Børnebog"
             });
-
        
             _context.Author.Add(new()
             {
@@ -56,6 +55,7 @@ namespace LibraryProject.Tests.Repositories
                 CategoryId = 1,
                 AuthorId = 1
             });
+
             _context.Book.Add(new()
             {
                 Id = 2,
@@ -79,7 +79,6 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<List<Book>>(result);
             Assert.Equal(2, result.Count);
-            // Assert.Empty(result);
         }
         [Fact]
         public async void SelectAllBooks_ShouldReturnEmptyListOfBooks_WhenNoBookExists()
@@ -101,13 +100,16 @@ namespace LibraryProject.Tests.Repositories
         {
             //Arrange 
             await _context.Database.EnsureDeletedAsync();
+
             int bookId = 1;
+
             _context.Category.Add(new()
             {
                 Id = 1,
                 CategoryName = "Børnebog"
 
             });
+
             _context.Author.Add(new()
             {
                 Id = 1,
@@ -119,16 +121,13 @@ namespace LibraryProject.Tests.Repositories
 
             _context.Book.Add(new()
             {
-
-                Id = 1,
+                Id = bookId,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
                 AuthorId = 1
-
-
 
             });
 
@@ -142,7 +141,6 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<Book>(result);
             Assert.Equal(bookId, result.Id);
-            // Assert.Empty(result);
         }
         [Fact]
         public async void SelectBookById_ShouldReturnNull_WhenBookDoesNotExist()
