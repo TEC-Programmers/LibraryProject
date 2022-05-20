@@ -16,9 +16,10 @@ namespace LibraryProject.Tests.Services
     {
         private readonly AuthorService _AuthorService;
         private readonly Mock<IAuthorRepository> _mockAuthorRepository = new();
+        private readonly Mock<IBookRepository> _mockBookRepository = new();
         public AuthorServicTests()
         {
-            _AuthorService = new AuthorService(_mockAuthorRepository.Object);
+            _AuthorService = new AuthorService(_mockAuthorRepository.Object, _mockBookRepository.Object);
         }
 
         [Fact]

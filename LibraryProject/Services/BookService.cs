@@ -21,21 +21,29 @@ namespace LibraryProject.API.Services
     public class BookService:IBookService
     {
         private readonly IBookRepository _bookRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository  _categoryRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly IPublisherRepository _publisherRepository;
-        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository,
+
+      
+        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository, 
             IAuthorRepository auhtorRepository, IPublisherRepository publisherRepository)
         {
             _bookRepository = bookRepository;
             _categoryRepository = categoryRepository;
+            
             _authorRepository = auhtorRepository;
+
             _publisherRepository = publisherRepository;
         }
+
+
         public async Task<List<BookResponse>> GetAllBooks()
         {
             List<Book> books = await _bookRepository.SelectAllBooks();
+
             return books.Select(book => MapBookToBookResponse(book)).ToList();
+
         }
 
         public async Task<BookResponse> GetBookById(int bookId)
@@ -48,6 +56,7 @@ namespace LibraryProject.API.Services
                 return MapBookToBookResponse(book);
             }
             return null;
+
         }
         public async Task<List<BookResponse>> GetBooksByCategoryId(int categoryId)
         {
@@ -56,18 +65,25 @@ namespace LibraryProject.API.Services
 
             return books.Select(book => MapBookToBookResponse(book)).ToList();
         }
+
+
         public async Task<BookResponse> CreateBook(BookRequest newBook)
-        {           
+        {
             Book book = MapBookRequestToBook(newBook);
 
             Book insertedBook = await _bookRepository.InsertNewBook(book);
 
             if (insertedBook != null)
             {
+                insertedBook.Category = await _categoryRepository.SelectCategoryById(insertedBook.CategoryId);
+                insertedBook.Author = await _authorRepository.SelectAuthorById(insertedBook.AuthorId);
+                insertedBook.Publisher = await _publisherRepository.SelectPublisherById(insertedBook.PublisherId);
                 return MapBookToBookResponse(insertedBook);
             }
+
             return null;
         }
+
         public async Task<BookResponse> UpdateBook(int bookId, BookRequest updateBook)
         {
             Book book = MapBookRequestToBook(updateBook);
@@ -84,6 +100,7 @@ namespace LibraryProject.API.Services
 
             return null;
         }
+
         public async Task<BookResponse> DeleteBook(int bookId)
         {
            Book book = await _bookRepository.DeleteBookById(bookId);
@@ -91,12 +108,12 @@ namespace LibraryProject.API.Services
             if (book != null)
             {
                 book.Category = await _categoryRepository.SelectCategoryById(book.CategoryId);
-                book.Author = await _authorRepository.SelectAuthorById(book.AuthorId);
-                book.Publisher = await _publisherRepository.SelectPublisherById(book.PublisherId);
+               book.Author = await _authorRepository.SelectAuthorById(book.AuthorId);
+               book.Publisher = await _publisherRepository.SelectPublisherById(book.PublisherId);
                 return MapBookToBookResponse(book);
             }
 
-            return null;           
+            return null;
         }
         private static Book MapBookRequestToBook(BookRequest bookRequest)
         {
@@ -106,6 +123,7 @@ namespace LibraryProject.API.Services
                 Title = bookRequest.Title,
                 Description = bookRequest.Description,
                 Language = bookRequest.Language,
+                Image=bookRequest.Image,
                 PublishYear = bookRequest.PublishYear,
                 CategoryId = bookRequest.CategoryId,
                 AuthorId = bookRequest.AuthorId,
@@ -120,6 +138,7 @@ namespace LibraryProject.API.Services
                 Id = book.Id,
                 Title = book.Title,
                 Description = book.Description,
+                Image = book.Image,
                 Language = book.Language,
                 PublishYear = book.PublishYear,
 

@@ -16,8 +16,12 @@ namespace LibraryProject.Database.Entities
         [Column(TypeName = "nvarchar(32)")]
         public string Language { get; set; }
 
+
         [Column(TypeName = "nvarchar(32)")]
         public string Description { get; set; }
+
+        [Column(TypeName = "nvarchar(32)")]
+        public string Image { get; set; }
 
         [Column(TypeName = "smallint")]
         public int PublishYear { get; set; }

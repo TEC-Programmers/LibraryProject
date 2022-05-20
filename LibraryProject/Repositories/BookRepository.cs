@@ -82,6 +82,7 @@ namespace LibraryProject.API.Repositories
                 updateBook.Title = book.Title;
                 updateBook.Description = book.Description;
                 updateBook.Language = book.Language;
+                updateBook.Image    =book.Image;
                 updateBook.PublishYear = book.PublishYear;
                 
 
