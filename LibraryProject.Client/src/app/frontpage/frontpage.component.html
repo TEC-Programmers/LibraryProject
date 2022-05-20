@@ -1,9 +1,13 @@
-<p>frontpage works!</p>
-
-<ul *ngIf="loans.length > 0">
-    <li *ngFor="let loan of loans">
+<!-- <div id="searchDiv">
+    <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for products" size="35">
 
 
+    <tr *ngFor="let book of allbooks | filter: filterTerm" [routerLink]="['/product', product.id]">
+        <td>
 
-    </li>
-</ul>
+            Product: {{product.name}}
+            <br> Description: {{product.description}} <br>
+            <br>
+        </td>
+    </tr> -->
+<!-- </div> -->
