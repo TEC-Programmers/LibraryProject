@@ -36,7 +36,6 @@ namespace LibraryProject.Tests.Repositories
                 CategoryName = "Børnebog"
 
             });
-
        
             _context.Author.Add(new()
             {
@@ -61,6 +60,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             });
+
             _context.Book.Add(new()
             {
 
@@ -108,13 +108,16 @@ namespace LibraryProject.Tests.Repositories
         {
             //Arrange 
             await _context.Database.EnsureDeletedAsync();
+
             int bookId = 1;
+
             _context.Category.Add(new()
             {
                 Id = 1,
                 CategoryName = "Børnebog"
 
             });
+
             _context.Author.Add(new()
             {
                 Id = 1,
@@ -126,16 +129,13 @@ namespace LibraryProject.Tests.Repositories
 
             _context.Book.Add(new()
             {
-
-                Id = 1,
+                Id = bookId,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
                 AuthorId = 1
-
-
 
             });
 
@@ -149,7 +149,6 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<Book>(result);
             Assert.Equal(bookId, result.Id);
-            // Assert.Empty(result);
         }
 
         [Fact]
