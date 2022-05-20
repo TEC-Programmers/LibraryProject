@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthorComponent } from './author/author.component';
 import { FormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
+import { AdministratorComponent } from './administrator/administrator.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
     AppComponent,
     AuthorComponent,
     FrontpageComponent,
+    AdministratorComponent,
 
 
   ],
