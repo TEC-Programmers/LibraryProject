@@ -52,11 +52,17 @@ namespace LibraryProject.API.Services
             return null;
         }
 
+
+
+
+
         public async Task<List<AuthorResponse>> GetAllAuthors()
         {
             List<Author> authors = await _authorRepository.SelectAllAuthors();
             return authors.Select(author => MapAuthorToAuthorResponse(author)).ToList();
         }
+
+
 
         public async Task<AuthorResponse> GetAuthorById(int authorId)
         {
@@ -82,6 +88,9 @@ namespace LibraryProject.API.Services
             return null;
         }
 
+
+
+
         private Author MapAuthorRequestToAuthor(AuthorRequest authorRequest)
         {
             return new Author()
@@ -91,6 +100,9 @@ namespace LibraryProject.API.Services
                 MiddleName = authorRequest.MiddleName,
             };
         }
+
+
+
 
         private AuthorResponse MapAuthorToAuthorResponse(Author author)
         {

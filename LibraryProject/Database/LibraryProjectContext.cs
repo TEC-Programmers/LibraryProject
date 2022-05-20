@@ -1,3 +1,4 @@
+
 ﻿using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,9 +21,9 @@ namespace LibraryProject
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Loan> Loan { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
 
             modelBuilder.Entity<Category>().HasData(
               new()
@@ -40,7 +41,7 @@ namespace LibraryProject
                new()
                {
                    Id = 1,
-                   Name = "Gyldendal",                 
+                   Name = "Gyldendal",
                },
                new()
                {
@@ -71,7 +72,7 @@ namespace LibraryProject
                 {
                     Id = 1,
                     Title = "Pippi Langstrømper",
-                    Description = "BØg for børn",
+                    Description = "Bog for børn",
                     Language = "Danish",
                     Image="Book1.jpg",
                     PublishYear = 1945,
@@ -150,8 +151,11 @@ namespace LibraryProject
                     reserved_To = "21/05/22"
                 }
                 );
-            
         }
+            
+
 
     }
+
+  
 }
