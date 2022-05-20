@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthorComponent } from './author/author.component';
 import { FormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
@@ -13,14 +12,19 @@ import { AdminCustomerComponent } from './admin-customer/admin-customer.componen
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { CategoryComponent } from './category/category.component';
+import { BookComponent } from './book/book.component';
+import { LoginComponent } from './login/login.component';
+import { ContactComponent } from './contact/contact.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthorComponent,
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
     CategoryComponent,
+    BookComponent,
+    LoginComponent,
+    ContactComponent,
 
 
   ],
