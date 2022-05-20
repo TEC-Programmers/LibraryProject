@@ -12,21 +12,10 @@ import { CategoryService } from './_services/category.service';
 export class AppComponent {
   title = 'LibraryProject-Client';
 
-  Categories: Category[] = [];
 
-  category: Category = {
-    Id: 1,
-    CategoryName: 'Manga',
-    Books: []
-  }
-
-
-  constructor(private categoryService: CategoryService) {}
+  constructor() {}
 
   ngOnInit(): void {
-
-    this.categoryService.getAllCategories()
-    .subscribe(c => this.Categories = c);
   }
 
 }

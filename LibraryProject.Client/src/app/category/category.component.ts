@@ -11,11 +11,13 @@ export class CategoryComponent implements OnInit {
 
   Categories: Category[] = [];
 
-  category: Category = {
-    Id: 1,
-    CategoryName: 'Manga',
-    Books: []
-  }
+  // category: Category = {
+  //   Id: 1,
+  //   CategoryName: 'Manga',
+  //   Books:[]
+  // }
+
+  public categories = ["børnebøger","voksenbøger", "Manga",]
 
 
 
@@ -25,7 +27,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.categoryService.getAllCategories()
-    .subscribe(c => this.Categories = c);
+    // this.categoryService.getAllCategories()
+    // .subscribe(c => this.Categories = c);
   }
 }
