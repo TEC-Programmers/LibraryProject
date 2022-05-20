@@ -53,6 +53,7 @@ namespace LibraryProject
               new()
               {
                   Id = 1,
+               
                   FirstName = "Astrid",
                   MiddleName = "",
                   LastName = " Lindgrens"
@@ -60,6 +61,7 @@ namespace LibraryProject
                new()
                {
                    Id = 2,
+                 
                    FirstName = "Helle",
                    MiddleName = "",
                    LastName = "Helle"
@@ -72,6 +74,7 @@ namespace LibraryProject
                     Title = "Pippi Langstrømper",
                     Description = "Bog for børn",
                     Language = "Danish",
+                    Image="Book1.jpg",
                     PublishYear = 1945,
                     CategoryId = 1,
                     AuthorId = 1,
@@ -83,6 +86,7 @@ namespace LibraryProject
                     Title = "Rødby-Puttgarden",
                     Description = "Romaner for voksen2",
                     Language = "Danish",
+                    Image = "Book2.jpg",
                     PublishYear = 2005,
                     CategoryId = 2,
                     AuthorId = 2,

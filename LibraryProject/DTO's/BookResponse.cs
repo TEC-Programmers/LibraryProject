@@ -8,7 +8,9 @@
         public string Language { get; set; }
        
         public string Description { get; set; }
-      
+
+        public string Image { get; set; }
+
         public int PublishYear { get; set; }
       
         public int CategoryId { get; set; }

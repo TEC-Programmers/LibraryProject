@@ -14,6 +14,9 @@ namespace LibraryProject.API.DTO_s
         public string Description { get; set; }
 
         [Required]
+        public string Image { get; set; }
+
+        [Required]
         public int PublishYear { get; set; }
 
         [Required]

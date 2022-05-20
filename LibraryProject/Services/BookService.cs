@@ -22,12 +22,22 @@ namespace LibraryProject.API.Services
     {
         private readonly IBookRepository _bookRepository;
         private readonly ICategoryRepository  _categoryRepository;
-        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository)
+        private readonly IAuthorRepository _authorRepository;
+        private readonly IPublisherRepository _publisherRepository;
+
+      
+        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository, 
+            IAuthorRepository auhtorRepository, IPublisherRepository publisherRepository)
         {
             _bookRepository = bookRepository;
             _categoryRepository = categoryRepository;
             
+            _authorRepository = auhtorRepository;
+
+            _publisherRepository = publisherRepository;
         }
+
+
         public async Task<List<BookResponse>> GetAllBooks()
         {
             List<Book> books = await _bookRepository.SelectAllBooks();
@@ -66,6 +76,8 @@ namespace LibraryProject.API.Services
             if (insertedBook != null)
             {
                 insertedBook.Category = await _categoryRepository.SelectCategoryById(insertedBook.CategoryId);
+                insertedBook.Author = await _authorRepository.SelectAuthorById(insertedBook.AuthorId);
+                insertedBook.Publisher = await _publisherRepository.SelectPublisherById(insertedBook.PublisherId);
                 return MapBookToBookResponse(insertedBook);
             }
 
@@ -81,6 +93,8 @@ namespace LibraryProject.API.Services
             if (updatedBook != null)
             {
                 updatedBook.Category = await _categoryRepository.SelectCategoryById(updatedBook.CategoryId);
+                updatedBook.Author = await _authorRepository.SelectAuthorById(updatedBook.AuthorId);
+                updatedBook.Publisher = await _publisherRepository.SelectPublisherById(updatedBook.PublisherId);
                 return MapBookToBookResponse(updatedBook);
             }
 
@@ -94,6 +108,8 @@ namespace LibraryProject.API.Services
             if (book != null)
             {
                 book.Category = await _categoryRepository.SelectCategoryById(book.CategoryId);
+               book.Author = await _authorRepository.SelectAuthorById(book.AuthorId);
+               book.Publisher = await _publisherRepository.SelectPublisherById(book.PublisherId);
                 return MapBookToBookResponse(book);
             }
 
@@ -107,6 +123,7 @@ namespace LibraryProject.API.Services
                 Title = bookRequest.Title,
                 Description = bookRequest.Description,
                 Language = bookRequest.Language,
+                Image=bookRequest.Image,
                 PublishYear = bookRequest.PublishYear,
                 CategoryId = bookRequest.CategoryId,
                 AuthorId = bookRequest.AuthorId,
@@ -121,6 +138,7 @@ namespace LibraryProject.API.Services
                 Id = book.Id,
                 Title = book.Title,
                 Description = book.Description,
+                Image = book.Image,
                 Language = book.Language,
                 PublishYear = book.PublishYear,
 
