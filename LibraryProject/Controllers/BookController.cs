@@ -115,7 +115,7 @@ namespace LibraryProject.API.Controllers
 
                 if (bookResponse == null)
                 {
-                    return NotFound();
+                    return Problem("Book was NOT created, something went wrong");
                 }
 
                 return Ok(bookResponse);
@@ -124,8 +124,8 @@ namespace LibraryProject.API.Controllers
             {
                 return Problem(ex.Message);
             }
-
         }
+
         [HttpPut("{bookId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

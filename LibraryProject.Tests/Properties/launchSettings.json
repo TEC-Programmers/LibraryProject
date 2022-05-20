@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "LibraryProject.Tests": {
+      "commandName": "Project"
+    }
+  }
+}
