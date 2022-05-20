@@ -9,7 +9,6 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -8,8 +8,9 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./admin-customer.component.css']
 })
 export class AdminCustomerComponent implements OnInit {
-  user!: User;
   total_Users: User[] = [];
+  user: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
+
 
   constructor(private userService: UserService) { }
 
