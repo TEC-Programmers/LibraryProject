@@ -182,6 +182,9 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(32)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(32)");
+
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(32)");
 
@@ -211,6 +214,7 @@ namespace LibraryProject.API.Migrations
                             AuthorId = 1,
                             CategoryId = 1,
                             Description = "BØg for børn",
+                            Image = "Book1.jpg",
                             Language = "Danish",
                             PublishYear = (short)1945,
                             PublisherId = 1,
@@ -222,6 +226,7 @@ namespace LibraryProject.API.Migrations
                             AuthorId = 2,
                             CategoryId = 2,
                             Description = "Romaner for voksen2",
+                            Image = "Book2.jpg",
                             Language = "Danish",
                             PublishYear = (short)2005,
                             PublisherId = 2,

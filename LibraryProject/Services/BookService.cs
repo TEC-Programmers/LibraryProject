@@ -123,6 +123,7 @@ namespace LibraryProject.API.Services
                 Title = bookRequest.Title,
                 Description = bookRequest.Description,
                 Language = bookRequest.Language,
+                Image=bookRequest.Image,
                 PublishYear = bookRequest.PublishYear,
                 CategoryId = bookRequest.CategoryId,
                 AuthorId = bookRequest.AuthorId,
@@ -137,6 +138,7 @@ namespace LibraryProject.API.Services
                 Id = book.Id,
                 Title = book.Title,
                 Description = book.Description,
+                Image = book.Image,
                 Language = book.Language,
                 PublishYear = book.PublishYear,
 
