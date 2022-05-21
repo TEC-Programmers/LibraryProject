@@ -19,7 +19,7 @@ export class CategoryComponent implements OnInit {
 
   public categories = ["børnebøger","voksenbøger", "Manga",]
 
-
+  public childrensBooks = ["Tal for børn","Alfabet for Børn","Navne på ting; for børn"]
 
 
 

@@ -2,6 +2,10 @@
 <H2>Kategorier</H2>
 
 
-    <li *ngFor="let category of categories; index as i">
+    <!-- <li *ngFor="let category of categories; index as i">
        {{i}} {{category}}
-    </li>
+    </li> -->
+    <h3>Børnebøger</h3>
+    <ul *ngFor="let book of childrensBooks">
+    <li>{{book}}</li>
+   </ul>

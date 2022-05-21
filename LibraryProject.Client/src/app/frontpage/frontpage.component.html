@@ -5,10 +5,17 @@
 
     <tr *ngFor="let book of allbooks | filter: filterTerm" [routerLink]="['/product', product.id]">
         <td>
-
             Product: {{product.name}}
             <br> Description: {{product.description}} <br>
             <br>
         </td>
     </tr> -->
 <!-- </div> -->
+
+<nav>
+    <a routerLink="/Frontpage">Forside</a> |
+    <a routerLink="/Category">Kategorier</a> |
+    <a routerLink="/Book">Bøger</a> |
+    <a routerLink="/Login">Login</a> |
+    <a routerLink="/Contact">Kontakt os</a> |
+</nav>

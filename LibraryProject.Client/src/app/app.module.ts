@@ -25,8 +25,6 @@ import { ContactComponent } from './contact/contact.component';
     BookComponent,
     LoginComponent,
     ContactComponent,
-
-
   ],
   imports: [
     BrowserModule,

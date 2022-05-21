@@ -9,31 +9,22 @@
         </ul>
     </div>
 </div> -->
-
-<nav>
-    <a routerLink="/Frontpage">Forside</a> |
-    <a routerLink="/Category">Kategorier</a> |
-    <a routerLink="/Book">Bøger</a> |
-    <a routerLink="/Login">Login</a> |
-    <a routerLink="/Contact">Kontakt os</a> |
-</nav>
-
-<!-- 
 <div class="container">
     <div style="border: 3px solid black;" class="navbar-brand align-item-center d-flex">
         <ul>
-            <li><a routerLink="/frontpage">Frontpage</a></li>
+            <li><a routerLink="/Frontpage">Forside</a></li> 
             <li class="cat"><a>Category</a>
                 <ul class="Categorys">
-                    <div class="category" *ngFor="let category of Categories;">
-                        <li><a [routerLink]="['/category',category.Id]">{{category.CategoryName}}</a></li>
-                    </div>
+                    <div class="category" *ngFor="let category of categories;">
+                        <li><a [routerLink]="['/Category',category]">{{category}}</a></li>
+                    </div> 
                 </ul>
             </li>
+                    <li><a routerLink="/Book">Bøger</a></li> 
+                    <li><a routerLink="/Login">Login</a></li> 
+                    <li><a routerLink="/Contact">Kontakt os</a></li> 
             </ul>
             </div>
             </div>
-        -->
 
-
-        <router-outlet></router-outlet>
+<router-outlet></router-outlet>

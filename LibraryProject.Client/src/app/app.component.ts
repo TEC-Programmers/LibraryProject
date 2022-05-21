@@ -10,6 +10,8 @@ export class AppComponent {
   title = 'LibraryProject-Client';
 
 
+  public categories = ["børnebøger","voksenbøger", "Manga",]
+
   constructor() {}
 
   ngOnInit(): void {
