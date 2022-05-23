@@ -12,7 +12,13 @@ import { Category } from './_models/Category';
 export class AppComponent {
   title = 'LibraryProject-Client';
 
-  catehory: Category[] = []
+  category: Category[] = []
+
+  categories: Category = {
+    Id: 0,
+    CategoryName: '',
+    Books: []
+  }
 
   author: Author[] = []
 
@@ -22,8 +28,8 @@ export class AppComponent {
     lastName: ''
   }
 
-  public categories = ["børnebøger","voksenbøger", "Manga",]
-  
+  public Categories = ["børnebøger","voksenbøger", "Manga",]
+
 
   constructor() {}
 
