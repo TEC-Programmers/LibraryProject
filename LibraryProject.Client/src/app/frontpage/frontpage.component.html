@@ -1,11 +1,21 @@
 <p>frontpage works!</p>
 
-<ul *ngIf="loans.length > 0">
-    <li *ngFor="let loan of loans">
+<ul *ngIf="book.length > 0">
+    <li *ngFor="let book of books">
         <!-- <button (click)="edit(loan)">Ret</button> // <button (click)="delete(loan)">Ret</button> --->
-       loan-id: {{loan.id }} |
-       User-Id:{{loan.userID}} |
-       Book-Id: {{loan.bookId}} |
-       Lånt fra: {{loan.loaned_At}} |
-       Lånt til: {{loan.return_date}}
-      
+        <div id="searchDiv">
+            <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for products" size="35"> 
+        
+          
+                <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book', book.id]">
+                  <td>
+                    
+                    Book:
+                    {{.name}}
+                    <br>
+                    Description:
+                    {{Book.description}} <br>
+                    <br>
+                  </td>
+                    </tr>
+        </div>   
