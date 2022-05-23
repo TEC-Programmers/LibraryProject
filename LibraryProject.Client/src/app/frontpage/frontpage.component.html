@@ -1,4 +1,4 @@
-<p>frontpage works!</p>
+
 
 <ul *ngIf="book.length > 0">
     <li *ngFor="let book of books">
@@ -9,7 +9,6 @@
           
                 <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book', book.id]">
                   <td>
-                    
                     Book:
                     {{.name}}
                     <br>
