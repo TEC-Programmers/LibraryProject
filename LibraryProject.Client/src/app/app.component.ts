@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoryComponent } from './category/category.component';
+import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { CategoryService } from './_services/category.service';
 
@@ -12,9 +13,11 @@ import { CategoryService } from './_services/category.service';
 export class AppComponent {
   title = 'LibraryProject-Client';
 
-  Category: Category[] = []
 
-  categories: Category = {
+
+  categories: Category[] = []
+
+  Category: Category = {
     Id: 1,
     CategoryName: '',
     Books: []
@@ -22,11 +25,12 @@ export class AppComponent {
 
 
 
+
   constructor(private categoryService:CategoryService) {}
 
   ngOnInit(): void {
     this.categoryService.getAllCategories()
-    .subscribe(c => this.Category = c);
+    .subscribe(c => this.categories = c);
   }
 
 }

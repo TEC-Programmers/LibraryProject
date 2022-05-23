@@ -8,7 +8,8 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path: 'Frontpage', component : FrontpageComponent},
+  {path: '', redirectTo: '/Frontpage', pathMatch: 'full'},
+  {path: 'Frontpage', component: FrontpageComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
   {path: 'Category', component: CategoryComponent},
