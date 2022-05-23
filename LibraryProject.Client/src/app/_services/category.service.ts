@@ -26,6 +26,9 @@ export class CategoryService {
   getCategoryById(categoryId: number): Observable<Category> {
     return this.http.get<Category>(`${this.apiUrl}/${categoryId}`)
   }
+  getCategoriesWithoutBooks(): Observable<Category[]>{
+    return this.http.get<Category[]>(`${this.apiUrl}/WithoutBooks`)
+ }
 
   addCategory(category: Category): Observable<Category>{
     return this.http.post<Category>(this.apiUrl, category, this.httpOptions);
@@ -38,4 +41,6 @@ export class CategoryService {
   deleteAuthor(categoryId: number): Observable<Category> {
     return this.http.delete<Category>(`${this.apiUrl}/${categoryId}`, this.httpOptions);
   }
+
+  
 }
