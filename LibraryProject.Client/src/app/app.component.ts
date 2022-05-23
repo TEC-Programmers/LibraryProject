@@ -15,40 +15,17 @@ export class AppComponent {
   category: Category[] = []
 
   categories: Category = {
-    Id: 0,
+    Id: 1,
     CategoryName: '',
     Books: []
   }
 
-  author: Author[] = []
-
-  authors: Author = {
-    id: 0,
-    firstName: '',
-    lastName: ''
-  }
-
-  public Categories = ["børnebøger","voksenbøger", "Manga",]
 
 
   constructor() {}
 
   ngOnInit(): void {
-    this.authors =  {
-      id: 1,
-      firstName: 'Bilal',
-      lastName: '16'
-    },
-    {
-      id: 2,
-      firstName: 'Azam',
-      lastName: '18'
-    },
-    {
-      id: 3,
-      firstName: 'Mahmood',
-      lastName: '22'
-    };
+
   }
 
 }
