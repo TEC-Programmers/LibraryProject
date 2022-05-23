@@ -12,19 +12,22 @@
 <div class="container">
     <div style="border: 3px solid black;" class="navbar-brand align-item-center d-flex">
         <ul>
-            <li><a routerLink="/Frontpage">Forside</a></li> 
+            <li><a routerLink="/Frontpage">Forside</a></li>
+
             <li class="cat"><a>Category</a>
                 <ul class="Categorys">
-                    <div class="category" *ngFor="let category of categories;">
-                        <li><a [routerLink]="['/Category',category]">{{category}}</a></li>
-                    </div> 
+                    <div class="category" *ngFor="let author of authors;">
+                        <li>
+                            <a [routerLink]="['/Category', author]">{{author}}</a>
+                        </li>
+                    </div>
                 </ul>
             </li>
-                    <li><a routerLink="/Book">Bøger</a></li> 
-                    <li><a routerLink="/Login">Login</a></li> 
-                    <li><a routerLink="/Contact">Kontakt os</a></li> 
-            </ul>
-            </div>
-            </div>
+            <li><a routerLink="/Book" routerLinkActive="active">Bøger</a></li>
+            <li><a routerLink="/Login">Login</a></li>
+            <li><a routerLink="/Contact">Kontakt os</a></li>
+        </ul>
+    </div>
+</div>
 
 <router-outlet></router-outlet>
