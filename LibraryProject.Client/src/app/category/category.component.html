@@ -1,1 +1,10 @@
 <p>category works!</p>
+<ul *ngIf="categories.length > 0">
+
+    <li *ngFor="let category of categories">
+     
+       
+       <a routerLink="/category_books/{{category.id}}">category Name: {{category.categoryName}} |</a>
+     
+    </li>
+</ul>

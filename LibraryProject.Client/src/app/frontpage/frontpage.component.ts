@@ -16,14 +16,12 @@ export class FrontpageComponent implements OnInit {
 
   authors: Author [] = [];
 
-  categories: Category[]=[];
-  category:Category = {Id: 0, CategoryName :""};
+  
 
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
-    console.log('value received ', );
+    
 
   }
 

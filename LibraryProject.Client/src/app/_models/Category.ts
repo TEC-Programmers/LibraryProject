@@ -2,7 +2,7 @@
 
 export interface Category
 {
-  Id: number;
-  CategoryName: string;
+  id: number;
+  categoryName: string;
 
 }
