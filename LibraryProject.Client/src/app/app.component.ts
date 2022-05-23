@@ -12,17 +12,16 @@ import { CategoryService } from './_services/category.service';
 })
 export class AppComponent {
   title = 'LibraryProject-Client';
+
   book!: Book;
   counter = 0;
   total: number = 0;
   categorys: Category[] = [];
-
   allBooks: Book[] = [];
   filterTerm!: string;
 
-
   constructor(private bookService: BookService, category: CategoryService) {}
-  showSearch(): void {
+showSearch(): void {
 
     if (this.filterTerm == null || this.filterTerm == '') {
      alert("The input field is empty")
@@ -33,14 +32,15 @@ export class AppComponent {
     .subscribe(p => this.allBooks = p);
     console.log(this.allBooks)
     }
-      
-    
+
+
   }
     checkSearch(event:any){
       if (event.key === "Backspace" || this.filterTerm == null) {
         this.allBooks = [];
         console.log(event);
-      
+
       }
     }
+
 }

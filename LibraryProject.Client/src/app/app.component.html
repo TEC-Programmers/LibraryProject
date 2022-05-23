@@ -1,3 +1,21 @@
+<div id="searchDiv">
+  <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for products" size="35">
+
+
+      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
+        <td>
+          Book:
+          {{book.name}}
+          <br>
+          Description:
+          {{book.description}} <br>
+          <br>
+        </td>
+          </tr>
+</div>
+
+
+
 <nav>
     <a routerLink="/"> Home | </a>
     <a routerLink="/Author">  Author | </a>

@@ -213,7 +213,7 @@ namespace LibraryProject.API.Migrations
                             Id = 1,
                             AuthorId = 1,
                             CategoryId = 1,
-                            Description = "Bog for børn",
+                            Description = "BØg for børn",
                             Image = "Book1.jpg",
                             Language = "Danish",
                             PublishYear = (short)1945,
