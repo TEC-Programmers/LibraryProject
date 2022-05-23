@@ -6,5 +6,11 @@ export interface User
     LastName: string;
     Email: string;
     Password: string;
-    Role: Role;
+    Role?: Role;
+    token?:string;
+}
+
+export enum Role {
+    Customer = 'Customer',
+    Admin = 'Administrator'
 }

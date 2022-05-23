@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
+import { CustomerComponent } from './customer/customer.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { AdminCustomerComponent } from './admin-customer/admin-customer.componen
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
+    CustomerComponent,
+    LoginComponent,
 
 
   ],
