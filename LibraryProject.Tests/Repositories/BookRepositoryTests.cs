@@ -34,7 +34,9 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = 1,
                 CategoryName = "Børnebog"
+
             });
+
        
             _context.Author.Add(new()
             {
@@ -42,29 +44,43 @@ namespace LibraryProject.Tests.Repositories
                 FirstName = "Astrid",
                 MiddleName = "",
                 LastName = " Lindgrens"
+
             });
 
+            _context.Publisher.Add(new()
+            {
+                Id = 1,
+                Name ="hhfj"
+
+            });
             _context.Book.Add(new()
             {
 
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
-                AuthorId = 1
-            });
+                AuthorId = 1,
+                PublisherId = 1
+               
 
+
+            });
             _context.Book.Add(new()
             {
+
                 Id = 2,
                 Title = "Karen begynder næsten i skole",
                 Description = "Bøg for Børn",
+                Image = "Book2.jpg",
                 Language = "Dansk",
                 PublishYear = 2022,
                 CategoryId = 1,
-                AuthorId= 1
+                AuthorId= 1,
+                PublisherId= 1
                
 
 
@@ -79,12 +95,16 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<List<Book>>(result);
             Assert.Equal(2, result.Count);
+            // Assert.Empty(result);
         }
         [Fact]
         public async void SelectAllBooks_ShouldReturnEmptyListOfBooks_WhenNoBookExists()
         {
             //Arrange 
             await _context.Database.EnsureDeletedAsync();
+
+
+
 
             //Act
             var result = await _bookRepository.SelectAllBooks();
@@ -100,16 +120,13 @@ namespace LibraryProject.Tests.Repositories
         {
             //Arrange 
             await _context.Database.EnsureDeletedAsync();
-
             int bookId = 1;
-
             _context.Category.Add(new()
             {
                 Id = 1,
                 CategoryName = "Børnebog"
 
             });
-
             _context.Author.Add(new()
             {
                 Id = 1,
@@ -119,15 +136,27 @@ namespace LibraryProject.Tests.Repositories
 
             });
 
+            _context.Publisher.Add(new()
+            {
+                Id = 1,
+                Name = "hhfj"
+
+            });
+
             _context.Book.Add(new()
             {
-                Id = bookId,
+
+                Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
-                AuthorId = 1
+                AuthorId = 1,
+                PublisherId = 1
+
+
 
             });
 
@@ -141,6 +170,7 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<Book>(result);
             Assert.Equal(bookId, result.Id);
+            // Assert.Empty(result);
         }
         [Fact]
         public async void SelectBookById_ShouldReturnNull_WhenBookDoesNotExist()
@@ -173,6 +203,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -208,6 +239,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -239,6 +271,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = 1,
                 Title = "Pipi Langstrømper",
                 Description = "Kids bog ",
+                Image = "Book1.jpg",
                 Language = "Dansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -255,6 +288,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = bookId,
                 Title = "Updated Pipi Langstrømper",
                 Description = " updated Kids bog ",
+                Image = "Book1.jpg",
                 Language = " updatedDansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -294,6 +328,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = bookId,
                 Title = "Updated Pipi Langstrømper",
                 Description = " updated Kids bog ",
+                Image = "Book1.jpg",
                 Language = " updatedDansk",
                 PublishYear = 1945,
                 CategoryId = 1,
@@ -322,6 +357,7 @@ namespace LibraryProject.Tests.Repositories
                 Id = bookId,
                 Title = "Updated Pipi Langstrømper",
                 Description = " updated Kids bog ",
+                Image = "Book1.jpg",
                 Language = " updatedDansk",
                 PublishYear = 1945,
                 CategoryId = 1,

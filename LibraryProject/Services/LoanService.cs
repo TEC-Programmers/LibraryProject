@@ -1,5 +1,6 @@
 ﻿using LibraryProject.API.Database.Entities;
 using LibraryProject.API.DTO;
+using LibraryProject.API.DTO_s;
 using LibraryProject.API.Repositories;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace LibraryProject.API.Services
 {
     public interface ILoanService
     {
-       Task<List<LoanResponse>> GetAllLoans();
-       Task<LoanResponse> GetLoanById(int loanId);
-       Task<LoanResponse> CreateLoan(LoanRequest newLoan);
-       Task<LoanResponse> UpdateLoan(int loanId, LoanRequest updateloan);
+        Task<List<LoanResponse>> GetAllLoans();
+        Task<LoanResponse> GetLoanById(int loanId);
+        Task<LoanResponse> CreateLoan(LoanRequest newLoan);
+        Task<LoanResponse> UpdateLoan(int loanId, LoanRequest updateloan);
         Task<LoanResponse> DeleteLoan(int loanId);
     }
-
     public class LoanService : ILoanService
+
     {
         private readonly ILoanRepository _loanRepository;
         public LoanService(ILoanRepository loanRepository)
@@ -24,91 +25,70 @@ namespace LibraryProject.API.Services
             _loanRepository = loanRepository;
         }
 
-        public  async Task<List<LoanResponse>> GetAllLoans()
-        {
-            List<Loan> loans =  await _loanRepository.SelectAllLoans();
-
-            return loans.Select(loan => new LoanResponse
-            {
-                Id = loan.Id,
-                userID = loan.userID,
-                bookId = loan.bookId,
-                loaned_At = loan.loaned_At,
-                return_date = loan.return_date,
-            }).ToList();
-            
-        }
-        public async Task<LoanResponse> GetLoanById(int loanId)
-        {
-            Loan loan = await _loanRepository.SelectLoanById(loanId);
-
-            if (loan != null)
-            {
-                return MapLoanToLoanResponse(loan);
-
-            }
-            return null;
-        }
-
         public async Task<LoanResponse> CreateLoan(LoanRequest newLoan)
         {
-            Loan loan = MapLoanRequestToLoan(newLoan);
+            Loan Loan = MapLoanRequestToLoan(newLoan);
 
-            Loan insertedLoan = await _loanRepository.InsertNewLoan(loan);
+            Loan insertedLoan = await _loanRepository.InsertNewLoan(Loan);
 
             if (insertedLoan != null)
             {
                 return MapLoanToLoanResponse(insertedLoan);
             }
             return null;
-
         }
 
-        public async Task<LoanResponse> UpdateLoan(int loanId, LoanRequest updateLoan)
+        public async Task<LoanResponse> DeleteLoan(int LoanId)
         {
-            Loan loan = MapLoanRequestToLoan(updateLoan);
+            Loan deletedLoan = await _loanRepository.DeleteLoanById(LoanId);
 
-            Loan updatedLoan = await _loanRepository.UpdateExistingLoan(loanId, loan);
+            if (deletedLoan != null)
+            {
+                return MapLoanToLoanResponse(deletedLoan);
+            }
+            return null;
+        }
+
+        public async Task<List<LoanResponse>> GetAllLoans()
+        {
+            List<Loan> Loans = await _loanRepository.SelectAllLoans();
+            return Loans.Select(Loan => MapLoanToLoanResponse(Loan)).ToList();
+        }
+
+        public async Task<LoanResponse> GetLoanById(int LoanId)
+        {
+            Loan Loan = await _loanRepository.SelectLoanById(LoanId);
+            if (Loan != null)
+            {
+                return MapLoanToLoanResponse(Loan);
+            }
+            return null;
+        }
+
+        public async Task<LoanResponse> UpdateLoan(int LoanId, LoanRequest updateLoan)
+        {
+            Loan Loan = MapLoanRequestToLoan(updateLoan);
+
+            Loan updatedLoan = await _loanRepository.UpdateExistingLoan(LoanId, Loan);
 
             if (updatedLoan != null)
             {
                 return MapLoanToLoanResponse(updatedLoan);
             }
             return null;
-
-        }
-
-        public async Task<LoanResponse> DeleteLoan(int loanId)
-        {
-            Loan deletedloan = await _loanRepository.DeleteLoanById(loanId);
-            if (deletedloan != null)
-            {
-                return new LoanResponse
-                {
-                    Id = deletedloan.Id,
-                    userID = deletedloan.userID,
-                    bookId = deletedloan.bookId,
-                    loaned_At = deletedloan.loaned_At,
-                    return_date = deletedloan.return_date,
-                };
-            }
-        
-              
-            return null;
-
         }
 
         private Loan MapLoanRequestToLoan(LoanRequest loanRequest)
         {
             return new Loan()
             {
-               userID = loanRequest.userID,
-               bookId= loanRequest.bookId,
-               loaned_At= loanRequest.loaned_At,
-               return_date = loanRequest.return_date
-
+                userID = loanRequest.userID,
+                bookId = loanRequest.bookId,
+                loaned_At = loanRequest.loaned_At,
+                return_date = loanRequest.return_date,
             };
         }
+
         private LoanResponse MapLoanToLoanResponse(Loan loan)
         {
             return new LoanResponse()
@@ -120,7 +100,5 @@ namespace LibraryProject.API.Services
                 return_date = loan.return_date,
             };
         }
-
-
     }
 }

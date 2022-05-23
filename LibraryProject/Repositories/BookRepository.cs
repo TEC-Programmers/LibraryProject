@@ -68,7 +68,10 @@ namespace LibraryProject.API.Repositories
         {
             _context.Book.Add(book);
             await _context.SaveChangesAsync();
-            return book;
+
+            Book insertBook = await SelectBookById(book.Id);
+
+            return insertBook;
         }
         public async Task<Book> UpdateExistingBook(int bookId, Book book)
         {
@@ -79,6 +82,7 @@ namespace LibraryProject.API.Repositories
                 updateBook.Title = book.Title;
                 updateBook.Description = book.Description;
                 updateBook.Language = book.Language;
+                updateBook.Image    =book.Image;
                 updateBook.PublishYear = book.PublishYear;
                 
 
@@ -90,14 +94,15 @@ namespace LibraryProject.API.Repositories
 
         public async Task<Book> DeleteBookById(int bookId)
         {
-            Book deleteBook = await _context.Book.FirstOrDefaultAsync(book => book.Id == bookId);
+            Book deleteBook = await _context.Book.
+                FirstOrDefaultAsync(book => book.Id == bookId);
 
             if (deleteBook != null)
             {
                 _context.Book.Remove(deleteBook);
                 await _context.SaveChangesAsync();
             }
-            return deleteBook;
+            return deleteBook;   
         }
     }
 }

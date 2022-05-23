@@ -1,7 +1,6 @@
 ﻿using LibraryProject.API.Database.Entities;
 using LibraryProject.API.DTO_s;
 using LibraryProject.API.Repositories;
-using LibraryProject.Database.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,8 +12,8 @@ namespace LibraryProject.API.Services
         Task<List<ReservationResponse>> GetAllReservations();
         Task<ReservationResponse> GetReservationById(int reservationId);
         Task<ReservationResponse> CreateReservation(ReservationRequest newReservation);
-        Task<ReservationResponse> UpdateExistingReservation(int reservationId, ReservationRequest updateReservation);
-        Task<ReservationResponse> DeleteReservationById(int reservationId);
+        Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation);
+        Task<ReservationResponse> DeleteReservation(int reservationId);
     }
     public class ReservationService : IReservationService
     {
@@ -25,51 +24,58 @@ namespace LibraryProject.API.Services
             _reservationRepository = reservationRepository;
         }
 
-
-        //----------------CREATE------------------//
         public async Task<ReservationResponse> CreateReservation(ReservationRequest newReservation)
         {
-            Reservation reservation = MapReservationToRequestReservation(newReservation);
+            Reservation reservation = new()
+            {
+                userId = newReservation.userId,
+                bookId = newReservation.bookId,
+                reserved_At = newReservation.reserved_At,
+                reserved_To = newReservation.reserved_To
+            };
+
 
             Reservation insertedReservation = await _reservationRepository.InsertNewReservation(reservation);
 
             if (insertedReservation != null)
             {
-                return MapReservationToReservationResponse(insertedReservation);
+                return new ReservationResponse()
+                {
+                    Id = insertedReservation.Id,
+                    userId = insertedReservation.userId,
+                    bookId = insertedReservation.bookId,
+                    reserved_At = newReservation.reserved_At,
+                    reserved_To = newReservation.reserved_To
+                };
             }
 
             return null;
 
         }
 
-
-
-        //----------------DELETE------------------//
-
-        public async Task<ReservationResponse> DeleteReservationById(int reservationId)
+        public async Task<ReservationResponse> DeleteReservation(int reservationId)
         {
             Reservation deletedReservation = await _reservationRepository.DeleteReservationById(reservationId);
 
             if (deletedReservation != null)
             {
-                return MapReservationToReservationResponse(deletedReservation);
+                return new ReservationResponse()
+                {
+                    Id = deletedReservation.Id,
+                    userId = deletedReservation.userId,
+                    bookId = deletedReservation.bookId,
+                    reserved_At = deletedReservation.reserved_At,
+                    reserved_To = deletedReservation.reserved_To
+                };
             }
             return null;
         }
 
-
-        //----------------GETALL------------------//
-
         public async Task<List<ReservationResponse>> GetAllReservations()
         {
             List<Reservation> reservations = await _reservationRepository.SelectAllReservations();
-
-            return reservations.Select(reservation => MapReservationToReservationResponse(reservation)).ToList();
+            return reservations.Select(reservation => MapReservationToReservationResponse(reservation)).ToList();           
         }
-
-
-
-        //----------------GET BY ID------------------//
 
         public async Task<ReservationResponse> GetReservationById(int reservationId)
         {
@@ -77,56 +83,67 @@ namespace LibraryProject.API.Services
 
             if (reservation != null)
             {
-                return
-                    MapReservationToReservationResponse(reservation);
+                return new ReservationResponse()
+                {
+                    Id = reservation.Id,
+                    userId = reservation.userId,
+                    bookId = reservation.bookId,
+                    reserved_At = reservation.reserved_At,
+                    reserved_To = reservation.reserved_To
+                };
             }
             return null;
         }
 
-
-        //----------------UPDATE------------------//
-        public async Task<ReservationResponse> UpdateExistingReservation(int reservationId, ReservationRequest updateReservation)
+        public async Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation)
         {
-            Reservation reservation = MapReservationToRequestReservation(updateReservation);
+            Reservation reservation = new()
+            {
+                userId = updateReservation.userId,
+                bookId = updateReservation.bookId,
+                reserved_At = updateReservation.reserved_At,
+                reserved_To = updateReservation.reserved_To
+            };
 
 
-            Reservation updatedReservation = await _reservationRepository.UpdateExistingReservation(reservationId, reservation);
+            Reservation updatedReservation = await _reservationRepository.UpdateReservation(reservationId, reservation);
 
             if (updatedReservation != null)
             {
-                return MapReservationToReservationResponse(updatedReservation);
+                return new ReservationResponse()
+                {
+                    Id = updatedReservation.Id,
+                    userId = updatedReservation.userId,
+                    bookId = updatedReservation.bookId,
+                    reserved_At = updatedReservation.reserved_At,
+                    reserved_To = updatedReservation.reserved_To
+                };
             }
 
             return null;
         }
 
 
-        //----------------REQUEST-MAPPING------------------//
-
-        private Reservation MapReservationToRequestReservation(ReservationRequest reservationRequest)
+        private Reservation MapReservationRequestToReservation(ReservationRequest ReservationRequest)
         {
             return new Reservation()
             {
-                userId = reservationRequest.userId,
-                bookId = reservationRequest.bookId,
-                reserved_At = reservationRequest.reserved_At,
-                reserved_To = reservationRequest.reserved_To
+                userId = ReservationRequest.userId,
+                bookId = ReservationRequest.bookId,
+                reserved_At = ReservationRequest.reserved_At,
+                reserved_To = ReservationRequest.reserved_To
             };
         }
 
-
-
-        //----------------RESPONSE-MAPPING------------------//
-
-        private ReservationResponse MapReservationToReservationResponse(Reservation reservation)
+        private ReservationResponse MapReservationToReservationResponse(Reservation Reservation)
         {
             return new ReservationResponse()
             {
-                Id = reservation.Id,
-                userId = reservation.userId,
-                bookId = reservation.bookId,
-                reserved_At = reservation.reserved_At,
-                reserved_To = reservation.reserved_To
+                Id = Reservation.Id,
+                userId = Reservation.userId,
+                bookId = Reservation.bookId,
+                reserved_At = Reservation.reserved_At,
+                reserved_To = Reservation.reserved_To
             };
         }
     }

@@ -9,15 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220518085410_DbDone")]
-    partial class DbDone
+    [Migration("20220520081455_Library")]
+    partial class Library
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected void BuildTargetModel(ModelBuilder modelBuilder)
         {
-#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.16")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("LibraryProject.API.Database.Entities.Loan", b =>
@@ -89,6 +88,48 @@ namespace LibraryProject.API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LibraryProject.API.Database.Entities.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("bookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("reserved_At")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("reserved_To")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reservation");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            bookId = 1,
+                            reserved_At = "06/05/22",
+                            reserved_To = "13/05/22",
+                            userId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            bookId = 2,
+                            reserved_At = "14/05/22",
+                            reserved_To = "21/05/22",
+                            userId = 2
+                        });
+                });
+
             modelBuilder.Entity("LibraryProject.Database.Entities.Author", b =>
                 {
                     b.Property<int>("Id")
@@ -142,6 +183,9 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(32)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(32)");
+
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(32)");
 
@@ -170,7 +214,8 @@ namespace LibraryProject.API.Migrations
                             Id = 1,
                             AuthorId = 1,
                             CategoryId = 1,
-                            Description = "Bog for børn",
+                            Description = "BØg for børn",
+                            Image = "Book1.jpg",
                             Language = "Danish",
                             PublishYear = (short)1945,
                             PublisherId = 1,
@@ -182,6 +227,7 @@ namespace LibraryProject.API.Migrations
                             AuthorId = 2,
                             CategoryId = 2,
                             Description = "Romaner for voksen2",
+                            Image = "Book2.jpg",
                             Language = "Danish",
                             PublishYear = (short)2005,
                             PublisherId = 2,
@@ -213,52 +259,6 @@ namespace LibraryProject.API.Migrations
                         {
                             Id = 2,
                             CategoryName = "Roman"
-                        });
-                });
-
-            modelBuilder.Entity("LibraryProject.Database.Entities.Reservation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("bookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("reserved_At")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("reserved_To")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("bookId");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("Reservation");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            bookId = 1,
-                            reserved_At = "06/05/22",
-                            reserved_To = "13/05/22",
-                            userId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            bookId = 2,
-                            reserved_At = "14/05/22",
-                            reserved_To = "21/05/22",
-                            userId = 2
                         });
                 });
 
@@ -339,25 +339,6 @@ namespace LibraryProject.API.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("LibraryProject.Database.Entities.Reservation", b =>
-                {
-                    b.HasOne("LibraryProject.Database.Entities.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("bookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LibraryProject.Database.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("LibraryProject.Database.Entities.Category", b =>
