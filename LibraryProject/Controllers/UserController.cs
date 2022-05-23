@@ -170,6 +170,7 @@ namespace LibraryProject.API.Controllers
         }
 
         //update
+      //  [AllowAnonymous]
        
         [Authorize(Role.Customer, Role.Administrator)]
         [HttpPut("{userId}")]
