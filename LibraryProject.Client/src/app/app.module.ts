@@ -10,6 +10,8 @@ import { AdminCustomerComponent } from './admin-customer/admin-customer.componen
 import { BookComponent } from './book/book.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
+import { AuthorComponent } from './author/author.component';
+import { CategoryComponent } from './category/category.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { DatePipe } from '@angular/common';
     AdministratorComponent,
     AdminCustomerComponent,
     BookComponent,
+    AuthorComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

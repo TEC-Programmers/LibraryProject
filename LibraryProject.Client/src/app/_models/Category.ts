@@ -5,6 +5,6 @@ import { Publisher } from "./Publisher";
 export interface Category
 {
   Id: number;
-  CategoryName: string;
+  categoryName: string;
   Books: Book[];
 }
