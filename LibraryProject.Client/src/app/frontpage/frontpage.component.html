@@ -1,12 +1,11 @@
 <p>frontpage works!</p>
 
-<ul *ngIf="loans.length > 0">
-    <li *ngFor="let loan of loans">
-        <!-- <button (click)="edit(loan)">Ret</button> // <button (click)="delete(loan)">Ret</button> --->
-       loan-id: {{loan.id }} |
-       User-Id:{{loan.userID}} |
-       Book-Id: {{loan.bookId}} |
-       Lånt fra: {{loan.loaned_At}} |
-       Lånt til: {{loan.return_date}}
-    </li>
-</ul>
+<div class="row">
+    <ng-container *ngFor="let item of categories">
+        <div class="card col-md-3">
+            <!-- <a routerLink="/product_detail/{{item.id}}"><img src="/assets/image/{{item.image}}" alt="picture of products"></a> -->
+            <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.CategoryName}}</h5>
+
+        </div>
+    </ng-container>
+</div>

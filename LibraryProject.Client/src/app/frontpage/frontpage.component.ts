@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Author } from '../_models/Author';
+import { Category } from '../_models/Category';
 import { Loan } from '../_models/Loan';
 import { AuthorService } from '../_services/author.service';
+import { CategoryService } from '../_services/category.service';
 import { LoanService } from '../_services/loan.service';
 
 @Component({
@@ -14,14 +16,14 @@ export class FrontpageComponent implements OnInit {
 
   authors: Author [] = [];
 
-  loans: Loan [] = [];
-  loan: Loan = {id: 0, userID: 0, bookId: 0,  loaned_At: "", return_date: ""};
+  categories: Category[]=[];
+  category:Category = {Id: 0, CategoryName :""};
 
-  constructor(private authorService: AuthorService, private loanService: LoanService) { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.loanService.getAllLoans()
-    .subscribe(p => this.loans = p);
+    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
+    console.log('value received ', );
 
   }
 
