@@ -6,12 +6,15 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/User';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+
 
 const routes: Routes = [
   {path: '', component : FrontpageComponent},
   {path: 'Author', component: AuthorComponent}, 
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
   { path: 'Login', component: LoginComponent },
   // {path: 'Admin/Books', component: AdministratorComponent},
 ];

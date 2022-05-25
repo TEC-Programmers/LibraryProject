@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
    // private cartService:CartService
   ) {
     // redirect to home if already logged in
-    // console.log(this.authenticationService.currentCustomerValue);
+    // console.log(this.authenticationService.currentUserValue);
     if (this.authService.currentUserValue != null && this.authService.currentUserValue.Id> 0) {
       this.router.navigate(['login']);
      

@@ -12,5 +12,5 @@ export interface User
 
 export enum Role {
     Customer = 'Customer',
-    Admin = 'Administrator'
+    Administrator = 'Admin'
 }

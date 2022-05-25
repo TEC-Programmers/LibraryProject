@@ -1,27 +1,32 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router}  from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { Role, User } from './_models/User';
-;
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
 
-  currentCustomer: User = { Id: 0, FirstName:'', MiddleName:'',LastName:'',Email:'',Password:'',Role:Role.Customer};
+  currentUser: User = { Id: 0, FirstName:'', MiddleName:'',LastName:'',Email:'',Password:''};
 
   title = 'LibraryProject-Client';
 
   constructor(
-    
+    private router: Router,
     private authService: AuthService,
    
   ) {
-    // get the current customer from authentication service
-    this.authService.currentUser.subscribe(x => this.currentCustomer = x);
+    // get the current user from authentication service
+    this.authService.currentUser.subscribe(x => this.currentUser= x);
+  }
+
+  ngOnInit(): void{   
+
   }
 
   logout() {
@@ -32,8 +37,8 @@ export class AppComponent {
 
       // subscribe to the changes in currentUser, and load Home component
       this.authService.currentUser.subscribe(x => {
-        this.currentCustomer = x
-       // this.router.navigate(['/']);
+        this.currentUser = x
+        this.router.navigate(['/']);
       });
     }
 

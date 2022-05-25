@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-
 import { AuthService } from '../_services/auth.service';
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +8,8 @@ export class AuthGuard implements CanActivate {
     private router: Router,
     private authService: AuthService
   ) { }
-
+//AuthGuard is used to protect the routes from unauthorized access in angular.
+// CanActivate is a Interface that a class can implement to be a guard deciding if a route can be activated
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentUserValue;
     if (currentUser) {
