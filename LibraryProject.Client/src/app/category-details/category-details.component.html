@@ -1,21 +1,18 @@
-<p>category-details works!</p>
-<div class="container" style="width: 900px;">
-    <h1>Category:&nbsp;{{ category.categoryName }}</h1>
+<div class="container" style="width: 900px">
+    <h1>Category:&nbsp; {{ category.categoryName }} </h1>
     <br>
-    <div class="row" *ngIf="!!category">
+    <div class="row" *ngIf="category">
         <div class="card col-md-3">
-            <h3>{{ category.categoryName }}</h3>
-            <div *ngFor="let category of categories">
-                <div *ngFor="let book of category.books">
-                    Bognavn: {{book.title}} Bog Beskrivelse: {{book.description}}
-                </div>
-            </div>
-            <!-- <p *ngFor="let book of categories.Books" [routerLink]="['/Book', book.id]">
-                <label style="font-weight: 620">Bog: </label>{{book.title}}
+            <h3> {{ category.categoryName }} </h3>
+            <p *ngFor="let book of category.books " [routerLink]="[ '/Book', book.id] ">
+                <label style="font-weight: 620"> Bognavn: </label>{{book.title}}
                 <br>
-                <label style="font-weight: 620">DKK:&nbsp;</label>{{book.description},-
+                <label style="font-weight: 620">Bog Beskrivelse: </label>{{book.description}}
                 <br>
-                <br> -->
+                <label style="font-weight: 620">Sprog: </label>{{book.language}}
+                <br>
+                <label style="font-weight: 620">Udgivelsesår: </label>{{book.publishYear}}
+                <br>
         </div>
     </div>
 </div>

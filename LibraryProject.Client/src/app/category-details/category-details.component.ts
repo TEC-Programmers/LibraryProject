@@ -11,7 +11,7 @@ import { CategoryService } from '../_services/category.service';
 })
 export class CategoryDetailsComponent implements OnInit {
 
-
+id: number = 0;
 category!: Category;
 categories: Category[] = [];
   books: Book_[] = [];
@@ -19,15 +19,15 @@ categories: Category[] = [];
   constructor(private bookService:BookService, private categoryService: CategoryService, private _Activatedroute:ActivatedRoute, private _router:Router) { }
 
   ngOnInit(): void {
-        // //  gets clicked category and prints its products
-        //  this._Activatedroute.paramMap.subscribe(params =>
-        //   {
-        //     this.id = parseInt(params.get('id') || '0');
-        //   this.categoryService.getCategoryById(this.id)
-        //   .subscribe(c => this.category = c);
-        // });
+        //  gets clicked category and prints its products
+         this._Activatedroute.paramMap.subscribe(params =>
+          {
+            this.id = parseInt(params.get('id') || '3');
+          this.categoryService.getCategoryById(this.id)
+          .subscribe(c => this.category = c);
+        });
 
-  // this.bookService.getAllBooks()
-  // .subscribe(p => this.books = p);
+  this.bookService.getAllBooks()
+  .subscribe(p => this.books = p);
   }
 }

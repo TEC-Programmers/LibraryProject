@@ -1,5 +1,3 @@
-import { Author } from "./Author";
-import { Publisher } from "./Publisher";
 
 export interface Category
 {

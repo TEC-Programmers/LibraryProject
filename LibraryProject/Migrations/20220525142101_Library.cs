@@ -105,7 +105,7 @@ namespace LibraryProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     Language = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(500)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     PublishYear = table.Column<short>(type: "smallint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
