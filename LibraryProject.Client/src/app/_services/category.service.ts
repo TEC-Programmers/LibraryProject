@@ -8,6 +8,9 @@ import { Category } from '../_models/Category';
   providedIn: 'root'
 })
 export class CategoryService {
+  getCategory(id: any) {
+    throw new Error('Method not implemented.');
+  }
 
   private apiUrl = environment.apiUrl + '/Category'
 

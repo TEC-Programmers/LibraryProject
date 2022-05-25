@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../_models/Category';
 import { CategoryService } from '../_services/category.service';
 
@@ -9,25 +10,22 @@ import { CategoryService } from '../_services/category.service';
 })
 export class CategoryComponent implements OnInit {
 
+  id: number = 0;
   Categories: Category[] = [];
-
-  // category: Category = {
-  //   Id: 1,
-  //   CategoryName: 'Manga',
-  //   Books:[]
+  // Category: Category = {
+  //   id: 0,
+  //   CategoryName: '',
+  //   books: []
   // }
-
-  public categories = ["børnebøger","voksenbøger", "Manga",]
-
-  public childrensBooks = ["Lær tallene","Bliv Alfa, med Alfabetet","Navne på ting"]
+  category!: Category;
 
 
 
-  constructor(private categoryService: CategoryService) { }
 
-  ngOnInit(): void {
+  constructor(private categoryService: CategoryService, private _Activatedroute:ActivatedRoute, private _router:Router) { }
 
-    // this.categoryService.getAllCategories()
-    // .subscribe(c => this.Categories = c);
-  }
-}
+  ngOnInit(): void{
+
+    this.categoryService.getAllCategories()
+    .subscribe(c => this.Categories = c);
+}}

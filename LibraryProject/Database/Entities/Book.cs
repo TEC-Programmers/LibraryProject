@@ -17,7 +17,7 @@ namespace LibraryProject.Database.Entities
         public string Language { get; set; }
 
 
-        [Column(TypeName = "nvarchar(32)")]
+        [Column(TypeName = "nvarchar(150)")]
         public string Description { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]

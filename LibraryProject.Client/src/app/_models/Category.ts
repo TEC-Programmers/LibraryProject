@@ -3,22 +3,16 @@ import { Publisher } from "./Publisher";
 
 export interface Category
 {
-  Id: number;
-  CategoryName: string;
-  Books: _Book[];
+  id: number;
+  categoryName: string;
+  books: Book_[];
 }
 
-export interface _Book
+export interface Book_
 {
-    Id: Number;
-    Title: string;
-    Language: string;
-    Description: string;
-    PublishYear: Number;
-    CategoryId: Number;
-    Category: Category;
-    AuthorId: Number;
-    Author:Author;
-    PublisherId: Number;
-    Publisher: Publisher
+    id: Number;
+    title: string;
+    language: string;
+    description: string;
+    publishYear: Number;
 }

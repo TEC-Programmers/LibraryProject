@@ -4,15 +4,15 @@ import { Publisher } from "./Publisher";
 
 export interface Book
 {
-    Id: Number;
-    Title: string;
-    Language: string;
-    Description: string;
-    PublishYear: Number;
-    CategoryId: Number;
-    Category: Category;
-    AuthorId: Number;
-    Author:Author;
-    PublisherId: Number;
-    Publisher: Publisher
+    id: Number;
+    title: string;
+    language: string;
+    description: string;
+    publishYear: Number;
+    categoryId: Number;
+    category: Category;
+    authorId: Number;
+    author:Author;
+    publisherId: Number;
+    publisher: Publisher
 }
