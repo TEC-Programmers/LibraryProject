@@ -1,9 +1,22 @@
 <p>category-books works!</p>
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <ng-container *ngFor="let item of books">
             <div class="card col-md-3">
                 <a routerLink="/category_books/{{item.id}}"><img src="/assets/images/{{item.image}}" alt="picture of books"></a>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
+
+            </div>
+        </ng-container>
+    </div>
+
+</div> -->
+
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let item of books">
+            <div class="card col-md-3">
+                <a routerLink="/product_detail/{{item.id}}"><img src="/assets/images/{{item.image}}" alt="picture of books"></a>
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
 
             </div>
