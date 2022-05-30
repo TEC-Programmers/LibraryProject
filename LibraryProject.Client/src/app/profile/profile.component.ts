@@ -1,4 +1,4 @@
-import { User } from '../_models/User';
+import { Role, User } from '../_models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   users: User[] = [];
   user: User = this.newUser();
   message: string[] = [];
-  currentUser: User = { Id: 0, FirstName: '', MiddleName: '', LastName: '', Email: '', Password: ''};
+  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
 
 
   constructor(
@@ -26,15 +26,16 @@ export class ProfileComponent implements OnInit {
 
   ) {
     // get the current user from authentication service
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+
+    this.authService.currentUser.subscribe(x=> this.currentUser=x);
   }
 
   ngOnInit(): void {
-
+    
   }
 
   newUser(): User {
-    return { Id: 0,  FirstName: '', MiddleName: '', LastName: '', Email: '', Password: ''};
+    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: ''};
   }
 
   edit(user: User): void {
@@ -48,47 +49,47 @@ export class ProfileComponent implements OnInit {
   }
 
   save(): void {
-    if (this.user.Email != '') {
+    if (this.user.email != '') {
      (confirm('To view the updated profile kindly "Sign in" again....!'))
     }
     this.message = [];
 
-    if (this.user.Email == '') {
+    if (this.user.email == '') {
       this.message.push('Enter Email');
     }
 
-    if (this.user.Password == '') {
+    if (this.user.password == '') {
       this.message.push('Enter Password');
     }
 
-    if (this.user.FirstName== '') {
+    if (this.user.firstName== '') {
       this.message.push('Enter Firstname');
     }
 
-    if (this.user.MiddleName == '') {
+    if (this.user.middleName == '') {
       this.message.push('Enter Middlename');
     }
 
-    if (this.user.LastName== '') {
+    if (this.user.lastName== '') {
       this.message.push('Enter Lastname');
     }
 
   
 
     if (this.message.length == 0) {
-      if (this.user.Id == 0) {
+      if (this.user.id == 0) {
         this.userService.registerUser(this.user)
            .subscribe(a => {
           this.users.push(a)
           this.user= this.newUser();
           });
       } 
-     /* else {
-        this.userService.updateUser(this.user.Id, this.user)
-          .subscribe(() => {
-            this.user = this.newUser();
-          });*/
+      // else {
+      //   this.userService.updateUser(this.user.id , this.user)
+      //     .subscribe(() => {
+      //       this.user = this.newUser();
+      //     });
         
-         }
+       }
     }
   }

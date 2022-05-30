@@ -20,14 +20,14 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     // console.log(this.authenticationService.currentUserValue);
-    if (this.authService.currentUserValue != null && this.authService.currentUserValue.Id> 0) {
+    if (this.authService.currentUserValue != null && this.authService.currentUserValue.id> 0) {
       this.router.navigate(['login']);
      
     }
   }
 
   ngOnInit() {
-
+   var username = this.authService.currentUserValue.firstName; 
   }
 
   login(): void {
@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
           
           
           this.router.navigate(['returnUrl']);
+          var username = this.authService.currentUserValue.firstName; 
         
         },
         error: obj => {
@@ -52,5 +53,9 @@ export class LoginComponent implements OnInit {
           }
         }
       });
+
+    
+  
+    
   }
 }

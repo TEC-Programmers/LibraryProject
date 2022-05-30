@@ -12,7 +12,7 @@ import { Role, User } from './_models/User';
 
 export class AppComponent {
 
-  currentUser: User = { Id: 0, FirstName:'', MiddleName:'',LastName:'',Email:'',Password:''};
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
 
   title = 'LibraryProject-Client';
 
@@ -23,10 +23,11 @@ export class AppComponent {
   ) {
     // get the current user from authentication service
     this.authService.currentUser.subscribe(x => this.currentUser= x);
+
   }
 
   ngOnInit(): void{   
-
+    
   }
 
   logout() {

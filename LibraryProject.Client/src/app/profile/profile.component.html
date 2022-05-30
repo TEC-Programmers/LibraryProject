@@ -1,5 +1,5 @@
 <p>profile works!</p>
-<h3>Hi {{currentUser.FirstName}}!</h3>
+<h3>Hi {{currentUser.firstName}}!</h3>
 
 <div class="w3-container">
     <h4>Your Profile:</h4><br>
@@ -17,12 +17,12 @@
             </tr>
             <tr>
 
-                <td>{{ currentUser.Email}}</td>
-                <td>{{ currentUser.Password }}</td>
-                <td>{{ currentUser.FirstName }}</td>
-                <td>{{ currentUser.MiddleName }}</td>
-                <td>{{ currentUser.LastName }}</td>             
-                <td>{{ currentUser.Role }}</td>
+                <td>{{ currentUser.email}}</td>
+                <td>{{ currentUser.password }}</td>
+                <td>{{ currentUser.firstName }}</td>
+                <td>{{ currentUser.middleName }}</td>
+                <td>{{ currentUser.lastName }}</td>             
+                <td>{{ currentUser.role }}</td>
                 <td>
                     <button class="w3-btn w3-yellow w3-ripple" (click)="edit(currentUser)">&#9998; Edit</button>
                 </td>
@@ -33,19 +33,19 @@
 
     <div>
         <label>Email</label>
-        <input class="w3-input w3-border" [(ngModel)]="user.Email">
+        <input class="w3-input w3-border" [(ngModel)]="user.email">
 
         <label>Password</label>
-        <input class="w3-input w3-border" [(ngModel)]="user.Password">
+        <input class="w3-input w3-border" [(ngModel)]="user.password">
 
         <label>FirstName</label>
-        <input class="w3-input w3-border" [(ngModel)]="user.FirstName">
+        <input class="w3-input w3-border" [(ngModel)]="user.firstName">
        
         <label>MiddleName</label>
-        <input class="w3-input w3-border" [(ngModel)]="user.MiddleName">
+        <input class="w3-input w3-border" [(ngModel)]="user.middleName">
 
         <label>LastName</label>
-        <input class="w3-input w3-border" [(ngModel)]="user.LastName">  
+        <input class="w3-input w3-border" [(ngModel)]="user.lastName">  
 
       
 
