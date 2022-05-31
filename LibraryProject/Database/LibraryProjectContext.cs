@@ -10,9 +10,9 @@ namespace LibraryProject
     public class LibraryProjectContext : DbContext
     {
         public LibraryProjectContext() { }
-        public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }
+        public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }  //creating instances of the class 
 
-        public DbSet<Book> Book { get; set; }
+        public DbSet<Book> Book { get; set; }   //represents the set of book enitity in EFC(Entity Framework Core)
         public DbSet<Category> Category { get; set; }
         public DbSet<User> User { get; set; }
 
@@ -23,7 +23,7 @@ namespace LibraryProject
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            //We override the method to configure the models of the set of entities
 
             modelBuilder.Entity<Category>().HasData(
               new()
