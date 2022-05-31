@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: '', component : FrontpageComponent},   //route for the frontpage
   {path: 'Author', component:AuthorComponent},  //route of the author
   {path: 'Category', component:CategoryComponent},   // it displays the Category component
-  { path: 'category_books/:id', component: CategoryBooksComponent },   //this is the url which displays the books of the  specific categoryID
+  { path: 'category_books/:id', component: CategoryBooksComponent }   //this is the url which displays the books of the  specific categoryID
 ];
 
 @NgModule({

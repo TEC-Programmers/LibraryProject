@@ -10,13 +10,15 @@ namespace LibraryProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoryController : ControllerBase   // This class is inheriting class ControlleBase and implement the methods
     {
-        private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly ICategoryService _categoryService;     //making  instances of the class ICategoryService,
+        public CategoryController(ICategoryService categoryService)   //dependency injection with parameter
         {
             _categoryService = categoryService;
         }
+
+        // HTTPGET method for requesting data from the server 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -45,6 +47,8 @@ namespace LibraryProject.API.Controllers
 
         }
 
+        // HTTPGET method by CategoryID  for requesting data from the server 
+
         // https://localhost:5001/api/Category/derp
         [HttpGet("{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -70,6 +74,8 @@ namespace LibraryProject.API.Controllers
             }
 
         }
+
+        // HTTPGET method only for Categories(without Books) for requesting data from the server 
         // https://localhost:5001/api/Category/derp
         [HttpGet("WithoutBooks")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -99,6 +105,8 @@ namespace LibraryProject.API.Controllers
 
 
         }
+
+        //HTTPPOST method for sending data to the server from an http client
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -124,7 +132,7 @@ namespace LibraryProject.API.Controllers
 
         }
 
-
+        //HTTPPUT method to update an existing resource on the server
         [HttpPut("{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -150,7 +158,7 @@ namespace LibraryProject.API.Controllers
 
         }
 
-
+        //HTTPDelete method to delete a resource from the server
         [HttpDelete("{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
