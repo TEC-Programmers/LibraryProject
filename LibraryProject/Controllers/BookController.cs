@@ -10,16 +10,17 @@ namespace LibraryProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookController : ControllerBase
+    public class BookController : ControllerBase   // This class is inheriting class ControlleBase and implement the methods
     {
 
-        private readonly IBookService _bookService;
+        private readonly IBookService _bookService;   //making  instances of the class IBookService,
 
-        public BookController(IBookService bookService)
+        public BookController(IBookService bookService)  //dependency injection with parameter
         {
             _bookService = bookService;
         }
 
+        // HTTPGET method for requesting data from the server 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -48,6 +49,8 @@ namespace LibraryProject.API.Controllers
 
         }
 
+        // HTTPGET method by BookID  for requesting data from the server 
+
         // https://localhost:5001/api/Product/derp
         [HttpGet("{bookId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -73,6 +76,8 @@ namespace LibraryProject.API.Controllers
             }
 
         }
+
+        // HTTPGET method by CategoryID  for requesting data from the server 
         // https://localhost:5001/api/Product/derp
 
         [HttpGet("Category/{categoryId}")]
@@ -102,6 +107,8 @@ namespace LibraryProject.API.Controllers
             }
         }
 
+
+        //HTTPPOST method for sending data to the server from an http client
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -126,6 +133,8 @@ namespace LibraryProject.API.Controllers
             }
 
         }
+
+        //HTTPPUT method to update an existing resource on the server
         [HttpPut("{bookId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -151,7 +160,7 @@ namespace LibraryProject.API.Controllers
 
         }
 
-
+        //HTTPDelete method to delete a resource from the server
         [HttpDelete("{bookId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
