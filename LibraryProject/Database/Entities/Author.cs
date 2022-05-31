@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryProject.Database.Entities
 {
+    //Creating Author Entity for the database
     public class Author
     {
         [Key]

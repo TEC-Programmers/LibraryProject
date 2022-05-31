@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryProject.API.Database.Entities
 {
+    //Creating Publisher Entity for the database
     public class Publisher
     {
         [Key]

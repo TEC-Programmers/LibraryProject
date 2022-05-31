@@ -5,6 +5,7 @@ using System.Net;
 
 namespace LibraryProject.Database.Entities
 {
+    //Creating Reservation Entity for the database
     public class Reservation
     {
         [Key]

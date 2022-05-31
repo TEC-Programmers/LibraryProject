@@ -3,7 +3,7 @@
 
 namespace LibraryProject.API.Database.Entities
 
-{
+{ //Creating Loan Entity for the database
     public class Loan
     {
         [Key]
