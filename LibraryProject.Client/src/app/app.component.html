@@ -1,4 +1,4 @@
-<body>
+<!-- <body>
   <i class="fa-solid fa-magnifying-glass"></i>
   <div class="fa-3x">
     <i class="fa-solid fa-circle-plus fa-beat"></i>
@@ -7,10 +7,11 @@
     <i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 2s;"></i>
     <i class="fa-solid fa-heart fa-beat" style="--fa-beat-scale: 2.0;"></i>
   </div>
-</body>
+</body> -->
 <div id="searchDiv">
+  <!--  -->
   <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
-  <button type="submit" inputmode="searchDiv">Search</button>
+  <button class="click" (click)="click()">Search</button>
       <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
         <td>
           <br>
