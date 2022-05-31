@@ -6,10 +6,10 @@ import { CategoryComponent } from './category/category.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 
 const routes: Routes = [
-  {path: '', component : FrontpageComponent},
-  {path: 'Author', component:AuthorComponent},
-  {path: 'Category', component:CategoryComponent},
-  { path: 'category_books/:id', component: CategoryBooksComponent },
+  {path: '', component : FrontpageComponent},   //route for the frontpage
+  {path: 'Author', component:AuthorComponent},  //route of the author
+  {path: 'Category', component:CategoryComponent},   // it displays the Category component
+  { path: 'category_books/:id', component: CategoryBooksComponent },   //this is the url which displays the books of the  specific categoryID
 ];
 
 @NgModule({

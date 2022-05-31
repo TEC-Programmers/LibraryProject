@@ -20,7 +20,7 @@
 #no-bullets{
     list-style-type: none;
 }
-/*product component*/
+/*Category component*/
 .card-top{
     position:relative;
     display: flex;
