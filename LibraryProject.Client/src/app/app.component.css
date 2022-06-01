@@ -90,6 +90,10 @@
         font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
+    .click:hover {
+        background-color: greenyellow;
+    }
+    
     #searchDiv {
         font-size: medium;
         color: blue;

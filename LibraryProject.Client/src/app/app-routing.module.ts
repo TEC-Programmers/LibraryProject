@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
   {path: 'Category', component: CategoryComponent},
-  {path: 'Category-Details', component: CategoryDetailsComponent},
+  {path: 'Category-Details/:id', component: CategoryDetailsComponent},
   {path: 'Book', component:BookComponent},
   {path: 'Contact', component: ContactComponent},
   {path: 'Login', component: LoginComponent},
