@@ -15,6 +15,7 @@ import { BookComponent } from './book/book.component';
 import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { CategoryDetailsComponent } from './category-details/category-details.co
     LoginComponent,
     ContactComponent,
     CategoryDetailsComponent,
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,

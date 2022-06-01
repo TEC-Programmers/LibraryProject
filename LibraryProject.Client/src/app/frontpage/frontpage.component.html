@@ -1,23 +1,11 @@
-<h1>
-    Forside</h1>
-<!--
-<div id="searchDiv">
-    <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for products" size="35">
+<div id="divforside">
+    <h1>Forside</h1>
 
 
-    <tr *ngFor="let book of allbooks | filter: filterTerm" [routerLink]="['/product', product.id]">
-        <td>
-            Product: {{product.name}}
-            <br> Description: {{product.description}} <br>
-            <br>
-        </td>
-    </tr>
-</div> -->
-
-<nav>
-    <a routerLink="/Category">Kategorier</a> |
-    <a routerLink="/Category-Details">Kat-Details</a> |
-    <a routerLink="/Book">Bøger</a> |
-    <a routerLink="/Login">Login</a> |
-    <a routerLink="/Contact">Kontakt os</a> |
-</nav>
+    <nav id="navforside">
+        <a routerLink="/Category">Kategorier</a> |
+        <a routerLink="/Book">Bøger</a> |
+        <a routerLink="/Login">Login</a> |
+        <a routerLink="/Contact">Kontakt os</a> |
+    </nav>
+</div>
