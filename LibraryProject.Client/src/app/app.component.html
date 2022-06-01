@@ -25,7 +25,6 @@
 
 
 <div id="searchDiv">
-    <!--  -->
     <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
     <button class="click" (click)="click()">Search</button>
     <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">

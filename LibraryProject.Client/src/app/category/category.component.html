@@ -1,5 +1,5 @@
 <div id="catDiv">
-    <H1>Kategorier</H1>
+    <h1>Kategorier</h1>
     <div *ngFor="let category of Categories">
         <li> Kategori-Navn:
             <a [routerLink]="['/Category-Details', category.id]">{{category.categoryName}} </a>

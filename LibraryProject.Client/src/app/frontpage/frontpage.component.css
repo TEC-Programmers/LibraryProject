@@ -1,21 +1,21 @@
     a {
         text-decoration: none;
     }
-    
+
     nav {
         font-family: monospace;
     }
-    
+
     tr {
         cursor: pointer;
     }
-    
+
     h1 {
         font-size: 75px;
         margin: 0;
     }
-    
+
     #divforside {
         position: absolute;
-        left: 500px;
+        left: 555px;
     }
