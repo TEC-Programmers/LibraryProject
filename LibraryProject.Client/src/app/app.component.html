@@ -1,9 +1,29 @@
+<div class="container" #scroll>
+  <div style="border: 3px solid black;" class="navbar-brand align-item-center d-flex">
+      <ul>
+          <li><a routerLink="/Frontpage">Forside</a></li>
 
+          <li class="cat" routerLink="/Category"><a>Category</a>
+              <ul class="Categorys">
+                  <div class="category" *ngFor="let category of categories ">
+                      <li>
+                          <a [routerLink]="['/Category-Details',category.id]">{{category.categoryName}}</a>
+                      </li>
+
+                  </div>
+              </ul>
+          </li>
+          <li>
+              <a routerLink="/Book">Bøger</a></li>
+          <li><a routerLink="/Login">Login</a></li>
+          <li><a routerLink="/Contact">Kontakt os</a></li>
+      </ul>
+  </div>
 <div id="searchDiv">
   <!--  -->
   <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
   <button class="click" (click)="click()">Search</button>
-      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
+      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
         <td>
           <br>
           Book:
@@ -18,10 +38,4 @@
         </td>
           </tr>
 </div>
-<nav id="nav">
-    <a routerLink="/"> Home | </a>
-    <a routerLink="/Author">  Author | </a>
-    <a routerLink="/Admin">  Admin | </a>
-    <a routerLink="/Category">  Category | </a>
-</nav>
 <router-outlet></router-outlet>

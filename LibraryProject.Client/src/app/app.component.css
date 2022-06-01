@@ -1,8 +1,3 @@
-
-body {
-  background-color: #F8F005;
-}
-
 button, button::after {
   width: 75px;
   height: 60px;
@@ -98,10 +93,6 @@ button:hover::after {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.click:hover{
-  background-color: greenyellow;
-}
-
 #searchDiv{
 font-size: medium;
 color: blue;
@@ -111,3 +102,77 @@ top: auto;
 left: 1225px;
 }
 
+.container {
+  position: absolute;
+}
+
+.d-flex {
+  width: 425px
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  font-family: monospace;
+}
+
+ul {
+  background: #4e1d04;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  height: 57px;
+}
+
+li {
+  color: #fff;
+  background: #ad6a34;
+  display: block;
+  float: left;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+
+li a {
+  color: #fff;
+}
+
+li:hover,
+li:focus-within {
+  background: #4e1d04;
+  cursor: pointer;
+}
+
+li:focus-within a {
+  outline: none;
+}
+
+ul li ul {
+  background: #dcbe87;
+  visibility: visible;
+  opacity: 0;
+  min-width: 5rem;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+  left: 0;
+  display: none;
+}
+
+ul li:hover>ul,
+ul li:focus-within>ul,
+ul li ul:hover,
+ul li ul:focus {
+  visibility: visible;
+  opacity: 1;
+  display: block
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+}

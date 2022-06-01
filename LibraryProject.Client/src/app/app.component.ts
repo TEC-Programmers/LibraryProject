@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { BookService } from './_services/book.service';
@@ -16,11 +15,17 @@ export class AppComponent {
   book!: Book;
   counter = 0;
   total: number = 0;
-  categorys: Category[] = [];
+  categories: Category[] = [];
   allBooks: Book[] = [];
   filterTerm!: string;
 
-  constructor(private bookService: BookService, category: CategoryService) {}
+  constructor(private bookService: BookService, private categoryService: CategoryService) {}
+
+  ngOnInit(): void {
+    this.categoryService.getAllCategories()
+    .subscribe(c => this.categories = c);
+
+  }
 showSearch(): void {
 
     if (this.filterTerm == null || this.filterTerm == '') {
@@ -52,33 +57,5 @@ showSearch(): void {
         console.log(event);
       }
     }
-
-//   pageYoffset = 0;
-//   @HostListener('window:scroll', ['$event']) onScroll(event){
-//     this.pageYoffset = window.pageYOffset;
-//  }
-  @ViewChild('scroll')
-  scroll!: ElementRef;
-
-  categories: Category[] = [];
-
-
-  constructor(private categoryService:CategoryService, /*private scroll:ViewportScroller*/) {}
-
-  ngOnInit(): void {
-    this.categoryService.getAllCategories()
-    .subscribe(c => this.categories = c);
-
-  }
-
- scrollToTop(){
-  // this.scroll.scrollToPosition([0,0]);
-  this.scroll.nativeElement.scrollToTop = 0;
-}
-
-scrollToBottom(){
-  console.log(this.scroll.nativeElement.scrollHeight)
-  this.scroll.nativeElement.scrollToTop = this.scroll.nativeElement.scrollHeight;
-}
 
 }
