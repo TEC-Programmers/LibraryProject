@@ -4,7 +4,7 @@ body {
 }
 
 button, button::after {
-  width: 120px;
+  width: 75px;
   height: 60px;
   font-size: 36px;
   font-family: 'Bebas Neue', cursive;
@@ -100,10 +100,14 @@ button:hover::after {
 
 .click:hover{
   background-color: greenyellow;
-
 }
 
 #searchDiv{
 font-size: medium;
 color: blue;
+max-width: 450px;
+position:absolute;
+top: auto;
+left: 1225px;
 }
+

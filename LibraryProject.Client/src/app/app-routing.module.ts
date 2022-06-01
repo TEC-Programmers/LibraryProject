@@ -11,8 +11,6 @@ const routes: Routes = [
   {path: 'Author', component: AuthorComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
-  // {path: 'Admin/Books', component: AdministratorComponent},
-  {path: 'Author', component:AuthorComponent},
   {path: 'Book', component: BookComponent},
   {path: 'Category', component: CategoryComponent}
 ];
