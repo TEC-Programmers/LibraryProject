@@ -1,7 +1,8 @@
-<p>category works!</p>
-
-<ul>
-  <li *ngFor="let category of categories">
-    <p>Kategori navn: <a routerLink="/Book"> {{category.categoryName}} </a></p>
-  </li>
-</ul>
+<div id="catDiv">
+    <H1>Kategorier</H1>
+    <div *ngFor="let category of Categories">
+        <li> Kategori-Navn:
+            <a [routerLink]="['/Category-Details', category.id]">{{category.categoryName}} </a>
+        </li>
+    </div>
+</div>

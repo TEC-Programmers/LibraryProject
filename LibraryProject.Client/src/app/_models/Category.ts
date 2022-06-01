@@ -1,10 +1,16 @@
-import { Author } from "./Author";
-import { Book } from "./Book";
-import { Publisher } from "./Publisher";
 
 export interface Category
 {
-  Id: number;
+  id: number;
   categoryName: string;
-  Books: Book[];
+  books: Book_[];
+}
+
+export interface Book_
+{
+    id: Number;
+    title: string;
+    language: string;
+    description: string;
+    publishYear: Number;
 }

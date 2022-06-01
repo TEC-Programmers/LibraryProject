@@ -3,11 +3,11 @@ import { User } from "./User";
 
 export interface Reservation
 {
-    Id: Number;
+    id: Number;
     userId: Number;
-    User: User;
+    user: User;
     bookId: Number;
-    Book:Book;
+    book:Book;
     reserved_At: string;
     reserved_To: string;
 }

@@ -7,11 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
-import { BookComponent } from './book/book.component';
+
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
-import { AuthorComponent } from './author/author.component';
 import { CategoryComponent } from './category/category.component';
+import { BookComponent } from './book/book.component';
+import { LoginComponent } from './login/login.component';
+import { ContactComponent } from './contact/contact.component';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 
 @NgModule({
@@ -20,16 +24,19 @@ import { CategoryComponent } from './category/category.component';
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
+    CategoryComponent,
     BookComponent,
-    AuthorComponent,
-    CategoryComponent
+    LoginComponent,
+    ContactComponent,
+    CategoryDetailsComponent,
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule,
+    Ng2SearchPipeModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

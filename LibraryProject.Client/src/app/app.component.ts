@@ -53,4 +53,32 @@ showSearch(): void {
       }
     }
 
+//   pageYoffset = 0;
+//   @HostListener('window:scroll', ['$event']) onScroll(event){
+//     this.pageYoffset = window.pageYOffset;
+//  }
+  @ViewChild('scroll')
+  scroll!: ElementRef;
+
+  categories: Category[] = [];
+
+
+  constructor(private categoryService:CategoryService, /*private scroll:ViewportScroller*/) {}
+
+  ngOnInit(): void {
+    this.categoryService.getAllCategories()
+    .subscribe(c => this.categories = c);
+
+  }
+
+ scrollToTop(){
+  // this.scroll.scrollToPosition([0,0]);
+  this.scroll.nativeElement.scrollToTop = 0;
+}
+
+scrollToBottom(){
+  console.log(this.scroll.nativeElement.scrollHeight)
+  this.scroll.nativeElement.scrollToTop = this.scroll.nativeElement.scrollHeight;
+}
+
 }

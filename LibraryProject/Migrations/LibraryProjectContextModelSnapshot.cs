@@ -180,7 +180,7 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(32)");

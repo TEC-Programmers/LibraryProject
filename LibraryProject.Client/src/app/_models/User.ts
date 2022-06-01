@@ -2,11 +2,11 @@ import { Role } from "./Role";
 
 export interface User
 {
-    Id: Number;
-    FirstName: string;
-    MiddleName: string;
-    LastName: string;
-    Email: string;
-    Password: string;
-    Role: Role;
+    id: Number;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    role: Role;
 }
