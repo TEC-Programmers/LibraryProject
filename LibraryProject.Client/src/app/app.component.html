@@ -1,4 +1,4 @@
-<div class="container" #scroll>
+<div class="container">
     <div style="border: 3px solid black;" class="navbar-brand align-item-center d-flex">
         <ul>
             <li><a routerLink="/Frontpage">Forside</a></li>
@@ -14,7 +14,7 @@
                 </ul>
             </li>
             <li>
-                <a routerLink="/Book">B�ger</a></li>
+                <a routerLink="/Book">Bøger</a></li>
             <li><a routerLink="/Login">Login</a></li>
             <li><a routerLink="/Contact">Kontakt os</a></li>
         </ul>
@@ -24,8 +24,6 @@
 </div>
 
 
-
-<router-outlet></router-outlet>
 <div id="searchDiv">
     <!--  -->
     <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
@@ -39,10 +37,5 @@
         </td>
     </tr>
 </div>
-<nav id="nav">
-    <a routerLink="/"> Home | </a>
-    <a routerLink="/Author">  Author | </a>
-    <a routerLink="/Admin">  Admin | </a>
-    <a routerLink="/Category">  Category | </a>
-</nav>
+
 <router-outlet></router-outlet>
