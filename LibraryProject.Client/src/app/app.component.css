@@ -1,13 +1,11 @@
     button,
     button::after {
         width: 100px;
-        height: 50px;
-        font-size: 36px;
+        height: 25px;
         font-family: 'Bebas Neue', cursive;
         background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
-        border: 0;
         letter-spacing: 1px;
-        line-height: 50px;
+        line-height: 20px;
         /*box-shadow: 0px 0px 0px blue;*/
         outline: transparent;
         position: relative;
@@ -87,18 +85,17 @@
     .click {
         color: black;
         cursor: pointer;
-        font-size: large;
-        border-radius: 1000px;
+        font-size: small;
+        border-radius: 50px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
     #searchDiv {
         font-size: medium;
         color: blue;
-        max-width: 450px;
         position: absolute;
         top: auto;
-        left: 1225px;
+        left: 1175px;
     }
 
     .d-flex {
