@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220525142101_Library")]
+    [Migration("20220523122222_Library")]
     partial class Library
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,7 +182,7 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(32)");

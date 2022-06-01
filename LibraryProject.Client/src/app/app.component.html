@@ -1,7 +1,3 @@
-<div class="container" #scroll>
-    <div style="border: 3px solid black;" class="navbar-brand align-item-center d-flex">
-        <ul>
-            <li><a routerLink="/Frontpage">Forside</a></li>
 
             <li class="cat" routerLink="/Category"><a>Category</a>
                 <ul class="Categorys">
@@ -14,7 +10,7 @@
                 </ul>
             </li>
             <li>
-                <a routerLink="/Book">BÃ¸ger</a></li>
+                <a routerLink="/Book">Bøger</a></li>
             <li><a routerLink="/Login">Login</a></li>
             <li><a routerLink="/Contact">Kontakt os</a></li>
         </ul>
@@ -25,4 +21,30 @@
 
 
 
+<router-outlet></router-outlet>
+<div id="searchDiv">
+  <!--  -->
+  <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
+  <button class="click" (click)="click()">Search</button>
+      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
+        <td>
+          <br>
+          Book:
+          {{book.title}}
+          <br>
+          Description:
+          {{book.description}}
+          <br>
+          Publish Year:
+          {{book.publishYear}}
+          <br>
+        </td>
+          </tr>
+</div>
+<nav id="nav">
+    <a routerLink="/"> Home | </a>
+    <a routerLink="/Author">  Author | </a>
+    <a routerLink="/Admin">  Admin | </a>
+    <a routerLink="/Category">  Category | </a>
+</nav>
 <router-outlet></router-outlet>
