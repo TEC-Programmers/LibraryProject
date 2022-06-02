@@ -33,7 +33,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
     DataTablesModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
-    NgbModal,
+    // NgbModal,
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent]
