@@ -84,12 +84,13 @@ export class ProfileComponent implements OnInit {
           this.user= this.newUser();
           });
       } 
-      // else {
-      //   this.userService.updateUser(this.user.id , this.user)
-      //     .subscribe(() => {
-      //       this.user = this.newUser();
-      //     });
+      else {
+        this.userService.updateUser(this.user.id , this.user)
+          .subscribe(() => {
+            this.user = this.newUser();
+          });
         
        }
     }
-  }
+  
+  }}

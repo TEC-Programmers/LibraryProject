@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ProfileComponent } from './profile/profile.component';
     CustomerComponent,
     LoginComponent,
     ProfileComponent,
+    RegisterComponent,
 
 
   ],
