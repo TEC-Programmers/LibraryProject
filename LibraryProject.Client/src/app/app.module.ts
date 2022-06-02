@@ -1,44 +1,41 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { AuthorComponent } from './author/author.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
-
+import { DataTablesModule } from 'angular-datatables';
+import { AngularPaginatorModule } from 'angular-paginator';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { DatePipe } from '@angular/common';
-import { CategoryComponent } from './category/category.component';
-import { BookComponent } from './book/book.component';
-import { LoginComponent } from './login/login.component';
-import { ContactComponent } from './contact/contact.component';
-import { CategoryDetailsComponent } from './category-details/category-details.component';
-import { BookDetailsComponent } from './book-details/book-details.component';
-
+import { DecimalPipe } from '@angular/common';
+import { SearchFilterPipe } from './search-filter.pipe';
+// import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthorComponent,
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
-    CategoryComponent,
-    BookComponent,
-    LoginComponent,
-    ContactComponent,
-    CategoryDetailsComponent,
-    BookDetailsComponent,
+    SearchFilterPipe,   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
+    AngularPaginatorModule,
+    DataTablesModule,
+    Ng2SearchPipeModule,
+    ReactiveFormsModule,
+    // NgbModal,
   ],
-  providers: [DatePipe],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
