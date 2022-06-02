@@ -16,7 +16,12 @@ import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import{ MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,13 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatIconModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

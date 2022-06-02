@@ -1,0 +1,8 @@
+        * {
+            margin: 0px;
+        }
+
+        #bookdetailsDiv {
+            position: absolute;
+            left: 555px;
+        }

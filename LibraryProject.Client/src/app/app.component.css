@@ -10,7 +10,7 @@
         outline: transparent;
         position: relative;
     }
-
+    
     button::after {
         --slice-0: inset(50% 50% 50% 50%);
         --slice-1: inset(80% -6px 0 0);
@@ -29,12 +29,12 @@
         text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
         clip-path: var(--slice-0);
     }
-
+    
     button:hover::after {
         animation: 1s glitch;
         animation-timing-function: steps(2, end);
     }
-
+    
     @keyframes glitch {
         0% {
             clip-path: var(--slice-1);
@@ -81,17 +81,13 @@
             transform: translate(0);
         }
     }
-
+    
     .click {
         color: black;
         cursor: pointer;
         font-size: small;
         border-radius: 50px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    .click:hover {
-        background-color: greenyellow;
     }
     
     #searchDiv {
@@ -101,7 +97,13 @@
         top: auto;
         left: 1175px;
     }
-
+    
+    #searchOuput {
+        border-radius: 5px;
+        border: 1.5px solid #009688;
+        background-color: white;
+    }
+    
     .d-flex {
         color: #fff;
         background-color: #0d6efd;
@@ -109,15 +111,15 @@
         width: 414px;
         position: absolute;
     }
-
+    
     a {
         text-decoration: none;
     }
-
+    
     nav {
         font-family: monospace;
     }
-
+    
     ul {
         background: #0d6efd;
         list-style: none;
@@ -126,7 +128,7 @@
         height: 57px;
         /*margin-top: -4px;*/
     }
-
+    
     li {
         color: #fff;
         background: #708fb8;
@@ -137,21 +139,21 @@
         text-decoration: none;
         transition-duration: 0.5s;
     }
-
+    
     li a {
         color: #fff;
     }
-
+    
     li:hover,
     li:focus-within {
         background: #0d6efd;
         cursor: pointer;
     }
-
+    
     li:focus-within a {
         outline: none;
     }
-
+    
     ul li ul {
         background: #89CFF0;
         visibility: hidden;
@@ -164,7 +166,7 @@
         left: 0;
         display: none;
     }
-
+    
     ul li:hover>ul,
     ul li:focus-within>ul,
     ul li ul:hover,
@@ -173,12 +175,23 @@
         opacity: 1;
         display: block
     }
-
+    
     ul li ul li {
         clear: both;
         width: 100%;
     }
-
+    
     tr {
         cursor: pointer;
+    }
+    
+    #Front {
+        color: black;
+        background-color: greenyellow;
+    }
+    
+    #datepicker {
+        top: 500px;
+        display: block;
+        position: relative;
     }

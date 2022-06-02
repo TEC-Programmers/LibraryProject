@@ -12,13 +12,14 @@ import { CategoryService } from './_services/category.service';
 })
 export class AppComponent {
   title = 'LibraryProject-Client';
-
   book!: Book;
   counter = 0;
   total: number = 0;
   categories: Category[] = [];
   allBooks: Book[] = [];
   filterTerm!: string;
+
+
 
   constructor(private bookService: BookService, private categoryService: CategoryService) {}
 

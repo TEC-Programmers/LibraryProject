@@ -16,3 +16,5 @@ export interface Book
     publisherId: Number;
     publisher: Publisher
 }
+
+

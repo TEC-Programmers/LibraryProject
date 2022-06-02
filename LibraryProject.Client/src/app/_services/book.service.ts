@@ -22,7 +22,7 @@ export class BookService {
     return this.http.get<Book[]>(this.apiUrl);
   }
 
-  getBook(bookId: number): Observable<Book> {
+  getBookById(bookId: number): Observable<Book> {
     return this.http.get<Book>(`${this.apiUrl}/${bookId}`)
   }
 

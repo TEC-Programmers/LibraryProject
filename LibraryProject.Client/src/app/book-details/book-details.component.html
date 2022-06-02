@@ -1,1 +1,26 @@
-<p>book-details works!</p>
+<div id="bookdetailsDiv">
+    <h1>Bog: {{Book.title}}</h1>
+    <br>
+    <div class="row" *ngIf="Book">
+
+        <h3>
+            <div class="card col-md-3">
+                <p *ngFor="let book of Books">
+                    <h2>Bog Detaljer</h2>
+                    <br>
+                    <label style="font-weight: 620;"> Bognavn: </label>{{Book.title}}
+                    <br>
+                    <label style="font-weight: 620 ">Bog Beskrivelse: </label>{{Book.description}}
+                    <br>
+                    <label style="font-weight: 620 ">Sprog: </label>{{Book.language}}
+                    <br>
+                    <label style="font-weight: 620 ">Udgivelsesår: </label>{{Book.publishYear}}
+                    <br>
+                    <label style="font-weight: 620 ">Udgiver: </label>{{Book.publisher}}
+                    <br>
+                    <label style="font-weight: 620 ">Kategori: </label>{{Book.category}}
+                    <br>
+            </div>
+        </h3>
+    </div>
+</div>
