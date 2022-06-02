@@ -18,9 +18,6 @@ export class RegisterComponent implements OnInit {
   message: string[] = [];
   error = '';
  
-
-  
-
   constructor(
     private userService: UserService,
    
@@ -47,12 +44,7 @@ export class RegisterComponent implements OnInit {
   save(): void {
     this.message = [];
 
-    if (this.user.email == '') {
-      this.message.push('Email field cannot be empty');
-    }
-    if (this.user.password == '') {
-      this.message.push('Password field cannot be empty');
-    }
+  
     if (this.user.firstName == '') {
       this.message.push('Enter FirstName');
     }
@@ -61,6 +53,12 @@ export class RegisterComponent implements OnInit {
     }
     if (this.user.lastName == '') {
       this.message.push('Enter Lastname');
+    }
+    if (this.user.email == '') {
+      this.message.push('Email field cannot be empty');
+    }
+    if (this.user.password == '') {
+      this.message.push('Password field cannot be empty');
     }
    
   
