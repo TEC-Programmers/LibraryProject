@@ -13,7 +13,7 @@ import { AngularPaginatorModule } from 'angular-paginator';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DecimalPipe } from '@angular/common';
 import { SearchFilterPipe } from './search-filter.pipe';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
