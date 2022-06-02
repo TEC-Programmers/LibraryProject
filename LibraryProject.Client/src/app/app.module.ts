@@ -13,6 +13,7 @@ import { AngularPaginatorModule } from 'angular-paginator';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DecimalPipe } from '@angular/common';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
-    SearchFilterPipe,
-     
+    SearchFilterPipe,   
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,8 @@ import { SearchFilterPipe } from './search-filter.pipe';
     AngularPaginatorModule,
     DataTablesModule,
     Ng2SearchPipeModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    NgbModal,
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent]

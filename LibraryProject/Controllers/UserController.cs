@@ -197,7 +197,8 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        [Authorize(Role.Administrator)]
+        //[Authorize(Role.Administrator)]
+        [AllowAnonymous]
         [HttpDelete("{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
