@@ -16,6 +16,11 @@ import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { LoanComponent } from './loan/loan.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 
 @NgModule({
@@ -30,13 +35,15 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     ContactComponent,
     CategoryDetailsComponent,
     BookDetailsComponent,
+    LoanComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    BrowserAnimationsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

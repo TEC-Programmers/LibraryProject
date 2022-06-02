@@ -99,7 +99,7 @@ color: blue;
 max-width: 450px;
 position:absolute;
 top: auto;
-left: 1225px;
+left: 1314px;
 }
 
 .container {
@@ -107,7 +107,7 @@ left: 1225px;
 }
 
 .d-flex {
-  width: 425px
+  width: 414px
 }
 
 a {
@@ -128,7 +128,7 @@ ul {
 
 li {
   color: #fff;
-  background: #ad6a34;
+  background: #9b6941;
   display: block;
   float: left;
   padding: 1rem;
@@ -161,6 +161,7 @@ ul li ul {
   margin-top: 1rem;
   left: 0;
   display: none;
+
 }
 
 ul li:hover>ul,
