@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CategoryBooksComponent } from './category-books/category-books.componen
     AuthorComponent,
     FrontpageComponent,
     CategoryComponent,
-    CategoryBooksComponent
+    CategoryBooksComponent,
+    BookDetailsComponent
 
 
   ],

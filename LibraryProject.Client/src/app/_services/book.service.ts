@@ -23,7 +23,7 @@ export class BookService {
     return this.http.get<Book[]>(this.apiUrl);  
   }
 
-  getBook(bookId: number): Observable<Book> {         //Method for getting one specific Book using API
+  getBookById(bookId: number): Observable<Book> {         //Method for getting one specific Book using API
     return this.http.get<Book>(`${this.apiUrl}/${bookId}`)
   }
 

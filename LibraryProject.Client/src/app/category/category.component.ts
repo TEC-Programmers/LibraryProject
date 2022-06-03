@@ -13,7 +13,7 @@ export class CategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService ) { }  //Dependency Injection
 
   ngOnInit(): void {
-    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);   //calling function and getting all categories and subscribe these. 
+    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);   //calling function from the service and getting all categories and subscribe these. 
                                                                                             //So that other component can see and use that
     console.log('value received ' );
   }
