@@ -1,24 +1,31 @@
 <div id="Front">
 
-    <h3>
-        <a routerLink="/Frontpage"> Online Bibliotek </a></h3>
+    <div class="Frontleft">
+        <h3><a routerLink="/Frontpage"><b> Online Bibliotek </b></a></h3>
+    </div>
+
+    <div class="FrontRight">
+        <h3><a routerLink="/Login"><b><button class="FrontBtn"> Login <i class="bi bi-box-arrow-in-right"></i></button></b></a></h3>
+        <h3><a routerLink="/Contact"><b> <button class="FrontBtn"> Profil <i class="bi bi-person-bounding-box"></i> </button></b></a></h3>
+    </div>
+
 </div>
 <div class="container">
-    <div style="border: 3px solid black;" class="navbar-brand align-item-center d-flex">
+    <div class="navbar-brand align-item-center d-flex">
         <ul>
-            <li class="cat" routerLink="/Category"><a>Category</a>
+            <li routerLink="/Book">
+                <a> Bøger  <i class="bi bi-book"></i></a>
+            </li>
+            <li class="cat" routerLink="/Category"><a>Kategori  <i class="bi bi-collection"></i></a>
                 <ul class="Categorys">
                     <div class="category" *ngFor="let category of categories ">
                         <li>
-                            <a [routerLink]="['/Category-Details',category.id]">{{category.categoryName}}</a>
+                            <a [routerLink]="['/Category-Details',category.id]">{{category.categoryName}}  <i class="bi bi-collection"></i></a>
                         </li>
                     </div>
                 </ul>
             </li>
-            <li>
-                <a routerLink="/Book">Bøger</a></li>
-            <li><a routerLink="/Login">Login</a></li>
-            <li><a routerLink="/Contact">Kontakt os</a></li>
+
         </ul>
 
     </div>
@@ -28,8 +35,8 @@
 
 
 <div id="searchDiv">
-    <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="25">
-    <button class="click" (click)="click()">Search</button>
+    <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Søg på bognavn, beskrivelse eller forfatter" size="40">
+    <button class="click" (click)="click()">Search <i class="bi bi-search"></i></button>
     <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]" id="searchOuput">
         <td>
             <br> Book: {{book.title}}

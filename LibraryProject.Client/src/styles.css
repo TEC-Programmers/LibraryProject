@@ -1,6 +1,246 @@
     /* You can add global styles to this file, and also import other style files */
-    
+
     body {
-        margin: 0;
         background-color: skyblue;
+    }
+
+    .click {
+        color: black;
+        cursor: pointer;
+        font-size: small;
+        border-radius: 50px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    #searchDiv {
+        max-width: 500px;
+        color: blue;
+        position: fixed;
+        left: 1150px;
+    }
+
+    #searchOuput {
+        position: relative;
+        min-width: 30px;
+        border-radius: 5px;
+        border: 1.5px solid #009688;
+        background-color: white;
+    }
+
+    button.click,
+    button::after {
+        width: 100px;
+        height: 25px;
+        font-family: 'Bebas Neue', cursive;
+        background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
+        letter-spacing: 1px;
+        line-height: 20px;
+        /*box-shadow: 0px 0px 0px blue;*/
+        outline: transparent;
+        position: relative;
+    }
+
+    button.click::after {
+        --slice-0: inset(50% 50% 50% 50%);
+        --slice-1: inset(80% -6px 0 0);
+        --slice-2: inset(50% -6px 30% 0);
+        --slice-3: inset(10% -6px 85% 0);
+        --slice-4: inset(40% -6px 43% 0);
+        --slice-5: inset(80% -6px 5% 0);
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
+        text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
+        clip-path: var(--slice-0);
+    }
+
+    button.click:hover::after {
+        animation: 1s glitch;
+        animation-timing-function: steps(2, end);
+    }
+
+    @keyframes glitch {
+        0% {
+            clip-path: var(--slice-1);
+            transform: translate(-20px, -10px);
+        }
+        10% {
+            clip-path: var(--slice-3);
+            transform: translate(10px, 10px);
+        }
+        20% {
+            clip-path: var(--slice-1);
+            transform: translate(-10px, 10px);
+        }
+        30% {
+            clip-path: var(--slice-3);
+            transform: translate(0px, 5px);
+        }
+        40% {
+            clip-path: var(--slice-2);
+            transform: translate(-5px, 0px);
+        }
+        50% {
+            clip-path: var(--slice-3);
+            transform: translate(5px, 0px);
+        }
+        60% {
+            clip-path: var(--slice-4);
+            transform: translate(5px, 10px);
+        }
+        70% {
+            clip-path: var(--slice-2);
+            transform: translate(-10px, 10px);
+        }
+        80% {
+            clip-path: var(--slice-5);
+            transform: translate(20px, -10px);
+        }
+        90% {
+            clip-path: var(--slice-1);
+            transform: translate(-10px, 0px);
+        }
+        100% {
+            clip-path: var(--slice-1);
+            transform: translate(0);
+        }
+    }
+
+    #datepicker {
+        top: 500px;
+    }
+
+    #Front {
+        background-color: greenyellow;
+        padding: 7px;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+    }
+
+    #Front h3 {
+        margin: 1px;
+    }
+
+    #Front h3 a {
+        color: #0d6efd;
+        /* border-bottom: 5px solid blue; */
+    }
+
+    .FrontRight {
+        display: flex;
+    }
+
+    .FrontLeft {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .FrontBtn {
+        font-weight: 700;
+        font-size: medium;
+        background-color: skyblue;
+        color: #002ead;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    /*
+    .FrontBtn button:hover {
+        background-color: #002ead;
+        transition: 0.2s;
+    } */
+    /*
+    .button:focus {
+        outline-color: transparent;
+        outline-style: solid;
+        box-shadow: 0 0 0 4px #5a01a7;
+        transition: 1s;
+    } */
+
+    .container {
+        position: fixed;
+    }
+
+    .d-flex {
+        color: #fff;
+        background-color: #0d6efd;
+        /* width: 256px; */
+        position: absolute;
+        border: 3px solid black;
+        margin-left: -12px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    nav {
+        font-family: monospace;
+    }
+
+    ul {
+        background: #0d6efd;
+        list-style: none;
+        padding-left: 0px;
+        height: 83px;
+        margin-top: -4px;
+    }
+
+    li {
+        color: #fff;
+        background: #708fb8;
+        /* display: block;
+      float: left; */
+        padding: 1rem;
+        position: relative;
+        text-decoration: none;
+        transition-duration: 0.5s;
+    }
+
+    li a {
+        color: #fff;
+    }
+
+    li:hover,
+    li:focus-within {
+        background: #0d6efd;
+        cursor: pointer;
+    }
+
+    li:focus-within a {
+        outline: none;
+    }
+
+    ul li ul {
+        background: #89CFF0;
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        transition: all 0.5s ease;
+        margin-top: 1rem;
+        left: 0;
+    }
+
+    ul li:hover>ul,
+    ul li:focus-within>ul,
+    ul li ul:hover,
+    ul li ul:focus {
+        visibility: visible;
+        opacity: 1;
+        display: block
+    }
+
+    ul li ul li {
+        clear: both;
+        width: 100%;
+    }
+
+    td {
+        cursor: pointer;
     }

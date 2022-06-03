@@ -28,4 +28,7 @@ export class CategoryComponent implements OnInit {
 
     this.categoryService.getAllCategories()
     .subscribe(c => this.Categories = c);
+
+    // this.categoryService.addCategory()
+    // .subscribe(c => this.Categories = c);
 }}
