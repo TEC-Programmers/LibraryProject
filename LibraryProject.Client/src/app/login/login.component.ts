@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 import { AuthService } from '../_services/auth.service';
-//import { CartService } from '../_services/cart.service';
+
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-   var username = this.authService.currentUserValue.firstName; 
+   var username = this.authService.currentUserValue.id; 
   }
 
   login(): void {

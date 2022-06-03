@@ -8,10 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
-import { CustomerComponent } from './customer/customer.component';
+
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './_helpers/auth.guard';
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -23,7 +22,7 @@ import { RegisterComponent } from './register/register.component';
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
-    CustomerComponent,
+  
     LoginComponent,
     ProfileComponent,
     RegisterComponent,

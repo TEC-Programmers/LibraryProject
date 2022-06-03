@@ -32,6 +32,7 @@
     <li class="nav-item">
         <a class="nav-link text-danger" *ngIf="currentUser != null && currentUser.firstName == 'username'">User</a>
     </li>
+   
     
     <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item" >
         <a routerLink="/" (click)="logout()">Logout</a>
@@ -58,4 +59,3 @@
 -->
 
 
-<router-outlet></router-outlet>

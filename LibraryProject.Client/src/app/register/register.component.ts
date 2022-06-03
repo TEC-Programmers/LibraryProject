@@ -63,18 +63,21 @@ export class RegisterComponent implements OnInit {
    
   
     if (this.message.length == 0) {
-      if (this.user.id == 10) {
+      if (this.user.id == 0) {
+        console.log("ko");
+
         this.userService.registerUser(this.user)
-          .subscribe({
+           .subscribe({
             next: a => {
             this.users.push(a)
+        
             this.user = this.newUser();
             alert('Thanks for Signing Up!');
            },
            error: (err)=>{
-                        alert("User already exists!");
-          }
-        });
+                alert("User already exists!");
+         }
+         });
        } else {
             this.userService.updateUser(this.user.id, this.user)
               .subscribe(() => {
@@ -83,5 +86,6 @@ export class RegisterComponent implements OnInit {
            }
   }}
 }
+
       
   

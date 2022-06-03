@@ -7,7 +7,7 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/User';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CustomerComponent } from './customer/customer.component';
+//import { CustomerComponent } from './customer/customer.component';
 import { RegisterComponent } from './register/register.component';
 
 
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
-  { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
+ // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},
 ];
 
