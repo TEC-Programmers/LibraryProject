@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryProject.Database.Entities
 {
+    //Creating Category Entity for the database
     public class Category
     {
         [Key]

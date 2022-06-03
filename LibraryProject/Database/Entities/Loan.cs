@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace LibraryProject.API.Database.Entities
-{
+
+{ //Creating Loan Entity for the database
     public class Loan
     {
         [Key]

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Book } from '../_models/Book';
+import { Category } from '../_models/Category';
 
 @Injectable({
   providedIn: 'root'
@@ -15,27 +16,30 @@ export class BookService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { }  //Dependency Injection
 
-  getAllBooks(): Observable<Book[]>
+  getAllBooks(): Observable<Book[]>  //Method for getting list of Books using API
   {
-    return this.http.get<Book[]>(this.apiUrl);
+    return this.http.get<Book[]>(this.apiUrl);  
   }
 
-  getBook(bookId: number): Observable<Book> {
+  getBookById(bookId: number): Observable<Book> {         //Method for getting one specific Book using API
     return this.http.get<Book>(`${this.apiUrl}/${bookId}`)
   }
 
-  addBook(book: Book): Observable<Book>{
+  getBooksByCategoryId(categoryId:number): Observable<Book[]>{             //Method for getting list of Books by specific Category using API
+    return this.http.get<Book[]>(`${this.apiUrl}/category/${categoryId} `)
+  }
+  addBook(book: Book): Observable<Book>{                                     //Method for adding one book in the database using API
     return this.http.post<Book>(this.apiUrl, book, this.httpOptions);
   }
 
-  updateBook(bookId: number, book:Book): Observable<Book> {
+  updateBook(bookId: number, book:Book): Observable<Book> {                                        //Method for updating  book's info in the database using API
     return this.http.put<Book>(`${this.apiUrl}/${bookId}`, book, this.httpOptions);
   }
 
 
-  deleteBook(bookId: number): Observable<Book> {
+  deleteBook(bookId: number): Observable<Book> {                                       //Method for deleting one book from the database using API
     return this.http.delete<Book>(`${this.apiUrl}/${bookId}`, this.httpOptions);
   }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../_models/Category';
 import { CategoryService } from '../_services/category.service';
 
@@ -9,23 +8,16 @@ import { CategoryService } from '../_services/category.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
+  categories: Category[]=[];    //declare a Category type array
+  category:Category = {id: 0, categoryName :""};   //Initialize the properties of the Category
+  constructor(private categoryService: CategoryService ) { }  //Dependency Injection
 
-  id: number = 0;
-  Categories: Category[] = [];
-  // Category: Category = {
-  //   id: 0,
-  //   CategoryName: '',
-  //   books: []
-  // }
-  category!: Category;
+  ngOnInit(): void {
+    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);   //calling function from the service and getting all categories and subscribe these. 
+                                                                                            //So that other component can see and use that
+    console.log('value received ' );
+  }
+  
 
 
-
-
-  constructor(private categoryService: CategoryService, private _Activatedroute:ActivatedRoute, private _router:Router) { }
-
-  ngOnInit(): void{
-
-    this.categoryService.getAllCategories()
-    .subscribe(c => this.Categories = c);
-}}
+}

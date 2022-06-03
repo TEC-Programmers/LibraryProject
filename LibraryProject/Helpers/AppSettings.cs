@@ -1,5 +1,4 @@
 ﻿
-
 namespace LibraryProject.API.Helpers
 {
     public class AppSettings

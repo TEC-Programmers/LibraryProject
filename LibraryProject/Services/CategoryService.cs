@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.API.Services
 {
+    //Creating Interface of ICategoryService
     public interface ICategoryService
     {
         Task<List<CategoryResponse>> GetAllCategories();
@@ -18,15 +19,17 @@ namespace LibraryProject.API.Services
 
 
     }
-    public class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService   // This class is inheriting interfcae ICategoryService and implement the interface
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;   //making  instances of the class   ICategoryRepository
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository)   //dependency injection with parameter
         {
-            _categoryRepository = categoryRepository;
+            _categoryRepository = categoryRepository;    
         }
 
+
+        //implementing the methods of ICategoryService interface 
         public async Task<List<CategoryResponse>> GetAllCategories()
         {
             List<Category> categories = await _categoryRepository.SelectAllCategories();
