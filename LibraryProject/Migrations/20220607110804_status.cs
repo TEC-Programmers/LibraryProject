@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class Library : Migration
+    public partial class status : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,8 @@ namespace LibraryProject.API.Migrations
                     userID = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,7 +106,7 @@ namespace LibraryProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     Language = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(500)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     PublishYear = table.Column<short>(type: "smallint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
@@ -155,11 +156,11 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Loan",
-                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "userID" },
+                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "status", "userID" },
                 values: new object[,]
                 {
-                    { 1, 2, "06/05/22", "13/05/22", 2 },
-                    { 3, 5, "27/06/22", "27/07/22", 4 }
+                    { 1, 2, "06/05/22", "13/05/22", 0, 2 },
+                    { 3, 5, "27/06/22", "27/07/22", 0, 4 }
                 });
 
             migrationBuilder.InsertData(

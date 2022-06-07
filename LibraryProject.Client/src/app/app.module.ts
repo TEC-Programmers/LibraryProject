@@ -10,14 +10,19 @@ import { CategoryBooksComponent } from './category-books/category-books.componen
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
-
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
 import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { LoanComponent } from './loan/loan.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MbscModule, MbscProvider } from "ack-angular-mobiscroll"
 
+
+import * as mobiscroll from "./login/login.component"
+MbscProvider.setMobiscroll(mobiscroll)
 
 @NgModule({
   declarations: [
@@ -31,6 +36,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     ContactComponent,
     CategoryDetailsComponent,
     BookDetailsComponent,
+    LoanComponent,
     CategoryBooksComponent,
 
 
@@ -40,7 +46,10 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    BrowserAnimationsModule,
+    MbscModule
+    
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

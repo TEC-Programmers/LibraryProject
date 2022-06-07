@@ -34,6 +34,9 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("return_date")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
                     b.Property<int>("userID")
                         .HasColumnType("int");
 
@@ -48,6 +51,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 2,
                             loaned_At = "06/05/22",
                             return_date = "13/05/22",
+                            status = 0,
                             userID = 2
                         },
                         new
@@ -56,6 +60,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 5,
                             loaned_At = "27/06/22",
                             return_date = "27/07/22",
+                            status = 0,
                             userID = 4
                         });
                 });
@@ -180,7 +185,7 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(32)");
