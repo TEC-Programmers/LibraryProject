@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { BookService } from './_services/book.service';
@@ -26,6 +26,8 @@ export class AppComponent {
     .subscribe(c => this.categories = c);
 
   }
+
+
 showSearch(): void {
 
     if (this.filterTerm == null || this.filterTerm == '') {
