@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router}  from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { Role, User } from './_models/User';
-import { Component, HostBinding } from '@angular/core';
+import {HostBinding } from '@angular/core';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { BookService } from './_services/book.service';

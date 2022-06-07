@@ -9,13 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-<<<<<<<< HEAD:LibraryProject/Migrations/20220607110804_status.Designer.cs
-    [Migration("20220607110804_status")]
-    partial class status
-========
-    [Migration("20220523100421_LibraryProject")]
-    partial class LibraryProject
->>>>>>>> Rizwanah:LibraryProject/Migrations/20220523100421_LibraryProject.Designer.cs
+    [Migration("20220607115336_libraryproject")]
+    partial class libraryproject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -225,8 +220,8 @@ namespace LibraryProject.API.Migrations
                             Id = 1,
                             AuthorId = 1,
                             CategoryId = 1,
-                            Description = "BØg for børn",
-                            Image = "Book1.jpg",
+                            Description = "Bog for børn",
+                            Image = "Book1.png",
                             Language = "Danish",
                             PublishYear = (short)1945,
                             PublisherId = 1,
@@ -238,7 +233,7 @@ namespace LibraryProject.API.Migrations
                             AuthorId = 2,
                             CategoryId = 2,
                             Description = "Romaner for voksen2",
-                            Image = "Book2.jpg",
+                            Image = "Book2.png",
                             Language = "Danish",
                             PublishYear = (short)2005,
                             PublisherId = 2,
