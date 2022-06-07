@@ -32,7 +32,7 @@ export class BookDetailsComponent implements OnInit {
 
   }
   reserve(book:Book){
-
+    
     
   }
 }

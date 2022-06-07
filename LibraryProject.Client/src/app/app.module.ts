@@ -9,6 +9,7 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     FrontpageComponent,
     CategoryComponent,
     CategoryBooksComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    ReservationComponent
 
 
   ],
