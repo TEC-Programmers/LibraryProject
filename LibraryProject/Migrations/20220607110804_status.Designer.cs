@@ -9,8 +9,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
+<<<<<<<< HEAD:LibraryProject/Migrations/20220607110804_status.Designer.cs
     [Migration("20220607110804_status")]
     partial class status
+========
+    [Migration("20220523100421_LibraryProject")]
+    partial class LibraryProject
+>>>>>>>> Rizwanah:LibraryProject/Migrations/20220523100421_LibraryProject.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
