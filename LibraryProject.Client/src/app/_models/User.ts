@@ -1,12 +1,16 @@
-import { Role } from "./Role";
-
 export interface User
 {
-    id: Number;
+    id: number;
     firstName: string;
-    middleName: string;
+    middleName?: string;
     lastName: string;
     email: string;
     password: string;
-    role: Role;
+    role?: Role;
+    token?:string;
+}
+
+export enum Role {
+    customer = 'Customer',
+    admin = 'Admin'
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.API.Repositories
 {
-
+    //Creating Interface of IBookRepository
     public interface IBookRepository
     {
         Task<List<Book>> SelectAllBooks();
@@ -17,17 +17,18 @@ namespace LibraryProject.API.Repositories
         Task<Book> UpdateExistingBook(int bookId, Book book);
         Task<Book> DeleteBookById(int bookId);
     }
-    public class BookRepository : IBookRepository
+    public class BookRepository : IBookRepository   // This class is inheriting interfcae IBookRepository and implement the interfaces
     {
 
-        private readonly LibraryProjectContext _context;
+        private readonly LibraryProjectContext _context;   //making an instance of the class LibraryProjectContext
 
-        public BookRepository(LibraryProjectContext context)
+        public BookRepository(LibraryProjectContext context)   //dependency injection with parameter 
         {
             _context = context;
         }
 
-        public async Task<List<Book>> SelectAllBooks()
+        //implementing the methods of IBookRepository interface 
+        public async Task<List<Book>> SelectAllBooks()   
         {
             return await _context.Book
                 .Include(a => a.Category)

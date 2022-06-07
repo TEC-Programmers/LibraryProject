@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router}  from '@angular/router';
+import { AuthService } from './_services/auth.service';
+import { Role, User } from './_models/User';
+import { Component, HostBinding } from '@angular/core';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { BookService } from './_services/book.service';
@@ -10,19 +13,49 @@ import { CategoryService } from './_services/category.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
+
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
+
   title = 'LibraryProject-Client';
-  book!: Book;
-  counter = 0;
-  total: number = 0;
-  categories: Category[] = [];
-  allBooks: Book[] = [];
-  filterTerm!: string;
 
 
+    book!: Book;
+    counter = 0;
+    total: number = 0;
+    categories: Category[] = [];
+    allBooks: Book[] = [];
+    filterTerm!: string;
 
-  constructor(private bookService: BookService, private categoryService: CategoryService) {}
+  constructor(
+    private router: Router,
+      private authService: AuthService,
+      private bookService: BookService,
+      private categoryService: CategoryService
+   
+  ) {
+    // get the current user from authentication service
+    this.authService.currentUser.subscribe(x => this.currentUser= x);
 
+  }
+
+  
+
+  logout() {
+    if (confirm('Are you sure you want to log out?')) {
+      // ask authentication service to perform logout
+      this.authService.logout();
+      
+
+      // subscribe to the changes in currentUser, and load Home component
+      this.authService.currentUser.subscribe(x => {
+        this.currentUser = x
+        this.router.navigate(['/']);
+      });
+    }
+
+  }
 
 
   ngOnInit(): void {
@@ -30,6 +63,7 @@ export class AppComponent {
     .subscribe(c => this.categories = c);
 
   }
+
 
 showSearch(): void {
 
@@ -62,4 +96,5 @@ showSearch(): void {
         console.log(event);
       }
     }
+
 }

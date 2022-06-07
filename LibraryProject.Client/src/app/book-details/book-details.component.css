@@ -1,8 +1,6 @@
-        * {
-            margin: 0px;
-        }
-
-        #bookdetailsDiv {
-            position: absolute;
-            left: 555px;
-        }
+#button-format {
+    display:inline-block;
+    margin-right:5px;
+    width: 100px;
+    text-align: center;
+ }

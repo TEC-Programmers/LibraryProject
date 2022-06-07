@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.API.Services
 {
-
+    //Creating Interface of IBookService
     public interface IBookService
     {
         Task<List<BookResponse>> GetAllBooks();
@@ -18,15 +18,15 @@ namespace LibraryProject.API.Services
         Task<BookResponse> DeleteBook(int bookId);
     }
 
-    public class BookService:IBookService
+    public class BookService: IBookService           // This class is inheriting interfcae IBookService and implement the interface
     {
-        private readonly IBookRepository _bookRepository;
+        private readonly IBookRepository _bookRepository;   //making  instances of the class IBookRepository,  ICategoryRepository, IAuthorRepository, IPublisherRepository
         private readonly ICategoryRepository  _categoryRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly IPublisherRepository _publisherRepository;
 
       
-        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository, 
+        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository,    //dependency injection with parameter 
             IAuthorRepository auhtorRepository, IPublisherRepository publisherRepository)
         {
             _bookRepository = bookRepository;
@@ -37,7 +37,7 @@ namespace LibraryProject.API.Services
             _publisherRepository = publisherRepository;
         }
 
-
+        //implementing the methods of IBookService interface 
         public async Task<List<BookResponse>> GetAllBooks()
         {
             List<Book> books = await _bookRepository.SelectAllBooks();

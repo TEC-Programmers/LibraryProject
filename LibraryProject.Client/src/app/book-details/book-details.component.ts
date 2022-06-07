@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from '../_models/Book';
-import { Category } from '../_models/Category';
-import { Publisher } from '../_models/Publisher';
 import { BookService } from '../_services/book.service';
 
 @Component({
@@ -12,22 +10,29 @@ import { BookService } from '../_services/book.service';
 })
 export class BookDetailsComponent implements OnInit {
 
-  id:number = 0
-  Book!: Book;
-  Books: Book[] = [];
-  category: Category[] = []
-  publishers: Publisher[] = [];
+  bookId: number =0;
   
-  constructor(private bookService: BookService, private _Activatedroute:ActivatedRoute) { }
+  book:Book={id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
+  constructor(private bookService:BookService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this._Activatedroute.paramMap.subscribe(params =>
-      {
-        this.id = parseInt(params.get('id') || '0');
-      this.bookService.getBookById(this.id)
-      .subscribe(c => this.Book = c);
+    this.route.params.subscribe(params => {
+      this.bookId = +params['id'];
+    });
+    this.bookService.getBookById(this.bookId).subscribe(x=> 
+      { this.book=x,
+      
+      console.log(this.book);
     });
   }
 
+  loan(book:Book){
+
+
+  }
+  reserve(book:Book){
+
+    
+  }
 }

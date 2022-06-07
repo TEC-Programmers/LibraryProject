@@ -10,7 +10,7 @@ import { User } from '../_models/User';
 })
 export class UserService {
 
-  private apiUrl = environment.apiUrl + '/User'
+  private apiUrl = environment.apiUrl + '/user'
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,21 +24,21 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
-  getUserById(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${userId}`)
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/${id}`)
   }
 
   registerUser(user: User): Observable<User>{
-    return this.http.post<User>(this.apiUrl, user, this.httpOptions);
+    return this.http.post<User>(this.apiUrl + `/register`, user, this.httpOptions);
   }
 
-  updateUser(userId: number, user:User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${userId}`, user, this.httpOptions);
+  updateUser(id: number, user:User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user, this.httpOptions);
   }
 
 
-  deleteUser(userId: number): Observable<User> {
-    return this.http.delete<User>(`${this.apiUrl}/${userId}`, this.httpOptions);
+  deleteUser(id: number): Observable<User> {
+    return this.http.delete<User>(`${this.apiUrl}/${id}`, this.httpOptions);
   }
 
 

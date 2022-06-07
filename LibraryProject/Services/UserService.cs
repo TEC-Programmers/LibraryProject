@@ -58,22 +58,7 @@ namespace LibraryProject.API.Services
 
         }
 
-        //public async Task<List<UserResponse>> GetAdmins()
-        //{
-        //    List<User> users = await _userRepository.GetCustomers();
-
-        //    return users == null ? null : users.Select(u => new UserResponse
-        //    {
-        //        Id = u.Id,
-        //        Email = u.Email,
-        //        FirstName = u.FirstName,
-        //        MiddleName = u.MiddleName,
-        //        LastName = u.LastName,
-        //        Password = u.Password,
-        //        Role = Helpers.Role.Administrator
-        //    }).ToList();
-
-        //}
+        
 
 
         public async Task<UserResponse> Register(UserRequest newuser)

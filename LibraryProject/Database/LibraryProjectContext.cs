@@ -1,3 +1,4 @@
+
 ﻿using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +10,9 @@ namespace LibraryProject
     public class LibraryProjectContext : DbContext
     {
         public LibraryProjectContext() { }
-        public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }
+        public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }  //creating instances of the class 
 
-        public DbSet<Book> Book { get; set; }
+        public DbSet<Book> Book { get; set; }   //represents the set of book enitity in EFC(Entity Framework Core)
         public DbSet<Category> Category { get; set; }
         public DbSet<User> User { get; set; }
 
@@ -20,9 +21,9 @@ namespace LibraryProject
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Loan> Loan { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //We override the method to configure the models of the set of entities
 
             modelBuilder.Entity<Category>().HasData(
               new()
@@ -40,7 +41,7 @@ namespace LibraryProject
                new()
                {
                    Id = 1,
-                   Name = "Gyldendal",                 
+                   Name = "Gyldendal",
                },
                new()
                {
@@ -71,9 +72,9 @@ namespace LibraryProject
                 {
                     Id = 1,
                     Title = "Pippi Langstrømper",
-                    Description = "BØg for børn",
+                    Description = "Bog for børn",
                     Language = "Danish",
-                    Image="Book1.jpg",
+                    Image="Book1.png",
                     PublishYear = 1945,
                     CategoryId = 1,
                     AuthorId = 1,
@@ -85,7 +86,7 @@ namespace LibraryProject
                     Title = "Rødby-Puttgarden",
                     Description = "Romaner for voksen2",
                     Language = "Danish",
-                    Image = "Book2.jpg",
+                    Image = "Book2.png",
                     PublishYear = 2005,
                     CategoryId = 2,
                     AuthorId = 2,
@@ -150,8 +151,11 @@ namespace LibraryProject
                     reserved_To = "21/05/22"
                 }
                 );
-            
         }
+            
+
 
     }
+
+  
 }

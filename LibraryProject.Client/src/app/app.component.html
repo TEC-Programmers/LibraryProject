@@ -1,55 +1,79 @@
-<div id="Front">
-
-    <div class="Frontleft">
-        <h3><a routerLink="/Frontpage"><b> Online Bibliotek </b></a></h3>
-    </div>
-
-    <div class="FrontRight">
-        <h3><a routerLink="/Login"><b><button class="FrontBtn"> Login <i class="bi bi-box-arrow-in-right"></i></button></b></a></h3>
-        <h3><a routerLink="/Contact"><b> <button class="FrontBtn"> Profil <i class="bi bi-person-bounding-box"></i> </button></b></a></h3>
-    </div>
-
-</div>
-<div class="container">
-    <div class="navbar-brand align-item-center d-flex">
-        <ul>
-            <li routerLink="/Book">
-                <a> Bøger  <i class="bi bi-book"></i></a>
-            </li>
-            <li class="cat" routerLink="/Category"><a>Kategori  <i class="bi bi-collection"></i></a>
-                <ul class="Categorys">
-                    <div class="category" *ngFor="let category of categories ">
-                        <li>
-                            <a [routerLink]="['/Category-Details',category.id]">{{category.categoryName}}  <i class="bi bi-collection"></i></a>
-                        </li>
-                    </div>
-                </ul>
-            </li>
-
-        </ul>
-
-    </div>
-
-</div>
-
-
 
 <div id="searchDiv">
-    <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Søg på bognavn, beskrivelse eller forfatter" size="40">
-    <button class="click" (click)="click()">Search <i class="bi bi-search"></i></button>
-    <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]" id="searchOuput">
+  <!--  -->
+  <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
+  <button class="click" (click)="click()">Search</button>
+      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
         <td>
-            <br> Book: {{book.title}}
-            <br> Description: {{book.description}}
-            <br> Publish Year: {{book.publishYear}}
+          <br>
+          Book:
+          {{book.title}}
+          <br>
+          Description:
+          {{book.description}}
+          <br>
+          Publish Year:
+          {{book.publishYear}}
+          <br>
         </td>
-    </tr>
+          </tr>
 </div>
-<!-- <div id="datepicker">
+<nav id="nav">
+<ul >
+  
+        <li><a routerLink="/" routerLinkActive="active-link w3-green" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        </li>
+   
+    
 
-    Dato for Udlån<input type="date"><br> Dato for Aflevering <input type="date">
+    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
+        <a routerLink="/admin/customer" routerLinkActive="active-link w3-green">Users</a>
+    </li>
 
-</div> -->
+    
+    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
+        <a routerLink="/" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Author</a>
+        
+    </li>
+
+    <li style="display:inline-block" *ngIf="currentUser != null">
+        <a routerLink="/profile" routerLinkActive="active-link w3-green">Profile</a>
+      
+    </li>
+
+    <li class="nav-item">
+        <a routerLink="/Admin" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Administrator</a>
+    </li>
 
 
+    <li class="nav-item">
+        <a routerLink="/Register" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Register</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-danger" *ngIf="currentUser != null && currentUser.firstName == 'username'">User</a>
+    </li>
+   
+    
+    <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item" >
+        <a routerLink="/" (click)="logout()">Logout</a>
+     
+    </li>
+
+    <li class="nav-item">
+        <a routerLink="/Login" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Login</a>
+    </li>
+
+</ul>
+
+
+
+
+ <!-- 
+<nav>
+    <a routerLink="/"> Home | </a>
+    <a routerLink="/Author">  Author | </a>
+    <a routerLink="/Category"> category | </a>   <!--added navigation in the menu-->
+    <a routerLink="/Admin">  Admin | </a>
+</nav>
 <router-outlet></router-outlet>

@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LibraryProject.API.Helpers;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace LibraryProject.API.Database.Entities
-{
+
+{ //Creating Loan Entity for the database
     public class Loan
     {
         [Key]
@@ -10,5 +13,7 @@ namespace LibraryProject.API.Database.Entities
         public int bookId { get; set; }
         public string loaned_At { get; set; }
         public string return_date { get; set; }
+
+        public Status status { get; set; }
     }
 }
