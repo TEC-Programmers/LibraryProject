@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
 
+.menu {
+  word-wrap: normal;
+  position: absolute;
+  top: 185px;
+  left: 153px;
+}
+
+.label {
+  word-wrap: normal;
+  position: absolute;
+  top: 185px;
+  left: 40px;
+}
+
 .red-color {
     color:red;
 }
@@ -21,8 +35,7 @@
 }
 
 .table-table-striped {
-    cursor: pointer;
-    
+    cursor: pointer;  
 }
 
 .head {

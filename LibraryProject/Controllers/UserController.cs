@@ -171,9 +171,8 @@ namespace LibraryProject.API.Controllers
         }
 
         //update
-      //  [AllowAnonymous]
-       
-        [Authorize(Role.Customer, Role.Administrator)]
+        //[Authorize(Role.Customer, Role.Administrator)]
+        [AllowAnonymous]
         [HttpPut("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

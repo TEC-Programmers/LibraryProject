@@ -1,16 +1,21 @@
+<h5 style="font-family: Times New Roman, serif;" class="label">Choose type:</h5>
+<select class="menu" [(ngModel)]="selectedValue">
+  <option value="0" selected>Customers</option>
+  <option value="1">Adminsrators</option>
+</select>
   <div class="container">
     <!-- <strong>Administration Panel</strong>
     <br>
     <strong>Manage Customers</strong> -->
     <h1><a>Administration Panel</a></h1>
-
     <div class="search-bar">
       <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by column">
     </div>
     <br>
 
-    <div class="table">
-      <table class=" table table-striped table table-hover table table-bordered">
+    <div class="table" *ngIf="selectedValue == 0">
+      <!-- <span *ngIf="message != ''">{{ message }}</span> -->
+      <table class="table table-striped table table-hover table table-bordered">
         <thead>
         <tr class="head">
           <th style="background-color: #212121; color: aliceblue;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th>
@@ -18,8 +23,8 @@
         </thead>
           <tbody *ngIf="customers?.length != 0">
             <tr class="head-values" *ngFor="let customer of customers | filter:searchText; index as i">
-              <button (click)="delete(customer)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>&nbsp;&nbsp;&nbsp;
-              <button><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+              <button (click)="delete_member(customer)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>&nbsp;&nbsp;&nbsp;
+              <button (click)="edit(customer)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
               <td>{{ customer.firstName }}</td>
               <td>{{ customer.middleName }}</td>
               <td>{{ customer.lastName }}</td>
@@ -29,13 +34,148 @@
             </tbody>
             <tbody *ngIf="customers?.length == 0">
               <tr>
-                <td colspan="3" class="no-data-available">Customers Table Is Empty!</td>
+                <td colspan="3" class="no-data-available">Customer Table Is Empty!</td>
               </tr>
             </tbody>
       </table>
-    </div>
-    
+    </div> 
   </div>
+
+
+   
+
+
+<div class="container">
+  <div class="table" *ngIf="selectedValue == 1">
+    <!-- <span *ngIf="message != ''">{{ message }}</span> -->
+    <table class="table table-striped table table-hover table table-bordered">
+    <thead>
+    <tr class="head">
+      <th style="background-color: #212121; color: aliceblue;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th>
+    </tr>
+    </thead>
+      <tbody *ngIf="administrators?.length != 0">
+        <tr class="head-values" *ngFor="let admin of administrators | filter:searchText; index as i">
+          <button (click)="delete_admin(admin)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>&nbsp;&nbsp;&nbsp;
+          <button (click)="edit_admin(admin)" data-bs-toggle="modal" data-bs-target="#Modal"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+          <td>{{ admin.firstName }}</td>
+          <td>{{ admin.middleName }}</td>
+          <td>{{ admin.lastName }}</td>
+          <td>{{ admin.email }}</td>
+          <td>{{ admin.role }}</td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="administrators?.length == 0">
+          <tr>
+            <td colspan="3" class="no-data-available">No administrators available!</td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="ModalLabel">EDIT Administrator Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <!-- <label for="firstName" class="form-label">Firstname</label> -->
+            <input [(ngModel)]="administrator.firstName" type="text" class="form-control" id="firstName2" name="firstName">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="middleName" class="form-label">Middlename</label> -->
+            <input [(ngModel)]="administrator.middleName" type="text" class="form-control" id="middleName2" name="middleName">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="lastName" class="form-label">Lastname</label> -->
+            <input [(ngModel)]="administrator.lastName" type="text" class="form-control" id="lastName2" name="lastName">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="email" class="form-label">E-mail</label> -->
+            <input [(ngModel)]="administrator.email" type="email" class="form-control" id="email2" name="email">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="password" class="form-label">Pass</label> -->
+            <input [(ngModel)]="administrator.password" type="password" class="form-control" id="password2" name="password">
+          </div>
+
+          
+          <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <input [(ngModel)]="administrator.role" type="role" class="form-control" id="role2" name="role" disabled>
+          </div>
+
+          &nbsp;&nbsp;
+          <button (click)="save_admin()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">EDIT Role</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <!-- <label for="firstName" class="form-label">Firstname</label> -->
+            <input [(ngModel)]="customer.firstName" type="text" class="form-control" id="firstName" name="firstName" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="middleName" class="form-label">Middlename</label> -->
+            <input [(ngModel)]="customer.middleName" type="text" class="form-control" id="middleName" name="middleName" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="lastName" class="form-label">Lastname</label> -->
+            <input [(ngModel)]="customer.lastName" type="text" class="form-control" id="lastName" name="lastName" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="email" class="form-label">E-mail</label> -->
+            <input [(ngModel)]="customer.email" type="email" class="form-control" id="email" name="email" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="password" class="form-label">Pass</label> -->
+            <input [(ngModel)]="customer.password" type="password" class="form-control" id="password" name="password" disabled type="hidden">
+          </div>
+
+          <label>Change Role: </label>
+          <!-- <br> -->
+          &nbsp;
+          <select name="role">
+              <option [value]="customer.role">{{customer.role}}</option>
+              <option>Administrator</option>
+          </select>
+
+          &nbsp;&nbsp;
+          <button (click)="save()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
   
 
   

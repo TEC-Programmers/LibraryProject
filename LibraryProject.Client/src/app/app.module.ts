@@ -8,12 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
-import { DataTablesModule } from 'angular-datatables';
 import { AngularPaginatorModule } from 'angular-paginator';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DecimalPipe } from '@angular/common';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { DataTablesModule } from 'angular-datatables';
 // import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+// import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -30,10 +31,11 @@ import { SearchFilterPipe } from './search-filter.pipe';
     HttpClientModule,
     FormsModule,
     AngularPaginatorModule,
-    DataTablesModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
     // NgbModal,
+    DataTablesModule,
+    ReactiveFormsModule   
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent]
