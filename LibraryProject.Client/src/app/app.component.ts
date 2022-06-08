@@ -24,7 +24,6 @@ export class AppComponent {
   ngOnInit(): void {
     this.categoryService.getAllCategories()
     .subscribe(c => this.categories = c);
-
   }
 
 
@@ -39,8 +38,6 @@ showSearch(): void {
     .subscribe(p => this.allBooks = p);
     console.log(this.allBooks)
     }
-
-
   }
   click(){
       if (this.filterTerm == null || this.filterTerm == '') {

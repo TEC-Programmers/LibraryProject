@@ -17,11 +17,9 @@ import { CategoryDetailsComponent } from './category-details/category-details.co
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MbscModule, MbscProvider } from "ack-angular-mobiscroll"
-
-
-import * as mobiscroll from "./login/login.component"
-MbscProvider.setMobiscroll(mobiscroll)
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core'
 
 @NgModule({
   declarations: [
@@ -44,8 +42,14 @@ MbscProvider.setMobiscroll(mobiscroll)
     FormsModule,
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
-    MbscModule
-    
+
+
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
+
+
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

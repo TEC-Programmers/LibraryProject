@@ -38,9 +38,20 @@
         </td>
           </tr>
 </div>
+<mat-date-range-input>
+  <input matStartDate placeholder="Start date">
+  <input matEndDate placeholder="End date">
+</mat-date-range-input>
 
-  <!-- <p id="datepicker">loan works!</p>
- <input type="date"> -->
+<mat-form-field>
+  <mat-label>Enter Session Period</mat-label>
+  <mat-date-range-input [rangePicker]="">
 
+
+  </mat-date-range-input>
+</mat-form-field>
+
+   <!-- <p id="datepicker">loan works!</p>
+ <input id="date" type="date"> -->
 
 <router-outlet></router-outlet>
