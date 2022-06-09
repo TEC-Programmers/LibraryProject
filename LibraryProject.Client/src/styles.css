@@ -11,15 +11,16 @@
     
 }
 
-/*app component*/
- a.nav-link{
+/* /*app component*/
+/* a.nav-link{
    color: white;
    font-family: cursive;
    font-size: 25px;
 }
 #no-bullets{
     list-style-type: none;
-}
+} */
+
 /*Category component*/
 .card-top{
     position:relative;

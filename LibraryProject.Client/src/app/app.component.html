@@ -1,31 +1,13 @@
-
-<div id="searchDiv">
-  <!--  -->
-  <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
-  <button class="click" (click)="click()">Search</button>
-      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
-        <td>
-          <br>
-          Book:
-          {{book.title}}
-          <br>
-          Description:
-          {{book.description}}
-          <br>
-          Publish Year:
-          {{book.publishYear}}
-          <br>
-        </td>
-          </tr>
-</div>
-<nav id="nav">
+<!-- <nav class="navbar navbar-dark bg-primary">
+ -->
+     
+        
 <ul >
   
-        <li><a routerLink="/" routerLinkActive="active-link w3-green" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <li class="nav-item"><a routerLink="/" routerLinkActive="active-link w3-green" >Home</a>
         </li>
    
     
-
     <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
         <a routerLink="/admin/customer" routerLinkActive="active-link w3-green">Users</a>
     </li>
@@ -51,7 +33,11 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link text-danger" *ngIf="currentUser != null && currentUser.firstName == 'username'">User</a>
+        <a routerLink="/Category" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Category</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-danger"  *ngIf="currentUser != null && currentUser.role == 'Admin'">User</a>
     </li>
    
     
@@ -64,16 +50,47 @@
         <a routerLink="/Login" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Login</a>
     </li>
 
+    <li>
+    
+       
+        <input class="form-control me-2" id="form1" type="search" aria-label="Search" id="form1" class="form-control" name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm"  placeholder="Search for Books"/>
+        <li>
+        <button type="button" class="btn btn-primary" (click)="click()">
+         <i class="fa fa-search"></i><li></li>
+      </button>
+
+     
+      
+</li>
+
 </ul>
+<!-- </nav> -->
 
 
 
+    <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
+        <td>
+          <br>
+          Book:
+          {{book.title}}
+          <br>
+          Description:
+          {{book.description}}
+          <br>
+          Publish Year:
+          {{book.publishYear}}
+          <br>
+        </td>
+          </tr>
+        
+   
 
- <!-- 
-<nav>
+
+ 
+<!-- <nav>
     <a routerLink="/"> Home | </a>
     <a routerLink="/Author">  Author | </a>
     <a routerLink="/Category"> category | </a>   <!--added navigation in the menu-->
-    <a routerLink="/Admin">  Admin | </a>
-</nav>
+   <!-- <a routerLink="/Admin">  Admin | </a>
+</nav> -->
 <router-outlet></router-outlet>
