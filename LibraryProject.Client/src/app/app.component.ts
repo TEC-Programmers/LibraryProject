@@ -19,6 +19,7 @@ export class AppComponent {
   allBooks: Book[] = [];
   filterTerm!: string;
 
+
   constructor(private bookService: BookService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
