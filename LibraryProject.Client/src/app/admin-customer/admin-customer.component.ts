@@ -13,9 +13,8 @@ import { Role } from '../_models/Role';
 // import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-
-
+import { MbscDatepickerOptions } from '@mobiscroll/angular';
+import { MbscDatepicker, MbscModule } from '@mobiscroll/angular';
 
 @Component({
   selector: 'app-admin-customer',
@@ -25,16 +24,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AdminCustomerComponent implements OnInit {
   customers: User[] = [];
   customer: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
+
   administrators: User[] = [];
   administrator: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
+  
   Users: User[] = [];
   total_users: User[] = [];
 
-  displayedColumns: string[] = ['Operation', 'Firstname', 'Middlename', 'Lastname', 'Email', 'Role'];
+  displayedColumns: string[] = ['Operation', 'Firstname', 'Middlename', 'Lastname', 'Email'];
   searchText!: string;
-
   closeResult!: string;
-  // private modalService: NgbModal
 
   registerForm!: FormGroup;
   submitted = false;
@@ -49,7 +48,7 @@ export class AdminCustomerComponent implements OnInit {
     this.getAllAdmins();
   }
 
-  edit(customer: User): void {
+  edit_member(customer: User): void {
     this.message = '';
     this.customer = customer;
     this.customer.id = customer.id || 0;
@@ -128,7 +127,7 @@ export class AdminCustomerComponent implements OnInit {
   }
 
 
-  save(): void {
+  save_member(): void {
     console.log(this.customer)
     this.message = '';
 

@@ -13,8 +13,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DecimalPipe } from '@angular/common';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { DataTablesModule } from 'angular-datatables';
-// import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-// import { DataTablesModule } from 'angular-datatables';
+import { AdminBookComponent } from './admin-book/admin-book.component';
+import { listFiles } from 'list-files-in-dir'
+
 
 @NgModule({
   declarations: [
@@ -23,9 +24,10 @@ import { DataTablesModule } from 'angular-datatables';
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
-    SearchFilterPipe,   
+    SearchFilterPipe,
+    AdminBookComponent,
   ],
-  imports: [
+  imports: [ 
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -33,9 +35,8 @@ import { DataTablesModule } from 'angular-datatables';
     AngularPaginatorModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
-    // NgbModal,
     DataTablesModule,
-    ReactiveFormsModule   
+    ReactiveFormsModule,
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent]

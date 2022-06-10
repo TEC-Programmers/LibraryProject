@@ -1,0 +1,150 @@
+<div class="container">
+    <h1><a>Administration Panel</a></h1>
+    <div class="search-bar">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by column">
+    <!-- <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> -->
+    </div>
+    <br>
+    <div class="btnAndTitle">
+      <strong style="height: 100px;" class="btnTitle">ADD NEW</strong>
+      <BR>
+      <button class="createBookBtn" data-bs-toggle="modal" data-bs-target="#Modal_Create_Book">+</button>
+    </div>
+      <!-- <span *ngIf="message != ''">{{ message }}</span> -->
+      <table style="width: 1000px;" class="table table-striped table table-hover table table-bordered">
+        <thead>
+        <tr class="head">
+          <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
+          <th style="background-color: #212121; color: aliceblue; width: 8%;">Operation</th>
+          <th style="background-color: #212121; color: aliceblue; width: 10%;">Image</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Title</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Language</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Description</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Publishyear</th>
+        </tr>
+        </thead>
+          <tbody *ngIf="books?.length != 0">
+            <tr class="head-values" *ngFor="let book of books">
+              <button style="width: 45px; height: 66px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+              <button style="width: 45px; height: 66px;" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+              <td><img src="/assets/images/{{book.image}}" alt="picture of book" height="50px" width="60px" style="padding-left: 17px;"></td>
+              <td>{{ book.title }}</td>
+              <td>{{ book.language }}</td>
+              <td>{{ book.description }}</td>
+              <td>{{ book.publishYear }}</td>
+              <!-- <td>{{ book.role }}</td> -->
+            </tr>
+            </tbody>
+            <tbody *ngIf="books?.length == 0">
+              <tr>
+                <td colspan="3" class="no-data-available">Book Table Is Empty!</td>
+              </tr>
+            </tbody>
+      </table>
+  </div>
+
+
+   <!-- Modal CREATE Book -->
+<div class="modal fade" id="Modal_Create_Book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">CREATE NEW BOOK</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title">
+          </div>
+          <div class="mb-3">
+            <label for="language" class="form-label">language</label>
+            <input [(ngModel)]="book.language" type="text" class="form-control" id="language" name="language">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description">
+          </div>
+          <div class="mb-3">
+            <label for="publishYear" class="form-label">publishYear</label>
+            <input min="1900" max="2022" [(ngModel)]="book.publishYear" type="number" class="form-control" id="publishYear" name="publishYear" placeholder="enter book release date">
+          </div>
+          <br>
+          <label>Pick Author: </label>
+          &nbsp;
+          <select [(ngModel)]="book.authorId" name="author">
+              <option *ngFor="let author of authors" [value]="author.id">{{author.firstName}}</option>
+          </select>
+          <br>
+          <br>
+          <label>Pick Publisher: </label>
+          &nbsp;
+          <select [(ngModel)]="book.publisherId" name="publisher">
+              <option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.name}}</option>
+          </select>
+          <br>
+          <br>
+          <label>Pick Category: </label>
+          &nbsp;
+          <select [(ngModel)]="book.categoryId" name="category">
+            <option *ngFor="let category of categorys" [value]="category.id">{{category.categoryName}}</option>
+          </select>
+          <br>
+          <br>
+          <label>Pick Image: </label>
+          &nbsp;
+          <select [(ngModel)]="book.image" name="image">
+            <option [ngValue]="null" selected disabled>Select Image</option>
+            <option *ngFor="let img of imageArray" [ngValue]="img.toString()">{{img.name}}</option>
+          </select>
+          <br>
+          <br>
+          <button (click)="save_book()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Modal UPDATE Book -->
+<div class="modal fade" id="Modal_Book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">EDIT BOOK DETAILS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <!-- <label for="title" class="form-label">Title</label> -->
+            <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="language" class="form-label">language</label> -->
+            <input [(ngModel)]="book.language" type="text" class="form-control" id="language" name="language">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="description" class="form-label">Description</label> -->
+            <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="publishYear" class="form-label">publishYear</label> -->
+            <input [(ngModel)]="book.publishYear" type="text" class="form-control" id="publishYear" name="publishYear">
+          </div>
+
+          &nbsp;&nbsp;
+          <button (click)="save_book()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
