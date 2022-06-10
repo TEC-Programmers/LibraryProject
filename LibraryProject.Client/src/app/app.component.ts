@@ -1,4 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { BookService } from './_services/book.service';
@@ -19,15 +20,12 @@ export class AppComponent {
   allBooks: Book[] = [];
   filterTerm!: string;
 
-
-  constructor(private bookService: BookService, private categoryService: CategoryService) {}
+  constructor(private bookService: BookService, private categoryService: CategoryService,) {}
 
   ngOnInit(): void {
     this.categoryService.getAllCategories()
     .subscribe(c => this.categories = c);
   }
-
-
 showSearch(): void {
 
     if (this.filterTerm == null || this.filterTerm == '') {

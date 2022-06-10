@@ -1,5 +1,46 @@
-<!-- <div id="datepicker">
-  Dato for Udlån:
-  <input type="date">
-</div>
- -->
+<mat-date-range-input>
+  <input matStartDate placeholder="Start date">
+  <input matEndDate placeholder="End date">
+</mat-date-range-input>
+
+
+  <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()">
+
+    <mat-form-field>
+
+      <mat-label>Enter Session Period</mat-label>
+
+      <mat-date-range-input [rangePicker]=" picker ">
+        <input matStartDate placeholder="From Date" required formControlName="fromDate">
+        <input matEndDate placeholder="To Date" required formControlName="toDate">
+      </mat-date-range-input>
+
+      <mat-datepicker-toggle matSuffix [for]=" picker "></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      <!-- Invalid Date Messages -->
+      <mat-error *ngIf="dateRangeForm.controls['fromDate'].hasError('matStartDateInvalid')">Invalid start date</mat-error>
+      <mat-error *ngIf="dateRangeForm.controls['toDate'].hasError('matEndDateInvalid')">Invalid end date</mat-error>
+
+      <!-- Required Date Messages -->
+      <mat-error *ngIf="dateRangeForm.controls['fromDate'].errors?.['required']">From Date Required</mat-error>
+      <mat-error *ngIf="dateRangeForm.controls['toDate'].errors?.['required']">To Date Required</mat-error>
+
+    </mat-form-field>
+
+    <p>Selected Date Range: {{dateRangeForm.value | json}}</p>
+    <h1>angular-dark-mode is Awesome!</h1>
+    <p>Toggle the checkbox to see magic happens!</p>
+    <div>
+      <input
+        type="checkbox"
+        [checked]="darkMode$ | async"
+        (change)="onToggle()"
+      />
+    </div>
+
+    <button>Submit</button>
+
+
+
+</form>

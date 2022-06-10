@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
@@ -42,8 +42,7 @@ import {MatNativeDateModule} from '@angular/material/core'
     FormsModule,
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
-
-
+    ReactiveFormsModule,
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule
