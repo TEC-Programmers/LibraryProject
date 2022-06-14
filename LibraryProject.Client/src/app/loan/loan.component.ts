@@ -9,8 +9,6 @@ import { Loan } from '../_models/Loan';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-
-
 @Component({
   selector: 'app-loan',
   templateUrl: './loan.component.html',
@@ -61,4 +59,5 @@ updateLoan(loanId: Number): Observable<Loan[]> {
 deleteLoan(loanId: Number): Observable<Loan[]> {
   return this.http.delete<Loan[]>(`${this.apiUrl}/${loanId}`, this.httpOptions);
 }
+
 }
