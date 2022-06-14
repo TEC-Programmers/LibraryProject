@@ -24,7 +24,7 @@
         </tr>
         </thead>
           <tbody *ngIf="books?.length != 0">
-            <tr class="head-values" *ngFor="let book of books">
+            <tr class="head-values" *ngFor="let book of books | filter:searchText;">
               <button style="width: 45px; height: 66px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
               <button style="width: 45px; height: 66px;" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
               <td><img src="/assets/images/{{book.image}}" alt="picture of book" height="50px" width="60px" style="padding-left: 17px;"></td>
@@ -56,48 +56,96 @@
         <form>
           <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title">
+            <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title" placeholder="book title">
           </div>
           <div class="mb-3">
-            <label for="language" class="form-label">language</label>
-            <input [(ngModel)]="book.language" type="text" class="form-control" id="language" name="language">
+            <label for="language" class="form-label">Language</label>
+            <input [(ngModel)]="book.language" type="text" class="form-control" id="language" name="language" placeholder="book language">
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description">
+            <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description" placeholder="short summary">
           </div>
           <div class="mb-3">
-            <label for="publishYear" class="form-label">publishYear</label>
-            <input min="1900" max="2022" [(ngModel)]="book.publishYear" type="number" class="form-control" id="publishYear" name="publishYear" placeholder="enter book release date">
+            <label for="publishYear" class="form-label">Publish Year</label>
+            <input min="1900" max="2022" [(ngModel)]="book.publishYear" type="number" class="form-control" id="publishYear" name="publishYear">
           </div>
           <br>
-          <label>Pick Author: </label>
-          &nbsp;
-          <select [(ngModel)]="book.authorId" name="author">
-              <option *ngFor="let author of authors" [value]="author.id">{{author.firstName}}</option>
-          </select>
+          <div *ngIf="authorId_value">
+            <label>Author: </label>
+            &nbsp;
+            <input [(ngModel)]="author.firstName" [value]="author.firstName">
+          </div>
+          <div *ngIf="isShown_author">
+            <div *ngIf="author_dropdown">
+              <label>Author: </label>
+              &nbsp;
+              <select [(ngModel)]="book.authorId" name="author">
+                <option *ngFor="let author of authors" [value]="author.id">{{author.firstName}}</option>
+              </select>
+              &nbsp;
+              <button (click)="newAuthor()" type="button" class="btn btn-primary btn-sm" *ngIf="btn_new_author">new author</button>
+            </div>
+          </div>
+              <div class="author_form" *ngIf="isShown_author_form">
+                <input [(ngModel)]="author.firstName" type="text" class="form-control" id="firstName" name="firstName" placeholder="Firstname">
+                <br>
+                <input [(ngModel)]="author.middleName" type="text" class="form-control" id="middleName" name="middleName" placeholder="Middlename (optional)">
+                <br>
+                <input [(ngModel)]="author.lastName" type="text" class="form-control" id="lastName" name="lastName" placeholder="Lastname">
+                <br>
+                <button (click)="cancel_new_author()" type="button" class="btn btn-warning">Cancel</button>
+                  &nbsp;
+                  &nbsp;
+                <button (click)="ContinueAuthorForm()" class="btn btn-primary btn-sm">Continue</button>   
+                <span *ngIf="message != ''">{{message}}</span>     
+              </div>
           <br>
           <br>
-          <label>Pick Publisher: </label>
-          &nbsp;
-          <select [(ngModel)]="book.publisherId" name="publisher">
-              <option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.name}}</option>
-          </select>
+          <div *ngIf="publisherId_value">
+            <label>Publisher: </label>
+            &nbsp;
+            <input [(ngModel)]="publisher.name" [value]="publisher.name" name="publisher">
+          </div>
+          <div *ngIf="isShown_publisher">
+            <div *ngIf="publisher_dropdown">
+              <label>Publisher: </label>
+              &nbsp;
+              <select [(ngModel)]="book.publisherId" name="publisher" required>
+                  <option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.name}}</option>
+              </select>
+              &nbsp;
+              <button (click)="newPublisher()" type="button" class="btn btn-primary btn-sm" *ngIf="btn_new_publisher">new publisher</button>
+            </div>
+          </div>
+          <div class="publisher_form" *ngIf="isShown_publisher_form">
+            <input [(ngModel)]="publisher.name" type="text" class="form-control" id="name" name="name" placeholder="Publisher">
+            <br>
+            <button (click)="cancel_new_publisher()" type="button" class="btn btn-warning">Cancel</button>
+              &nbsp;
+              &nbsp;
+            <button (click)="ContinuePublisherForm()" class="btn btn-primary btn-sm">Continue</button>   
+            <span *ngIf="message != ''">{{message}}</span>     
+          </div>
           <br>
           <br>
-          <label>Pick Category: </label>
+          <div *ngIf="isShown_category">
+            <label>Category: </label>
           &nbsp;
           <select [(ngModel)]="book.categoryId" name="category">
             <option *ngFor="let category of categorys" [value]="category.id">{{category.categoryName}}</option>
           </select>
+          </div>
           <br>
-          <br>
-          <label>Pick Image: </label>
-          &nbsp;
-          <select [(ngModel)]="book.image" name="image">
-            <option [ngValue]="null" selected disabled>Select Image</option>
-            <option *ngFor="let img of imageArray" [ngValue]="img.toString()">{{img.name}}</option>
-          </select>
+          <br>  
+          <div *ngIf="isShown_image">
+            <label>Image: </label>
+            &nbsp;
+            <select [(ngModel)]="book.image" name="image">
+              <option [ngValue]="null" selected disabled>Select Image</option>
+              <option *ngFor="let img of imageArray" [ngValue]="img.name.toString()">{{img.name}}</option>
+            </select>
+          </div>            
           <br>
           <br>
           <button (click)="save_book()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>

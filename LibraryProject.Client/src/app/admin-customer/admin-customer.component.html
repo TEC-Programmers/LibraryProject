@@ -4,7 +4,6 @@
   <option value="1">Adminsrators</option>
 </select>
 
-<!-- <a href="/" class="bn5">Choose Type</a> -->
 <!-- user type: Member -->
   <div class="container">
     <h1><a>Administration Panel</a></h1>
@@ -33,7 +32,6 @@
               <td>{{ customer.middleName }}</td>
               <td>{{ customer.lastName }}</td>
               <td>{{ customer.email }}</td>
-              <!-- <td>{{ customer.role }}</td> -->
             </tr>
             </tbody>
             <tbody *ngIf="customers?.length == 0">
@@ -57,28 +55,21 @@
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <!-- <label for="firstName" class="form-label">Firstname</label> -->
             <input [(ngModel)]="customer.firstName" type="text" class="form-control" id="firstName" name="firstName" disabled type="hidden">
           </div>
           <div class="mb-3">
-            <!-- <label for="middleName" class="form-label">Middlename</label> -->
             <input [(ngModel)]="customer.middleName" type="text" class="form-control" id="middleName" name="middleName" disabled type="hidden">
           </div>
           <div class="mb-3">
-            <!-- <label for="lastName" class="form-label">Lastname</label> -->
             <input [(ngModel)]="customer.lastName" type="text" class="form-control" id="lastName" name="lastName" disabled type="hidden">
           </div>
           <div class="mb-3">
-            <!-- <label for="email" class="form-label">E-mail</label> -->
             <input [(ngModel)]="customer.email" type="email" class="form-control" id="email" name="email" disabled type="hidden">
           </div>
           <div class="mb-3">
-            <!-- <label for="password" class="form-label">Pass</label> -->
             <input [(ngModel)]="customer.password" type="password" class="form-control" id="password" name="password" disabled type="hidden">
           </div>
-
           <label>Change Role: </label>
-          <!-- <br> -->
           &nbsp;
           <select name="role">
               <option [value]="customer.role">{{customer.role}}</option>

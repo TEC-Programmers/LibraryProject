@@ -14,7 +14,8 @@ import { DecimalPipe } from '@angular/common';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { DataTablesModule } from 'angular-datatables';
 import { AdminBookComponent } from './admin-book/admin-book.component';
-import { listFiles } from 'list-files-in-dir'
+import { listFiles } from 'list-files-in-dir';
+import { AdminCategoryComponent } from './admin-category/admin-category.component'
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { listFiles } from 'list-files-in-dir'
     AdminCustomerComponent,
     SearchFilterPipe,
     AdminBookComponent,
+    AdminCategoryComponent,
   ],
   imports: [ 
     BrowserModule,
