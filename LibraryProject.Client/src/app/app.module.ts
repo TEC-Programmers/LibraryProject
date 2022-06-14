@@ -19,7 +19,7 @@ import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core'
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -46,9 +46,6 @@ import {MatNativeDateModule} from '@angular/material/core'
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule
-
-
-
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

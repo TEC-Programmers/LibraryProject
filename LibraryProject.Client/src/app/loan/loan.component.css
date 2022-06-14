@@ -1,25 +1,63 @@
-body {
+*{
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
-
-body:not(.dark-mode-preloading) {
-  transition: all 0.3s linear;
-}
-
-body.dark-mode {
-  background-color: #2f3542;
-  color: #f1f2f6;
-}
-
-body.light-mode {
-  background-color: #f1f2f6;
-  color: #2f3542;
-}
-
-:host {
-  min-height: 100vh;
+body{
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+.container{
+  width: 100%;
+  height: 100%;
+  padding: 80px 20px;
+  transition: .4s ease;
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* Styling the checkbox input */
+#checkbox{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  appearance: none;
+  -webkit-appearance : none;
+  -moz-appearance : none;
+  -o-appearance : none;
+  width: 80px;
+  height: 40px;
+  background: black;
+  border-radius: 22px;
+  cursor: pointer;
+  outline: none;
+}
+/* styling the circle inside the checkbox input */
+#checkbox::before{
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 35px;
+  background-color:white;
+  border-radius: 35px;
+  top: 2px;
+  left: 2px;
+  cursor: pointer;
+  transition: .3s linear;
+}
+/* Switching to the dark when the checkbox is toggled */
+#checkbox:checked + .container{
+background: rgb(19, 18, 18);
+color: white;
+}
+/* moving the checkbox circle when it's toggled by the user */
+#checkbox:checked::before{
+  left: 40px;
+}
+/* changing the color of the checkbox when it's toggled */
+#checkbox:checked{
+  background: rgb(12, 177, 81);
 }
