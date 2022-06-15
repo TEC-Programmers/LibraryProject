@@ -19,21 +19,21 @@ import { LoanComponent } from './loan/loan.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Frontpage', pathMatch: 'full' },   //route for the frontpage
+  {path: 'Frontpage', component: FrontpageComponent},
   {path: 'Category', component:CategoryComponent},   // it displays the Category component
   { path: 'category_books/:id', component: CategoryBooksComponent },  //this is the url which displays the books of the  specific categoryID
-  { path: 'book_details/:id', component: BookDetailsComponent },
+  {path: 'book_details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
-  { path: 'Login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},
-
   {path: 'Book', component:BookComponent},
   {path: 'Contact', component: ContactComponent},
-  {path: 'Book-Details', component: BookDetailsComponent},
-  {path: 'Loan', component: LoanComponent}
+
+  {path: 'loan', component: LoanComponent}
 
 ];
 

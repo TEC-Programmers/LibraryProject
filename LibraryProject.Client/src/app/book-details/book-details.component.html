@@ -8,14 +8,14 @@
                 </h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;"><strong>Description: </strong>
                     {{book.description}}</p>
-                <p><strong>AuthorName: </strong>{{book.author.firstName + " " + book.author.lastName}}</p> 
-                <p><strong>PublisherName: </strong>{{book.publisher.name}}</p> 
+                <p><strong>AuthorName: </strong>{{book.author.firstName + " " + book.author.lastName}}</p>
+                <p><strong>PublisherName: </strong>{{book.publisher.name}}</p>
                <!--  <div class="relative">
                     <button class="btns" type="button" ><i class="fa fa-plus"></i></button>
                     <span >{{product.quantity}}</span>
                     <button class="btns" type="button" ><i class="fa fa-minus"></i></button>
                 </div> -->
-                <button class="btn btn-primary" id="button-format" (click)="loan(book)" >LÅN </button>
+                <button class="btn btn-primary" id="button-format" (click)="loan(book)">LÅN </button>
                 <button class="btn btn-primary" id="button-format" (click)="reserve(book)" >RESERVER  </button>
             </div>
         </ng-container>

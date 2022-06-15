@@ -18,8 +18,9 @@ import { ContactComponent } from './contact/contact.component';
 
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core'
 
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
@@ -31,8 +32,8 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     FrontpageComponent,
     AdministratorComponent,
-    AdminCustomerComponent, 
- 
+    AdminCustomerComponent,
+
     ProfileComponent,
     RegisterComponent,
 
@@ -45,7 +46,7 @@ import { RegisterComponent } from './register/register.component';
     CategoryBooksComponent
 
   ],
-  
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -53,16 +54,19 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
     ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    [DatePipe] 
-    
+    [DatePipe]
+
   ],
   bootstrap: [AppComponent]
- 
- 
+
+
 })
 export class AppModule { }
