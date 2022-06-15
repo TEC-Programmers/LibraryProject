@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class status : Migration
+    public partial class libraryproject : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,12 +193,12 @@ namespace LibraryProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Image", "Language", "PublishYear", "PublisherId", "Title" },
-                values: new object[] { 1, 1, 1, "BØg for børn", "Book1.jpg", "Danish", (short)1945, 1, "Pippi Langstrømper" });
+                values: new object[] { 1, 1, 1, "Bog for børn", "Book1.png", "Danish", (short)1945, 1, "Pippi Langstrømper" });
 
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Image", "Language", "PublishYear", "PublisherId", "Title" },
-                values: new object[] { 2, 2, 2, "Romaner for voksen2", "Book2.jpg", "Danish", (short)2005, 2, "Rødby-Puttgarden" });
+                values: new object[] { 2, 2, 2, "Romaner for voksen2", "Book2.png", "Danish", (short)2005, 2, "Rødby-Puttgarden" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Book_AuthorId",

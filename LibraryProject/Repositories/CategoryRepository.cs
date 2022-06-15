@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.API.Repositories
 {
+    //creating Interface of ICategoryRepository
     public interface ICategoryRepository
     {
         Task<List<Category>> SelectAllCategories();
@@ -15,15 +16,16 @@ namespace LibraryProject.API.Repositories
         Task<Category> UpdateExistingCategory(int categoryId, Category category);
         Task<Category> DeleteCategoryById(int categoryId);
     }
-    public class CategoryRepository:ICategoryRepository
+    public class CategoryRepository: ICategoryRepository      // This class is inheriting interfcae ICategoryRepository and implement the interfaces
     {
-        private readonly LibraryProjectContext _context;
+        private readonly LibraryProjectContext _context;  //making an instance of the class LibraryProjectContext
 
-        public CategoryRepository(LibraryProjectContext context)
+        public CategoryRepository(LibraryProjectContext context)    //dependency injection with parameter 
         {
             _context = context;
-        }
 
+        }
+        //implementing the methods of ICategoryRepository interface 
         public async Task<List<Category>> SelectAllCategories()
         {
             return await _context.Category

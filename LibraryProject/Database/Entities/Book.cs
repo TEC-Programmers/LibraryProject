@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryProject.Database.Entities
 {
+    //making Book Entity for the database 
     public class Book
     {
 

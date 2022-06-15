@@ -2,6 +2,7 @@
 
 namespace LibraryProject.API.Database.Entities
 {
+    //Creating Reservation Entity for the database
     public class Reservation
     {
         [Key]
