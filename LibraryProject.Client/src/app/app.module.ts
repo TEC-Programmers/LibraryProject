@@ -25,6 +25,8 @@ import {MatNativeDateModule} from '@angular/material/core'
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { Router } from '@angular/router';
+
 
 
 @NgModule({
@@ -57,7 +59,7 @@ import { RegisterComponent } from './register/register.component';
     Ng2SearchPipeModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
     ],
 
   providers: [

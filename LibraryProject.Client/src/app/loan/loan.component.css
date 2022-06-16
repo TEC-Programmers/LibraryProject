@@ -1,8 +1,19 @@
-*{
+/* *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+} */
+
+.cal {
+  
+}
+
+.container {
+  max-width: 296px;
+    margin-left: 613px;
+    margin-top: 180px;
+    border: 5px double gray;
 }
 body{
   height: 100vh;
