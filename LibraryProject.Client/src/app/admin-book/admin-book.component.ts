@@ -9,7 +9,6 @@ import { BookService } from 'app/_services/book.service';
 import { CategoryService } from 'app/_services/category.service';
 import { PublisherService } from 'app/_services/publisher.service';
 import Swal from 'sweetalert2';
-import { SearchFilterPipe } from 'app/search-filter.pipe';
 
 @Component({
   selector: 'app-admin-book',
@@ -21,6 +20,8 @@ export class AdminBookComponent implements OnInit {
   author: Author = { id: 0, firstName: '', middleName: '', lastName: ''}
   publishers: Publisher[] = [];
   publisher: Publisher = { id: 0, name: ''}
+  books: Book[] = [];
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '' };
   categorys: Category[] = [];
   isShown_author: boolean = true;
   isShown_publisher: boolean = true;
@@ -37,11 +38,9 @@ export class AdminBookComponent implements OnInit {
   publisher_dropdown: boolean = true;
   publisherId_value: boolean = false;
 
-
-  books: Book[] = [];
-  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '' };
   message: string = '';
   searchText!: string;
+  p: any;
 
   selectedImg = null;
   imageArray = [
@@ -52,7 +51,6 @@ export class AdminBookComponent implements OnInit {
     {"name": "Romaner_Books.png"},
     {"name": "Tor_Fanger_Tyve.jpg"}
 ]
-
 
   constructor(private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
 
@@ -136,15 +134,12 @@ export class AdminBookComponent implements OnInit {
     this.isShown_category = true;
     this.isShown_image = true;
     this.author_dropdown = true;
-
     this.publisherId_value = false;
     this.isShown_publisher = true;
     this.isShown_publisher_form = false;  
     this.btn_new_publisher = true;
     this.publisher_dropdown = true;
   }
-
-
 
 
   edit_book(book: Book): void {
@@ -175,6 +170,7 @@ export class AdminBookComponent implements OnInit {
           this.message = '';
           console.log('Author added successfully');
 
+          // INSERT PUBLISHER
           if(this.publisher.id == 0) {
             this.publisherService.addPublisher(this.publisher)
             .subscribe({
@@ -185,49 +181,44 @@ export class AdminBookComponent implements OnInit {
                 this.message = '';
                 console.log('Publisher added successfully');
 
-                // INSERT BOOK
-          if(this.book.id == 0) {
-            this.bookService.addBook(this.book)
-            .subscribe({
-              next: (x) => {
-                this.books.push(x);
-                this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0 };
-                this.message = '';
-                Swal.fire({
-                  title: 'Success!',
-                  text: 'Book added successfully',
-                  icon: 'success',
-                  confirmButtonText: 'Continue'
-                });
-                this.authorId_value = false;
-                this.isShown_author_form = false;
-                this.btn_new_author = true;
-                this.isShown_author = true;
-              },
-              error: (err) => {
-                console.log(err.error);
-                this.message = Object.values(err.error.errors).join(", ");
-              }
-            }); 
+                  // INSERT BOOK
+                  if(this.book.id == 0) {
+                    this.bookService.addBook(this.book)
+                    .subscribe({
+                      next: (x) => {
+                        this.books.push(x);
+                        this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0 };
+                        this.message = '';
+                        Swal.fire({
+                          title: 'Success!',
+                          text: 'Book added successfully',
+                          icon: 'success',
+                          confirmButtonText: 'Continue'
+                        });
+                        this.authorId_value = false;
+                        this.isShown_author_form = false;
+                        this.btn_new_author = true;
+                        this.isShown_author = true;
+                      },
+                      error: (err) => {
+                        console.log(err.error);
+                        this.message = Object.values(err.error.errors).join(", ");
+                      }
+                    }); 
+                  } 
+                },
+                  error: (err) => {
+                  console.log(err.error);
+                  this.message = Object.values(err.error.errors).join(", ");
+                  }
+              }); 
+            }
+          },
+          error: (err) => {
+            console.log(err.error);
+            this.message = Object.values(err.error.errors).join(", ");
           }
-              },
-              error: (err) => {
-                console.log(err.error);
-                this.message = Object.values(err.error.errors).join(", ");
-              }
-            }); 
-          }
-         
-  
-        },
-        error: (err) => {
-          console.log(err.error);
-          this.message = Object.values(err.error.errors).join(", ");
-       }
-     });  
-   }
- }
-
-  
-
+      });  
+    }
+  } 
 }

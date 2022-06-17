@@ -1,1 +1,62 @@
-<p>admin-category works!</p>
+<div class="container">
+  <h1><a>Administration Panel</a></h1>
+    <div class="background" style="background-color: #b3d9ff;">
+      <div class="search-bar">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by category">
+        <div class="btnAndTitle">
+          <strong style="height: 100px;" class="btnTitle">ADD</strong>
+          <button class="createBookBtn" data-bs-toggle="modal" data-bs-target="#Modal_Category">+</button>
+        </div>
+      </div>
+      
+      <table style="width: 440px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
+          <thead>
+          <tr class="head">
+            <th id="operation" style="background-color: #212121; color: aliceblue;">Operation</th>
+            <th id="cat_column" style="background-color: #212121; color: aliceblue;">Category</th>
+          </tr>
+          </thead>
+            <tbody *ngIf="categorys?.length != 0">
+              <tr class="head-values" *ngFor="let category of categorys | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+                <button style="width: 53px;" (click)="delete(category)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+                <button style="width: 53px; color: rgb(224, 211, 22);" (click)="edit(category)" data-bs-toggle="modal" data-bs-target="#Modal_Category"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+                <td style="color: whitesmoke;">{{ category.categoryName }}</td>
+              </tr>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </tbody>
+              <tbody *ngIf="categorys?.length == 0">
+                <tr>
+                  <td colspan="3" class="no-data-available">category Table Is Empty!</td>
+                </tr>
+              </tbody>
+        </table>
+  </div>
+    </div>
+    
+
+
+
+<!-- Modal For Categorys -->
+<div class="modal fade" id="Modal_Category" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger" id="exampleModalLabel">CREATE NEW Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <input [(ngModel)]="category.categoryName" class="form-control" id="name" name="name" placeholder="enter category name">
+            </div>
+            &nbsp;&nbsp;
+            <button (click)="save()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

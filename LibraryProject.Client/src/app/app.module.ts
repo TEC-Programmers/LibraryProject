@@ -14,9 +14,11 @@ import { DecimalPipe } from '@angular/common';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { DataTablesModule } from 'angular-datatables';
 import { AdminBookComponent } from './admin-book/admin-book.component';
-import { listFiles } from 'list-files-in-dir';
-import { AdminCategoryComponent } from './admin-category/admin-category.component'
-
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,10 @@ import { AdminCategoryComponent } from './admin-category/admin-category.componen
     ReactiveFormsModule,
     DataTablesModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    NgxPaginationModule,
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent]

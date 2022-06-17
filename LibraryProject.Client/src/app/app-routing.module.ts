@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'Author', component: AuthorComponent}, 
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin', component: AdministratorComponent},
-  {path: 'Admin/Customers', component: AdminCustomerComponent},
+  {path: 'Admin/Users', component: AdminCustomerComponent},
   {path: 'Admin/Books', component: AdminBookComponent},
   {path: 'Admin/Categorys', component: AdminCategoryComponent}
 ];

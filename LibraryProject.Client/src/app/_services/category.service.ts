@@ -38,7 +38,7 @@ export class CategoryService {
     return this.http.put<Category>(`${this.apiUrl}/${categoryId}`, Category, this.httpOptions);
   }
 
-  deleteAuthor(categoryId: number): Observable<Category> {
+  deleteCategory(categoryId: number): Observable<Category> {
     return this.http.delete<Category>(`${this.apiUrl}/${categoryId}`, this.httpOptions);
   }
 

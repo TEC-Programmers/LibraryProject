@@ -1,5 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
 
+.pageOptions {
+
+}
+
+.role_admin {
+  position: absolute;
+  /* top: 208px; */
+  top: 232px;
+  margin-top: 11px;
+}
+
+.choose_type {
+  top: -170px;
+  position: absolute;
+  left: -8px;
+}
+
+.background {
+  left: 0px;
+  position: absolute;
+  top: 178px;
+  width: 2000px;
+  height: 1000px;
+}
+
 .navdrop {
   top: 207px;
   left: 115px
@@ -83,9 +108,11 @@ ul li ul li {
 }
 
 .table {
-    margin-left: -120px;
-    margin-top: 38px;
-    /* column-width: 700px; */
+  margin-left: 141px;
+  margin-top: -13px;
+  /* column-width: 700px; */
+  /* background-color: #33475b;
+  color: white; */
 }
 
 .container {
@@ -94,9 +121,9 @@ ul li ul li {
 
 .search-bar {
     width: 350px;
-    margin-left: -239px;
-    position: absolute;
-    margin-top: 20px
+    margin-left: 279px;
+    /* position: absolute; */
+    margin-top: 7px;
 }
 
 .table-table-striped {
@@ -119,10 +146,11 @@ h1 {
   font-family: "Raleway", cursive;
   font-weight: 100;
   position: relative;
-  width: 80%;
+  width: 63%;
   background: linear-gradient(to right, black, #eee, black);
   white-space: nowrap;
-  left: -112px;
+  left: -157px;
+  top: 22px;
 }
 h1::before {
   content: "";

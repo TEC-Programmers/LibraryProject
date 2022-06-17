@@ -1,3 +1,11 @@
+.background {
+  left: 0px;
+  position: absolute;
+  top: 180px;
+  width: 2000px;
+  height: 1000px;
+}
+
 .createBookBtn {
   width: 40px;
   height: 40px;
@@ -9,6 +17,8 @@
   cursor: pointer;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   margin-left: 39px;
+  margin-top: 14px;
+  position: absolute;
 }
 
 .createBookBtn:hover {
@@ -16,16 +26,17 @@
 }
 
 .btnAndTitle {
-  margin-top: 38px;
-  margin-left: 764px;
+  margin-top: 37px;
+  margin-left: 1252px;
   background-color: rgb(51, 49, 49);
   width: 118px;
-  height: 82px;
+  height: 86px;
 }
 
 .btnTitle {
-  margin-top: 6px;
-  margin-left: 9px;
+  position: absolute;
+  margin-top: 9px;
+  margin-left: 13px;
   font-size: 20px;
   color: white;
 }
@@ -42,9 +53,9 @@
   }
   
   .table {
-    margin-left: -236px;
-    margin-top: -82px;
-      /* column-width: 700px; */
+    margin-left: 252px;
+    margin-top: -87px;
+          /* column-width: 700px; */
   }
   
   .container {
@@ -52,10 +63,10 @@
   }
   
   .search-bar {
-      width: 350px;
-      margin-left: -239px;
-      position: absolute;
-      margin-top: 20px
+    width: 357px;
+    margin-left: 609px;
+    position: absolute;
+    margin-top: 8px;
   }
   
   .table-table-striped {
@@ -72,7 +83,7 @@
   
   
   h1 {
-    color: white;
+    /* color: white;
     text-transform: uppercase;
     padding: 1px;
     font-family: "Raleway", cursive;
@@ -81,7 +92,18 @@
     width: 80%;
     background: linear-gradient(to right, black, #eee, black);
     white-space: nowrap;
-    left: -112px;
+    left: -112px; */
+  color: white;
+  text-transform: uppercase;
+  padding: 1px;
+  font-family: "Raleway", cursive;
+  font-weight: 100;
+  position: relative;
+  width: 65%;
+  background: linear-gradient(to right, black, #eee, black);
+  white-space: nowrap;
+  left: -157px;
+  top: 22px;
   }
   h1::before {
     content: "";

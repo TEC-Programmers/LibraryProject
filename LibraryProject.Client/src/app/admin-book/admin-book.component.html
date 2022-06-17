@@ -1,47 +1,50 @@
 <div class="container">
     <h1><a>Administration Panel</a></h1>
-    <div class="search-bar">
-      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by column">
-    <!-- <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> -->
-    </div>
-    <br>
-    <div class="btnAndTitle">
-      <strong style="height: 100px;" class="btnTitle">ADD NEW</strong>
-      <BR>
-      <button class="createBookBtn" data-bs-toggle="modal" data-bs-target="#Modal_Create_Book">+</button>
-    </div>
-      <!-- <span *ngIf="message != ''">{{ message }}</span> -->
-      <table style="width: 1000px;" class="table table-striped table table-hover table table-bordered">
-        <thead>
-        <tr class="head">
-          <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-          <th style="background-color: #212121; color: aliceblue; width: 8%;">Operation</th>
-          <th style="background-color: #212121; color: aliceblue; width: 10%;">Image</th>
-          <th style="background-color: #212121; color: aliceblue; width: 23%;">Title</th>
-          <th style="background-color: #212121; color: aliceblue; width: 23%;">Language</th>
-          <th style="background-color: #212121; color: aliceblue; width: 23%;">Description</th>
-          <th style="background-color: #212121; color: aliceblue; width: 23%;">Publishyear</th>
-        </tr>
-        </thead>
-          <tbody *ngIf="books?.length != 0">
-            <tr class="head-values" *ngFor="let book of books | filter:searchText;">
-              <button style="width: 45px; height: 66px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-              <button style="width: 45px; height: 66px;" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
-              <td><img src="/assets/images/{{book.image}}" alt="picture of book" height="50px" width="60px" style="padding-left: 17px;"></td>
-              <td>{{ book.title }}</td>
-              <td>{{ book.language }}</td>
-              <td>{{ book.description }}</td>
-              <td>{{ book.publishYear }}</td>
-              <!-- <td>{{ book.role }}</td> -->
-            </tr>
-            </tbody>
-            <tbody *ngIf="books?.length == 0">
-              <tr>
-                <td colspan="3" class="no-data-available">Book Table Is Empty!</td>
+    <div class="background" style="background-color: #b3d9ff;">
+      <div class="search-bar">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by book">
+      <!-- <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> -->
+      </div>
+      <br>
+      <div class="btnAndTitle">
+        <strong style="height: 100px;" class="btnTitle">ADD NEW</strong>
+        <BR>
+        <button class="createBookBtn" data-bs-toggle="modal" data-bs-target="#Modal_Create_Book">+</button>
+      </div>
+        <!-- <span *ngIf="message != ''">{{ message }}</span> -->
+        <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
+          <thead>
+          <tr class="head">
+            <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
+            <th style="background-color: #212121; color: aliceblue; width: 5%;">Operation</th>
+            <th style="background-color: #212121; color: aliceblue; width: 15%;">Image</th>
+            <th style="background-color: #212121; color: aliceblue; width: 20%;">Title</th>
+            <th style="background-color: #212121; color: aliceblue; width: 20%;">Language</th>
+            <th style="background-color: #212121; color: aliceblue; width: 20%;">Description</th>
+            <th style="background-color: #212121; color: aliceblue; width: 20%;">Publishyear</th>
+          </tr>
+          </thead>
+            <tbody *ngIf="books?.length != 0">
+              <tr class="head-values" *ngFor="let book of books | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+                <button style="width: 53px; height: 65px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+                <button style="width: 53px; height: 65px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+                <td><img src="/assets/images/{{book.image}}" alt="picture of book" height="50px" width="60px" style="padding-left: 17px;"></td>
+                <td style="color: whitesmoke;">{{ book.title }}</td>
+                <td style="color: whitesmoke;">{{ book.language }}</td>
+                <td style="color: whitesmoke;">{{ book.description }}</td>
+                <td style="color: whitesmoke;">{{ book.publishYear }}</td>
               </tr>
-            </tbody>
-      </table>
-  </div>
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </tbody>
+              <tbody *ngIf="books?.length == 0">
+                <tr>
+                  <td colspan="3" class="no-data-available">Book Table Is Empty!</td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+    </div>
+    
 
 
    <!-- Modal CREATE Book -->
@@ -64,7 +67,7 @@
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description" placeholder="short summary">
+            <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description" placeholder="short book summary">
           </div>
           <div class="mb-3">
             <label for="publishYear" class="form-label">Publish Year</label>
