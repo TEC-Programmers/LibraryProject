@@ -12,6 +12,7 @@ import { Book } from '../_models/Book';
 import { AuthService } from '../_services/auth.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {formatDate} from '@angular/common';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -30,6 +31,7 @@ export class LoanComponent implements OnInit {
   currentDate = new Date();
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   minDate = new Date(this.dateNow);
+  minDate2 = new Date(this.minDate)
 
 
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
@@ -45,7 +47,6 @@ export class LoanComponent implements OnInit {
     this.dateRangeForm = this.formBuilder.group({
       fromDate: new FormControl('', Validators.required),
       toDate: new FormControl('', Validators.required),
-
     });
 
 
@@ -71,19 +72,21 @@ export class LoanComponent implements OnInit {
         }
         console.log('loanitem: ',loanitem)
         this.loan = loanitem;
-
+        console.log('loan: ',this.loan)
         if (this.loan) {
           this.loanservice.addLoan(this.loan)
           .subscribe({
             next: (x) => {
               this.loans.push(x);
               this.loan = { id: 0, bookId: 0, userId: 0, return_date: '', loaned_At: ''}
-              // Swal.fire({
-              //   title: 'Success!',
-              //   text: 'loan added successfully',
-              //   icon: 'success',
-              //   confirmButtonText: 'Continue'
-              // });
+              this.loaned_at = '';
+              this.return_date = '';
+              Swal.fire({
+                title: 'Success!',
+                text: 'loan added successfully',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+              });
               console.log('loan added successfully!')
             },
             error: (err) => {
@@ -91,10 +94,21 @@ export class LoanComponent implements OnInit {
               // this.message = Object.values(err.error.errors).join(", ");
             }
           });
-
-
         }
       }
+    }
 
-  }
+    // resetForm(): void {
+    //   if (this.loaned_at && this.return_date) {
+
+    //   }
+    //   else {
+    //     console.log('data NOT valid.')
+    //   }
+
+    // }
+
+
+
+
   }

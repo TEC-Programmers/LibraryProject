@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
-  { path: 'login', component: LoginComponent },
+  { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},

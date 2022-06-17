@@ -24,7 +24,7 @@ export class BookDetailsComponent implements OnInit {
     this.bookService.getBookById(this.bookId).subscribe(x=>
       { this.book=x,
 
-      console.log(this.book);
+      console.log('book-details on load: ',this.book);
     });
   }
 

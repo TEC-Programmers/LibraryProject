@@ -1,45 +1,23 @@
 
-<!--
-  <div class="container">
-    <input type="checkbox" id="checkbox">
-    <mat-date-range-input>
-      <input matStartDate placeholder="Start date">
-      <input matEndDate placeholder="End date">
-    </mat-date-range-input>
 
+<div class="container">
+  <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()" class="cal">
+    <mat-form-field>
+      <input [(ngModel)]="loaned_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date"  formControlName="fromDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
 
-      <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()" class="cal">
+    <mat-form-field>
+      <input [(ngModel)]="return_date" [min]="loaned_at" matInput [matDatepicker]="picker2" placeholder="End date"  formControlName="toDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
 
-        <mat-form-field>
-
-          <mat-label>Enter Session Period</mat-label>
-
-          <mat-date-range-input [rangePicker]=" picker ">
-            <input matInput [min]="minDate" [matDatepicker]="picker" required formControlName="fromDate">
-            <input matInput [min]="minDate" [matDatepicker]="picker" [(ngModel)]="return_date" matEndDate placeholder="To Date" required formControlName="toDate">
-          </mat-date-range-input>
-
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-
-
-          <mat-error *ngIf="dateRangeForm.controls['fromDate'].hasError('matStartDateInvalid')">Invalid start date</mat-error>
-          <mat-error *ngIf="dateRangeForm.controls['toDate'].hasError('matEndDateInvalid')">Invalid end date</mat-error>
-
-
-          <mat-error *ngIf="dateRangeForm.controls['fromDate'].errors?.['required']">From Date Required</mat-error>
-          <mat-error *ngIf="dateRangeForm.controls['toDate'].errors?.['required']">To Date Required</mat-error>
-        </mat-form-field>
-        <button>Submit</button>
-
-    </form>
-  </div> -->
-
-  <mat-form-field class="example-full-width">
-    <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Choose a date">
-    <input [(ngModel)]="return_date" matEndDate placeholder="To Date" required formControlName="toDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+    <br>
+    <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Burrow</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  </form>
+</div>
 
 

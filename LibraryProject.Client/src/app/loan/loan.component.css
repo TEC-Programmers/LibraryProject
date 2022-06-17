@@ -6,7 +6,14 @@
 } */
 
 .cal {
-  
+  height: 160px;
+  margin-left: 32px;
+  margin-top: 23px;
+}
+
+.submit {
+  margin-left: 102px;
+  margin-left: 74px;
 }
 
 .container {
