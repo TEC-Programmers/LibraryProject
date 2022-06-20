@@ -2,6 +2,6 @@ export interface Author
 {
     id: number;
     firstName: string;
-    middleName?: string;
+    middleName: string;
     lastName: string    
 }
