@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220523122222_Library")]
-    partial class Library
+    [Migration("20220620060638_library")]
+    partial class library
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,7 +182,7 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(32)");
@@ -215,8 +215,8 @@ namespace LibraryProject.API.Migrations
                             Id = 1,
                             AuthorId = 1,
                             CategoryId = 1,
-                            Description = "BØg for børn",
-                            Image = "Book1.jpg",
+                            Description = "Bog for børn",
+                            Image = "Book1.png",
                             Language = "Danish",
                             PublishYear = (short)1945,
                             PublisherId = 1,
@@ -228,7 +228,7 @@ namespace LibraryProject.API.Migrations
                             AuthorId = 2,
                             CategoryId = 2,
                             Description = "Romaner for voksen2",
-                            Image = "Book2.jpg",
+                            Image = "Book2.png",
                             Language = "Danish",
                             PublishYear = (short)2005,
                             PublisherId = 2,

@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class Library : Migration
+    public partial class library : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -105,7 +105,7 @@ namespace LibraryProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     Language = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(500)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     PublishYear = table.Column<short>(type: "smallint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
@@ -192,12 +192,12 @@ namespace LibraryProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Image", "Language", "PublishYear", "PublisherId", "Title" },
-                values: new object[] { 1, 1, 1, "BØg for børn", "Book1.jpg", "Danish", (short)1945, 1, "Pippi Langstrømper" });
+                values: new object[] { 1, 1, 1, "Bog for børn", "Book1.png", "Danish", (short)1945, 1, "Pippi Langstrømper" });
 
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Image", "Language", "PublishYear", "PublisherId", "Title" },
-                values: new object[] { 2, 2, 2, "Romaner for voksen2", "Book2.jpg", "Danish", (short)2005, 2, "Rødby-Puttgarden" });
+                values: new object[] { 2, 2, 2, "Romaner for voksen2", "Book2.png", "Danish", (short)2005, 2, "Rødby-Puttgarden" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Book_AuthorId",

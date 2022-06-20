@@ -16,7 +16,8 @@ import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
 import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
-import { BookDetailsComponent } from './book-details/book-details.component';
+//import { CategoryDetailsComponent } from './category-details/category-details.component';
+
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     BookComponent,
     LoginComponent,
     ContactComponent,
-    CategoryDetailsComponent,
+    
     BookDetailsComponent,
     CategoryBooksComponent,
 
