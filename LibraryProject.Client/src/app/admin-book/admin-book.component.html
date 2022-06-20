@@ -16,19 +16,19 @@
           <thead>
           <tr class="head">
             <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-            <th style="background-color: #212121; color: aliceblue; width: 5%;">Operation</th>
-            <th style="background-color: #212121; color: aliceblue; width: 15%;">Image</th>
+            <th style="background-color: #212121; color: aliceblue; width: 0%;">Operation</th>
+            <th style="background-color: #212121; color: aliceblue; width: 9%;">Image</th>
             <th style="background-color: #212121; color: aliceblue; width: 20%;">Title</th>
             <th style="background-color: #212121; color: aliceblue; width: 20%;">Language</th>
             <th style="background-color: #212121; color: aliceblue; width: 20%;">Description</th>
-            <th style="background-color: #212121; color: aliceblue; width: 20%;">Publishyear</th>
+            <th style="background-color: #212121; color: aliceblue; width: 0%;">Publishyear</th>
           </tr>
           </thead>
             <tbody *ngIf="books?.length != 0">
               <tr class="head-values" *ngFor="let book of books | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                <button style="width: 53px; height: 65px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                <button style="width: 53px; height: 65px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
-                <td><img src="/assets/images/{{book.image}}" alt="picture of book" height="50px" width="60px" style="padding-left: 17px;"></td>
+                <button style="width: 53px; height: 59px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+                <button style="width: 53px; height: 59px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+                <td><img src="/assets/images/{{book.image}}" alt="picture of book"  id="img"></td>
                 <td style="color: whitesmoke;">{{ book.title }}</td>
                 <td style="color: whitesmoke;">{{ book.language }}</td>
                 <td style="color: whitesmoke;">{{ book.description }}</td>
