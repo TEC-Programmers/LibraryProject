@@ -1,7 +1,11 @@
-#button-format {
+.btn-primary {
     display: inline-block;
     margin-right: 5px;
     margin-top: 5px;
     width: 100px;
     text-align: center;
+}
+
+#button-format2:disabled {
+    color: #666;
 }
