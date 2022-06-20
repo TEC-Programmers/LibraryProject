@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class LibraryProject : Migration
+    public partial class LibraryProjectA : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,8 @@ namespace LibraryProject.API.Migrations
                     userID = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,7 +106,7 @@ namespace LibraryProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     Language = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     PublishYear = table.Column<short>(type: "smallint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
@@ -155,11 +156,11 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Loan",
-                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "userID" },
+                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "status", "userID" },
                 values: new object[,]
                 {
-                    { 1, 2, "06/05/22", "13/05/22", 2 },
-                    { 3, 5, "27/06/22", "27/07/22", 4 }
+                    { 1, 2, "06/05/22", "13/05/22", 0, 2 },
+                    { 3, 5, "27/06/22", "27/07/22", 0, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -192,12 +193,12 @@ namespace LibraryProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Image", "Language", "PublishYear", "PublisherId", "Title" },
-                values: new object[] { 1, 1, 1, "BØg for børn", "Book1.jpg", "Danish", (short)1945, 1, "Pippi Langstrømper" });
+                values: new object[] { 1, 1, 1, "Bog for børn", "Book1.png", "Danish", (short)1945, 1, "Pippi Langstrømper" });
 
             migrationBuilder.InsertData(
                 table: "Book",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "Description", "Image", "Language", "PublishYear", "PublisherId", "Title" },
-                values: new object[] { 2, 2, 2, "Romaner for voksen2", "Book2.jpg", "Danish", (short)2005, 2, "Rødby-Puttgarden" });
+                values: new object[] { 2, 2, 2, "Romaner for voksen2", "Book2.png", "Danish", (short)2005, 2, "Rødby-Puttgarden" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Book_AuthorId",

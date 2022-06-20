@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router}  from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { Role, User } from './_models/User';
-import { Component, HostBinding } from '@angular/core';
+import {HostBinding } from '@angular/core';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { BookService } from './_services/book.service';
@@ -33,20 +33,20 @@ export class AppComponent {
       private authService: AuthService,
       private bookService: BookService,
       private categoryService: CategoryService
-   
+
   ) {
     // get the current user from authentication service
     this.authService.currentUser.subscribe(x => this.currentUser= x);
 
   }
 
-  
+
 
   logout() {
     if (confirm('Are you sure you want to log out?')) {
       // ask authentication service to perform logout
       this.authService.logout();
-      
+
 
       // subscribe to the changes in currentUser, and load Home component
       this.authService.currentUser.subscribe(x => {
