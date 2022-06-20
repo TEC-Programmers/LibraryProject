@@ -7,13 +7,13 @@ import { AdministratorComponent } from './administrator/administrator.component'
 import { BookComponent } from './book/book.component';
 import { ContactComponent } from './contact/contact.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
-import { AuthGuard } from './_helpers/auth.guard';
-import { Role } from './_models/User';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
 import { LoanComponent } from './loan/loan.component';
 import { LoginComponent } from './login/login.component';
+import { Role } from './_models/Role';
+import { AuthGuard } from './_helpers/auth.guard';
 
 
 const routes: Routes = [

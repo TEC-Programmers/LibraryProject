@@ -6,7 +6,8 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
-import { Role, User} from '../_models/User';
+import { User} from '../_models/User';
+import { Role } from 'app/_models/Role';
 import { Data, Router } from '@angular/router';
 
 
@@ -34,7 +35,7 @@ export class AuthService {
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('currentUser', JSON.stringify(user));
-        
+
         this.currentUserSubject.next(user);
         // console.log('login user',user);
         return user;
