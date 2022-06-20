@@ -34,7 +34,6 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = 1,
                 CategoryName = "Børnebog"
-
             });
 
        
