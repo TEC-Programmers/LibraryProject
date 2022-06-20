@@ -157,6 +157,7 @@ namespace LibraryProject.API.Controllers
                 return Ok(user);
 
                 UserResponse currentUser = (UserResponse)HttpContext.Items["User"];
+
                 if (userId != currentUser.Id && currentUser.Role != Role.Administrator)
                 {
                     return Unauthorized(new { message = "Unauthorized" });      // only admins can access other user records
@@ -170,6 +171,7 @@ namespace LibraryProject.API.Controllers
         }
 
         //update
+      //  [AllowAnonymous]
        
         [Authorize(Role.Customer, Role.Administrator)]
         [HttpPut("{userId}")]

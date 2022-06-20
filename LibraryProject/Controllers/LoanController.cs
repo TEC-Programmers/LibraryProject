@@ -1,4 +1,5 @@
 ﻿using LibraryProject.API.DTO;
+using LibraryProject.API.DTO_s;
 using LibraryProject.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LibraryProject.Controllers
+namespace LibraryProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -46,16 +47,16 @@ namespace LibraryProject.Controllers
             }
 
         }
-        [HttpGet("{loanid}")]
+        [HttpGet("{loanId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetById([FromRoute] int loanid)
+        public async Task<IActionResult> GetById([FromRoute] int loanId)
         {
             try
             {
-                LoanResponse loanResponse = await _loanService.GetLoanById(loanid);
+                LoanResponse loanResponse = await _loanService.GetLoanById(loanId);
                 if (loanResponse == null)
                 {
                     return NotFound();
@@ -123,7 +124,7 @@ namespace LibraryProject.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpDelete("{loanid}")]
+        [HttpDelete("{loanId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

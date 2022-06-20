@@ -1,4 +1,5 @@
-﻿using LibraryProject.API.DTO_s;
+﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.API.DTO_s;
 using LibraryProject.API.Repositories;
 using LibraryProject.API.Services;
 using LibraryProject.Database;
@@ -206,7 +207,7 @@ namespace LibraryProject.Tests.Services
 
             //Arrange
 
-            ReservationRequest reservationRequest = new()
+            ReservationRequest ReservationRequest = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -226,28 +227,28 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockReservationRepository
-                .Setup(x => x.UpdateExistingReservation(It.IsAny<int>(), It.IsAny<Reservation>()))
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservation>()))
                 .ReturnsAsync(reservation);
 
             //Act
-            var result = await _reservationService.UpdateExistingReservation(reservationId, reservationRequest);
+            var result = await _reservationService.UpdateReservation(reservationId, ReservationRequest);
 
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
             Assert.Equal(reservationId, result.Id);
-            Assert.Equal(reservationRequest.userId, result.userId);
-            Assert.Equal(reservationRequest.bookId, result.bookId);
-            Assert.Equal(reservationRequest.reserved_At, result.reserved_At);
-            Assert.Equal(reservationRequest.reserved_To, result.reserved_To);
+            Assert.Equal(ReservationRequest.userId, result.userId);
+            Assert.Equal(ReservationRequest.bookId, result.bookId);
+            Assert.Equal(ReservationRequest.reserved_At, result.reserved_At);
+            Assert.Equal(ReservationRequest.reserved_To, result.reserved_To);
         }
 
         [Fact]
         public async void UpdateReservation_ShouldReturnNull_WhenReservationDoesNotExist()
         {
             //Arrange
-            ReservationRequest reservationRequest = new()
+            ReservationRequest ReservationRequest = new()
             {
                 userId = 1,
                 bookId = 1,
@@ -259,11 +260,11 @@ namespace LibraryProject.Tests.Services
 
 
             _mockReservationRepository
-                .Setup(x => x.UpdateExistingReservation(It.IsAny<int>(), It.IsAny<Reservation>()))
+                .Setup(x => x.UpdateReservation(It.IsAny<int>(), It.IsAny<Reservation>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _reservationService.UpdateExistingReservation(reservationId, reservationRequest);
+            var result = await _reservationService.UpdateReservation(reservationId, ReservationRequest);
 
             //Assert
             Assert.Null(result);
@@ -288,13 +289,12 @@ namespace LibraryProject.Tests.Services
                    .ReturnsAsync(deletedReservation);
 
             //Act
-            var result = await _reservationService.DeleteReservationById(reservationId);
+            var result = await _reservationService.DeleteReservation(reservationId);
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
             Assert.Equal(reservationId, result.Id);
-
         }
 
         [Fact]
@@ -308,13 +308,10 @@ namespace LibraryProject.Tests.Services
                   .ReturnsAsync(() => null);
 
             //Act
-            var result = await _reservationService.DeleteReservationById(reservationId);
+            var result = await _reservationService.DeleteReservation(reservationId);
 
             //Assert
             Assert.Null(result);
-
         }
-
-
     }
 }

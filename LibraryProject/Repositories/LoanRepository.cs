@@ -1,10 +1,11 @@
 ﻿using LibraryProject.API.Database.Entities;
+using LibraryProject.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 namespace LibraryProject.API.Repositories
 {
-
     public interface ILoanRepository
     {
         Task<List<Loan>> SelectAllLoans();
@@ -39,7 +40,7 @@ namespace LibraryProject.API.Repositories
         }
         public async Task<Loan> UpdateExistingLoan(int loanId, Loan loan)
         {
-            Loan updateLoan = await _context.Loan.FirstOrDefaultAsync(loan=>loan.Id == loanId);
+            Loan updateLoan = await _context.Loan.FirstOrDefaultAsync(loan => loan.Id == loanId);
             if (updateLoan != null)
             {
                 updateLoan.userID = loan.userID;
@@ -57,7 +58,7 @@ namespace LibraryProject.API.Repositories
             Loan deleteLoan = await _context.Loan.FirstOrDefaultAsync(loan => loan.Id == loanId);
             if (deleteLoan != null)
             {
-               
+
                 _context.Loan.Remove(deleteLoan);
                 await _context.SaveChangesAsync();
             }

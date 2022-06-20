@@ -18,6 +18,9 @@ namespace LibraryProject.Database.Entities
         [Column(TypeName = "nvarchar(32)")]
         public string LastName { get; set; }
 
-     
+        //public int bookId { get; set; }
+
+        //[ForeignKey("bookId")]
+        //public Book Book { get; set; }
     }
 }

@@ -1,6 +1,7 @@
-﻿using LibraryProject.API.DTO;
+﻿using LibraryProject.API.Controllers;
+using LibraryProject.API.DTO;
+using LibraryProject.API.DTO_s;
 using LibraryProject.API.Services;
-using LibraryProject.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Moq;
 using System;
@@ -15,7 +16,6 @@ namespace LibraryProject.Tests.Controllers
 
     public class LoanControllerTests
     {
-
         private readonly LoanController _loanController;
         private readonly Mock<ILoanService> _mockLoanService = new();
 

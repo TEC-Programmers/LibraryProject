@@ -1,0 +1,12 @@
+#catDiv {
+    position: absolute;
+    left: 500px;
+}
+
+a {
+    text-decoration: none;
+}
+
+* {
+    margin: 0px;
+}

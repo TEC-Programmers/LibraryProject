@@ -1,5 +1,6 @@
 ﻿using LibraryProject.API.Database.Entities;
 using LibraryProject.API.Helpers;
+using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ namespace LibraryProject.API.Repositories
     public interface IUserRepository
     {
         Task<List<User>> GetAll();
-       // Task<List<User>> GetAdmins();
         Task<User> Create(User user);
         Task<User> GetByEmail(string email);
         Task<User> GetById(int userId);

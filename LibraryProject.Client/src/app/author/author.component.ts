@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorService } from '../_services/author.service';
 import { Author } from '../_models/Author';
+import { Category } from '../_models/Category';
+import { CategoryService } from '../_services/category.service';
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
@@ -14,11 +16,13 @@ export class AuthorComponent implements OnInit {
 
 
 
-  constructor(private authorService: AuthorService) { }
+
+  constructor(private authorService: AuthorService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.authorService.getAllAuthors()
     .subscribe(p => this.authors = p);
-  }
 
+
+  }
 }

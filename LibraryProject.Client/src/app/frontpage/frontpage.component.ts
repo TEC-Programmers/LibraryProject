@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Author } from '../_models/Author';
-import { Category } from '../_models/Category';
+import { Book } from '../_models/Book';
 import { Loan } from '../_models/Loan';
 import { AuthorService } from '../_services/author.service';
-import { CategoryService } from '../_services/category.service';
 import { LoanService } from '../_services/loan.service';
+import { BookService } from '../_services/book.service';
+
 
 @Component({
   selector: 'app-frontpage',
@@ -13,16 +14,18 @@ import { LoanService } from '../_services/loan.service';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
-
-  authors: Author [] = [];
-
   
+  allBooks: Book[] = [];
 
-  constructor(private categoryService: CategoryService) { }
+books : Book[]= [];
+
+
+
+
+
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    
-
   }
 
 }
