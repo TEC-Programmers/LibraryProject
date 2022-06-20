@@ -3,7 +3,7 @@
   <!--  -->
   <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
   <button class="click" (click)="click()">Search</button>
-      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book', book.id]">
+      <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
         <td>
           <br>
           Book:
@@ -20,25 +20,25 @@
 </div>
 <nav id="nav">
 <ul >
-  
+
         <li><a routerLink="/" routerLinkActive="active-link w3-green" [routerLinkActiveOptions]="{exact:true}">Home</a>
         </li>
-   
-    
+
+
 
     <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
         <a routerLink="/admin/customer" routerLinkActive="active-link w3-green">Users</a>
     </li>
 
-    
+
     <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
         <a routerLink="/" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Author</a>
-        
+
     </li>
 
     <li style="display:inline-block" *ngIf="currentUser != null">
         <a routerLink="/profile" routerLinkActive="active-link w3-green">Profile</a>
-      
+
     </li>
 
     <li class="nav-item">
@@ -53,11 +53,11 @@
     <li class="nav-item">
         <a class="nav-link text-danger" *ngIf="currentUser != null && currentUser.firstName == 'username'">User</a>
     </li>
-   
-    
+
+
     <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item" >
         <a routerLink="/" (click)="logout()">Logout</a>
-     
+
     </li>
 
     <li class="nav-item">
@@ -69,7 +69,7 @@
 
 
 
- <!-- 
+ <!--
 <nav>
     <a routerLink="/"> Home | </a>
     <a routerLink="/Author">  Author | </a>

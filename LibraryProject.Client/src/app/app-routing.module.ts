@@ -22,18 +22,17 @@ const routes: Routes = [
   {path: 'Frontpage', component: FrontpageComponent},
   {path: 'Category', component:CategoryComponent},   // it displays the Category component
   { path: 'category_books/:id', component: CategoryBooksComponent },  //this is the url which displays the books of the  specific categoryID
-  {path: 'Book-Details/:id', component: BookDetailsComponent},
+  {path: 'book_details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
-  { path: 'login', component: LoginComponent },
+  { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
   {path: 'Contact', component: ContactComponent},
   {path: 'loan/:id', component: LoanComponent}
-
 ];
 
 @NgModule({

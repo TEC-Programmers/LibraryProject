@@ -33,20 +33,20 @@ export class AppComponent {
       private authService: AuthService,
       private bookService: BookService,
       private categoryService: CategoryService
-   
+
   ) {
     // get the current user from authentication service
     this.authService.currentUser.subscribe(x => this.currentUser= x);
 
   }
 
-  
+
 
   logout() {
     if (confirm('Are you sure you want to log out?')) {
       // ask authentication service to perform logout
       this.authService.logout();
-      
+
 
       // subscribe to the changes in currentUser, and load Home component
       this.authService.currentUser.subscribe(x => {
