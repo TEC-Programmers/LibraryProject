@@ -1,6 +1,7 @@
 #button-format {
-    display:inline-block;
-    margin-right:5px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
     width: 100px;
     text-align: center;
- }
+}

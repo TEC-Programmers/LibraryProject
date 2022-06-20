@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
 import { LoanComponent } from './loan/loan.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [

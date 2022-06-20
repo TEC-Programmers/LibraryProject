@@ -1,23 +1,18 @@
-
-
 <div class="container">
-  <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()" class="cal">
-    <mat-form-field>
-      <input [(ngModel)]="loaned_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date"  formControlName="fromDate">
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
+    <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()" class="cal">
+        <mat-form-field>
+            <input [(ngModel)]="loaned_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date" formControlName="fromDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field>
-      <input [(ngModel)]="return_date" [min]="loaned_at" matInput [matDatepicker]="picker2" placeholder="End date"  formControlName="toDate">
-      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="return_date" [min]="loaned_at" matInput [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
 
-    <br>
-    <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Burrow</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-  </form>
+        <br>
+        <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Borrow</button> &nbsp;&nbsp;&nbsp;&nbsp;
+    </form>
 </div>
-
-
