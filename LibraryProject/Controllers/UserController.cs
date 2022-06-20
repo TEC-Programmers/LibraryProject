@@ -55,37 +55,7 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        ////[Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
-        //[AllowAnonymous]
-        //[HttpGet("Get Admins")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<IActionResult> GetAdmins()
-        //{
-        //    try
-        //    {
-        //        List<UserResponse> users = await _userService.GetAdmins();
-
-        //        if (users == null)
-        //        {
-        //            return Problem("Got no data, not even an empty list, this is unexpected");
-        //        }
-
-        //        if (users.Count == 0)
-        //        {
-        //            return NoContent();
-        //        }
-
-        //        return Ok(users);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Problem(ex.Message);
-        //    }
-        //}
-
+        
 
         [AllowAnonymous]
         [HttpPost("register")]
@@ -198,7 +168,9 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        [Authorize(Role.Administrator)]
+        [AllowAnonymous]
+
+       // [Authorize(Role.Administrator)]
         [HttpDelete("{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
