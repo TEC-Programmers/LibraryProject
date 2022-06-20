@@ -7,25 +7,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
+import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
-import { BookDetailsComponent } from './book-details/book-details.component';
+
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MbscModule, MbscProvider } from "ack-angular-mobiscroll"
-import { LoginComponent } from './login/login.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core'
+
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 
-import * as mobiscroll from "./login/login.component"
-MbscProvider.setMobiscroll(mobiscroll)
 
 @NgModule({
   declarations: [
@@ -33,33 +35,40 @@ MbscProvider.setMobiscroll(mobiscroll)
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
-    LoginComponent,
+
     ProfileComponent,
     RegisterComponent,
+
     CategoryComponent,
     BookComponent,
     LoginComponent,
     ContactComponent,
-    CategoryDetailsComponent,
     BookDetailsComponent,
     LoanComponent,
-    CategoryBooksComponent,
+    CategoryBooksComponent
+
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule,
     BrowserAnimationsModule,
-    MbscModule,
-    RouterModule
-  ],
-  providers: [ [DatePipe],
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    Ng2SearchPipeModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    ],
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    [DatePipe]
 
   ],
   bootstrap: [AppComponent]
+
+
 })
 export class AppModule { }

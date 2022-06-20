@@ -2,7 +2,11 @@
 
 namespace LibraryProject.API.Migrations
 {
+<<<<<<<< HEAD:LibraryProject/Migrations/20220607123738_LibraryProjectA.cs
     public partial class LibraryProjectA : Migration
+========
+    public partial class libraryproject : Migration
+>>>>>>>> dev:LibraryProject/Migrations/20220607115336_libraryproject.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

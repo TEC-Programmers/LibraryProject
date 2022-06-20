@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthorComponent } from './author/author.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
 import { CategoryComponent } from './category/category.component';
@@ -14,14 +13,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
 import { LoanComponent } from './loan/loan.component';
-import { LoginComponent } from './login/login.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/Frontpage', pathMatch: 'full' },   //route for the frontpage
-  {path: 'Author', component:AuthorComponent},  //route of the author
+  {path: 'Frontpage', component: FrontpageComponent},
   {path: 'Category', component:CategoryComponent},   // it displays the Category component
   { path: 'category_books/:id', component: CategoryBooksComponent },  //this is the url which displays the books of the  specific categoryID
-  { path: 'book_details/:id', component: BookDetailsComponent },
+  {path: 'Book-Details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
@@ -31,8 +30,7 @@ const routes: Routes = [
   // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
   {path: 'Contact', component: ContactComponent},
-  {path: 'Book-Details', component: BookDetailsComponent},
-  {path: 'Loan', component: LoanComponent}
+  {path: 'loan/:id', component: LoanComponent}
 
 ];
 
