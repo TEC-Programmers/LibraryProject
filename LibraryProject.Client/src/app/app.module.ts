@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
@@ -25,6 +25,7 @@ import { RegisterComponent } from './register/register.component';
 import { NgxPaginationModule } from 'ngx-pagination'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchFilterPipe } from './search-filter.pipe';
+// import { FormsModule } from '@angular/core';
 
 
 @NgModule({
