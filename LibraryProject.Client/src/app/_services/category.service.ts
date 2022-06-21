@@ -38,7 +38,7 @@ export class CategoryService {
     return this.http.put<Category>(`${this.apiUrl}/${categoryId}`, Category, this.httpOptions);
   }
 
-  deleteCatagory(categoryId: number): Observable<Category> {                                        //Method for deleting one category from the database using API
+  deleteCategory(categoryId: number): Observable<Category> {                                        //Method for deleting one category from the database using API
     return this.http.delete<Category>(`${this.apiUrl}/${categoryId}`, this.httpOptions);
   }
 
