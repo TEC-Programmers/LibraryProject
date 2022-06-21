@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Role, User } from '../_models/User';
+import { User } from '../_models/User';
+import { Role } from 'app/_models/Role';
 import { UserService } from '../_services/user.service';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2'
@@ -14,11 +15,11 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 })
 export class AdminCustomerComponent implements OnInit {
   customers: User[] = [];
-  customer: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer }
+  customer: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
 
   administrators: User[] = [];
-  administrator: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer }
-  
+  administrator: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
+
   Users: User[] = [];
   total_users: User[] = [];
 
@@ -27,15 +28,13 @@ export class AdminCustomerComponent implements OnInit {
   closeResult!: string;
 
   message: string = '';
-  roles!: Role;
-  role_cus: Role = Role.customer;
-  role_admin: Role = Role.admin;
-  selectedValue: Role = Role.customer || Role.admin;
+  roles!: Role
+  selectedValue = 0;
   p: any;
 
   constructor(private userService: UserService, private http: HttpClient, private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.getAllCustomers();
     this.getAllAdmins();
   }
@@ -83,7 +82,7 @@ export class AdminCustomerComponent implements OnInit {
       .subscribe({
         next: (x) => {
           this.administrators.push(x);
-          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };          
+          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
           this.message = '';
           Swal.fire({
             title: 'Success!',
@@ -96,7 +95,7 @@ export class AdminCustomerComponent implements OnInit {
           console.log(err.error);
           this.message = Object.values(err.error.errors).join(", ");
         }
-      }); 
+      });
     } else {
       this.userService.updateUser(this.administrator.id, this.administrator)
       .subscribe({
@@ -106,7 +105,7 @@ export class AdminCustomerComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
-          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };
+          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
           Swal.fire({
             title: 'Success!',
             text: 'Administrator updated successfully',
@@ -128,7 +127,7 @@ export class AdminCustomerComponent implements OnInit {
       .subscribe({
         next: (x) => {
           this.customers.push(x);
-          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };          
+          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
           this.message = '';
           Swal.fire({
             title: 'Success!',
@@ -141,7 +140,7 @@ export class AdminCustomerComponent implements OnInit {
           console.log(err.error);
           this.message = Object.values(err.error.errors).join(", ");
         }
-      }); 
+      });
     } else {
       this.userService.updateUser(this.customer.id, this.customer)
       .subscribe({
@@ -151,7 +150,7 @@ export class AdminCustomerComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
-          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };
+          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
           Swal.fire({
             title: 'Success!',
             text: 'Customer updated successfully',
@@ -164,17 +163,17 @@ export class AdminCustomerComponent implements OnInit {
   }
 
   cancel(): void {
-    this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };
+    this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
   }
 
 
-    getAllCustomers() { 
+    getAllCustomers() {
       this.userService.getAllUsers().subscribe({
         next: (all_users) => {
           this.total_users = all_users;
           const indexOf_Customer = Object.values(Role).indexOf(1 as unknown as Role);
           const key = Object.keys(Role)[indexOf_Customer];
-      
+
           this.customers = this.total_users.filter((obj) => {
             return obj.role.toString() === key
           });
@@ -189,14 +188,14 @@ export class AdminCustomerComponent implements OnInit {
     }
 
 
-    getAllAdmins() { 
+    getAllAdmins() {
       this.userService.getAllUsers().subscribe({
         next: (all_users) => {
           this.total_users = all_users;
 
           const indexOf_Customer = Object.values(Role).indexOf(0 as unknown as Role);
           const key = Object.keys(Role)[indexOf_Customer];
-      
+
           this.administrators = this.total_users.filter((obj) => {
             return obj.role.toString() === key
           });

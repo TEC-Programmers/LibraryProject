@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormBuilder } from '@angular/forms';
 
 import { UserService } from '../_services/user.service';
-import { Role, User} from '../_models/User';
+import { User} from '../_models/User';
 
 
 @Component({
@@ -17,10 +17,10 @@ export class RegisterComponent implements OnInit {
   user: User = this.newUser();
   message: string[] = [];
   error = '';
- 
+
   constructor(
     private userService: UserService,
-   
+
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   newUser(): User {
-    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: Role.admin || Role.customer };
+    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
   }
 
   getUsers(): void {
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
   save(): void {
     this.message = [];
 
-  
+
     if (this.user.firstName == '') {
       this.message.push('Enter FirstName');
     }
@@ -60,8 +60,8 @@ export class RegisterComponent implements OnInit {
     if (this.user.password == '') {
       this.message.push('Password field cannot be empty');
     }
-   
-  
+
+
     if (this.message.length == 0) {
       if (this.user.id == 0) {
         console.log("ko");
@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
            .subscribe({
             next: a => {
             this.users.push(a)
-        
+
             this.user = this.newUser();
             alert('Thanks for Signing Up!');
            },
@@ -87,5 +87,4 @@ export class RegisterComponent implements OnInit {
   }}
 }
 
-      
-  
+
