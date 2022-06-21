@@ -26,6 +26,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JW
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -60,6 +61,7 @@ import { Router } from '@angular/router';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
+    NgxPaginationModule
     ],
 
   providers: [

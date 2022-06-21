@@ -1,3 +1,5 @@
+import { Role } from "./Role";
+
 export interface User
 {
     id: number;
@@ -6,11 +8,11 @@ export interface User
     lastName: string;
     email: string;
     password: string;
-    role?: Role;
+    role: Role;
     token?:string;
 }
 
-export enum Role {
-    customer = 'Customer',
-    admin = 'Admin'
-}
+// export enum Role {
+//     customer = 'Customer',
+//     admin = 'Admin'
+// }
