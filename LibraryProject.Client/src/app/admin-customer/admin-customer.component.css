@@ -14,7 +14,7 @@
 .choose_type {
   top: -170px;
   position: absolute;
-  left: -8px;
+  left: -3px;
 }
 
 .background {
@@ -99,17 +99,22 @@ ul li ul li {
 .label {
   word-wrap: normal;
   position: absolute;
-  top: 185px;
-  left: 40px;
+  top: 181px;
+  left: 25px;
 }
 
 .red-color {
     color:red;
 }
 
+.table_admin {
+  margin-left: 141px;
+  margin-top: -20px;
+}
+
 .table {
   margin-left: 141px;
-  margin-top: -13px;
+  margin-top: -16px;
   /* column-width: 700px; */
   /* background-color: #33475b;
   color: white; */
@@ -126,12 +131,26 @@ ul li ul li {
     margin-top: 7px;
 }
 
+.table-table-striped-table-table-hover-table-table-bordered {
+  background-color: red;
+}
+
+.table-striped{
+  /* background-color: green; */
+}
+
 .table-table-striped {
     cursor: pointer;  
+    /* background-color: green; */
 }
 
 .head {
     cursor: pointer;
+}
+
+.head-values_admin {
+  cursor: pointer;
+  background-color: green;
 }
 
 .head-values {
@@ -149,8 +168,8 @@ h1 {
   width: 63%;
   background: linear-gradient(to right, black, #eee, black);
   white-space: nowrap;
-  left: -157px;
-  top: 22px;
+  left: -125px;
+  top: -2px;
 }
 h1::before {
   content: "";

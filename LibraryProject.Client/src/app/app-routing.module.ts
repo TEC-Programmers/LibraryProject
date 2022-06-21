@@ -34,7 +34,8 @@ const routes: Routes = [
   // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
   {path: 'Contact', component: ContactComponent},
-  {path: 'loan/:id', component: LoanComponent}
+  {path: 'loan/:id', component: LoanComponent},
+  
 
 ];
 

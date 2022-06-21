@@ -130,7 +130,7 @@ namespace LibraryProject
                     userID = 4,
                     bookId = 5,
                     loaned_At = "27/06/22",
-                    return_date = "27/07/22"
+                    return_date = "27/07/22",
                 }
                 );
             modelBuilder.Entity<Reservation>().HasData(
