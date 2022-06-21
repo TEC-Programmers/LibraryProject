@@ -14,14 +14,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
 import { LoginComponent } from './login/login.component';
-import { ContactComponent } from './contact/contact.component';
-
+// import { ContactComponent } from './contact/contact.component';
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core'
-
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
@@ -43,11 +41,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CategoryComponent,
     BookComponent,
     LoginComponent,
-    ContactComponent,
     BookDetailsComponent,
     LoanComponent,
     CategoryBooksComponent
-
   ],
 
   imports: [
