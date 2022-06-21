@@ -17,6 +17,13 @@ export class BookDetailsComponent implements OnInit {
 
   book:Book = { id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
+  loan:Loan = {
+    id: 0,
+    userId: 0,
+    bookId: 0,
+    loaned_At: '',
+    return_date: ''
+  }
   constructor(private bookService:BookService, private loanService: LoanService, private route:ActivatedRoute, private router: Router, private authService: AuthService ) { }
 
   ngOnInit(): void {
@@ -31,7 +38,7 @@ export class BookDetailsComponent implements OnInit {
     });
   }
 
-  loan(book:Book){
+  Loan(book:Book){
     if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
       this.router.navigate(['login']);
@@ -48,15 +55,21 @@ export class BookDetailsComponent implements OnInit {
 
   }
 
-  bookIdNotAvailable(){
+  CheckIfBookBorrowed(){
+  // for (const obj of this.loan) {
+  //   if (obj.HasOwnProperty("bookId")) {
+  //     return true
+  //   }
+  // }
 
-   if ( /*tjek om bookId fineds i låntabellen*/ this.bookId &&  ) {
+   if ( /*tjek om bookId fineds i låntabellen*/ '') {
+     return false
+  }
+  else{
+    console.log("else")
+  }
+  return true;
 
-     return true;
-    }
 
-    else{
-      return false
-    }
   }
 }

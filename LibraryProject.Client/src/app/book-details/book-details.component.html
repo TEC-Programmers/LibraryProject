@@ -15,8 +15,8 @@
                     <span >{{product.quantity}}</span>
                     <button class="btns" type="button" ><i class="fa fa-minus"></i></button>
                 </div> -->
-                <button class="btn btn-primary" id="button-format1" (click)="loan(book)">LÅN </button>
-                <button class="btn btn-primary" id="button-format2" (click)="reserve(book)" [disabled]="bookIdNotAvailable()"> RESERVER  </button>
+                <button class="btn btn-primary" id="button-format1" (click)="Loan(book)">LÅN </button>
+                <button class="btn btn-primary" id="button-format2" (click)="reserve(book)" [disabled]="CheckIfBookBorrowed()"> RESERVER  </button>
             </div>
         </ng-container>
     </div>
