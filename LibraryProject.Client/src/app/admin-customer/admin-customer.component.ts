@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from '../_models/User';
+import { Role, User } from '../_models/User';
 import { UserService } from '../_services/user.service';
 import { HttpClient } from '@angular/common/http';
-import { Role } from '../_models/Role';
 import Swal from 'sweetalert2'
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,10 +14,10 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 })
 export class AdminCustomerComponent implements OnInit {
   customers: User[] = [];
-  customer: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
+  customer: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer }
 
   administrators: User[] = [];
-  administrator: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
+  administrator: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer }
   
   Users: User[] = [];
   total_users: User[] = [];
@@ -28,8 +27,10 @@ export class AdminCustomerComponent implements OnInit {
   closeResult!: string;
 
   message: string = '';
-  roles!: Role
-  selectedValue = 0;
+  roles!: Role;
+  role_cus: Role = Role.customer;
+  role_admin: Role = Role.admin;
+  selectedValue: Role = Role.customer || Role.admin;
   p: any;
 
   constructor(private userService: UserService, private http: HttpClient, private formBuilder: FormBuilder) {}
@@ -82,7 +83,7 @@ export class AdminCustomerComponent implements OnInit {
       .subscribe({
         next: (x) => {
           this.administrators.push(x);
-          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };          
+          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };          
           this.message = '';
           Swal.fire({
             title: 'Success!',
@@ -105,7 +106,7 @@ export class AdminCustomerComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
-          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
+          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };
           Swal.fire({
             title: 'Success!',
             text: 'Administrator updated successfully',
@@ -127,7 +128,7 @@ export class AdminCustomerComponent implements OnInit {
       .subscribe({
         next: (x) => {
           this.customers.push(x);
-          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };          
+          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };          
           this.message = '';
           Swal.fire({
             title: 'Success!',
@@ -150,7 +151,7 @@ export class AdminCustomerComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
-          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
+          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };
           Swal.fire({
             title: 'Success!',
             text: 'Customer updated successfully',
@@ -163,7 +164,7 @@ export class AdminCustomerComponent implements OnInit {
   }
 
   cancel(): void {
-    this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
+    this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: Role.admin || Role.customer };
   }
 
 

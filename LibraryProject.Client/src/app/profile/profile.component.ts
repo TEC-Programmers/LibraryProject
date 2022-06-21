@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   users: User[] = [];
   user: User = this.newUser();
   message: string[] = [];
-  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
+  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: Role.admin || Role.customer};
 
 
   constructor(
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   }
 
   newUser(): User {
-    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: ''};
+    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: '', role: Role.admin || Role.customer};
   }
 
   edit(user: User): void {

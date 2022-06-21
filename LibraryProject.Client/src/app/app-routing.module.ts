@@ -15,6 +15,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
 import { LoanComponent } from './loan/loan.component';
+import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
   {path: 'Book-Details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
+  {path: 'Admin/Users', component: AdminCustomerComponent},
+  {path: 'Admin/Categorys', component: AdminCategoryComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},

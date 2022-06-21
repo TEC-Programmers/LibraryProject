@@ -3,10 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { environment } from '../../environments/environment';
-
-import { Role, User} from '../_models/User';
+import { User } from 'app/_models/User';
 import { Data, Router } from '@angular/router';
 
 

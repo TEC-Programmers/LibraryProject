@@ -16,7 +16,7 @@ import { CategoryService } from './_services/category.service';
 
 export class AppComponent {
 
-  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: Role.admin || Role.customer };
 
   title = 'LibraryProject-Client';
 

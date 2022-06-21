@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Category } from 'app/_models/Category';
 import { CategoryService } from 'app/_services/category.service';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-category',
   templateUrl: './admin-category.component.html',
   styleUrls: ['./admin-category.component.css']
 })
+
 export class AdminCategoryComponent implements OnInit {
   searchText!: string;
   message!: string;
   categorys: Category[] = [];
-  category: Category = { id: 0, categoryName: '', books: [] }
+  category: Category = { id: 0, categoryName: '' }
   p: any;
 
   constructor(private categoryService: CategoryService) { }
@@ -22,7 +24,7 @@ export class AdminCategoryComponent implements OnInit {
   }
 
   cancel(): void {
-    this.category = { id: 0, categoryName: '', books: [] }
+    this.category = { id: 0, categoryName: '' }
   }
 
   delete(category: Category): void {
@@ -50,7 +52,7 @@ export class AdminCategoryComponent implements OnInit {
       .subscribe({
         next: (x) => {
           this.categorys.push(x);
-          this.category = { id: 0, categoryName: '', books: [] }
+          this.category = { id: 0, categoryName: '' }
           this.message = '';
           Swal.fire({
             title: 'Success!',
@@ -73,7 +75,7 @@ export class AdminCategoryComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
-          this.category = { id: 0, categoryName: '', books: [] }
+          this.category = { id: 0, categoryName: '' }
           Swal.fire({
             title: 'Success!',
             text: 'Category updated successfully',

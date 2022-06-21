@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormBuilder } from '@angular/forms';
 
 import { UserService } from '../_services/user.service';
-import { User} from '../_models/User';
+import { Role, User} from '../_models/User';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   newUser(): User {
-    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
+    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: Role.admin || Role.customer };
   }
 
   getUsers(): void {

@@ -8,8 +8,8 @@
     <div class="choose_type">
       <h5 style="font-family: Times New Roman, serif; font-size: 20px;" class="label">Choose&nbsp;Role:</h5>
       <select class="menu" [(ngModel)]="selectedValue">
-        <option value="0" selected>Members</option>
-        <option value="1">Adminisrators</option>
+        <option value="role_string.customer" selected>Members</option>
+        <option value="role_string.admin">Adminisrators</option>
       </select>
    </div>
     
@@ -17,7 +17,7 @@
       <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by user">
     </div>
     <br>
-    <div class="table" *ngIf="selectedValue == 0">
+    <div class="table" *ngIf="selectedValue == role_cus.valueOf()">
       <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
         <thead>
         <tr class="head">
@@ -101,7 +101,7 @@
 
 <!-- user type: Administrator -->
 <div class="role_admin">
-  <div class="table" *ngIf="selectedValue == 1">
+  <div class="table" *ngIf="selectedValue == role_admin.valueOf()">
     <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
     <thead>
     <tr class="head">
