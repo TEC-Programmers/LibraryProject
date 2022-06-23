@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { Role } from './_models/Role';
 import { AuthGuard } from './_helpers/auth.guard';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
+import { AdminBookComponent } from './admin-book/admin-book.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
 
 
 const routes: Routes = [
@@ -24,7 +26,9 @@ const routes: Routes = [
   {path: 'Book-Details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
+  {path: 'Admin/Books', component: AdminBookComponent},
   {path: 'Admin/Users', component: AdminCustomerComponent},
+  {path: 'Admin/Categorys', component: AdminCategoryComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
