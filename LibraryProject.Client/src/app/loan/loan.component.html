@@ -6,6 +6,12 @@
 
       <input  [(ngModel)]="loaned_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date"  formControlName="fromDate" >
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel class="btn">Cancel</button>
+        <button mat-raised-button color="primary" class="btn" matDatepickerApply>Confirm</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
 
       <mat-datepicker #picker1 id="picker1"></mat-datepicker>
 
@@ -13,11 +19,11 @@
 
     <mat-form-field>
       <input [(ngModel)]="return_date" [min]="loaned_at" matInput [matDatepicker]="picker2" placeholder="End date"  formControlName="toDate">
-      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2>
+      <mat-datepicker-toggle matSuffix id="picker2" [for]="picker2"></mat-datepicker-toggle>
+     <mat-datepicker #picker2>
           <mat-date-range-picker-actions>
-            <button mat-button matDateRangePickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+            <button mat-button matDateRangePickerCancel class="btn" >Cancel</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply class="btn">Confirm</button>
           </mat-date-range-picker-actions>
       </mat-datepicker>
     </mat-form-field>
