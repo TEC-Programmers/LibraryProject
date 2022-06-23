@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
-
+/* 
 .pageOptions {
 
-}
+} */
 
 .role_admin {
   position: absolute;
@@ -55,7 +55,7 @@ li {
   text-decoration: none;
   transition-duration: 0.5s;
 }
-  
+
 li a {
   color: #fff;
 }
@@ -127,7 +127,8 @@ ul li ul li {
 }
 
 .table-table-striped {
-    cursor: pointer;  
+    cursor: pointer;
+
 }
 
 .head {
@@ -136,6 +137,7 @@ ul li ul li {
 
 .head-values {
     cursor: pointer;
+
 }
 
 

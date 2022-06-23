@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router}  from '@angular/router';
 import { AuthService } from './_services/auth.service';
-import { Role, User } from './_models/User';
+import { User } from './_models/User';
 import {HostBinding } from '@angular/core';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
@@ -16,7 +16,7 @@ import { CategoryService } from './_services/category.service';
 
 export class AppComponent {
 
-  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
 
   title = 'LibraryProject-Client';
 

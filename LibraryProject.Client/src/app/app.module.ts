@@ -26,6 +26,9 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JW
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { AdminBookComponent } from './admin-book/admin-book.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -45,7 +48,9 @@ import { Router } from '@angular/router';
     ContactComponent,
     BookDetailsComponent,
     LoanComponent,
-    CategoryBooksComponent
+    CategoryBooksComponent,
+    AdminCategoryComponent,
+    AdminBookComponent
 
   ],
 
@@ -60,6 +65,7 @@ import { Router } from '@angular/router';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
+    NgxPaginationModule
     ],
 
   providers: [

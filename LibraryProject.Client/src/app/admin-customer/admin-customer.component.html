@@ -3,7 +3,7 @@
   <!-- user type: Member -->
   <div class="container">
     <h1><a>Administration Panel</a></h1>
-    
+
   <div class="background" style="background-color: #b3d9ff;">
     <div class="choose_type">
       <h5 style="font-family: Times New Roman, serif; font-size: 20px;" class="label">Choose&nbsp;Role:</h5>
@@ -12,7 +12,7 @@
         <option value="1">Adminisrators</option>
       </select>
    </div>
-    
+
     <div class="search-bar">
       <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by user">
     </div>
@@ -30,7 +30,7 @@
         </tr>
         </thead>
           <tbody *ngIf="customers?.length != 0">
-            <tr class="head-values" *ngFor="let customer of customers | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+            <tr class="head-values" style="background-color: #686868" *ngFor="let customer of customers | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
               <button style="width: 53px;" (click)="delete_member(customer)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
               <button style="width: 53px; color: rgb(224, 211, 22);" (click)="edit_member(customer)" data-bs-toggle="modal" data-bs-target="#Modal_Members"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
               <td style="color: whitesmoke;">{{ customer.firstName }}</td>
@@ -46,10 +46,10 @@
               </tr>
             </tbody>
       </table>
-    </div> 
+    </div>
   </div>
   </div>
-    
+
 
 
 
@@ -97,7 +97,7 @@
 </div>
 
 
-   
+
 
 <!-- user type: Administrator -->
 <div class="role_admin">
@@ -114,9 +114,9 @@
     </tr>
     </thead>
       <tbody *ngIf="administrators?.length != 0">
-        <tr class="head-values" *ngFor="let admin of administrators | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-          <button style="width: 53px;" (click)="delete_admin(admin)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-          <button style="width: 53px; color: rgb(224, 211, 22);" (click)="edit_admin(admin)" data-bs-toggle="modal" data-bs-target="#Modal"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+        <tr class="head-values"  style="background-color: #686868" *ngFor="let admin of administrators | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+          <button style="width: 53px;" style="background-color: #686868"  (click)="delete_admin(admin)"> <i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+          <button style="width: 53px; color:  rgb(224, 211, 22);"  (click)="edit_admin(admin)" data-bs-toggle="modal" data-bs-target="#Modal"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
           <td style="color: whitesmoke;">{{ admin.firstName }}</td>
           <td style="color: whitesmoke;">{{ admin.middleName }}</td>
           <td style="color: whitesmoke;">{{ admin.lastName }}</td>
@@ -171,7 +171,7 @@
           <label for="role" class="form-label">Role</label>
           &nbsp;
           <div class="mb-3">
-            
+
             <input [(ngModel)]="administrator.role" type="role" class="form-control" id="role2" name="role" disabled>
           </div>
         </form>
@@ -187,7 +187,6 @@
 
 
 
- 
-  
 
-  
+
+

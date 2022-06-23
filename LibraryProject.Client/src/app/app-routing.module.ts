@@ -8,13 +8,16 @@ import { BookComponent } from './book/book.component';
 import { ContactComponent } from './contact/contact.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AuthGuard } from './_helpers/auth.guard';
-import { Role } from './_models/User';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 //import { CustomerComponent } from './customer/customer.component';
 import { RegisterComponent } from './register/register.component';
 
 import { LoanComponent } from './loan/loan.component';
+import { AdminBookComponent } from './admin-book/admin-book.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { Role } from './_models/Role';
+import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
 
 
 const routes: Routes = [
@@ -25,8 +28,10 @@ const routes: Routes = [
   {path: 'book_details/:id', component: BookDetailsComponent},
   {path: 'Book-Details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent},
-  {path: 'Admin/Customers', component: AdministratorComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
+  {path: 'Admin/Users', component: AdminCustomerComponent},
+  {path: 'Admin/Books', component: AdminBookComponent},
+  {path: 'Admin/Categorys', component: AdminCategoryComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },

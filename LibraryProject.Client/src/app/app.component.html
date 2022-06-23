@@ -26,12 +26,12 @@
 
 
 
-    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
+    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 1">
         <a routerLink="/admin/customer" routerLinkActive="active-link w3-green">Users</a>
     </li>
 
 
-    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
+    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 1">
         <a routerLink="/" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Author</a>
 
     </li>
