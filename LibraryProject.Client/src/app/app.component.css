@@ -203,8 +203,8 @@ ul li ul li {
 
 
 @media (max-width:952px){
-  ul{
-    
+  ul li ul{
+    z-index:1;
   }
   #nav ul li a{
     font-size: 20px;
