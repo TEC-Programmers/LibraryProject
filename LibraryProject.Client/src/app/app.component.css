@@ -1,4 +1,4 @@
-button, button::after {
+/* button, button::after {
   width: 75px;
   height: 60px;
   font-size: 36px;
@@ -83,24 +83,25 @@ button:hover::after {
     clip-path: var(--slice-1);
     transform: translate(0);
   }
-}
+} */
 
 .click{
  color: black;
  cursor: pointer;
  font-size: large;
  border-radius: 1000px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #searchDiv{
 font-size: medium;
 color: blue;
 max-width: 450px;
-position:absolute;
-top: auto;
-left: 1314px;
+display:flex;
+top: 20px;
+left: 1510px;
 }
+
 
 .container {
   position: absolute;
@@ -112,6 +113,7 @@ left: 1314px;
 
 a {
   text-decoration: none;
+  transition:700ms ease;
 }
 
 nav {
@@ -120,15 +122,18 @@ nav {
 
 ul {
   background: black;
+  display:flex;
+  flex-direction: row;
   list-style: none;
   margin: 0;
   padding-left: 0;
   height: 57px;
+  width:100%
 }
 
 li {
   color: #fff;
-  background: #9b6941;
+  background: black;
   display: block;
   float: left;
   padding: 1rem;
@@ -140,6 +145,7 @@ li {
 li a {
   color: #fff;
 }
+
 
 li:hover,
 li:focus-within {
@@ -184,5 +190,29 @@ ul li ul li {
  h1{
   color:wheat;
   font-weight: bold;
-  text-align: center;
+ justify-content: space-between;
+ padding: 10px 60px 20px 90px;
+ margin: auto;
+
+}
+
+
+
+
+/*Responsive*/
+
+
+@media (max-width:952px){
+  ul{
+    
+  }
+  #nav ul li a{
+    font-size: 20px;
+
+  }
+  h1{
+    font-size:13px;
+    size:0.5em;
+  }
+ 
 }

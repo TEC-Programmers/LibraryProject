@@ -30,9 +30,9 @@ export class AppComponent {
     private router: Router) {   // get the current user from authentication service
     this.authService.currentUser.subscribe(x => this.currentUser= x);}
   ngOnInit(): void {
-    this.categoryService.getAllCategories()
-    .subscribe(c => this.categories = c);
-
+    // this.categoryService.getAllCategories()
+    // .subscribe(c => this.categories = c);
+    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
   }
 showSearch(): void {
 

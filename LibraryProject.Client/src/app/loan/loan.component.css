@@ -9,11 +9,24 @@
   height: 160px;
   margin-left: 32px;
   margin-top: 23px;
+  
 }
 
 .submit {
-  margin-left: 102px;
-  margin-left: 74px;
+  
+  margin-left: 35px;
+ background-color:rgb(107, 62, 62);
+ font-weight:bold;
+ color:black;
+ transition:0.5s;
+ width: 150px;
+}
+.submit:hover{
+  cursor:pointer;
+  background-color:rgb(172, 199, 18);
+  color:black;
+  box-shadow: 0 0 5px rgb(187, 137, 137), 0 0 10px rgb(126, 89, 89), 0 0 15px rgb(150, 115, 115);
+  font-weight: bold;
 }
 
 .container {
@@ -21,6 +34,8 @@
     margin-left: 613px;
     margin-top: 180px;
     border: 5px double gray;
+    background-color: rgb(212, 148, 69) ;
+    color:black;
 }
 body{
   height: 100vh;

@@ -1,4 +1,4 @@
-#catDiv {
+/* #catDiv {
     position: absolute;
     left: 500px;
 }
@@ -9,4 +9,12 @@ a {
 
 * {
     margin: 0px;
+} */
+
+#card{
+    background-color:rgb(212, 148, 69)
+}
+a{
+    color:black;
+    font-size:large;
 }
