@@ -7,7 +7,7 @@ import { LoanService } from '../_services/loan.service';
 import { Loan } from '../_models/Loan';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../_models/Book';
 import { AuthService } from '../_services/auth.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -36,7 +36,7 @@ export class LoanComponent implements OnInit {
 
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
-  constructor(private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
+  constructor(private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
 
   range = new FormGroup({
     fromDate: new FormControl('', Validators.required),
@@ -83,11 +83,12 @@ export class LoanComponent implements OnInit {
               this.return_date = '';
               Swal.fire({
                 title: 'Success!',
-                text: 'loan added successfully',
+                text: 'book burrow successfully!',
                 icon: 'success',
                 confirmButtonText: 'Continue'
               });
               console.log('loan added successfully!')
+              this.router.navigate(['Book-Details/',this.bookId]);
             },
             error: (err) => {
               console.log(err.error);
