@@ -21,7 +21,18 @@ export class AdminBookComponent implements OnInit {
   publishers: Publisher[] = [];
   publisher: Publisher = { id: 0, name: ''}
   books: Book[] = [];
-  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '' };
+  book: Book = {
+    id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '',
+    author: {
+      id: 0,
+      firstName: '',
+      lastName: ''
+    },
+    publisher: {
+      id: 0,
+      name: ''
+    }
+  };
   categorys: Category[] = [];
   isShown_author: boolean = true;
   isShown_publisher: boolean = true;
@@ -123,7 +134,16 @@ export class AdminBookComponent implements OnInit {
   }
 
   cancel(): void {
-    this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0 };
+    this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '',
+    author: {
+      id: 0,
+      firstName: '',
+      lastName: ''
+    },
+    publisher: {
+      id: 0,
+      name: ''
+    } };
     this.author = { id: 0, firstName: '', middleName: '', lastName: '' };
     this.publisher = { id: 0, name: ''}
     this.authorId_value = false;
@@ -136,7 +156,7 @@ export class AdminBookComponent implements OnInit {
     this.author_dropdown = true;
     this.publisherId_value = false;
     this.isShown_publisher = true;
-    this.isShown_publisher_form = false;  
+    this.isShown_publisher_form = false;
     this.btn_new_publisher = true;
     this.publisher_dropdown = true;
   }
@@ -187,7 +207,16 @@ export class AdminBookComponent implements OnInit {
                     .subscribe({
                       next: (x) => {
                         this.books.push(x);
-                        this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0 };
+                        this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '',
+                        author: {
+                          id: 0,
+                          firstName: '',
+                          lastName: ''
+                        },
+                        publisher: {
+                          id: 0,
+                          name: ''
+                        } };
                         this.message = '';
                         Swal.fire({
                           title: 'Success!',
@@ -204,21 +233,21 @@ export class AdminBookComponent implements OnInit {
                         console.log(err.error);
                         this.message = Object.values(err.error.errors).join(", ");
                       }
-                    }); 
-                  } 
+                    });
+                  }
                 },
                   error: (err) => {
                   console.log(err.error);
                   this.message = Object.values(err.error.errors).join(", ");
                   }
-              }); 
+              });
             }
           },
           error: (err) => {
             console.log(err.error);
             this.message = Object.values(err.error.errors).join(", ");
           }
-      });  
+      });
     }
-  } 
+  }
 }
