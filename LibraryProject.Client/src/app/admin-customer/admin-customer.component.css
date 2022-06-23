@@ -8,7 +8,7 @@
   position: absolute;
   /* top: 208px; */
   top: 232px;
-  margin-top: 11px;
+  margin-top: 42px;
 }
 
 .choose_type {
@@ -20,7 +20,7 @@
 .background {
   left: 0px;
   position: absolute;
-  top: 178px;
+  top: 193px;
   width: 2000px;
   height: 1000px;
 }
@@ -109,39 +109,23 @@ ul li ul li {
 
 .table_admin {
   margin-left: 141px;
-  margin-top: -20px;
+  margin-top: -25px;
 }
 
 .table {
   margin-left: 141px;
-  margin-top: -16px;
-  /* column-width: 700px; */
-  /* background-color: #33475b;
-  color: white; */
-}
-
-.container {
-    margin-left: 500px;
+  margin-top: -10px;
 }
 
 .search-bar {
     width: 350px;
     margin-left: 279px;
-    /* position: absolute; */
-    margin-top: 7px;
+    margin-top: 12px;
 }
 
-.table-table-striped-table-table-hover-table-table-bordered {
-  background-color: red;
-}
-
-.table-striped{
-  /* background-color: green; */
-}
 
 .table-table-striped {
     cursor: pointer;  
-    /* background-color: green; */
 }
 
 .head {
@@ -150,36 +134,34 @@ ul li ul li {
 
 .head-values_admin {
   cursor: pointer;
-  background-color: green;
 }
 
 .head-values {
     cursor: pointer;
 }
 
-
 h1 {
+  text-align: center;
   color: white;
   text-transform: uppercase;
   padding: 1px;
   font-family: "Raleway", cursive;
   font-weight: 100;
   position: relative;
-  width: 63%;
+  width: 263%;
   background: linear-gradient(to right, black, #eee, black);
   white-space: nowrap;
-  left: -125px;
-  top: -2px;
+  left: -785px;
 }
 h1::before {
   content: "";
   position: absolute;
-  left: -10%;
+  left: 0;
   top: -50px;
-  width: 1722px;
-  margin-left: -300px;
+  width: 64%;
+  margin-left: 390px;
   margin-top: -220px;
-  height: 430px;
+  height: 600px;
   background: radial-gradient(ellipse closest-side, #444, black);
   z-index: -1;
 }
@@ -191,6 +173,9 @@ h1 a {
   letter-spacing: 30px;
   color: white;
   animation: comein 1.5s 1 ease-in-out forwards;
+  margin-left: -564px;
+  margin-top: 0px;
+  font-family: "Raleway", cursive;
 }
 
 @keyframes comein {

@@ -27,6 +27,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminBookComponent } from './admin-book/admin-book.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
 
 
 
@@ -46,8 +48,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ContactComponent,
     BookDetailsComponent,
     LoanComponent,
-    CategoryBooksComponent
-
+    CategoryBooksComponent,
+    AdminBookComponent,
+    AdminCategoryComponent,
   ],
 
   imports: [

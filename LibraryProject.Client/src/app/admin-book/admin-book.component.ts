@@ -21,7 +21,7 @@ export class AdminBookComponent implements OnInit {
   publishers: Publisher[] = [];
   publisher: Publisher = { id: 0, name: ''}
   books: Book[] = [];
-  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '' };
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
   categorys: Category[] = [];
   isShown_author: boolean = true;
   isShown_publisher: boolean = true;
@@ -123,7 +123,7 @@ export class AdminBookComponent implements OnInit {
   }
 
   cancel(): void {
-    this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0 };
+    this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
     this.author = { id: 0, firstName: '', middleName: '', lastName: '' };
     this.publisher = { id: 0, name: ''}
     this.authorId_value = false;
@@ -187,7 +187,7 @@ export class AdminBookComponent implements OnInit {
                     .subscribe({
                       next: (x) => {
                         this.books.push(x);
-                        this.book = { id: 0, title: '', language: '', description: '',publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0 };
+                        this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
                         this.message = '';
                         Swal.fire({
                           title: 'Success!',
