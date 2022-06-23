@@ -1,5 +1,11 @@
     a {
         text-decoration: none;
+        color:black;
+        font-weight: bold;
+        font-size:x-large
+    }
+    a:hover{
+        background-color: brown;
     }
     
     nav {
@@ -18,4 +24,8 @@
     #divforside {
         position: absolute;
         left: 500px;
+    }
+
+    h2 {
+        color:white;
     }

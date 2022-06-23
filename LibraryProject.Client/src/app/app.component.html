@@ -20,23 +20,23 @@
 </div>
 <nav id="nav">
 <ul >
-
+       
         <li><a routerLink="/" routerLinkActive="active-link w3-green" [routerLinkActiveOptions]="{exact:true}">Home</a>
         </li>
 
 
 
-    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
+    <li  *ngIf="currentUser != null && currentUser.role == 'Admin'">
         <a routerLink="/admin/customer" routerLinkActive="active-link w3-green">Users</a>
     </li>
 
 
-    <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
+    <li  *ngIf="currentUser != null && currentUser.role == 'Admin'">
         <a routerLink="/" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Author</a>
 
     </li>
 
-    <li style="display:inline-block" *ngIf="currentUser != null">
+    <li  *ngIf="currentUser != null">
         <a routerLink="/profile" routerLinkActive="active-link w3-green">Profile</a>
 
     </li>
@@ -53,7 +53,9 @@
     <li class="nav-item">
         <a class="nav-link text-danger" *ngIf="currentUser != null && currentUser.firstName == 'username'">User</a>
     </li>
-
+    <li class="nav-item">
+        <a routerLink="/Category" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Kategorier</a>
+    </li>
 
     <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item" >
         <a routerLink="/" (click)="logout()">Logout</a>
@@ -63,8 +65,16 @@
     <li class="nav-item">
         <a routerLink="/login" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Login</a>
     </li>
-
+    <h1>Library Management System</h1>
+<!--     <nav id="navforside">
+         |
+        <a routerLink="/Book">Bøger</a> |
+        <a routerLink="/Login">Login</a> |
+        <a routerLink="/Contact">Kontakt os</a> |
+    </nav> -->
 </ul>
+
+
 
 
 
@@ -74,6 +84,6 @@
     <a routerLink="/"> Home | </a>
     <a routerLink="/Author">  Author | </a>
     <a routerLink="/Category"> category | </a>   <!--added navigation in the menu-->
-    <a routerLink="/Admin">  Admin | </a>
-</nav>
+   
+
 <router-outlet></router-outlet>

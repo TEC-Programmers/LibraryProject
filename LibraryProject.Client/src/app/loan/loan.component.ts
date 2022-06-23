@@ -29,7 +29,7 @@ export class LoanComponent implements OnInit {
   return_date: string = ''
   loaned_at: string = ''
   currentDate = new Date();
-  dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
+  dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-EU');
   minDate = new Date(this.dateNow);
   minDate2 = new Date(this.minDate)
 

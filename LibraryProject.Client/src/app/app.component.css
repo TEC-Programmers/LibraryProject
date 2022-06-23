@@ -119,7 +119,7 @@ nav {
 }
 
 ul {
-  background: #4e1d04;
+  background: black;
   list-style: none;
   margin: 0;
   padding-left: 0;
@@ -181,3 +181,8 @@ ul li ul li {
 /* #date{
   color: green;
 } */
+ h1{
+  color:wheat;
+  font-weight: bold;
+  text-align: center;
+}

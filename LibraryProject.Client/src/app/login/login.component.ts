@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   error = '';
 
+  bookId: number = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -29,6 +30,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
    var username = this.authService.currentUserValue.id; 
+
+   this.route.params.subscribe(params => {
+    this.bookId = +params['id'];
+  });
   }
 
   login(): void {
@@ -40,7 +45,7 @@ export class LoginComponent implements OnInit {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           
           
-          this.router.navigate(['returnUrl']);
+          this.router.navigate(['/loan',this.bookId]);
           var username = this.authService.currentUserValue.firstName; 
         
         },

@@ -10,6 +10,12 @@
   
     
 }
+body {
+    background: url("/assets/images/Library.jpg") no-repeat center center fixed;
+    background-size:cover;
+    height:100vh;
+
+ }
 
 /*app component*/
  a.nav-link{
