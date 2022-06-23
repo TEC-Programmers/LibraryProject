@@ -13,7 +13,6 @@ namespace LibraryProject.API.Database.Entities
         public int bookId { get; set; }
         public string loaned_At { get; set; }
         public string return_date { get; set; }
-
         public Status status { get; set; }
     }
 }

@@ -122,7 +122,7 @@ namespace LibraryProject
                     userID = 2,
                     bookId = 2,
                     loaned_At = "06/05/22",
-                    return_date = "13/05/22"
+                    return_date = "13/05/22",
                 },
                 new()
                 {
