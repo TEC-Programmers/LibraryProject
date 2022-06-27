@@ -33,9 +33,9 @@ export class BookDetailsComponent implements OnInit {
     publisher: { id: 0, name:"" }},
   reserved_At: '',
   reserved_To: '',
-
 }
-isDisabled_loanBtn: boolean= false;
+  isDisabled_loanBtn: boolean= false;
+
 
   constructor(private bookService:BookService, private loanService: LoanService, private reservationService:ReservationService, private route:ActivatedRoute, private router: Router, private authService: AuthService ) { }
 
@@ -50,30 +50,26 @@ isDisabled_loanBtn: boolean= false;
       console.log('book-details on load: ',this.book);
     });
 
-    // console.log('clicked book: ',this.bookId)
-    // this.loanService.getAllLoans().subscribe(loan => {
-    //   this.loans = loan;
+    console.log('clicked book: ',this.bookId)
+    this.loanService.getAllLoans().subscribe(loan => {
+      this.loans = loan;
 
-    //   for (const key in this.loans) {
-    //     if (this.loans.hasOwnProperty(key)) {
-    //       console.log(`${key} : ${this.loans[key]}`)
+      for (const key in this.loans) {
+        if (this.loans.hasOwnProperty(key)) {
+          console.log(`${key} : ${this.loans[key]}`)
 
-    //       if (this.loans[key].bookId == this.bookId) {
-    //         console.log('book found!  bookId: ',this.bookId)
-    //         this.isDisabled_loanBtn = true;
-    //       }
-    //       else {
-    //     console.log('Book not found')
-    //       }
-    //     }
-    //   }
-    // });
+          if (this.loans[key].bookId == this.bookId) {
+            console.log('book found!  bookId: ',this.bookId)
+            this.isDisabled_loanBtn = true;
+          }
+          else {
+        console.log('Book not found')
+          }
+        }
+      }
+    });
 
-
-    // this.checking();
   }
-
-
 
 
   Loan(book:Book){
@@ -93,34 +89,27 @@ isDisabled_loanBtn: boolean= false;
 
   }
 
- 
-
-
-
-
   DisableIfBookReserve(){
 
-  //  // console.log('clicked book: ',this.bookId)
-  //   this.reservationService.getAllReservations().subscribe(reservation => {
-  //     this.reservations = reservation;
+   // console.log('clicked book: ',this.bookId)
+    this.reservationService.getAllReservations().subscribe(reservation => {
+      this.reservations = reservation;
 
-  //   for(const item in this.loans) {
+    for(const item in this.loans) {
 
-  //     if (this.loans.hasOwnProperty(item)) {
-  //         console.log(`${item} : ${this.loans[item]}`)
+      if (this.loans.hasOwnProperty(item)) {
+          console.log(`${item} : ${this.loans[item]}`)
 
-  //         if (this.reservations[item].bookId == this.bookId) {
-  //          console.log('book found!  bookId: ',this.bookId)
-  //         }
-  //         else {
-  //       console.log('Book not found')
+          if (this.reservations[item].bookId == this.bookId) {
+           console.log('book found!  bookId: ',this.bookId)
+          }
+          else {
+        console.log('Book not found')
 
-  //         }
-  //       }
-  //     }
-  //     });
-
-
+          }
+        }
+      }
+      });
 
   }
 
