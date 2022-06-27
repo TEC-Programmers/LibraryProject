@@ -5,8 +5,6 @@ import { UserService } from '../_services/user.service';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2'
 import { FormBuilder } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-admin-customer',
