@@ -24,7 +24,7 @@ import Swal from 'sweetalert2'
 export class LoanComponent implements OnInit {
   dateRangeForm!: FormGroup;
   loans: Loan[] = [];
-  loan: Loan = { id: 0, bookId: 0, userId: 0, return_date: '', loaned_At: ''}
+  loan: Loan = { id: 0, bookId: 0, userID: 0, return_date: '', loaned_At: ''}
   bookId: number = 0;
   return_date: string = ''
   loaned_at: string = ''
@@ -65,7 +65,7 @@ export class LoanComponent implements OnInit {
     if (this.authService.currentUserValue.id != null && this.authService.currentUserValue.id > 0) {
         let loanitem: Loan = {
           id: this.book.id,
-          userId: this.authService.currentUserValue.id,
+          userID: this.authService.currentUserValue.id,
           bookId: this.book.id,
           return_date: this.return_date,
           loaned_At: this.loaned_at
@@ -78,7 +78,7 @@ export class LoanComponent implements OnInit {
           .subscribe({
             next: (x) => {
               this.loans.push(x);
-              this.loan = { id: 0, bookId: 0, userId: 0, return_date: '', loaned_At: ''}
+              this.loan = { id: 0, bookId: 0, userID: 0, return_date: '', loaned_At: ''}
               this.loaned_at = '';
               this.return_date = '';
               Swal.fire({

@@ -7,6 +7,9 @@ import { LoanService } from 'app/_services/loan.service';
 import { Loan } from 'app/_models/Loan';
 import { ReservationService } from 'app/_services/reservation.service';
 import { Reservation } from 'app/_models/Reservation';
+import { User } from 'app/_models/User';
+import { UserService } from 'app/_services/user.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-book-details',
@@ -23,13 +26,19 @@ export class BookDetailsComponent implements OnInit {
   total_loans: Loan[] = [];
   loans: Loan[] = [];
   reservations: Reservation[] = [];
-  // book_found: any = {};
-  loanObj: Loan | undefined = { id: 0, userId: 0, bookId: 0, loaned_At: '', return_date: '' }
-  userId: number = 0;
+  loanObjFound: Loan | undefined = { id: 0, userID: 0, bookId: 0, loaned_At: '', return_date: '' }
+  userID: number = 0;
+  books: Book[] = [];
+  users: User[] = []
+
+  
  
-  constructor(private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService ) { }
+  constructor(private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService ) { }
 
   ngOnInit(): void {
+    this.bookService.getAllBooks().subscribe(b => this.books = b);
+    this.userService.getAllUsers().subscribe(u => this.users = u)
+
     this.route.params.subscribe(params => {
       this.bookId = +params['id'];
     });
@@ -37,33 +46,81 @@ export class BookDetailsComponent implements OnInit {
     this.bookService.getBookById(this.bookId).subscribe(x => { 
       this.book = x,
       console.log('book-details on load: ',this.book);
-      // console.log('bookId: ',this.book.id)
-
-
     });
 
     // this.findBookIdInLoanTable();
-    this.getLoan_();
+    this.getLoan_();    
   }
 
   
 
+  
+
+  // (CHECK) if Loan already exists
   getLoan_() {
     this.loanService.getAllLoans().subscribe({
       next: (all_loans) => {
         this.loans = all_loans;
-        this.userId = this.authService.currentUserValue.id;
-        console.log('userId: ',this.userId)
-        console.log('bookId: ',this.bookId)
-        
-        let reuslt = this.loans.every(el => {
-          console.log('every: ',el.bookId === this.bookId)
-          if (el.bookId === this.bookId) {
-            console.log('trueeeee')
-          }
-          return false
-        })
+        this.userID = this.authService.currentUserValue.id;
 
+        console.log('search userID: ',this.userID)
+        console.log('search bookId: ',this.bookId)
+
+        for (var i = this.loans.length -1; i > -1; i--) {
+          let userid = this.loans[i].userID != this.userID;
+
+          // bruger er logget ind og har lånt bog
+          if (this.loans[i].bookId === this.bookId && this.loans[i].userID === this.userID) {
+            console.log('Loan Found')
+            this.isDisabled_loanBtn = true;
+            this.isDisabled_reserveBtn = true;
+          }
+          else if (this.loans[i].bookId === this.bookId)
+          {
+              // Book is in burrowed
+              console.log('Book ready for reservation!')
+              this.isDisabled_loanBtn = true;
+              this.isDisabled_reserveBtn = false;
+          }
+          else if (this.loans[i].bookId != this.bookId)
+          {
+            // Book is (NOT) in [Loan] table and is availabe for users to loan and reserve
+            this.isDisabled_loanBtn = false;
+            this.isDisabled_reserveBtn = true;
+          }
+
+          // Object.keys(loan).forEach(prop => {
+          //   console.log(prop)
+          //   console.log(loan[prop]);
+
+          //   if (loan[prop].bookId === 3) {
+          //     console.log('found')
+          //   }
+          //   else
+          //   {
+          //     console.log('NOT found')
+          //   }
+          // });           
+      
+        }
+
+
+        // let filterResult: any = this.loans.filter(loan =>
+        //   loan.bookId == this.bookId && loan.userID == this.userID);
+        //   console.log('new obj: ',JSON.stringify(filterResult))
+
+
+
+        // var result = this.loans.filter((o, i) => {
+        //   return ((o["bookId"] === this.bookId) && o.userID === this.userID);
+        // })
+        // console.log('object: ',result)
+
+        // const returnLoanWithBookId = this.loans.filter((obj) => {
+        //     return obj.bookId === this.bookId && obj.userID === this.userID;
+        //   });
+
+        //   console.log(returnLoanWithBookId)
 
 
 
@@ -81,29 +138,30 @@ export class BookDetailsComponent implements OnInit {
         // }
       },
     });    
-  }
+}
 
   findBookIdInLoanTable(): void {
     this.loanService.getAllLoans().subscribe({
       next: (all_loans) => {
         this.loans = all_loans;
-        this.userId = this.authService.currentUserValue.id;
-        console.log('userId: ',this.userId)       
+        this.userID = this.authService.currentUserValue.id;
+        console.log('userID: ',this.userID)
+        console.log('bookId: ',this.bookId)
 
         for (const key in this.loans) {
           if (this.loans.hasOwnProperty(key)) {
-            console.log(`key: ${key} : object: ${this.loans[key]}`)
+            // console.log(`key: ${key} : object: ${this.loans[key]}`)
 
             // check if user loggin in has burrow book
-            if (this.loans[key].bookId === this.bookId && (this.loans[key].userId === this.userId)) {
-              this.isDisabled_loanBtn = true; // NOT Active
-              this.isDisabled_reserveBtn = true;
+            if (this.loans[key].bookId == this.bookId && this.loans[key].userID == this.userID) {
+              //this.isDisabled_loanBtn = true; // NOT Active
+              //this.isDisabled_reserveBtn = true;
               console.log('me')
             }
             else {
               console.log('not')
             }
-            // else if (this.loans[key].bookId === this.bookId && (this.loans[key].userId != this.userId)) {
+            // else if (this.loans[key].bookId === this.bookId && (this.loans[key].userID != this.userID)) {
             //   // find anyone who has burrow book
             //   this.isDisabled_loanBtn = true;
             //   this.isDisabled_reserveBtn = false;
@@ -123,7 +181,7 @@ export class BookDetailsComponent implements OnInit {
 
         // check if user loggin in has burrow book
         // const findUserLoggin = this.loans.filter(el => {
-        //   return el.bookId === this.bookId && el.userId === this.userId;
+        //   return el.bookId === this.bookId && el.userID === this.userID;
         // })
 
         // find anyone who has burrow book
@@ -166,11 +224,11 @@ export class BookDetailsComponent implements OnInit {
     this.reserveService.getAllReservations().subscribe({
       next: (all_res) => {
         this.reservations = all_res;
-        this.userId = this.authService.currentUserValue.id;
+        this.userID = this.authService.currentUserValue.id;
 
         // check if user loggin in has reserved book
         const findUserLoggin = this.reservations.filter(el => {
-          return el.bookId === this.bookId && el.userId === this.userId;
+          return el.bookId === this.bookId && el.userId === this.userID;
         })
 
         // find anyone who has reserved book
@@ -178,7 +236,7 @@ export class BookDetailsComponent implements OnInit {
           return el.bookId === this.bookId;
         })
 
-        if (findUserLoggin) {    //&& res.userId === 
+        if (findUserLoggin) {    //&& res.userID === 
           console.log('res found')
           this.isDisabled_reserveBtn = true;
           this.isDisabled_loanBtn = true;
@@ -211,6 +269,8 @@ export class BookDetailsComponent implements OnInit {
     }
     else
       this.bookId = this.book.id;
+      // if ()
+      // this.isDisabled_reserveBtn = true;
       console.log('book-details: bookId: ',this.bookId)
       this.router.navigate(['/loan',this.bookId]);
   }
