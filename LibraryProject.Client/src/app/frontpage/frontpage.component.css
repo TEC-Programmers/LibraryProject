@@ -11,11 +11,11 @@
     }
     
     h1 {
-        font-size: 75px;
-        margin: 0;
+        font-size: 50px;
     }
     
     #divforside {
         position: absolute;
-        left: 500px;
+        top: 75px;
+        left: 555px;
     }

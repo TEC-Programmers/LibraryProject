@@ -42,5 +42,5 @@ export class CategoryService {
     return this.http.delete<Category>(`${this.apiUrl}/${categoryId}`, this.httpOptions);
   }
 
-  
+
 }

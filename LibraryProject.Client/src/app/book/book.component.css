@@ -1,5 +1,6 @@
 h1 {
     font-size: 50px;
+    padding-bottom: 30px;
 }
 
 * {
@@ -8,5 +9,5 @@ h1 {
 
 #bookDiv {
     position: absolute;
-    left: 500px;
+    left: 555px;
 }

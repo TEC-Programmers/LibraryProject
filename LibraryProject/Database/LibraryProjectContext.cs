@@ -119,7 +119,7 @@ namespace LibraryProject
                 new()
                 {
                     Id = 1,
-                    userID = 2,
+                    userId = 2,
                     bookId = 2,
                     loaned_At = "06/05/22",
                     return_date = "13/05/22"
@@ -127,7 +127,7 @@ namespace LibraryProject
                 new()
                 {
                     Id = 3,
-                    userID = 4,
+                    userId = 4,
                     bookId = 5,
                     loaned_At = "27/06/22",
                     return_date = "27/07/22",
