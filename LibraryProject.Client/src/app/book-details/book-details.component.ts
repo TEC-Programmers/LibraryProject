@@ -17,14 +17,15 @@ import { noUndefined } from '@angular/compiler/src/util';
 })
 export class BookDetailsComponent implements OnInit {
 
-  bookId: number = 0;
+   bookId:number  = 0;
+   userID:number = 0;
+
   book:Book = { id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
-  loans: Loan[] = []
 
   reservations: Reservation[] = []
   reservation: Reservation = {
   id: 0,
-  userId: 0,
+  userID: 0,
   user: { id: 0, firstName: "", lastName: "", email: "", password: "", role: 0 },
   bookId: 0,
   book: {
@@ -33,8 +34,9 @@ export class BookDetailsComponent implements OnInit {
     publisher: { id: 0, name:"" }},
   reserved_At: '',
   reserved_To: '',
-}
 
+
+}
   isDisabled_loanBtn: boolean= false;
 
 
@@ -51,26 +53,55 @@ export class BookDetailsComponent implements OnInit {
       console.log('book-details on load: ',this.book);
     });
 
-    // console.log('clicked book: ',this.bookId)
-    // this.loanService.getAllLoans().subscribe(loan => {
-    //   this.loans = loan;
-
-    //   for (const key in this.loans) {
-    //     if (this.loans.hasOwnProperty(key)) {
-    //       console.log(`${key} : ${this.loans[key]}`)
-
-    //       if (this.loans[key].bookId == this.bookId) {
-    //         console.log('book found!  bookId: ',this.bookId)
-    //         this.isDisabled_loanBtn = true;
-    //       }
-    //       else {
-    //     console.log('Book not found')
-    //       }
-    //     }
-    //   }
-    // });
-
+    this.DisableIfBookReserve();
   }
+
+    DisableIfBookReserve() {
+        // this.reservationService.getAllReservations().subscribe(reservation => {
+        // this.reservations = reservation;
+         const bookId = this.reservationService.getReservationById(this.bookId)
+         this.userID = this.authService.currentUserValue.id
+
+        console.log("bookId:", this.bookId, "userId:", this.userID);
+        // console.log("reservation bookId", this.reservation.bookId)
+
+        if (this.reservation.userID === this.userID) {
+          console.log("userid:", this.userID)
+        }
+
+        else{
+          console.log("this is not working")
+        }
+      //   if (this.reservation.userId === this.userId) {
+      //     console.log("found user");
+
+      //     if (this.reservation.bookId === this.bookId) {
+      //       console.log("found book");
+
+      //       if (this.reservation.userId === this.userId && this.reservation.bookId === this.bookId) {
+
+      //         console.log("did not find user with book and vice versa");
+      //       }
+
+      //       else{
+
+      //         console.log("not reserved by user 3")
+      //       }
+      //     }
+
+      //     else{
+      //  console.log("not reserved by this user 2")
+      //     }
+
+        // }
+
+
+        // else{
+        //   console.log("book not reserved by this user 1")
+        // }
+
+      //  })
+    }
 
 
   Loan(book:Book){
@@ -88,21 +119,6 @@ export class BookDetailsComponent implements OnInit {
   reserve(book:Book){
 
 
-  }
-
-  DisableIfBookReserve(){
-
-  //  // console.log('clicked book: ',this.bookId)
-  //   this.reservationService.getAllReservations().subscribe(reservation => {
-  //     this.reservations = reservation;
-  //     const bookId = this.reservationService.getReservationById(this.bookId)
-  //     const userId = this.authService.currentUserValue.id
-
-  //     if (this.reservation.bookId && this.reservation.bookId == this.bookId) {
-  //       console.log("book reserved by this user")
-  //     }
-
-    // })
   }
 
 }
