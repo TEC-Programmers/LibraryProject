@@ -6,9 +6,8 @@ import { AuthService } from '../_services/auth.service';
 import { LoanService } from 'app/_services/loan.service';
 import { Reservation } from 'app/_models/Reservation';
 import { ReservationService } from 'app/_services/reservation.service';
-import { Loan } from 'app/_models/Loan';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-import { noUndefined } from '@angular/compiler/src/util';
+import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-book-details',
@@ -16,16 +15,15 @@ import { noUndefined } from '@angular/compiler/src/util';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-
    bookId:number  = 0;
-   userID:number = 0;
+   userId:number = 0;
 
   book:Book = { id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
   reservations: Reservation[] = []
   reservation: Reservation = {
   id: 0,
-  userID: 0,
+  userId: 0,
   user: { id: 0, firstName: "", lastName: "", email: "", password: "", role: 0 },
   bookId: 0,
   book: {
@@ -40,7 +38,7 @@ export class BookDetailsComponent implements OnInit {
   isDisabled_loanBtn: boolean= false;
 
 
-  constructor(private bookService:BookService, private loanService: LoanService, private reservationService:ReservationService, private route:ActivatedRoute, private router: Router, private authService: AuthService ) { }
+  constructor(private bookService:BookService, private loanService: LoanService, private reservationService:ReservationService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private datepipe:DatePipe ) { }
 
   ngOnInit(): void {
 
@@ -52,26 +50,29 @@ export class BookDetailsComponent implements OnInit {
 
       console.log('book-details on load: ',this.book);
     });
-
-    this.DisableIfBookReserve();
+    // this.DisableIfBookReserve();
+    this.reserve();
   }
 
     DisableIfBookReserve() {
         // this.reservationService.getAllReservations().subscribe(reservation => {
         // this.reservations = reservation;
-         const bookId = this.reservationService.getReservationById(this.bookId)
-         this.userID = this.authService.currentUserValue.id
 
-        console.log("bookId:", this.bookId, "userId:", this.userID);
+
+
+        //  const bookId = this.reservationService.getReservationById(this.bookId)
+        //  this.userId = this.authService.currentUserValue.id
+
+        // console.log("resBookId", this.reservation.bookId, "\n", "bookId:", this.bookId, "\n", "userId:", this.userId);
         // console.log("reservation bookId", this.reservation.bookId)
 
-        if (this.reservation.userID === this.userID) {
-          console.log("userid:", this.userID)
-        }
+        // if (this.reservation.userId === this.userId) {
+        //   console.log("userid:", this.userId)
+        // }
 
-        else{
-          console.log("this is not working")
-        }
+        // else{
+        //   console.log("this is not working")
+        // }
       //   if (this.reservation.userId === this.userId) {
       //     console.log("found user");
 
@@ -116,9 +117,22 @@ export class BookDetailsComponent implements OnInit {
   }
 
 
-  reserve(book:Book){
+  reserve(){
+    this.reservationService.getReservationById(this.bookId).subscribe(x=>
+      { this.reservation = x,
+      console.log("reservation",this.reservations);
 
+      })
+
+      let reserveEnd = this.reservation.bookId;
 
   }
 
+  // functionGetNewDate(endDate){
+  //   const year = getYear(endDate)
+  //   const month = getMonth(endDate)
+  //   const day = getDay(endDate)
+  //   return newEndDate = new Date(year,month,day)
+  // }
 }
+

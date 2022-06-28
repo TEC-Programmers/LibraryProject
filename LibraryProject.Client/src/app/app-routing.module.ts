@@ -32,9 +32,6 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
-
- // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
-  // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
   {path: 'loan/:id', component: LoanComponent}
 

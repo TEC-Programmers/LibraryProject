@@ -4,7 +4,7 @@ import { User } from "./User";
 export interface Reservation
 {
     id: Number;
-    userID: Number;
+    userId: Number;
     user: User;
     bookId: Number;
     book:Book;
