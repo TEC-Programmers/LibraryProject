@@ -6,18 +6,16 @@ import { CategoryBooksComponent } from './category-books/category-books.componen
 import { CategoryComponent } from './category/category.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { BookComponent } from './book/book.component';
-import { ContactComponent } from './contact/contact.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-//import { CustomerComponent } from './customer/customer.component';
 import { RegisterComponent } from './register/register.component';
-
 import { LoanComponent } from './loan/loan.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
 import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 
 const routes: Routes = [
@@ -37,8 +35,8 @@ const routes: Routes = [
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
-  {path: 'Contact', component: ContactComponent},
   {path: 'loan/:id', component: LoanComponent},
+  {path: 'reserve/:id', component: ReservationComponent},
   
 
 ];

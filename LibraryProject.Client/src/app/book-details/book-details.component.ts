@@ -22,17 +22,18 @@ export class BookDetailsComponent implements OnInit {
   book: Book = { id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
   isDisabled_loanBtn = false;
   isDisabled_reserveBtn = true;
-  IdFound!: any;
+  loan_found: boolean = false;
   total_loans: Loan[] = [];
-  loans: Loan[] = [];
+  loans: Loan[] | undefined = [];
   reservations: Reservation[] = [];
-  loanObjFound: Loan | undefined = { id: 0, userID: 0, bookId: 0, loaned_At: '', return_date: '' }
+  loanObjFound: Loan = { id: 0, userID: 0, bookId: 0, loaned_At: '', return_date: '' }
   userID: number = 0;
   books: Book[] = [];
   users: User[] = []
+  userLoggedIn_status: boolean = false;
+  bookBorrowed_status: boolean = false;
+  bookAvailable_status: boolean = false;
 
-  
- 
   constructor(private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService ) { }
 
   ngOnInit(): void {
@@ -48,237 +49,123 @@ export class BookDetailsComponent implements OnInit {
       console.log('book-details on load: ',this.book);
     });
 
-    // this.findBookIdInLoanTable();
-    this.getLoan_();    
+    this.check_Reservation();
+    this.check_Loan();    
   }
 
   
+  check_Reservation() {
+    this.reserveService.getAllReservations().subscribe({
+      next: (all_reservations) => {
+        this.reservations = all_reservations;
+        this.userID = this.authService.currentUserValue.id;
+        console.log('check_Reservation: userID: ',this.userID)
+        console.log('check_Reservation: bookId: ',this.bookId)
 
+        var userLoggedIn = this.reservations.find((res) => {
+          return ((res["bookId"] === this.bookId) && (res["userId"] === this.userID));
+       })
+
+      //  var bookBorrowed = this.reservations.find((res) => {
+      //    return ((res["bookId"] === this.bookId) && (res["userId"] !== this.userID));    
+      //  })
+
+      //  var bookAvailable = this.reservations.find((res) => {
+      //    return ((res["bookId"] == 0));
+      //  })
+
+
+       if (userLoggedIn) {
+        this.isDisabled_loanBtn = true; // NOT Active
+        this.isDisabled_reserveBtn = true;
+        console.log('userLoggedIn')             
+      }
+      // else
+      // {     
+      //   this.isDisabled_loanBtn = true;
+      //   this.isDisabled_reserveBtn = false;
+      //   console.log('bookBorrowed')
+      // }
+    
+      // if (bookAvailable) {
+      //   this.isDisabled_loanBtn = false;
+      //   this.isDisabled_reserveBtn = true;
+      //   console.log('bookAvailable')
+      // }
+
+      }
+    })
+  }
   
 
   // (CHECK) if Loan already exists
-  getLoan_() {
+  check_Loan() {
     this.loanService.getAllLoans().subscribe({
       next: (all_loans) => {
         this.loans = all_loans;
         this.userID = this.authService.currentUserValue.id;
+        console.log('check_Loan: userID: ',this.userID)
+        console.log('check_Loan: bookId: ',this.bookId)
 
-        console.log('search userID: ',this.userID)
-        console.log('search bookId: ',this.bookId)
+        var userLoggedIn = this.loans.find((loan) => {
+           return ((loan["bookId"] === this.bookId) && (loan["userId"] === this.userID));
+        })
 
-        for (var i = this.loans.length -1; i > -1; i--) {
-          let userid = this.loans[i].userID != this.userID;
+        var bookBorrowed = this.loans.find((loan) => {
+          return ((loan["bookId"] === this.bookId) && (loan["userId"] !== this.userID));    
+        })
 
-          // bruger er logget ind og har lånt bog
-          if (this.loans[i].bookId === this.bookId && this.loans[i].userID === this.userID) {
-            console.log('Loan Found')
-            this.isDisabled_loanBtn = true;
-            this.isDisabled_reserveBtn = true;
-          }
-          else if (this.loans[i].bookId === this.bookId)
-          {
-              // Book is in burrowed
-              console.log('Book ready for reservation!')
-              this.isDisabled_loanBtn = true;
-              this.isDisabled_reserveBtn = false;
-          }
-          else if (this.loans[i].bookId != this.bookId)
-          {
-            // Book is (NOT) in [Loan] table and is availabe for users to loan and reserve
-            this.isDisabled_loanBtn = false;
-            this.isDisabled_reserveBtn = true;
-          }
-
-          // Object.keys(loan).forEach(prop => {
-          //   console.log(prop)
-          //   console.log(loan[prop]);
-
-          //   if (loan[prop].bookId === 3) {
-          //     console.log('found')
-          //   }
-          //   else
-          //   {
-          //     console.log('NOT found')
-          //   }
-          // });           
-      
+        var bookAvailable = this.loans.find((loan) => {
+          return ((loan["bookId"] == 0));
+        })
+        
+        if (userLoggedIn) {
+          this.isDisabled_loanBtn = true; // NOT Active
+          this.isDisabled_reserveBtn = true;
+          console.log('userLoggedIn')       
         }
-
-
-        // let filterResult: any = this.loans.filter(loan =>
-        //   loan.bookId == this.bookId && loan.userID == this.userID);
-        //   console.log('new obj: ',JSON.stringify(filterResult))
-
-
-
-        // var result = this.loans.filter((o, i) => {
-        //   return ((o["bookId"] === this.bookId) && o.userID === this.userID);
-        // })
-        // console.log('object: ',result)
-
-        // const returnLoanWithBookId = this.loans.filter((obj) => {
-        //     return obj.bookId === this.bookId && obj.userID === this.userID;
-        //   });
-
-        //   console.log(returnLoanWithBookId)
-
-
-
-
-        // const first = this.loans.find((obj) => {
-        //   return obj.bookId === this.bookId;
-        // });
-        // console.log('first: ',first)
-        // if (first) {
-        //   console.log('anyone')
-        // }
-        // else
-        // {
-        //   console.log('first is false')
-        // }
+        else
+        {
+               
+          this.isDisabled_loanBtn = true;
+          this.isDisabled_reserveBtn = false;
+          console.log('bookBorrowed')
+        }
+      
+        if (bookAvailable) {
+          this.isDisabled_loanBtn = false;
+          this.isDisabled_reserveBtn = true;
+          console.log('bookAvailable')
+        }
       },
     });    
 }
-
-  findBookIdInLoanTable(): void {
-    this.loanService.getAllLoans().subscribe({
-      next: (all_loans) => {
-        this.loans = all_loans;
-        this.userID = this.authService.currentUserValue.id;
-        console.log('userID: ',this.userID)
-        console.log('bookId: ',this.bookId)
-
-        for (const key in this.loans) {
-          if (this.loans.hasOwnProperty(key)) {
-            // console.log(`key: ${key} : object: ${this.loans[key]}`)
-
-            // check if user loggin in has burrow book
-            if (this.loans[key].bookId == this.bookId && this.loans[key].userID == this.userID) {
-              //this.isDisabled_loanBtn = true; // NOT Active
-              //this.isDisabled_reserveBtn = true;
-              console.log('me')
-            }
-            else {
-              console.log('not')
-            }
-            // else if (this.loans[key].bookId === this.bookId && (this.loans[key].userID != this.userID)) {
-            //   // find anyone who has burrow book
-            //   this.isDisabled_loanBtn = true;
-            //   this.isDisabled_reserveBtn = false;
-            //   console.log('anyone')
-            // }
-            // else {
-            //   this.isDisabled_loanBtn = false;
-            //   this.isDisabled_reserveBtn = true;
-            //   console.log('book available')
-            // }
-          }
-        }
-      
-        
-
-        
-
-        // check if user loggin in has burrow book
-        // const findUserLoggin = this.loans.filter(el => {
-        //   return el.bookId === this.bookId && el.userID === this.userID;
-        // })
-
-        // find anyone who has burrow book
-        // const findUser = this.loans.filter(el => {
-        //   return el.bookId === this.bookId;
-        // })
-
-        
-    //     if (findUserLoggin) { 
-    //       console.log('My loan found: ',findUserLoggin)
-    //       this.isDisabled_loanBtn = true; // NOT Active
-    //       this.isDisabled_reserveBtn = true;
-    //     } 
-    //     else if (findUser)
-    //     {
-    //       console.log('loan found and current user have not burrow this book')
-    //       this.isDisabled_loanBtn = true;
-    //       this.isDisabled_reserveBtn = false;
-    //       this.findBookInReserve();
-    //     }
-    //     else // bog (IKKE) lånt
-    //     {
-    //       this.isDisabled_loanBtn = false;
-    //       this.isDisabled_reserveBtn = true;
-    //       console.log('book available')
-    //     }
-    //   },
-    //   error: (err: any) => {
-    //     console.log(err);
-    //   },
-    //   complete: () => {
-    //     console.log('getAllCustomers() - Completed Successfully');
-      },
-    });
-
-  }
-
-  // this.authService.currentUserValue.firstName; 
-  findBookInReserve(): void {
-    this.reserveService.getAllReservations().subscribe({
-      next: (all_res) => {
-        this.reservations = all_res;
-        this.userID = this.authService.currentUserValue.id;
-
-        // check if user loggin in has reserved book
-        const findUserLoggin = this.reservations.filter(el => {
-          return el.bookId === this.bookId && el.userId === this.userID;
-        })
-
-        // find anyone who has reserved book
-        const findUser = this.reservations.filter(el => {
-          return el.bookId === this.bookId;
-        })
-
-        if (findUserLoggin) {    //&& res.userID === 
-          console.log('res found')
-          this.isDisabled_reserveBtn = true;
-          this.isDisabled_loanBtn = true;
-        } 
-        else if (findUser)
-        {
-          this.isDisabled_reserveBtn = true;
-          this.isDisabled_loanBtn = true;
-        }    
-        else 
-        {
-          console.log('res not found')
-          this.isDisabled_reserveBtn = false;
-          this.isDisabled_loanBtn = true;
-        } 
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-      complete: () => {
-        console.log('findBookInReserve() - Completed Successfully');
-      },
-    });
-  }
 
   loan(book:Book){
     if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
       this.router.navigate(['login']);
     }
-    else
+    else 
+    {
       this.bookId = this.book.id;
-      // if ()
-      // this.isDisabled_reserveBtn = true;
       console.log('book-details: bookId: ',this.bookId)
       this.router.navigate(['/loan',this.bookId]);
+    }  
   }
 
 
   reserve(book:Book){
-
-
+    if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
+      alert("Do you have any account? If yes, then Login, otherwise create a new account..");
+      this.router.navigate(['login']);
+    }
+    else 
+    {
+      this.bookId = this.book.id;
+      console.log('book-details: bookId: ',this.bookId)
+      this.router.navigate(['/reserve',this.bookId]);
+    } 
   }
 
 

@@ -1,19 +1,19 @@
 <div class="container">
-    <h2>Borrow</h2>
+    <h2>Reservation</h2>
     <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()" class="cal">
         <mat-form-field>
-            <input [(ngModel)]="loaned_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date" formControlName="fromDate">
+            <input [(ngModel)]="reserved_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date" formControlName="fromDate">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-            <input [(ngModel)]="return_date" [min]="loaned_at" matInput [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
+            <input [(ngModel)]="return_date" [min]="reserved_at" matInput [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
 
         <br>
-        <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Borrow</button> &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="submit" class="submit" [disabled]="!reserved_at || !return_date">Reserve</button> &nbsp;&nbsp;&nbsp;&nbsp;
     </form>
 </div>

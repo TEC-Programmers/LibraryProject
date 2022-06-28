@@ -33,7 +33,6 @@ export class LoanComponent implements OnInit {
   minDate = new Date(this.dateNow);
   minDate2 = new Date(this.minDate)
 
-
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
   constructor(private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
@@ -49,16 +48,15 @@ export class LoanComponent implements OnInit {
       toDate: new FormControl('', Validators.required),
     });
 
-
-    // gets clicked book id
+    // gets clicked book.id
     this.bookId = this.route.snapshot.params['id'];
-    console.log('bookId: ',this.bookId)
 
     this.bookService.getBookById(this.bookId).subscribe(x => {
-      this.book = x
-      console.log('book: ',this.book);
+      this.book = x;
     })
   }
+
+
   onFormSubmit() {
     console.log('Is Form Invalid', this.dateRangeForm.invalid);
 
@@ -99,17 +97,5 @@ export class LoanComponent implements OnInit {
       }
     }
 
-    // resetForm(): void {
-    //   if (this.loaned_at && this.return_date) {
-
-    //   }
-    //   else {
-    //     console.log('data NOT valid.')
-    //   }
-
-    // }
-
-
-
-
+   
   }
