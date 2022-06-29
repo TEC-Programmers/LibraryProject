@@ -13,6 +13,7 @@ import { AuthService } from '../_services/auth.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {formatDate} from '@angular/common';
 import Swal from 'sweetalert2'
+import moment from 'moment';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class LoanComponent implements OnInit {
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   minDate = new Date(this.dateNow);
   minDate2 = new Date(this.minDate)
+  public loanDate;
 
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
@@ -54,6 +56,10 @@ export class LoanComponent implements OnInit {
     this.bookService.getBookById(this.bookId).subscribe(x => {
       this.book = x;
     })
+
+    this.loanservice.getAllLoans().subscribe((loan) => {
+      this.loans = loan;
+    })
   }
 
 
@@ -61,19 +67,26 @@ export class LoanComponent implements OnInit {
     console.log('Is Form Invalid', this.dateRangeForm.invalid);
 
     if (this.authService.currentUserValue.id != null && this.authService.currentUserValue.id > 0) {
+        for (let item of this.loans) {
+          // this.loanDate = formatDate(item.return_date, 'yyyy-MM-dd', 'en-US');
+          this.loanDate = moment().format("YYYY/MM/DD")         
+        }
+
         let loanitem: Loan = {
           id: this.book.id,
           userID: this.authService.currentUserValue.id,
           bookId: this.book.id,
-          return_date: this.return_date,
+          return_date: this.loanDate,
           loaned_At: this.loaned_at
         }
-        console.log('loanitem: ',loanitem)
-        this.loan = loanitem;
-        console.log('loan: ',this.loan)
-        if (this.loan) {
-          this.loanservice.addLoan(this.loan)
-          .subscribe({
+          
+          console.log('loanDate: ',this.loanDate)
+          console.log('loanitem: ',loanitem)
+          this.loan = loanitem;
+          console.log('loan: ',this.loan)
+          if (this.loan) {
+            this.loanservice.addLoan(this.loan)
+            .subscribe({
             next: (x) => {
               this.loans.push(x);
               this.loan = { id: 0, bookId: 0, userID: 0, return_date: '', loaned_At: ''}
@@ -96,6 +109,7 @@ export class LoanComponent implements OnInit {
         }
       }
     }
-
-   
+    
+    
   }
+  

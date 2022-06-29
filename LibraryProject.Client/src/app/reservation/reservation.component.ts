@@ -52,8 +52,9 @@ export class ReservationComponent implements OnInit {
 
   onFormSubmit() {
     console.log('Is Form Invalid', this.dateRangeForm.invalid);
+    console.log('book id: ',this.book.id)
 
-    if (this.authService.currentUserValue.id != null && this.authService.currentUserValue.id > 0) {
+    if (this.authService.currentUserValue.id !== null && this.authService.currentUserValue.id > 0) {
         let reservationitem: Reservation = {
           id: 0,
           userId: this.authService.currentUserValue.id,
