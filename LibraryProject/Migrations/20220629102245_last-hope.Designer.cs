@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220628085337_lastDb")]
-    partial class lastDb
+    [Migration("20220629102245_last-hope")]
+    partial class lasthope
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class lastDb : Migration
+    public partial class lasthope : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
