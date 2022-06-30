@@ -1,5 +1,11 @@
     a {
         text-decoration: none;
+        color:black;
+        font-weight: bold;
+        font-size:x-large
+    }
+    a:hover{
+        background-color: brown;
     }
     
     nav {
@@ -11,11 +17,15 @@
     }
     
     h1 {
-        font-size: 50px;
+        font-size: 75px;
+        margin: 0;
     }
     
     #divforside {
         position: absolute;
-        top: 75px;
-        left: 555px;
+        left: 500px;
+    }
+
+    h2 {
+        color:white;
     }

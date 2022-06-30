@@ -110,12 +110,13 @@ export class BookDetailsComponent implements OnInit {
       this.router.navigate(['login']);
     }
     else
+    {
     this.bookId = this.book.id;
     console.log('book-details: bookId: ',this.bookId)
     this.router.navigate(['/loan',this.bookId]);
+    }
+
   }
-
-
   reserve(book:Book){
 
 
