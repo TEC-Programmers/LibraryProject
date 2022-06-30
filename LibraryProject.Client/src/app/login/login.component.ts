@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+
 import { AuthService } from '../_services/auth.service';
+
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -9,8 +12,8 @@ export class LoginComponent implements OnInit {
   password: string = '';
   submitted = false;
   error = '';
-  username: number = 0;
 
+  bookId: number = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,7 +29,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.username = this.authService.currentUserValue.id; 
+   var username = this.authService.currentUserValue.id; 
+
+   this.route.params.subscribe(params => {
+    this.bookId = +params['id'];
+  });
   }
 
   login(): void {
@@ -38,7 +45,7 @@ export class LoginComponent implements OnInit {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           
           
-          this.router.navigate(['returnUrl']);
+          this.router.navigate(['/loan',this.bookId]);
           var username = this.authService.currentUserValue.firstName; 
         
         },

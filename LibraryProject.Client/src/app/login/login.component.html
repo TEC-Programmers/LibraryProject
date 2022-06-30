@@ -1,8 +1,8 @@
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-conten padding-y" style="min-width: none; height: 84px;">
+<section class="section-conten padding-y" style="min-width: none; height: 84px; ">
 
     <!-- ============================ COMPONENT LOGIN   ================================= -->
-    <div class="card mx-auto" style="max-width:380px; margin-top:100px;">
+    <div class="card mx-auto" style="max-width:380px; margin-top:100px; background-color:rgb(212, 148, 69) ;">
         <div class="card-body">
 
             <p class="text-center mt-4 w3-red"> {{ error }}</p>
@@ -25,16 +25,17 @@
                 </div>-->
                 <!-- form-group form-check .// -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block" (click)="login()"> Login  </button>
+                    <button type="submit" class="btn btn-primary btn-block w3-brown" (click)="login()"> Login  </button>
                 </div>
                 <!-- form-group// -->
             </form>
         </div>
+        <p class="text-center mt-4">Don't have account?<a routerLink="/Register">Sign up</a></p>
         <!-- card-body.// -->
     </div>
     <!-- card .// -->
 
-    <p class="text-center mt-4">Don't have account?<a routerLink="/Register">Sign up</a></p>
+    
 
     <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
 
