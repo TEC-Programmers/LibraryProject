@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'Admin/Books', component: AdminBookComponent},
   {path: 'Admin/Users', component: AdminCustomerComponent},
   {path: 'Admin/Categorys', component: AdminCategoryComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.customer, Role.admin] } },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
   { path: 'login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
 

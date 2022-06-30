@@ -21,7 +21,7 @@ export class AppComponent {
   categories: Category[] = [];
   allBooks: Book[] = [];
   filterTerm!: string;
-  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '',role:0};
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role:0 };
 
 
   constructor(private bookService: BookService, 
