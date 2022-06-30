@@ -11,8 +11,8 @@
         <li class="nav-item active">
             <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
         </li>
-        <li class="nav-item">
-          <a  routerLink="/admin/customer" routerLinkActive="active-link w3-brown">Users</a>
+        <li class="nav-item" *ngIf="currentUser == null">
+            <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
         </li>
         <li class="nav-item" *ngIf="currentUser != null && currentUser.role == 'Admin'">
             <a  routerLink="/" routerLinkActive="active-link w3-brown" *ngIf="currentUser == null">Administrator</a>
@@ -34,17 +34,21 @@
         <li class="nav-item">
             <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
         </li>
-        <li class="nav-item">
+        <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+            <a routerLink="/" (click)="logout()">Logout</a>
+
+        </li>
+
+        <li class="nav-item" *ngIf="currentUser == null">
             <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
         </li>
        
-            
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
         (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
         placeholder="Search for Books" size="35">
       
-          <li>
-                <i class="fa-solid fa-magnifying-glass" (click)= "click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;"></i>
+          <li  >
+                <i class="fa-solid fa-magnifying-glass" (click)= "click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
                 <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
                 
                     <td>
@@ -59,7 +63,7 @@
                     </td>
                 </tr>
          </li>
-
+       
 </ul>   
 
  <!-- <nav id="nav">
