@@ -2,7 +2,11 @@
 
 namespace LibraryProject.API.Migrations
 {
+<<<<<<<< HEAD:LibraryProject/Migrations/20220628085337_lastDb.cs
     public partial class lastDb : Migration
+========
+    public partial class Library : Migration
+>>>>>>>> Afrina:LibraryProject/Migrations/20220620063503_Library.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
