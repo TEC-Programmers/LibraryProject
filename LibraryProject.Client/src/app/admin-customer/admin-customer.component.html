@@ -1,251 +1,193 @@
+
 <span *ngIf="message != ''">{{ message }}</span>
-<!-- user type: Member -->
-<div class="container">
+  <!-- user type: Member -->
+  <div class="container">
     <h1><a>Administration Panel</a></h1>
-
-    <div class="background" style="background-color: #b3d9ff;">
-        <div class="choose_type">
-            <h5 style="font-family: Times New Roman, serif; font-size: 20px;" class="label">Choose&nbsp;Role:</h5>
-            <select class="menu" [(ngModel)]="selectedValue">
-        <option value="0" selected>Members</option>
-        <option value="1">Adminisrators</option>
-
-
-        <div class="background" style="background-color: #b3d9ff;">
-        <div class="choose_type">
-            <h5 style="font-family: Times New Roman, serif; font-size: 20px;" class="label">Choose&nbsp;Role:</h5>
-            <select class="menu" [(ngModel)]="selectedValue">
-        <option value="role_string.customer" selected>Members</option>
-        <option value="role_string.admin">Adminisrators</option>
-
+    
+  <div class="background" style="background-color: #b3d9ff;">
+    <div class="choose_type">
+      <h5 style="font-family: Times New Roman, serif; font-size: 20px; color: black;" class="label">Choose&nbsp;Role:</h5>
+      <select class="menu" [(ngModel)]="selectedValue">
+        <option value="1" selected>Members</option>
+        <option value="0">Adminisrators</option>
       </select>
-        </div>
-
-        <div class="search-bar">
-            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by user">
-        </div>
-        <br>
-        <div class="table" *ngIf="selectedValue == 0">
-            <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
-                <thead>
-                    <tr class="head">
-                        <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-                        <th style="background-color: #212121; color: aliceblue; width: 8%;">Operation</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Firstname</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Middlename</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Lastname</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Email</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="customers?.length != 0">
-                    <tr class="head-values" *ngFor="let customer of customers | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                        <button style="width: 53px;" (click)="delete_member(customer)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                        <button style="width: 53px; color: rgb(224, 211, 22);" (click)="edit_member(customer)" data-bs-toggle="modal" data-bs-target="#Modal_Members"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
-                        <td style="color: whitesmoke;">{{ customer.firstName }}</td>
-                        <td style="color: whitesmoke;">{{ customer.middleName }}</td>
-                        <td style="color: whitesmoke;">{{ customer.lastName }}</td>
-                        <td style="color: whitesmoke;">{{ customer.email }}</td>
-                    </tr>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </tbody>
-                <tbody *ngIf="customers?.length == 0">
-                    <tr>
-                        <td colspan="3" class="no-data-available">Members Table Is Empty!</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+   </div>
+    
+    <div class="search-bar">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="search by user">
     </div>
     <br>
-    <div class="table" *ngIf="selectedValue == 0">
-        <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
-            <thead>
-                <tr class="head">
-                    <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-                    <th style="background-color: #212121; color: aliceblue; width: 8%;">Operation</th>
-                    <th style="background-color: #212121; color: aliceblue; width: 23%;">Firstname</th>
-                    <th style="background-color: #212121; color: aliceblue; width: 23%;">Middlename</th>
-                    <th style="background-color: #212121; color: aliceblue; width: 23%;">Lastname</th>
-                    <th style="background-color: #212121; color: aliceblue; width: 23%;">Email</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="customers?.length != 0">
-                <tr class="head-values" *ngFor="let customer of customers | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <button style="width: 53px;" (click)="delete_member(customer)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                    <button style="width: 53px; color: rgb(224, 211, 22);" (click)="edit_member(customer)" data-bs-toggle="modal" data-bs-target="#Modal_Members"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
-                    <td style="color: whitesmoke;">{{ customer.firstName }}</td>
-                    <td style="color: whitesmoke;">{{ customer.middleName }}</td>
-                    <td style="color: whitesmoke;">{{ customer.lastName }}</td>
-                    <td style="color: whitesmoke;">{{ customer.email }}</td>
-                </tr>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <div class="table" *ngIf="selectedValue == 1">
+      <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
+        <thead>
+        <tr class="head">
+          <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
+          <th style="background-color: #212121; color: aliceblue; width: 11%;">Operation</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Firstname</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Middlename</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Lastname</th>
+          <th style="background-color: #212121; color: aliceblue; width: 23%;">Email</th>
+        </tr>
+        </thead>
+          <tbody *ngIf="customers?.length != 0">
+            <tr style="background-color: #686868;" class="head-values" *ngFor="let customer of customers | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+              <button style="width: 54px;" (click)="delete_member(customer)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+              <button style="width: 54px; color: rgb(224, 211, 22);" (click)="edit_member(customer)" data-bs-toggle="modal" data-bs-target="#Modal_Members"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+              <td style="color: whitesmoke;">{{ customer.firstName }}</td>
+              <td style="color: whitesmoke;">{{ customer.middleName }}</td>
+              <td style="color: whitesmoke;">{{ customer.lastName }}</td>
+              <td style="color: whitesmoke;">{{ customer.email }}</td>
+            </tr>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </tbody>
             <tbody *ngIf="customers?.length == 0">
-                <tr>
-                    <td colspan="3" class="no-data-available">Members Table Is Empty!</td>
-                </tr>
+              <tr>
+                <td colspan="3" class="no-data-available">Members Table Is Empty!</td>
+              </tr>
             </tbody>
-        </table>
-    </div>
+      </table>
+    </div> 
+  </div>
+  </div>
+    
 
 
 
-
-
-    <!-- Modal For Edit Members -->
-    <div class="modal fade" id="Modal_Members" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-danger" id="exampleModalLabel">EDIT Role</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <input [(ngModel)]="customer.firstName" type="text" class="form-control" id="firstName" name="firstName" disabled type="hidden">
-                        </div>
-                        <div class="mb-3">
-                            <input [(ngModel)]="customer.middleName" type="text" class="form-control" id="middleName" name="middleName" disabled type="hidden">
-                        </div>
-                        <div class="mb-3">
-                            <input [(ngModel)]="customer.lastName" type="text" class="form-control" id="lastName" name="lastName" disabled type="hidden">
-                        </div>
-                        <div class="mb-3">
-                            <input [(ngModel)]="customer.email" type="email" class="form-control" id="email" name="email" disabled type="hidden">
-                        </div>
-                        <div class="mb-3">
-                            <input [(ngModel)]="customer.password" type="password" class="form-control" id="password" name="password" disabled type="hidden">
-                        </div>
-                        <label>Change Role: </label> &nbsp;
-                        <select name="role">
+  <!-- Modal For Edit Members -->
+<div class="modal fade" id="Modal_Members" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">EDIT Role</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <input [(ngModel)]="customer.firstName" type="text" class="form-control" id="firstName" name="firstName" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <input [(ngModel)]="customer.middleName" type="text" class="form-control" id="middleName" name="middleName" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <input [(ngModel)]="customer.lastName" type="text" class="form-control" id="lastName" name="lastName" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <input [(ngModel)]="customer.email" type="email" class="form-control" id="email" name="email" disabled type="hidden">
+          </div>
+          <div class="mb-3">
+            <input [(ngModel)]="customer.password" type="password" class="form-control" id="password" name="password" disabled type="hidden">
+          </div>
+          <label>Change Role: </label>
+          &nbsp;
+          <select name="role">
               <option [value]="customer.role">{{customer.role}}</option>
               <option>Administrator</option>
-          </select> &nbsp;&nbsp;
-                        <button (click)="save_member()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+          </select>
+
+          &nbsp;&nbsp;
+          <button (click)="save_member()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
+</div>
 
 
+   
+<!-- #686868; -->
+<!-- user type: Administrator -->
+<div class="role_admin">
+  <div class="table_admin" *ngIf="selectedValue == 0">
+    <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
+    <thead>
+    <tr class="head">
+      <!-- <th style="background-color: #212121; color: aliceblue;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
+      <th style="background-color: #212121; color: aliceblue; width: 11%;">Operation</th>
+      <th style="background-color: #212121; color: aliceblue; width: 23%;">Firstname</th>
+      <th style="background-color: #212121; color: aliceblue; width: 23%;">Middlename</th>
+      <th style="background-color: #212121; color: aliceblue; width: 23%;">Lastname</th>
+      <th style="background-color: #212121; color: aliceblue; width: 23%;">Email</th>
+    </tr>
+    </thead>
+      <tbody *ngIf="administrators?.length != 0">
+        <tr style="background-color: #686868;" class="head-values_admin" *ngFor="let admin of administrators | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+          <button style="width: 54px;" (click)="delete_admin(admin)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+          <button style="width: 54px; color: rgb(224, 211, 22);" (click)="edit_admin(admin)" data-bs-toggle="modal" data-bs-target="#Modal"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+          <td style="color: whitesmoke;">{{ admin.firstName }}</td>
+          <td style="color: whitesmoke;">{{ admin.middleName }}</td>
+          <td style="color: whitesmoke;">{{ admin.lastName }}</td>
+          <td style="color: whitesmoke;">{{ admin.email }}</td>
+          <!-- <td>{{ admin.role }}</td> -->
+        </tr>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </tbody>
+        <tbody *ngIf="administrators?.length == 0">
+          <tr>
+            <td colspan="3" class="no-data-available">No administrators available!</td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
 
 
-    <!-- user type: Administrator -->
-    <div class="role_admin">
-        <div class="table" *ngIf="selectedValue == 1">
-            <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
-                <thead>
-                    <tr class="head">
-                        <!-- <th style="background-color: #212121; color: aliceblue;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-                        <th style="background-color: #212121; color: aliceblue; width: 8%;">Operation</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Firstname</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Middlename</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Lastname</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Email</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="administrators?.length != 0">
-                    <tr class="head-values" *ngFor="let admin of administrators | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                        <button style="width: 53px;" (click)="delete_admin(admin)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                        <button style="width: 53px; color: rgb(224, 211, 22);" (click)="edit_admin(admin)" data-bs-toggle="modal" data-bs-target="#Modal"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
-                        <td style="color: whitesmoke;">{{ admin.firstName }}</td>
-                        <td style="color: whitesmoke;">{{ admin.middleName }}</td>
-                        <td style="color: whitesmoke;">{{ admin.lastName }}</td>
-                        <td style="color: whitesmoke;">{{ admin.email }}</td>
-                        <!-- <td>{{ admin.role }}</td> -->
-                    </tr>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </tbody>
-                <tbody *ngIf="administrators?.length == 0">
-                    <tr>
-                        <td colspan="3" class="no-data-available">No administrators available!</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="table" *ngIf="selectedValue == 1">
-            <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
-                <thead>
-                    <tr class="head">
-                        <!-- <th style="background-color: #212121; color: aliceblue;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-                        <th style="background-color: #212121; color: aliceblue; width: 8%;">Operation</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Firstname</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Middlename</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Lastname</th>
-                        <th style="background-color: #212121; color: aliceblue; width: 23%;">Email</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="administrators?.length != 0">
-                    <tr class="head-values" *ngFor="let admin of administrators | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                        <button style="width: 53px;" (click)="delete_admin(admin)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                        <button style="width: 53px; color: rgb(224, 211, 22);" (click)="edit_admin(admin)" data-bs-toggle="modal" data-bs-target="#Modal"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
-                        <td style="color: whitesmoke;">{{ admin.firstName }}</td>
-                        <td style="color: whitesmoke;">{{ admin.middleName }}</td>
-                        <td style="color: whitesmoke;">{{ admin.lastName }}</td>
-                        <td style="color: whitesmoke;">{{ admin.email }}</td>
-                        <!-- <td>{{ admin.role }}</td> -->
-                    </tr>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </tbody>
-                <tbody *ngIf="administrators?.length == 0">
-                    <tr>
-                        <td colspan="3" class="no-data-available">No administrators available!</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        >>>>>>> Stashed changes
+<!-- Modal For: Edit Administrators -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="ModalLabel">EDIT Administrator Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <!-- <label for="firstName" class="form-label">Firstname</label> -->
+            <input [(ngModel)]="administrator.firstName" type="text" class="form-control" id="firstName2" name="firstName">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="middleName" class="form-label">Middlename</label> -->
+            <input [(ngModel)]="administrator.middleName" type="text" class="form-control" id="middleName2" name="middleName">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="lastName" class="form-label">Lastname</label> -->
+            <input [(ngModel)]="administrator.lastName" type="text" class="form-control" id="lastName2" name="lastName">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="email" class="form-label">E-mail</label> -->
+            <input [(ngModel)]="administrator.email" type="email" class="form-control" id="email2" name="email">
+          </div>
+          <div class="mb-3">
+            <!-- <label for="password" class="form-label">Pass</label> -->
+            <input [(ngModel)]="administrator.password" type="password" class="form-control" id="password2" name="password">
+          </div>
+          &nbsp;&nbsp;
+          <button (click)="save_admin()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <br>
+          <label for="role" class="form-label">Role</label>
+          &nbsp;
+          <div class="mb-3">
+            
+            <input [(ngModel)]="administrator.role" type="role" class="form-control" id="role2" name="role" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
+</div>
 
 
-    <!-- Modal For: Edit Administrators -->
-    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-danger" id="ModalLabel">EDIT Administrator Info</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <!-- <label for="firstName" class="form-label">Firstname</label> -->
-                            <input [(ngModel)]="administrator.firstName" type="text" class="form-control" id="firstName2" name="firstName">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="middleName" class="form-label">Middlename</label> -->
-                            <input [(ngModel)]="administrator.middleName" type="text" class="form-control" id="middleName2" name="middleName">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="lastName" class="form-label">Lastname</label> -->
-                            <input [(ngModel)]="administrator.lastName" type="text" class="form-control" id="lastName2" name="lastName">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="email" class="form-label">E-mail</label> -->
-                            <input [(ngModel)]="administrator.email" type="email" class="form-control" id="email2" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="password" class="form-label">Pass</label> -->
-                            <input [(ngModel)]="administrator.password" type="password" class="form-control" id="password2" name="password">
-                        </div>
-                        &nbsp;&nbsp;
-                        <button (click)="save_admin()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                        <br>
-                        <label for="role" class="form-label">Role</label> &nbsp;
-                        <div class="mb-3">
 
-                            <input [(ngModel)]="administrator.role" type="role" class="form-control" id="role2" name="role" disabled>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+ 
+  
+
+  

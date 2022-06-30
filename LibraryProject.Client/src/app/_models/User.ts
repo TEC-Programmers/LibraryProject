@@ -12,4 +12,7 @@ export interface User
     token?:string;
 }
 
-
+// export enum Role {
+//     customer = 'Customer',
+//     admin = 'Admin'
+// }

@@ -1,134 +1,139 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
-.pageOptions {}
+
+.pageOptions {
+
+}
 
 .role_admin {
-    position: absolute;
-    /* top: 208px; */
-    top: 232px;
-    margin-top: 11px;
+  position: absolute;
+  /* top: 208px; */
+  top: 232px;
+  margin-top: 42px;
 }
 
 .choose_type {
-    top: -170px;
-    position: absolute;
-    left: -8px;
+  top: -170px;
+  position: absolute;
+  left: -3px;
 }
 
 .background {
-    left: 0px;
-    position: absolute;
-    top: 178px;
-    width: 2000px;
-    height: 1000px;
+  left: 0px;
+  position: absolute;
+  top: 193px;
+  width: 2000px;
+  height: 1000px;
 }
 
 .navdrop {
-    top: 207px;
-    left: 115px
+  top: 207px;
+  left: 115px
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 nav {
-    font-family: monospace;
+  font-family: monospace;
 }
 
 ul {
-    background: darkorange;
-    list-style: none;
-    margin: 0;
-    padding-left: 0;
+  background: darkorange;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
 }
 
 li {
-    color: #fff;
-    background: darkorange;
-    display: block;
-    float: left;
-    padding: 1rem;
-    position: relative;
-    text-decoration: none;
-    transition-duration: 0.5s;
+  color: #fff;
+  background: darkorange;
+  display: block;
+  float: left;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
 }
-
+  
 li a {
-    color: #fff;
+  color: #fff;
 }
 
 li:hover {
-    background: red;
-    cursor: pointer;
+  background: red;
+  cursor: pointer;
 }
 
 ul li ul {
-    background: orange;
-    visibility: hidden;
-    opacity: 0;
-    min-width: 5rem;
-    position: absolute;
-    transition: all 0.5s ease;
-    margin-top: 1rem;
-    left: 0;
-    display: none;
+  background: orange;
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+  left: 0;
+  display: none;
 }
 
-ul li:hover>ul,
+ul li:hover > ul,
 ul li ul:hover {
-    visibility: visible;
-    opacity: 1;
-    display: block;
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 ul li ul li {
-    clear: both;
-    width: 100%;
+  clear: both;
+  width: 100%;
 }
 
 .menu {
-    word-wrap: normal;
-    position: absolute;
-    top: 185px;
-    left: 153px;
+  word-wrap: normal;
+  position: absolute;
+  top: 185px;
+  left: 153px;
 }
 
 .label {
-    word-wrap: normal;
-    position: absolute;
-    top: 185px;
-    left: 40px;
+  word-wrap: normal;
+  position: absolute;
+  top: 181px;
+  left: 25px;
 }
 
 .red-color {
-    color: red;
+    color:red;
+}
+
+.table_admin {
+  margin-left: 141px;
+  margin-top: -25px;
 }
 
 .table {
-    margin-left: 141px;
-    margin-top: -13px;
-    /* column-width: 700px; */
-    /* background-color: #33475b;
-  color: white; */
-}
-
-.container {
-    margin-left: 500px;
+  margin-left: 141px;
+  margin-top: -10px;
 }
 
 .search-bar {
     width: 350px;
     margin-left: 279px;
-    /* position: absolute; */
-    margin-top: 7px;
+    margin-top: 12px;
 }
 
+
 .table-table-striped {
-    cursor: pointer;
+    cursor: pointer;  
 }
 
 .head {
     cursor: pointer;
+}
+
+.head-values_admin {
+  cursor: pointer;
 }
 
 .head-values {
@@ -136,61 +141,62 @@ ul li ul li {
 }
 
 h1 {
-    color: white;
-    text-transform: uppercase;
-    padding: 1px;
-    font-family: "Raleway", cursive;
-    font-weight: 100;
-    position: relative;
-    width: 63%;
-    background: linear-gradient(to right, black, #eee, black);
-    white-space: nowrap;
-    left: -157px;
-    top: 22px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  padding: 1px;
+  font-family: "Raleway", cursive;
+  font-weight: 100;
+  position: relative;
+  width: 263%;
+  background: linear-gradient(to right, black, #eee, black);
+  white-space: nowrap;
+  left: -785px;
 }
-
 h1::before {
-    content: "";
-    position: absolute;
-    left: -10%;
-    top: -50px;
-    width: 1722px;
-    margin-left: -300px;
-    margin-top: -220px;
-    height: 430px;
-    background: radial-gradient(ellipse closest-side, #444, black);
-    z-index: -1;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -50px;
+  width: 64%;
+  margin-left: 390px;
+  margin-top: -220px;
+  height: 600px;
+  background: radial-gradient(ellipse closest-side, #444, black);
+  z-index: -1;
 }
-
 h1 a {
-    background: black;
-    display: block;
-    padding: 20px;
-    text-decoration: none;
-    letter-spacing: 30px;
-    color: white;
-    animation: comein 1.5s 1 ease-in-out forwards;
+  background: black;
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  letter-spacing: 30px;
+  color: white;
+  animation: comein 1.5s 1 ease-in-out forwards;
+  margin-left: -564px;
+  margin-top: 0px;
+  font-family: "Raleway", cursive;
 }
 
 @keyframes comein {
-    0% {
-        letter-spacing: 80px;
-        color: rgba(255, 255, 255, 0);
-    }
-    70% {
-        letter-spacing: 20px;
-    }
-    100% {
-        letter-spacing: 25px;
-        color: rgba(255, 255, 255, 1);
-    }
+  0% {
+    letter-spacing: 80px;
+    color: rgba(255, 255, 255, 0);
+  }
+  70% {
+    letter-spacing: 20px;
+  }
+  100% {
+    letter-spacing: 25px;
+    color: rgba(255, 255, 255, 1);
+  }
 }
 
 body {
-    background: black;
-    display: grid;
-    place-items: center;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
+  background: black;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
 }

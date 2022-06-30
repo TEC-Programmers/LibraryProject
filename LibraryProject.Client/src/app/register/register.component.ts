@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   newUser(): User {
-    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
   }
 
   getUsers(): void {

@@ -17,17 +17,14 @@
         <li><a routerLink="/" routerLinkActive="active-link w3-green" [routerLinkActiveOptions]="{exact:true}">Home</a>
         </li>
 
-
-
         <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 1">
             <a routerLink="/admin/customer" routerLinkActive="active-link w3-green">Users</a>
         </li>
 
-
-        <!-- <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 'Admin'">
+        <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 1">
             <a routerLink="/" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Author</a>
 
-        </li> -->
+        </li>
 
         <li style="display:inline-block" *ngIf="currentUser != null">
             <a routerLink="/profile" routerLinkActive="active-link w3-green">Profile</a>
@@ -38,7 +35,6 @@
             <a routerLink="/Admin" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Administrator</a>
         </li>
 
-
         <li class="nav-item">
             <a routerLink="/Register" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Register</a>
         </li>
@@ -46,7 +42,6 @@
         <li class="nav-item">
             <a class="nav-link text-danger" *ngIf="currentUser != null && currentUser.firstName == 'username'">User</a>
         </li>
-
 
         <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
             <a routerLink="/" (click)="logout()">Logout</a>
@@ -59,6 +54,4 @@
 
     </ul>
 
-    <a routerLink="/Admin">  Admin | </a>
-</nav>
 <router-outlet></router-outlet>
