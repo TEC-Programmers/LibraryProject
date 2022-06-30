@@ -14,16 +14,20 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
 import { LoginComponent } from './login/login.component';
-import { ContactComponent } from './contact/contact.component';
-
+// import { ContactComponent } from './contact/contact.component';
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core'
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminBookComponent } from './admin-book/admin-book.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+
 
 
 @NgModule({
@@ -31,21 +35,20 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     FrontpageComponent,
     AdministratorComponent,
-    AdminCustomerComponent, 
- 
+    AdminCustomerComponent,
     ProfileComponent,
     RegisterComponent,
-
     CategoryComponent,
     BookComponent,
     LoginComponent,
-    ContactComponent,
     BookDetailsComponent,
     LoanComponent,
-    CategoryBooksComponent
+    CategoryBooksComponent,
+    AdminBookComponent,
+    AdminCategoryComponent
 
   ],
-  
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -53,16 +56,20 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    NgxPaginationModule
     ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    [DatePipe] 
-    
+    [DatePipe]
+
   ],
   bootstrap: [AppComponent]
- 
- 
+
+
 })
 export class AppModule { }

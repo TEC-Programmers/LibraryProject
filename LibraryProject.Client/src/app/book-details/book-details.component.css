@@ -3,4 +3,10 @@
     margin-right:5px;
     width: 100px;
     text-align: center;
+    justify-content: space-between;
+    
+ }
+ #card{
+    background-color: rgb(212, 148, 69);
+    align-items: center;
  }

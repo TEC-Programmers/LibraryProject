@@ -20,7 +20,7 @@ export class LoanService {
   getAllLoans(): Observable<Loan[]> {
     return this.http.get<Loan[]>(this.apiUrl);
   }
-  getLoan(loanid: number ): Observable<Loan>{
+  getLoanById(loanid: number ): Observable<Loan>{
     return this.http.get<Loan>(`${this.apiUrl}/${loanid}`);
    }
    addLoan(loan: Loan ): Observable<Loan>{

@@ -22,7 +22,7 @@ export class AuthorService {
     return this.http.get<Author[]>(this.apiUrl);
   }
 
-  getAuthor(authorId: number): Observable<Author> {
+  getAuthorById(authorId: number): Observable<Author> {
     return this.http.get<Author>(`${this.apiUrl}/${authorId}`)
   }
 

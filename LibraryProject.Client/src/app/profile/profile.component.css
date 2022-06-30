@@ -1,4 +1,19 @@
 div {
     width: 60%;
     padding-left: 10rem;
+    background-color:rgb(212, 148, 69);
+
+ 
+   
+}
+
+.common{
+    justify-content: center;
+    align-items: center;
+    
+}
+h3{
+    color:black;
+    font-weight: bold;
+    
 }
