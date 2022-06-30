@@ -21,14 +21,16 @@ export class AppComponent {
   categories: Category[] = [];
   allBooks: Book[] = [];
   filterTerm!: string;
-  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '',role:0};
 
 
   constructor(private bookService: BookService, 
     private categoryService: CategoryService,  
     private authService: AuthService,
-    private router: Router) {   // get the current user from authentication service
-    this.authService.currentUser.subscribe(x => this.currentUser= x);}
+    private router: Router) 
+    {   
+    this.authService.currentUser.subscribe(x => this.currentUser= x); // get the current user from authentication service
+  }
   ngOnInit(): void {
     // this.categoryService.getAllCategories()
     // .subscribe(c => this.categories = c);
@@ -43,10 +45,8 @@ showSearch(): void {
     else if (this.filterTerm.length >= 0 ){
       this.bookService.getAllBooks()
     .subscribe(p => this.allBooks = p);
-    console.log(this.allBooks)
+    console.log(this.allBooks);
     }
-
-
   }
   click(){
       if (this.filterTerm == null || this.filterTerm == '') {

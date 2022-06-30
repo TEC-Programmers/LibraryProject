@@ -175,8 +175,13 @@ export class AdminCustomerComponent implements OnInit {
           const key = Object.keys(Role)[indexOf_Customer];
 
           this.customers = this.total_users.filter((obj) => {
+          
             return obj.role.toString() === key
+          
           });
+        
+
+       
         },
         error: (err: any) => {
           console.log(err);
