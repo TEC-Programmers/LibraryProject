@@ -9,15 +9,12 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-<<<<<<<< HEAD:LibraryProject/Migrations/20220629102245_last-hope.Designer.cs
+
     [Migration("20220629102245_last-hope")]
     partial class lasthope
-========
-    [Migration("20220620063503_Library")]
-    partial class Library
->>>>>>>> Afrina:LibraryProject/Migrations/20220620063503_Library.Designer.cs
+
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
