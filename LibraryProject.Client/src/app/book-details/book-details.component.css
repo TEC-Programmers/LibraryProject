@@ -1,12 +1,17 @@
 #button-format {
-    display:inline-block;
-    margin-right:5px;
+    display: inline-block;
+    margin-right: 5px;
     width: 100px;
     text-align: center;
     justify-content: space-between;
-    
- }
- #card{
+}
+
+#card {
     background-color: rgb(212, 148, 69);
     align-items: center;
- }
+}
+
+#MenuAboveAll {
+    position: absolute;
+    z-index: 1000px;
+}

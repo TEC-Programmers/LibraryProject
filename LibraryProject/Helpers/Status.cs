@@ -3,7 +3,7 @@
     //For at definere enums enumbruges nøgleordet.
     public enum Status
     {
-        ledig = 0,
-        Udlånt = 1 
+        Available = 0,
+        Occupied = 1 
     }
 }

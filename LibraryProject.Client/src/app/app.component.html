@@ -21,7 +21,7 @@
     <li class="nav-item">
         <a routerLinkActive="active-link w3-brown">Kategorier</a>
         <ul>
-            <ng-container *ngFor="let category of categories">
+            <ng-container id=MenuAboveAll *ngFor="let category of categories">
                 <li>
                     <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
 
@@ -38,6 +38,9 @@
         <a routerLink="/" (click)="logout()">Logout</a>
 
     </li>
+    <li class="nav-item">
+        <a routerLink="/profile" routerLinkActive="active-link w3-brown">Profile</a>
+    </li>
 
     <li class="nav-item" *ngIf="currentUser == null">
         <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
@@ -46,8 +49,8 @@
     <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
 
     <li>
-        <i class="fa-solid fa-magnifying-glass" (click)="click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;"></i>
-        <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
+        <i class="fa-solid fa-magnifying-glass" (click)="click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;" id="searchDiv"></i>
+        <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
 
             <td>
                 {{book.title}}
@@ -57,6 +60,9 @@
             </td>
         </tr>
     </li>
+
+
+
 
 </ul>
 

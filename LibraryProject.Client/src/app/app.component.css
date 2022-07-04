@@ -102,3 +102,8 @@ input {
 input a i {
     margin: 10px;
 }
+
+#MenuAboveAll {
+    position: relative;
+    z-index: 1px;
+}
