@@ -7,20 +7,29 @@
     padding:0px;
     margin:0px;
     box-sizing: border-box;
+    font-size: 14px ;
   
     
 }
 body {
-    background: url("/assets/images/Library.jpg") no-repeat center center fixed;
+    /* background: url("/assets/images/library2.jpg") no-repeat center center fixed; */
+    background-image: linear-gradient(rgba(75, 146, 212, 0.705),rgba(159, 240, 236, 0.822)),url("/assets/images/Library.jpg"); 
     background-size:cover;
-    height:100vh;
-   
-
+    background-position: center;
+    height:100vh;  
+    font-size: 12px ;
+  
  }
+
  img{
     width: 60px;
-    
+     
+
 }
+
+
+  
+ 
 
 /*app component*/
 /*

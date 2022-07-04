@@ -1,8 +1,32 @@
+<div class="container">
 
+    <div class="row height d-flex justify-content-center align-items-center">
 
-<div id="divforside">
-    
-
-
-   
+      <div class="col-md-8">
+        <div class="search">
+          <i class="fa fa-search"></i>
+          <input type="text" class="form-control" placeholder="Search Books" (keydown.enter)="showSearch()"
+          (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
+          <button class="btn btn-primary"  (click)="click()">Search</button>  
+          <div class="searchDiv">
+          <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
+        
+            <td>
+            {{book.title}}
+                <br>
+            Description:
+            {{book.description}}
+                <br>
+            Publish Year:
+            {{book.publishYear}}
+             <br>
+            </td>
+        </tr>
+    </div>  
+        </div>
+        
+      </div>
+      
+    </div>
 </div>
+

@@ -1,4 +1,91 @@
-<ul>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+    
+      <a class="navbar-brand" href="#"> <img src="assets/images/logo1.png" ></a>
+        <button class="navbar-toggler"type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent"    aria-expanded="false" aria-label="Toggle navigation">
+    
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
+          </li>
+            <li class="nav-item">
+                <a class="nav-link"  routerLinkActive="active-link w3-brown">Categories</a>
+                <ul>
+                    <ng-container *ngFor="let category of categories">
+                        <li>
+                            <a class="nav-link" routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
+                        </li>
+                    </ng-container>
+                </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Reservation</a>
+          </li>         
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item nav-link">
+                        
+                  <div class="search">    
+                    <i class="fa fa-search"></i>             
+                    <input type="text" class="form-control" placeholder="Search Books" (keydown.enter)="showSearch()"
+                    (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
+                        </div>   </li>
+                              
+                       
+            <li class="nav-item">
+                <a class="nav-link"routerLink="/Admin" routerLinkActive="active-link w3-brown" *ngIf="currentUser != null">Admin Panel</a>
+            </li>                 
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
+            </li>
+            <li class="nav-item" *ngIf="currentUser == null">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
+            </li>
+            <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+                <a class="nav-link" routerLink="/" (click)="logout()">Logout</a>    
+            </li>
+        </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="searchDiv">  <!--to display the search result-->
+    <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">                  
+      <td>
+      {{book.title}}
+          <br>
+      Description:
+      {{book.description}}
+          <br>
+      Publish Year:
+      {{book.publishYear}}
+       <br>
+      </td>
+  </tr>     
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+  crossorigin="anonymous"></script>    
+       
+
+  
+
+
+
+<!----------------------right code------------------------------------------------------------------------------------------------>
+
+
+<!-- <ul>
 
         <li class="nav-item">  
         <img src="assets/images/logo2.png" ></li>
@@ -63,7 +150,9 @@
                 </tr>
          </li>
        
-</ul>   
+</ul>    -->
+
+<!---slut med det -->
 
  <!-- <nav id="nav">
     <ul>
