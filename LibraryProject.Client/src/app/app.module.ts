@@ -26,6 +26,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JW
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
+import { FilterPipe } from './_shared/filter.pipe';
 
 
 
@@ -45,7 +46,8 @@ import { Router } from '@angular/router';
     ContactComponent,
     BookDetailsComponent,
     LoanComponent,
-    CategoryBooksComponent
+    CategoryBooksComponent,
+    FilterPipe
 
   ],
 

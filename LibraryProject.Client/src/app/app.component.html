@@ -9,7 +9,7 @@
  
      
         <li class="nav-item active">
-            <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
+            <a routerLink="/Book" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
         </li>
         <li class="nav-item" *ngIf="currentUser == null">
             <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
@@ -50,7 +50,7 @@
         </div>
        <table class="table">
                 <i class="fa-solid fa-magnifying-glass" (click)= "click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
-                <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]" >
+                <!-- <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]" >
                 
                     <td >
                     {{book.title}}
@@ -62,7 +62,7 @@
                     {{book.publishYear}}
                      <br>
                     </td>
-                </tr>
+                </tr> -->
     </table>
         
        
