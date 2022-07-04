@@ -43,15 +43,16 @@
             <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
         </li>
        
+        <div  >
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
         (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
         placeholder="Search for Books" size="35">
-      
-          <li  >
+        </div>
+       <table class="table">
                 <i class="fa-solid fa-magnifying-glass" (click)= "click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
-                <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
+                <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]" >
                 
-                    <td>
+                    <td >
                     {{book.title}}
                         <br>
                     Description:
@@ -62,7 +63,8 @@
                      <br>
                     </td>
                 </tr>
-         </li>
+    </table>
+        
        
 </ul>   
 

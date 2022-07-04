@@ -1,4 +1,4 @@
-/*enum Role {
-    Administrator = 0,
-    Customer = 1
-}*/
+enum Role {
+    Administrator = 1,
+    Customer = 0
+}
