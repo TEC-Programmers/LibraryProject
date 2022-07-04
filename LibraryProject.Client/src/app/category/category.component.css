@@ -1,20 +1,8 @@
-/* #catDiv {
-    position: absolute;
-    left: 500px;
+#card {
+    background-color: rgb(212, 148, 69)
 }
 
 a {
-    text-decoration: none;
-}
-
-* {
-    margin: 0px;
-} */
-
-#card{
-    background-color:rgb(212, 148, 69)
-}
-a{
-    color:black;
-    font-size:large;
+    color: black;
+    font-size: large;
 }

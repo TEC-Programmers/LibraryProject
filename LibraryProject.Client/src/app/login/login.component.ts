@@ -24,12 +24,12 @@ export class LoginComponent implements OnInit {
     // console.log(this.authenticationService.currentUserValue);
     if (this.authService.currentUserValue != null && this.authService.currentUserValue.id> 0) {
       this.router.navigate(['login']);
-     
+
     }
   }
 
   ngOnInit() {
-   var username = this.authService.currentUserValue.id; 
+   var username = this.authService.currentUserValue.id;
 
    this.route.params.subscribe(params => {
     this.bookId = +params['id'];
@@ -43,14 +43,13 @@ export class LoginComponent implements OnInit {
         next: () => {
           // // get return url from route parameters or default to '/'
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          
-          
+
+
           this.router.navigate(['/loan',this.bookId]);
-          var username = this.authService.currentUserValue.firstName; 
-        
+          var username = this.authService.currentUserValue.firstName;
+
         },
         error: obj => {
-          // console.log('login error ', obj.error);
           if (obj.error.status == 400 || obj.error.status == 401 || obj.error.status == 500) {
             this.error = 'Incorrect Username or Password';
           }
@@ -60,8 +59,8 @@ export class LoginComponent implements OnInit {
         }
       });
 
-    
-  
-    
+
+
+
   }
 }

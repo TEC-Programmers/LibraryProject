@@ -30,14 +30,14 @@ const routes: Routes = [
   {path: 'Admin/Books', component: AdminBookComponent},
   {path: 'Admin/Categorys', component: AdminCategoryComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
-  { path: 'Login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
   {path: 'loan/:id', component: LoanComponent},
   {path: 'reserve/:id', component: ReservationComponent},
-  
+
 
 ];
 
