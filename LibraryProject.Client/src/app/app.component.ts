@@ -37,7 +37,9 @@ export class AppComponent {
   ) {
     // get the current user from authentication service
     this.authService.currentUser.subscribe(x => this.currentUser= x);
-
+    // this.categoryService.getAllCategories()
+    // .subscribe(c => this.categories = c);
+    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
   }
 
 
