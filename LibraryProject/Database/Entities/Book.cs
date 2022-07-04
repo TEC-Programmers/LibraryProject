@@ -11,12 +11,13 @@ namespace LibraryProject.Database.Entities
         [Key]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(32)")]
+        [Column(TypeName = "nvarchar(MAX)")]
         public string Title { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]
         public string Language { get; set; }
 
+        [Column(TypeName = "nvarchar(MAX)")]
         public string Description { get; set; }
 
         [Column(TypeName = "nvarchar(32)")]
