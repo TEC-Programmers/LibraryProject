@@ -9,6 +9,7 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
+
 import { LoanComponent } from './loan/loan.component';
 import { LoginComponent } from './login/login.component';
 import { Role } from './_models/Role';
@@ -16,6 +17,7 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
 import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
+
 
 
 const routes: Routes = [
@@ -33,8 +35,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
 
- // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
-  // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
   {path: 'loan/:id', component: LoanComponent}
 

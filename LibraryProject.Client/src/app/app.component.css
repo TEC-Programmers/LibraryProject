@@ -21,6 +21,7 @@
 }
 
 
+
 #navBarSearchForm
 {
   width: 250px;
@@ -38,7 +39,7 @@
 }
 
 .navbar li ul {
-  /*background: #dcbe87;*/
+  background: lightgrey;
   visibility: visible;
   opacity: 0;
   min-width: 5rem;
@@ -47,15 +48,7 @@
   display: none;
 
 }
-.navbar li ul {
-  background: wheat;
-  visibility: visible;  
-  min-width: 5rem;
-  position: absolute;
-  transition: all 0.5s ease;
-  display: none;
 
-}
 /*category hover*/
 .navbar  li:hover>ul,
 ul li:focus-within>ul,
@@ -109,3 +102,42 @@ ul li ul:focus {
 
      }
 
+
+     
+@media(max-width:786px) 
+{
+.search 
+{display:none;}
+
+  .navbar-brand{
+    width: 7rem  !important;
+  }
+
+ .nav-item {
+  display:inline-flex;
+}
+  .navbar-brand img{
+    display:none;
+}
+
+}
+
+     
+footer {
+  position: fixed;
+  padding: 10px 10px 0px 0px;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  background-color: rgba(21, 124, 221, 0.5);
+  color: white;
+}
+
+
+
+/*Hvis browservinduet er 600 px eller mindre, vil text-align være center*/
+
+
+@media (max-width: 600px) {
+ 
+  .footer {width: 100%;  text-align: center; } }

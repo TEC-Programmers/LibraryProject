@@ -30,6 +30,8 @@ import { AdminCategoryComponent } from './admin-category/admin-category.componen
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,9 @@ import { AdminCategoryComponent } from './admin-category/admin-category.componen
     LoanComponent,
     CategoryBooksComponent,
     AdminBookComponent,
-    AdminCategoryComponent
+    AdminCategoryComponent,
+ 
+ 
 
   ],
 
