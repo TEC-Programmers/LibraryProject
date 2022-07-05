@@ -22,7 +22,7 @@ export class AppComponent {
   allBooks: Book[] = [];
   filterTerm!: string;
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
-
+  public searchTerm:string="";
 
   constructor(private bookService: BookService, 
     private categoryService: CategoryService,  
@@ -34,6 +34,7 @@ export class AppComponent {
     // .subscribe(c => this.categories = c);
     this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
   }
+  
 showSearch(): void {
 
     if (this.filterTerm == null || this.filterTerm == '') {
@@ -104,4 +105,10 @@ scrollToBottom(){
   this.scroll.nativeElement.scrollToTop = this.scroll.nativeElement.scrollHeight;
 } */
 
+
+search(event:any){
+  this.searchTerm=(event.target as HTMLInputElement).value;
+  console.log(this.searchTerm);
+  this.bookService.search.next(this.searchTerm);
+}
 }
