@@ -1,16 +1,17 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+
     background-color: black;
-    margin: 40px 0;
+    
 }
 
 * {
     box-sizing: border-box;
+
 }
 
 .container{
-    background-color:rgb(212, 148, 69);
-    width: 350px;
+    background-color:rgb(212, 148, 69); 
+    width: 400px;
     margin-top: 70px; 
    }
 /* Add padding to containers */
@@ -29,6 +30,11 @@ input[type=password] {
     display:block;
     border: #eee;
     background: #f1f1f1;
+}
+
+button{
+    width:100px;
+    margin-left: 25px;
 }
 
 input[type=text]:focus,
