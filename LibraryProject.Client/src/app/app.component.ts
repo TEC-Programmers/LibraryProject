@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
 import { User } from './_models/User';
@@ -27,15 +27,18 @@ export class AppComponent {
   constructor(private bookService: BookService, 
     private categoryService: CategoryService,  
     private authService: AuthService,
-    private router: Router) {   // get the current user from authentication service
+    private router: Router, private route:ActivatedRoute) {   // get the current user from authentication service
     this.authService.currentUser.subscribe(x => this.currentUser= x);}
   ngOnInit(): void {
     // this.categoryService.getAllCategories()
     // .subscribe(c => this.categories = c);
+    
     this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
+
+    
   }
   
-showSearch(): void {
+/* showSearch(): void {
 
     if (this.filterTerm == null || this.filterTerm == '') {
      alert("The input field is empty")
@@ -66,7 +69,7 @@ showSearch(): void {
         console.log(event);
       }
     }
-
+ */
     logout() {
       if (confirm('Are you sure you want to log out?')) {
         // ask authentication service to perform logout

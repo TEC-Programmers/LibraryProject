@@ -27,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
 import { FilterPipe } from './_shared/filter.pipe';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -47,7 +48,8 @@ import { FilterPipe } from './_shared/filter.pipe';
     BookDetailsComponent,
     LoanComponent,
     CategoryBooksComponent,
-    FilterPipe
+    FilterPipe,
+    SearchComponent
 
   ],
 
