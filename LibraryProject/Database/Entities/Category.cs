@@ -10,7 +10,7 @@ namespace LibraryProject.Database.Entities
         [Key]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(20)")]
+        [Column(TypeName = "nvarchar(50)")]
         public string CategoryName { get; set; }
 
 

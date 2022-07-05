@@ -10,18 +10,18 @@ namespace LibraryProject.Database.Entities
         [Key]   //[Key]fortæller EntityFramworkat Idegenskaben skal være den primære nøgle.
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(32)")]
+        [Column(TypeName = "nvarchar(50)")]
         public string FirstName { get; set; }
 
-        [Column(TypeName = "nvarchar(32)")]
+        [Column(TypeName = "nvarchar(50)")]
         public string MiddleName { get; set; }
 
-        [Column(TypeName = "nvarchar(32)")]
+        [Column(TypeName = "nvarchar(50)")]
         public string LastName { get; set; }
-        [Column(TypeName = "nvarchar(128)")]
+        [Column(TypeName = "nvarchar(150)")]
         public string Email { get; set; }
 
-        [Column(TypeName = "nvarchar(32)")]
+        [Column(TypeName = "nvarchar(50)")]
         public string Password { get; set; }
 
    

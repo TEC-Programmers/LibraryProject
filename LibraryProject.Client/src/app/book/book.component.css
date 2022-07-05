@@ -8,6 +8,7 @@ h1 {
 }
 
 #bookDiv {
-    position: absolute;
+    position: fixed;
     left: 555px;
+    color: yellow;
 }

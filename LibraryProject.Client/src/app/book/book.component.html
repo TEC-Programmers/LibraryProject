@@ -1,9 +1,8 @@
 <div id="bookDiv">
     <h1>Alle Bøger</h1>
-
-
-    <li *ngFor="let book of Books;">
-        <a [routerLink]="['/Book-Details', book.id]">{{book.title}} </a>
-        
-    </li>
+    <ol>
+        <li *ngFor="let book of Books;">
+            <h2>{{book.title}}</h2>
+        </li>
+    </ol>
 </div>

@@ -53,13 +53,12 @@
         <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
 
             <td>
-                {{book.title}}
+                <br> {{book.title}}
                 <br> Description: {{book.description}}
-                <br> Publish Year: {{book.publishYear}}
-                <br>
             </td>
         </tr>
     </li>
+
 
 
 
