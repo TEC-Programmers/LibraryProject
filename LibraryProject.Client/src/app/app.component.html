@@ -1,49 +1,49 @@
 <ul>
 
-        <li class="nav-item">  
-        <img src="assets/images/logo2.png" ></li>
+    <li class="nav-item">
+        <img src="assets/images/logo2.png"></li>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
- 
-     
-        <li class="nav-item active">
-            <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
-        </li>
-        <li class="nav-item" *ngIf="currentUser == null">
-            <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
-        </li>
-        <li class="nav-item" *ngIf="currentUser != null && currentUser.role == 'Admin'">
-            <a  routerLink="/" routerLinkActive="active-link w3-brown" *ngIf="currentUser == null">Administrator</a>
-
-        </li>
-        <li class="nav-item">
-            <a routerLinkActive="active-link w3-brown">Kategorier</a>
-            <ul>
-                <ng-container *ngFor="let category of categories">
-                    <li>
-                        <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
 
 
-                    </li>
-                </ng-container>
 
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
-        </li>
-        <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
-            <a routerLink="/" (click)="logout()">Logout</a>
+    <li class="nav-item active">
+        <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
+    </li>
+    <li class="nav-item" *ngIf="currentUser == null">
+        <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
+    </li>
+    <li class="nav-item" *ngIf="currentUser != null && currentUser.role == 1">
+        <a routerLink="/" routerLinkActive="active-link w3-brown" *ngIf="currentUser == null">Administrator</a>
 
-        </li>
+    </li>
+    <li class="nav-item">
+        <a routerLinkActive="active-link w3-brown">Kategorier</a>
+        <ul>
+            <ng-container *ngFor="let category of categories">
+                <li>
+                    <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
 
-        <li class="nav-item" *ngIf="currentUser == null">
-            <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
-        </li>
-       
-       <!--  <div  >
+
+                </li>
+            </ng-container>
+
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
+    </li>
+    <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+        <a routerLink="/" (click)="logout()">Logout</a>
+
+    </li>
+
+    <li class="nav-item" *ngIf="currentUser == null">
+        <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
+    </li>
+
+    <!--  <div  >
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
         (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
         placeholder="Search for Books" size="35">
@@ -51,7 +51,7 @@
        <table class="table">
                 <i class="fa-solid fa-magnifying-glass" (click)= "click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
                 <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]" >
-                
+
                     <td >
                     {{book.title}}
                         <br>
@@ -62,17 +62,17 @@
                     {{book.publishYear}}
                      <br>
                     </td>
-                </tr> 
+                </tr>
     </table> -->
     <div class="form-group">
         <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="bookTitle">
     </div>
     <span class="fas fa-search search-icon " style="color:white"></span>
-    
-    
-</ul>   
 
- <!-- <nav id="nav">
+
+</ul>
+
+<!-- <nav id="nav">
     <ul>
 
         <li><a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
@@ -104,7 +104,7 @@
             <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
         </li>
 
-     
+
         <li class="nav-item">
             <a routerLinkActive="active-link w3-brown">Kategorier</a>
             <ul>
@@ -127,16 +127,16 @@
         <li class="nav-item" *ngIf="currentUser == null">
             <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
         </li>
-     
+
         <h1><img src="assets/images/logo.png" style="height:40px;width:40px;">Library Management System</h1>
         <div id="searchDiv">
-          
+
             <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
                 (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
                 placeholder="Search for Books" size="35"><a><i class="fa-solid fa-magnifying-glass"  style="color: aliceblue; margin-top: 15px;"></i></a>
-         
+
                 <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
-                
+
                     <td>
                     {{book.title}}
                         <br>
@@ -148,12 +148,12 @@
                      <br>
                     </td>
                 </tr>
-          
+
         </div>
 
     </ul>
 </nav>  -->
-  
+
 
 
 

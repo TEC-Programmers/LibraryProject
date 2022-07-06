@@ -25,7 +25,8 @@
                 </tr>
             </thead>
             <tbody *ngIf="books?.length != 0">
-                <tr class="head-values" *ngFor="let book of books | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+                <!-- | filter:searchText -->
+                <tr class="head-values" *ngFor="let book of books | paginate: { itemsPerPage: 5, currentPage: p }">
                     <button style="width: 53px; height: 59px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
                     <button style="width: 53px; height: 59px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
                     <td><img src="/assets/images/{{book.image}}" alt="picture of book" id="img"></td>

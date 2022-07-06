@@ -19,7 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core'
-
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
@@ -48,8 +47,7 @@ import { SearchComponent } from './search/search.component';
     LoanComponent,
     CategoryBooksComponent,
     FilterPipe,
-    SearchComponent
-
+    SearchComponent,
     CategoryBooksComponent,
     AdminBookComponent,
     AdminCategoryComponent,
