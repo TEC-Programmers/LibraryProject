@@ -1,8 +1,22 @@
-<div id="bookDiv">
+<!-- <div id="bookDiv">
     <h1>Alle Bøger</h1>
-    <ol>
-        <li *ngFor="let book of Books;">
-            <h2>{{book.title}}</h2>
-        </li>
-    </ol>
+
+
+    <li *ngFor="let book of Books;">
+        <a [routerLink]="['/Book-Details', book.id]">{{book.title}} </a>
+        
+    </li>
+</div> -->
+
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let item of searchBooks">
+            <div class="card col-md-3">
+                <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}" alt="picture of products"></a>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
+
+            </div>
+        </ng-container>
+    </div>
+
 </div>

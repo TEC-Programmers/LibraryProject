@@ -28,6 +28,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { FilterPipe } from './_shared/filter.pipe';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -44,6 +46,10 @@ import { ReservationComponent } from './reservation/reservation.component';
     LoginComponent,
     BookDetailsComponent,
     LoanComponent,
+    CategoryBooksComponent,
+    FilterPipe,
+    SearchComponent
+
     CategoryBooksComponent,
     AdminBookComponent,
     AdminCategoryComponent,
