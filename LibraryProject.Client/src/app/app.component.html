@@ -43,11 +43,11 @@
             <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
         </li>
         <div>
-            <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
+            <input id="searchInput" name="searchInput" 
         (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
         placeholder="Search for Books" size="35">
         
-        <i class="fa-solid fa-magnifying-glass" (click)= "click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
+        <i class="fa-solid fa-magnifying-glass" (click)= "click()" (keydown.enter)="checkSearch($event)"style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
     </div>
        <!--  <div  >
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
