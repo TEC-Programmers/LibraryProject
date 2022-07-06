@@ -8,7 +8,7 @@
     </li>
 </div> -->
 
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <ng-container *ngFor="let item of searchBooks">
             <div class="card col-md-3">
@@ -19,4 +19,8 @@
         </ng-container>
     </div>
 
+</div> -->
+<div>
+    <input type="text" placeholder="Search for Book"  [(ngModel)]="searchTerm" (change)="searchTerm">
+    <button (click)="search()">Search</button>
 </div>

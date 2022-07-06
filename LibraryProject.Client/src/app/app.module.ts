@@ -26,8 +26,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JW
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
-import { FilterPipe } from './_shared/filter.pipe';
 import { SearchComponent } from './search/search.component';
+
 
 
 
@@ -48,7 +48,6 @@ import { SearchComponent } from './search/search.component';
     BookDetailsComponent,
     LoanComponent,
     CategoryBooksComponent,
-    FilterPipe,
     SearchComponent
 
   ],

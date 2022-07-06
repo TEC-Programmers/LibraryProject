@@ -21,6 +21,7 @@ export class AppComponent {
   categories: Category[] = [];
   allBooks: Book[] = [];
   filterTerm!: string;
+  searchBooks: Book[] = [];
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: ''};
   public searchTerm:string="";
 
@@ -35,10 +36,18 @@ export class AppComponent {
     
     this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
 
-    
+    this.route.params.subscribe(params => {
+      if(params['searchTerm'])
+      this.searchTerm=params['searchTerm'];
+    })
   }
-  
-/* showSearch(): void {
+  // search():void{
+
+  //   if(this.searchTerm)
+  //   this.router.navigate(['/Book', this.searchTerm]);
+  // }
+
+ showSearch(): void {
 
     if (this.filterTerm == null || this.filterTerm == '') {
      alert("The input field is empty")
@@ -47,7 +56,8 @@ export class AppComponent {
     else if (this.filterTerm.length >= 0 ){
       this.bookService.getAllBooks()
     .subscribe(p => this.allBooks = p);
-    console.log(this.allBooks)
+    console.log(this.allBooks);
+    this.router.navigate(['/Book', this.filterTerm]);
     }
 
 
@@ -60,16 +70,21 @@ export class AppComponent {
        else if (this.filterTerm.length >= 0 ){
          this.bookService.getAllBooks()
        .subscribe(p => this.allBooks = p);
-       console.log(this.allBooks)
+       console.log(this.allBooks);
+       
+       
+       this.router.navigate(['/Book', this.filterTerm]);
        }
     }
     checkSearch(event:any){
-      if (event.key === "Backspace" || this.filterTerm == null) {
+      if (event.key === "Enter" || this.filterTerm == null) {
         this.allBooks = [];
+        this.searchTerm=(event.target as HTMLInputElement).value;
         console.log(event);
+        this.bookService.search.next(this.filterTerm);
       }
     }
- */
+ 
     logout() {
       if (confirm('Are you sure you want to log out?')) {
         // ask authentication service to perform logout
@@ -109,9 +124,9 @@ scrollToBottom(){
 } */
 
 
-search(event:any){
-  this.searchTerm=(event.target as HTMLInputElement).value;
-  console.log(this.searchTerm);
-  this.bookService.search.next(this.searchTerm);
-}
+// searchKey(event:any){
+//   this.searchTerm=(event.target as HTMLInputElement).value;
+//   console.log(this.searchTerm);
+//   this.bookService.search.next(this.searchTerm);
+// } 
 }

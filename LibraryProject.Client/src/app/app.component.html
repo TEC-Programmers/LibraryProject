@@ -42,7 +42,13 @@
         <li class="nav-item" *ngIf="currentUser == null">
             <a routerLink="/login" routerLinkActive="active-link w3-brown">Login</a>
         </li>
-       
+        <div>
+            <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
+        (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
+        placeholder="Search for Books" size="35">
+        
+        <i class="fa-solid fa-magnifying-glass" (click)= "click()" style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
+    </div>
        <!--  <div  >
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
         (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
@@ -64,10 +70,10 @@
                     </td>
                 </tr> 
     </table> -->
-    <div class="form-group">
+    <!-- <div class="form-group">
         <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="bookTitle">
     </div>
-    <span class="fas fa-search search-icon " style="color:white"></span>
+    <span class="fas fa-search search-icon " style="color:white"></span> -->
     
     
 </ul>   
