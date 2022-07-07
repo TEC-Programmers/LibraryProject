@@ -1,4 +1,18 @@
 div {
-    width: 60%;
-    padding-left: 10rem;
+    width: 50%;
+    margin-left: 500px ;
+    margin-top: 80px; 
+    opacity: 75%;  
+    background-color:rgb(212, 148, 69); 
+   
+}
+
+.common{
+  padding-left: 10;
+    
+}
+h3{
+    color:black;
+    font-weight: bold;
+        
 }

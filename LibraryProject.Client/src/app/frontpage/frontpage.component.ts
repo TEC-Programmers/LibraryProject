@@ -1,16 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { Author } from '../_models/Author';
 import { Book } from '../_models/Book';
-import { Loan } from '../_models/Loan';
-import { AuthorService } from '../_services/author.service';
-import { LoanService } from '../_services/loan.service';
+import { Category } from '../_models/Category';
+import { User } from '../_models/User';
 import { BookService } from '../_services/book.service';
-import { AuthService } from 'app/_services/auth.service';
-import Swal from 'sweetalert2';
-import { User } from 'app/_models/User';
-import { first, Observable, of, subscribeOn, Subscriber } from 'rxjs';
-import { UserService } from 'app/_services/user.service';
+import { CategoryService } from '../_services/category.service';
 
 
 @Component({
@@ -19,44 +14,56 @@ import { UserService } from 'app/_services/user.service';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
-  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
-  allBooks: Book[] = [];
-  books : Book[]= [];
-  disabled: boolean = true;
-  public x: number = 0;
-  z: any;
+  
+  title = 'LibraryProject-Client';
 
-  constructor(private bookService: BookService, private authService: AuthService, private userService: UserService) { }
+  book!: Book;
+  counter = 0;
+  total: number = 0;
+  categories: Category[] = [];
+  allBooks: Book[] = [];
+  filterTerm!: string;
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role:0 };
+
+
+  constructor(private bookService: BookService,
+    private categoryService: CategoryService,  
+    private router: Router) {    
+    }
 
   ngOnInit(): void {
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
+  }
+showSearch(): void {
 
-    if (this.authService.currentUserValue != null && this.authService.currentUserValue.id > 0) {
-      console.log('current Role: ',this.authService.currentUserValue.role)
+    if (this.filterTerm == null || this.filterTerm == '') {
+     alert("The input field is empty")
+    }
+
+    else if (this.filterTerm.length >= 0 ){
+      this.bookService.getAllBooks()
+    .subscribe(p => this.allBooks = p);
+    console.log(this.allBooks);
     }
   }
+  click(){
+      if (this.filterTerm == null || this.filterTerm == '') {
+        alert("The input field is empty")
+       }
 
-  ngAfterContentChecked(): void {
-    this.showOrhideAdminBtn();  
-  }
-
-  showOrhideAdminBtn() {
-    this.authService.currentUser.subscribe(x => {
-    this.currentUser = x;
-  
-    if (this.currentUser) {
-      this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
-        if (this.currentUser.role.toString() === 'Administrator') {
-          this.userService.getRole_(1);
-        }
-        else {
-          this.userService.getRole_(0);
-        }
+       else if (this.filterTerm.length >= 0 ){
+         this.bookService.getAllBooks()
+       .subscribe(p => this.allBooks = p);
+       console.log(this.allBooks)
+       }
+    }
+    checkSearch(event:any){
+      if (event.key === "Backspace" || this.filterTerm == null) {
+        this.allBooks = [];
+        console.log(event);
       }
-      else {
-        this.userService.getRole_(0);
-      } 
-    });
+    }
+
   }
 
-}
+
