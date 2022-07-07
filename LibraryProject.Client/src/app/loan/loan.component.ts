@@ -33,11 +33,13 @@ export class LoanComponent implements OnInit {
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   minDate = new Date(this.dateNow);
   minDate2 = new Date(this.minDate)
-  public loanDate;
+  public formatted_return_date;
+  public formatted_loaned_at;
+  total_loans: Loan[] = [];
 
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
-  constructor(private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
+  constructor(private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
 
   range = new FormGroup({
     fromDate: new FormControl('', Validators.required),
@@ -58,33 +60,38 @@ export class LoanComponent implements OnInit {
     })
 
     this.loanservice.getAllLoans().subscribe((loan) => {
-      this.loans = loan;
+      this.loans = loan || [];
     })
+
+    this.setLoanMinDate();
+  }
+
+  setLoanMinDate() {
+    this.return_date = this.loaned_at + 1;
+    console.log('return_date: ',this.return_date)
   }
 
 
   onFormSubmit() {
     console.log('Is Form Invalid', this.dateRangeForm.invalid);
 
-    if (this.authService.currentUserValue.id != null && this.authService.currentUserValue.id > 0) {
-        for (let item of this.loans) {
-          // this.loanDate = formatDate(item.return_date, 'yyyy-MM-dd', 'en-US');
-          this.loanDate = moment().format("YYYY/MM/DD")         
-        }
+    if (this.authService.currentUserValue.id != null && this.authService.currentUserValue.id > 0) {     
+
+        this.formatted_return_date = moment(this.return_date).format("YYYY/MM/DD")  
+        this.formatted_loaned_at = moment(this.loaned_at).format("YYYY/MM/DD")  
 
         let loanitem: Loan = {
           id: this.book.id,
           userID: this.authService.currentUserValue.id,
           bookId: this.book.id,
-          return_date: this.loanDate,
-          loaned_At: this.loaned_at
+          return_date: this.formatted_return_date,
+          loaned_At: this.formatted_loaned_at
         }
           
-          console.log('loanDate: ',this.loanDate)
-          console.log('loanitem: ',loanitem)
           this.loan = loanitem;
-          console.log('loan: ',this.loan)
-          if (this.loan) {
+          // console.log('loanitem: ',this.loan)
+          if (loanitem.id > 0) {
+            console.log('loan: ',this.loan)
             this.loanservice.addLoan(this.loan)
             .subscribe({
             next: (x) => {

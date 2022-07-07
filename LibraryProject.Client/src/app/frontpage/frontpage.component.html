@@ -3,7 +3,7 @@
     <nav id="navforside">
         <a routerLink="/Category">Kategorier</a> |
         <a routerLink="/Book">Bøger</a> |
-        <a routerLink="/Login">Login</a> |
+        <a routerLink="/Login" *ngIf="currentUser == null">Login</a> |
         <a routerLink="/Contact">Kontakt os</a> |
     </nav>
 </div>

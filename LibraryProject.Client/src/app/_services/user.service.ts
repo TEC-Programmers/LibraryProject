@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Loan } from '../_models/Loan';
 import { User } from '../_models/User';
 
@@ -18,6 +18,12 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
+  public getRole: BehaviorSubject<number> = new BehaviorSubject(0);
+  public getRole$: Observable<number> = this.getRole.asObservable();
+
+  getRole_(roleNr: number) {
+    this.getRole.next(roleNr)
+  }
 
   getAllUsers(): Observable<User[]>
   {

@@ -30,7 +30,6 @@ import { AdminCategoryComponent } from './admin-category/admin-category.componen
 import { ReservationComponent } from './reservation/reservation.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

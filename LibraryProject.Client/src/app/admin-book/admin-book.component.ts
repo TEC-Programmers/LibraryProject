@@ -41,6 +41,11 @@ export class AdminBookComponent implements OnInit {
   message: string = '';
   searchText!: string;
   p: any;
+  category: Category = { id: 0, categoryName: '' }
+  showErrorMess: boolean = true;
+  showCreateBtn: boolean = false;
+  showAuthorContinueBtn: boolean = false;
+
 
   selectedImg = null;
   imageArray = [
@@ -67,7 +72,12 @@ export class AdminBookComponent implements OnInit {
     this.isShown_image = false;
     this.isShown_publisher_form = true;
     this.publisher_dropdown = true;
-    this.btn_new_publisher = true;
+    this.btn_new_publisher = false;
+    this.isShown_author = false;
+    this.btn_new_author = false;
+    this.publisher = { id: 0, name: ''}
+
+    this.showCreateBtn = true;
   }
 
   newAuthor(): void {
@@ -77,27 +87,84 @@ export class AdminBookComponent implements OnInit {
     this.isShown_author_form = true;
     this.btn_new_author = false;
     this.author_dropdown = false;
+    this.btn_new_publisher = false;
+    this.author = { id: 0, firstName: '', middleName: '', lastName: ''}
+
+    this.showCreateBtn = true;
   }
 
   ContinuePublisherForm(): void {
-    this.isShown_author = true;
-    this.isShown_publisher = false;
-    this.isShown_category= true;
-    this.isShown_image = true;
-    this.publisher_dropdown = true;
-    this.publisherId_value = true;
-    this.isShown_publisher_form = false;
-    this.author_dropdown = false;
+    if (this.book.authorId) {
+      this.btn_new_author = false;
+      this.isShown_author = true;
+      this.isShown_publisher = false;
+      this.isShown_category= true;
+      this.isShown_image = true;
+      this.publisher_dropdown = true;
+      this.publisherId_value = true;
+      this.isShown_publisher_form = false;
+      this.btn_new_publisher = false;
+      this.showCreateBtn = false;
+    }
+    else if (this.author.firstName && this.author.lastName) {
+        this.btn_new_publisher = false;
+        this.isShown_publisher = false;
+        this.isShown_category = true;
+        this.isShown_image = true;
+        this.publisher_dropdown = true;
+        this.publisherId_value = true;
+        this.isShown_publisher_form = false;
+        this.showCreateBtn = false;
+      }
+      else {
+        this.btn_new_author = true;
+        this.isShown_author = true;
+        this.btn_new_publisher = false;
+        this.isShown_publisher = false;
+        this.isShown_category = true;
+        this.isShown_image = true;
+        this.publisher_dropdown = true;
+        this.publisherId_value = true;
+        this.isShown_publisher_form = false;
+        this.showCreateBtn = false;
+      }
   }
 
   ContinueAuthorForm(): void {
-    this.isShown_author = false;
-    this.isShown_publisher = true;
-    this.isShown_category= true;
-    this.isShown_image = true;
-    this.author_dropdown = true;
-    this.authorId_value = true;
-    this.isShown_author_form = false;
+    if (this.book.publisherId) {
+      this.btn_new_publisher = true;
+      this.isShown_author = false;
+      this.isShown_publisher = true;
+      this.isShown_category= true;
+      this.isShown_image = true;
+      this.author_dropdown = true;
+      this.authorId_value = true;
+      this.isShown_author_form = false;
+      this.btn_new_author = false;
+      this.showCreateBtn = false;
+    }
+    else if (this.publisher.name) {
+        this.btn_new_author = false;
+        this.isShown_author = false;
+        this.isShown_category = true;
+        this.isShown_image = true;
+        this.author_dropdown = true;
+        this.authorId_value = true;
+        this.isShown_author_form = false;
+        this.showCreateBtn = false;
+      }
+      else {
+        this.btn_new_publisher = true;
+        this.isShown_publisher = true;
+        this.btn_new_author = false;
+        this.isShown_author = false;
+        this.isShown_category = true;
+        this.isShown_image = true;
+        this.author_dropdown = true;
+        this.authorId_value = true;
+        this.isShown_author_form = false;
+        this.showCreateBtn = false;
+      }
   }
 
   cancel_new_publisher(): void {
@@ -108,7 +175,9 @@ export class AdminBookComponent implements OnInit {
     this.isShown_image = true;
     this.btn_new_publisher = true;
     this.publisher_dropdown = true;
+    this.btn_new_author = true;
     this.publisher = { id: 0, name: ''}
+    this.showCreateBtn = false;
   }
 
   cancel_new_author(): void {
@@ -119,7 +188,9 @@ export class AdminBookComponent implements OnInit {
   this.isShown_image= true;
   this.btn_new_author = true;
   this.author_dropdown = true;
+  this.btn_new_publisher = true;
   this.author = { id: 0, firstName: '', middleName: '', lastName: ''}
+  this.showCreateBtn = false;
   }
 
   cancel(): void {
@@ -156,6 +227,13 @@ export class AdminBookComponent implements OnInit {
             this.books = this.books.filter(x => x.id != book.id);
         });
     }
+  }
+
+  save_book2(): void {
+    if (this.book.authorId > 0) {
+      console.log('authorId True')
+    }
+    
   }
 
   save_book(): void {

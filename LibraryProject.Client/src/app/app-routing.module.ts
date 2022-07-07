@@ -17,7 +17,6 @@ import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
 import { ReservationComponent } from './reservation/reservation.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/Frontpage', pathMatch: 'full' },   //route for the frontpage
   {path: 'Frontpage', component: FrontpageComponent},
