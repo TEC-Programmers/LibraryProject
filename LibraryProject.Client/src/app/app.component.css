@@ -156,8 +156,10 @@ ul li ul {
   display: none;
 
 }
+
 /*category hover*/
-  ul li:hover>ul,
+
+ul li:hover>ul,
 ul li:focus-within>ul,
 ul li ul:hover,
 ul li ul:focus {
@@ -165,8 +167,8 @@ ul li ul:focus {
   opacity: 1;
   display: block;
   z-index: 1;
-  
 } 
+
 /* 
 ul li ul li {
   clear: both;
