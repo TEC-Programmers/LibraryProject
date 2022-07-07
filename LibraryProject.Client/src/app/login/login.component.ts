@@ -40,13 +40,16 @@ export class LoginComponent implements OnInit {
       this.userService.getRole$.subscribe(x => this.x = x ); // start listening for changes 
         if (this.currentUser.role.toString() === 'Administrator') {
           this.userService.getRole_(1);
+          console.log('x = ',this.x)
         }
         else {
           this.userService.getRole_(0);
+          console.log('x = ',this.x)
         }
       }
       else {
         this.userService.getRole_(0);
+        console.log('x = ',this.x)
       } 
     });
   }
@@ -57,7 +60,13 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           this.showOrhideAdminBtn();
-          this.router.navigate(['Frontpage']);
+
+          if (this.currentUser.role.toString() !== 'Administrator') {
+            this.router.navigate(['Frontpage']);
+          }
+          else {
+            this.router.navigate(['Admin']);
+          }
           Swal.fire({
             title: 'Success!',
             text: 'Logged In Successfully',

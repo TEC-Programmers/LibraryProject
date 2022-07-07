@@ -12,6 +12,10 @@
   padding-left: 17px;
 }
 
+#btn_new_author {
+  margin-top: -26px;
+}
+
 #author_continue_btn {
   margin-top: -10px;
 }
