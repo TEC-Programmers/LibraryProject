@@ -1,0 +1,21 @@
+    .card {
+        top: 100px;
+        margin: 10px;
+        max-width: 200px;
+        text-align: center;
+        background-color: transparent;
+        border: none;
+    }
+    
+    a {
+        margin: 10px 0px 15px 0px;
+    }
+    
+    h5 {
+        color: skyblue;
+        font-size: small;
+    }
+    
+    #pic {
+        width: 150px;
+    }

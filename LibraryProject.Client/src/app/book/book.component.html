@@ -12,7 +12,7 @@
     <div class="row">
         <ng-container *ngFor="let item of searchBooks">
             <div class="card col-md-3">
-                <a routerLink="/Book-Details/{{item.id}}"><img src="/assets/images/{{item.image}}" alt="picture of products"></a>
+                <a routerLink="/Book-Details/{{item.id}}"><img id="pic" src="/assets/images/{{item.image}}" alt="picture of products"></a>
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
 
             </div>

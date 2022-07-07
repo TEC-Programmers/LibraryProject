@@ -1,40 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+
 /* You can add global styles to this file, and also import other style files */
- @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 
-*{
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+* {
     border: 0px;
-    padding:0px;
-    margin:0px;
+    padding: 0px;
+    margin: 0px;
     box-sizing: border-box;
-    font-size: 14px ;
-  
-    
+    font-size: 14px;
 }
-body { 
- 
-    background-image: linear-gradient(rgba(75, 146, 212, 0.705),rgba(192, 61, 9, 0.822)),url("/assets/images/Library.jpg");  
- /* background-image: linear-gradient(rgba(75, 146, 212, 0.705),rgba(159, 240, 236, 0.822)),url("/assets/images/Library.jpg");   */
- 
 
-    background-size:cover;
-    background-position: center;    
-    height:100vh;  
-    font-size: 12px ;
-    /* rgba(223, 86, 32, 0.822) */
- }
+body {
+    background-image: linear-gradient(rgba(75, 146, 212, 0.705), rgba(192, 61, 9, 0.822)), url("/assets/images/Library.jpg");
+    /* background-image: linear-gradient(rgba(18, 9, 156, 0.705), rgba(82, 145, 10, 0.822)), url("/assets/images/Library.jpg"); */
+    /* background-image: linear-gradient(rgba(22, 166, 185, 0.822), rgba(224, 30, 30, 0.705)), url("/assets/images/Library.jpg"); */
+    /* background-image: linear-gradient(rgba(38, 22, 185, 0.822), rgba(30, 224, 143, 0.705)), url("/assets/images/Library.jpg"); */
+    /* background-image: linear-gradient(rgba(38, 22, 185, 0.822), rgba(185, 116, 12, 0.705)), url("/assets/images/Library.jpg"); */
+    /* background-image: linear-gradient(rgba(185, 5, 116, 0.705), rgba(50, 158, 17, 0.822)), url("/assets/images/Library.jpg"); */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    font-size: 12px;
+}
 
- img{
+img {
     width: 60px;
-     
-
 }
 
-
-  
- 
 
 /*app component*/
+
+
 /*
  a.nav-link{
    color: white;
@@ -44,7 +42,11 @@ body {
 #no-bullets{
     list-style-type: none;
 }*/
+
+
 /*Category component*/
+
+
 /*
 .card-top{
     position:relative;
@@ -84,7 +86,7 @@ body {
 }
 .btns{
     display:inline-block;
-   
+
 
 
 }

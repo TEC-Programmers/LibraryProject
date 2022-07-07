@@ -12,3 +12,14 @@ button#button-format:disabled {
     background-color: #cccccc;
     color: #666666;
 }
+
+.card {
+    align-items: center;
+    background: transparent;
+    border: none;
+}
+
+img {
+    width: 200px;
+    margin: 30px;
+}
