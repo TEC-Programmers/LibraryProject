@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Author } from '../_models/Author';
 import { Book } from '../_models/Book';
@@ -6,7 +6,11 @@ import { Loan } from '../_models/Loan';
 import { AuthorService } from '../_services/author.service';
 import { LoanService } from '../_services/loan.service';
 import { BookService } from '../_services/book.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'app/_services/auth.service';
+import Swal from 'sweetalert2';
+import { User } from 'app/_models/User';
+import { first, Observable, of, subscribeOn, Subscriber } from 'rxjs';
+import { UserService } from 'app/_services/user.service';
 
 
 @Component({
@@ -15,49 +19,44 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
-  
-  book: Book = {
-    id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
-    language: '',
-    authorId: 0,
-    author: {
-      id: 0,
-      firstName: '',
-      lastName: ''
-    },
-    publisher: {
-      id: 0,
-      name: ''
-    }
-  }
-  books: Book[] = [];
-  bookId: number = 0;
-  searchKey: string = "";
-  searchBooks: Book[] = [];
+  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
+  allBooks: Book[] = [];
+  books : Book[]= [];
+  disabled: boolean = true;
+  public x: number = 0;
+  z: any;
 
-
-
-
-
-  constructor(private bookService: BookService,  private route: ActivatedRoute, private router: Router) { }
+  constructor(private bookService: BookService, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.bookService.getAllBooks().subscribe(x =>{ 
-      this.books = x;
-      this.searchBooks=this.books;
-      
-    
-      this.bookService.search.subscribe((value: string) => {
-        
-        this.searchKey = value
-        console.log(this.searchBooks, this.books);
-        this.searchBooks = this.books.filter(x => 
-          x.title.toLowerCase().includes(this.searchKey.toLowerCase()) || x.description.toLowerCase().includes(this.searchKey.toLowerCase())
-        
-      )});
-    });
-    
+    this.authService.currentUser.subscribe(x => this.currentUser = x);
 
+    if (this.authService.currentUserValue != null && this.authService.currentUserValue.id > 0) {
+      console.log('current Role: ',this.authService.currentUserValue.role)
+    }
+  }
+
+  ngAfterContentChecked(): void {
+    this.showOrhideAdminBtn();  
+  }
+
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(x => {
+    this.currentUser = x;
+  
+    if (this.currentUser) {
+      this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+        if (this.currentUser.role.toString() === 'Administrator') {
+          this.userService.getRole_(1);
+        }
+        else {
+          this.userService.getRole_(0);
+        }
+      }
+      else {
+        this.userService.getRole_(0);
+      } 
+    });
   }
 
 }

@@ -12,6 +12,56 @@
   padding-left: 17px;
 }
 
+#author_continue_btn {
+  margin-top: -10px;
+}
+
+#publisher_continue_btn {
+  margin-top: -29px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+#author_btn, #select_author {
+  display: inline;
+}
+
+#createBtn {
+  margin-left: 205px;
+  margin-top: 90px;
+}
+
+#user_message_author {
+  margin-left: 174px;
+}
+
+#user_message {
+  margin-left: 174px;
+}
+
+#btn_close_create {
+  position: absolute;
+  top: 31px;
+}
+
+#Modal_Create_Book {
+  opacity:1 !important;
+  top: 79px;
+}
+
+.btn-close {
+  margin-left: 468px;
+  margin-top: -1px;
+}
+
+#Modal_Book {
+  opacity:1.5 !important;
+  top: 130px;
+}
+
 .createBookBtn {
   width: 40px;
   height: 40px;
@@ -25,6 +75,7 @@
   margin-left: 39px;
   margin-top: 14px;
   position: absolute;
+  font-size: x-large;
 }
 
 .createBookBtn:hover {

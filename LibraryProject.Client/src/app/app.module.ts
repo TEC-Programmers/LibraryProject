@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core'
+
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
@@ -27,7 +28,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
 import { ReservationComponent } from './reservation/reservation.component';
-
 
 
 @NgModule({
@@ -43,7 +43,6 @@ import { ReservationComponent } from './reservation/reservation.component';
     LoginComponent,
     BookDetailsComponent,
     LoanComponent,
-    CategoryBooksComponent,
     CategoryBooksComponent,
     AdminBookComponent,
     AdminCategoryComponent,

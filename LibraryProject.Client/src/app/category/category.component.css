@@ -1,8 +1,17 @@
-#card {
-    background-color: rgb(212, 148, 69)
+#catDiv {
+    position: absolute;
+    left: 555px;
 }
 
 a {
-    color: black;
-    font-size: large;
+    text-decoration: none;
+}
+
+* {
+    margin: 0px;
+}
+
+h1 {
+    font-size: 50px;
+    padding-bottom: 30px;
 }

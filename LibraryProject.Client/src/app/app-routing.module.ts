@@ -17,7 +17,6 @@ import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
 import { ReservationComponent } from './reservation/reservation.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/Frontpage', pathMatch: 'full' },   //route for the frontpage
   {path: 'Frontpage', component: FrontpageComponent},
@@ -30,14 +29,14 @@ const routes: Routes = [
   {path: 'Admin/Books', component: AdminBookComponent},
   {path: 'Admin/Categorys', component: AdminCategoryComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
-  { path: 'login', component: LoginComponent },
+  { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book', component:BookComponent},
   {path: 'loan/:id', component: LoanComponent},
   {path: 'reserve/:id', component: ReservationComponent},
-
+  
 
 ];
 

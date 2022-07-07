@@ -38,4 +38,6 @@ export class ReservationService {
   deleteReservation(reservationId: number): Observable<Reservation> {
     return this.http.delete<Reservation>(`${this.apiUrl}/${reservationId}`, this.httpOptions);
   }
+
+  
 }

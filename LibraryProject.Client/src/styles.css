@@ -1,19 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
 
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
-* {
+
+ *{
     border: 0px;
-    padding: 0px;
-    margin: 0px;
+    padding:0px;
+    margin:0px;
     box-sizing: border-box;
+  
+    
+} 
+
+/* app component */
+  a.nav-link{
+   color: white;
+   font-family: cursive;
+   font-size: 25px;
+}
+#no-bullets{
+    list-style-type: none;
+} 
+/*Category component*/
+ .card-top{
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    min-width:0;
+    word-wrap:break-word;
+    background: #fff;
+    background-clip:border-box;
+    border:px solid rgba(0,0,0,0.2);
+    border-radius: .25rem;
+}
+.item img{
+    width:70px;
+}
+.item{
+    margin:0px 15px;
+    text-align: center;
+}
+.item a:hover{
+    color:blue;
+}
+.card{
+    padding:20px;
+    margin:50px;
+
+}
+.card img{
+    width:200px;
+    height:200px;
+    margin-bottom:15px;
+    transition:0.3s ease-in-out;
+}
+.card img:hover{
+    transition: 0.3s ease-in-out;
+    transform:scale(1.1);
+}
+.btns{
+    display:inline-block;
+   
+
+
 }
 
-body {
-    background: url("/assets/images/Library.jpg") no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
-}
 
-img {
-    width: 60px;
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } 

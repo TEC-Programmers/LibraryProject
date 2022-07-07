@@ -8,12 +8,7 @@ body {
     box-sizing: border-box;
 }
 
-.container{
-    background-color:rgb(212, 148, 69);
-    width: 450px;
-  
- 
-}
+
 /* Add padding to containers */
 
 
@@ -47,7 +42,7 @@ hr {
 
 
 /* Set a style for the submit button */
-/* 
+
 .registerbtn {
     background-color: #1661ec;
     color: white;
@@ -57,13 +52,13 @@ hr {
     cursor: pointer;
     align-items: center;
     display: flex;
-    width: auto;
+    width: 50%;
     opacity: 0.9;
 }
 
 .registerbtn:hover {
     opacity: 1;
-} */
+}
 
 
 /* Add a blue text color to links */

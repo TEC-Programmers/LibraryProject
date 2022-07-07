@@ -4,7 +4,7 @@
         <mat-form-field>
             <input [(ngModel)]="loaned_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date" formControlName="fromDate">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
+            <mat-datepicker #picker1 id="start_date"></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>

@@ -1,14 +1,9 @@
-
-
-<div class="container">
-    <div class="row">
-        <ng-container *ngFor="let item of searchBooks">
-            <div class="card col-md-3">
-                <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}" alt="picture of products"></a>
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
-
-            </div>
-        </ng-container>
-    </div>
-
+<div id="divforside">
+    <h1>Forside</h1>
+    <nav id="navforside">
+        <a routerLink="/Category">Kategorier</a> |
+        <a routerLink="/Book">Bøger</a> |
+        <a routerLink="/Login" *ngIf="currentUser == null">Login</a> |
+        <a routerLink="/Contact">Kontakt os</a> |
+    </nav>
 </div>
