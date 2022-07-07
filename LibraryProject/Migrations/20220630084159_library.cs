@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class Library : Migration
+    public partial class library : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userID = table.Column<int>(type: "int", nullable: false),
+                    userId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     return_date = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -156,7 +156,7 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Loan",
-                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "status", "userID" },
+                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "status", "userId" },
                 values: new object[,]
                 {
                     { 1, 2, "06/05/22", "13/05/22", 0, 2 },

@@ -37,7 +37,7 @@ namespace LibraryProject.API.Migrations
                     b.Property<int>("status")
                         .HasColumnType("int");
 
-                    b.Property<int>("userID")
+                    b.Property<int>("userId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -52,7 +52,7 @@ namespace LibraryProject.API.Migrations
                             loaned_At = "06/05/22",
                             return_date = "13/05/22",
                             status = 0,
-                            userID = 2
+                            userId = 2
                         },
                         new
                         {
@@ -61,7 +61,7 @@ namespace LibraryProject.API.Migrations
                             loaned_At = "27/06/22",
                             return_date = "27/07/22",
                             status = 0,
-                            userID = 4
+                            userId = 4
                         });
                 });
 
