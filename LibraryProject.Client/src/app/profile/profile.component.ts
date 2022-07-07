@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
+import { Loan } from 'app/_models/Loan';
+import { LoanService } from 'app/_services/loan.service';
 
 
 @Component({
@@ -13,16 +15,17 @@ import { UserService } from '../_services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
+  userId = 0
   users: User[] = [];
   user: User = this.newUser();
   message: string[] = [];
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
 
-
   constructor(
     private router: Router,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private loanService: LoanService
 
   ) {
     // get the current user from authentication service
@@ -31,7 +34,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.loanService.getLoan
   }
 
   newUser(): User {
