@@ -20,9 +20,11 @@ export class LoanService {
   getAllLoans(): Observable<Loan[]> {
     return this.http.get<Loan[]>(this.apiUrl);
   }
-  getLoanById(loanid: number ): Observable<Loan>{
-    return this.http.get<Loan>(`${this.apiUrl}/${loanid}`);
+
+  getLoan(bookId: number ): Observable<Loan>{
+    return this.http.get<Loan>(`${this.apiUrl}/${bookId}`);
    }
+
    addLoan(loan: Loan ): Observable<Loan>{
     return this.http.post<Loan>(this.apiUrl, loan, this.httpOptions);
    }

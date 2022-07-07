@@ -1,8 +1,7 @@
+<p>profile works!</p>
+<h3>Hi {{currentUser.firstName}}!</h3>
 
-
-
-<div class="common">
-    <h3>Hi {{currentUser.firstName}}!</h3>
+<div class="w3-container">
     <h4>Your Profile:</h4><br>
 
     <table class="w3-table w3-bordered w3-striped">
@@ -33,7 +32,7 @@
     <br>
     <hr>
 
-    <div class="common">
+    <div>
         <label>Email</label>
         <input class="w3-input w3-border" [(ngModel)]="user.email">
 
@@ -53,9 +52,8 @@
 
     </div><br>
 
-    <div class="common">
+    <div>
         <button class="w3-btn w3-green w3-ripple" (click)="save()">Save</button>&nbsp;&nbsp;
         <button class="w3-btn w3-blue w3-ripple" (click)="cancel()">Cancel</button> <br><br>
         <span class="w3-red">{{ message }}</span>
     </div>
-</div>

@@ -1,7 +1,7 @@
 .background {
   left: 0px;
   position: absolute;
-  top: 180px;
+  top: 193px;
   width: 2000px;
   height: 1000px;
 }
@@ -10,6 +10,56 @@
   height: 43px;
   width: 58px;
   padding-left: 17px;
+}
+
+#author_continue_btn {
+  margin-top: -10px;
+}
+
+#publisher_continue_btn {
+  margin-top: -29px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+#author_btn, #select_author {
+  display: inline;
+}
+
+#createBtn {
+  margin-left: 205px;
+  margin-top: 90px;
+}
+
+#user_message_author {
+  margin-left: 174px;
+}
+
+#user_message {
+  margin-left: 174px;
+}
+
+#btn_close_create {
+  position: absolute;
+  top: 31px;
+}
+
+#Modal_Create_Book {
+  opacity:1 !important;
+  top: 79px;
+}
+
+.btn-close {
+  margin-left: 468px;
+  margin-top: -1px;
+}
+
+#Modal_Book {
+  opacity:1.5 !important;
+  top: 130px;
 }
 
 .createBookBtn {
@@ -25,6 +75,7 @@
   margin-left: 39px;
   margin-top: 14px;
   position: absolute;
+  font-size: x-large;
 }
 
 .createBookBtn:hover {
@@ -72,7 +123,7 @@
     width: 357px;
     margin-left: 609px;
     position: absolute;
-    margin-top: 8px;
+    margin-top: 11px;
   }
   
   .table-table-striped {
@@ -89,37 +140,27 @@
   
   
   h1 {
-    /* color: white;
+    text-align: center;
+    color: white;
     text-transform: uppercase;
     padding: 1px;
-    font-family: "Raleway", cursive;
+    /* font-family: "Raleway", cursive; */
     font-weight: 100;
     position: relative;
-    width: 80%;
+    width: 263%;
     background: linear-gradient(to right, black, #eee, black);
     white-space: nowrap;
-    left: -112px; */
-  color: white;
-  text-transform: uppercase;
-  padding: 1px;
-  font-family: "Raleway", cursive;
-  font-weight: 100;
-  position: relative;
-  width: 65%;
-  background: linear-gradient(to right, black, #eee, black);
-  white-space: nowrap;
-  left: -157px;
-  top: 22px;
+    left: -1050px;
   }
   h1::before {
     content: "";
     position: absolute;
-    left: -10%;
+    left: 0;
     top: -50px;
-    width: 1722px;
-    margin-left: -300px;
+    width: 68%;
+    margin-left: 277px;
     margin-top: -220px;
-    height: 430px;
+    height: 600px;
     background: radial-gradient(ellipse closest-side, #444, black);
     z-index: -1;
   }
@@ -131,7 +172,10 @@
     letter-spacing: 30px;
     color: white;
     animation: comein 1.5s 1 ease-in-out forwards;
-  }
+    margin-left: -519px;
+    margin-top: 0px;
+    font-family: "Raleway", cursive;
+    }
   
   @keyframes comein {
     0% {

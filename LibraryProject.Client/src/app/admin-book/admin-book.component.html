@@ -9,14 +9,14 @@
         <div class="btnAndTitle">
             <strong style="height: 100px;" class="btnTitle">ADD NEW</strong>
             <BR>
-            <button class="createBookBtn" data-bs-toggle="modal" data-bs-target="#Modal_Create_Book">+</button>
+            <button class="createBookBtn" data-toggle="modal" data-target="#Modal_Create_Book">+</button>
         </div>
         <!-- <span *ngIf="message != ''">{{ message }}</span> -->
         <table style="width: 1000px; background-color: #686868;" class="table table-striped table table-hover table table-bordered">
             <thead>
                 <tr class="head">
                     <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-                    <th style="background-color: #212121; color: aliceblue; width: 0%;">Operation</th>
+                    <th style="background-color: #212121; color: aliceblue; width: 5%;">Operation</th>
                     <th style="background-color: #212121; color: aliceblue; width: 9%;">Image</th>
                     <th style="background-color: #212121; color: aliceblue; width: 20%;">Title</th>
                     <th style="background-color: #212121; color: aliceblue; width: 20%;">Language</th>
@@ -25,10 +25,10 @@
                 </tr>
             </thead>
             <tbody *ngIf="books?.length != 0">
-                <tr class="head-values" *ngFor="let book of books | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <button style="width: 53px; height: 59px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                    <button style="width: 53px; height: 59px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-bs-toggle="modal" data-bs-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
-                    <td><img src="/assets/images/{{book.image}}" alt="picture of book" id="img"></td>
+                <tr style="background-color: #686868;" class="head-values_" *ngFor="let book of books | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <button style="width: 49px; height: 58px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+                    <button style="width: 49px; height: 58px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-toggle="modal" data-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+                    <td style="background-color: #686868;"><img src="/assets/images/{{book.image}}" alt="picture of book" id="img"></td>
                     <td style="color: whitesmoke;">{{ book.title }}</td>
                     <td style="color: whitesmoke;">{{ book.language }}</td>
                     <td style="color: whitesmoke;">{{ book.description }}</td>
@@ -51,42 +51,50 @@
 <div class="modal fade" id="Modal_Create_Book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-danger" id="exampleModalLabel">CREATE NEW BOOK</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title" placeholder="book title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="language" class="form-label">Language</label>
-                        <input [(ngModel)]="book.language" type="text" class="form-control" id="language" name="language" placeholder="book language">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description" placeholder="short book summary">
-                    </div>
-                    <div class="mb-3">
-                        <label for="publishYear" class="form-label">Publish Year</label>
-                        <input min="1900" max="2022" [(ngModel)]="book.publishYear" type="number" class="form-control" id="publishYear" name="publishYear">
-                    </div>
-                    <br>
-                    <div *ngIf="authorId_value">
-                        <label>Author: </label> &nbsp;
-                        <input [(ngModel)]="author.firstName" [value]="author.firstName">
-                    </div>
-                    <div *ngIf="isShown_author">
-                        <div *ngIf="author_dropdown">
-                            <label>Author: </label> &nbsp;
-                            <select [(ngModel)]="book.authorId" name="author">
-                <option *ngFor="let author of authors" [value]="author.id">{{author.firstName}}</option>
-              </select> &nbsp;
-                            <button (click)="newAuthor()" type="button" class="btn btn-primary btn-sm" *ngIf="btn_new_author">new author</button>
+                <div class="modal-header">
+
+                </div>
+                    <h4 class="modal-title text-danger" id="exampleModalLabel">CREATE NEW BOOK</h4>
+                    <button (click)="cancel()" id="btn_close_create" type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <form>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title" placeholder="book title">
                         </div>
+                        <div class="mb-3">
+                            <label for="language" class="form-label">Language</label>
+                            <input [(ngModel)]="book.language" type="text" class="form-control" id="language" name="language" placeholder="book language">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description" placeholder="short book summary">
+                        </div>
+                        <div class="mb-3">
+                            <label for="publishYear" class="form-label">Publish Year</label>
+                            <input min="1900" max="2022" [(ngModel)]="book.publishYear" type="number" class="form-control" id="publishYear" name="publishYear">
+                        </div>
+                        <br>
+
+                        <div *ngIf="authorId_value">
+                            <label>Author: </label> &nbsp;
+                            <input [(ngModel)]="author.firstName" [value]="author.firstName" name="author">
+                        </div>
+                        <div>
+                            <div style="float: left;" id="select_author" *ngIf="isShown_author">
+                                <div *ngIf="author_dropdown">
+                                 <label>Author: </label> &nbsp;
+                                    <select [(ngModel)]="book.authorId" name="author">
+                                        <option selected></option>
+                                        <option *ngFor="let author of authors" [value]="author.id">{{author.firstName}}</option>
+                                    </select> &nbsp;
+                                </div>
+                            </div>
+                            <div style="float: center;" id="author_btn">
+                                <button (click)="newAuthor()" type="button" id="btn_new_author" class="btn btn-primary btn-md" *ngIf="btn_new_author">new author</button>
+                            </div>
                     </div>
+                 
                     <div class="author_form" *ngIf="isShown_author_form">
                         <input [(ngModel)]="author.firstName" type="text" class="form-control" id="firstName" name="firstName" placeholder="Firstname">
                         <br>
@@ -94,8 +102,14 @@
                         <br>
                         <input [(ngModel)]="author.lastName" type="text" class="form-control" id="lastName" name="lastName" placeholder="Lastname">
                         <br>
-                        <button (click)="cancel_new_author()" type="button" class="btn btn-warning">Cancel</button> &nbsp; &nbsp;
-                        <button (click)="ContinueAuthorForm()" class="btn btn-primary btn-sm">Continue</button>
+                        <button (click)="cancel_new_author()" type="button" class="btn btn-warning">Cancel</button> &nbsp;&nbsp;
+                        <div class="center" *ngIf="!showAuthorContinueBtn">
+                            <button (click)="ContinueAuthorForm()" class="btn btn-primary btn-md" id="author_continue_btn" [disabled]="(!author.firstName) || (!author.lastName)">Continue</button>
+                            <br>                           
+                        </div>
+                        <p id="user_message_author" [hidden]="author.firstName && author.lastName">
+                            <span style="font-size:0.8em; color: red;">*all fields required</span>
+                        </p>
                         <span *ngIf="message != ''">{{message}}</span>
                     </div>
                     <br>
@@ -104,20 +118,30 @@
                         <label>Publisher: </label> &nbsp;
                         <input [(ngModel)]="publisher.name" [value]="publisher.name" name="publisher">
                     </div>
-                    <div *ngIf="isShown_publisher">
+                    <div style="float: left;" *ngIf="isShown_publisher">
                         <div *ngIf="publisher_dropdown">
                             <label>Publisher: </label> &nbsp;
-                            <select [(ngModel)]="book.publisherId" name="publisher" required>
-                  <option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.name}}</option>
-              </select> &nbsp;
-                            <button (click)="newPublisher()" type="button" class="btn btn-primary btn-sm" *ngIf="btn_new_publisher">new publisher</button>
-                        </div>
+                        <select [(ngModel)]="book.publisherId" name="publisher" required>
+                            <option selected></option>
+                            <option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.name}}</option>
+                        </select> &nbsp;
+                    </div>
+                </div>
+                    <div style="float: center;">
+                        <button (click)="newPublisher()" type="button" class="btn btn-primary btn-md" *ngIf="btn_new_publisher">new publisher</button>
                     </div>
                     <div class="publisher_form" *ngIf="isShown_publisher_form">
                         <input [(ngModel)]="publisher.name" type="text" class="form-control" id="name" name="name" placeholder="Publisher">
                         <br>
                         <button (click)="cancel_new_publisher()" type="button" class="btn btn-warning">Cancel</button> &nbsp; &nbsp;
-                        <button (click)="ContinuePublisherForm()" class="btn btn-primary btn-sm">Continue</button>
+                        <br>
+                        <br>
+                        <div class="center">
+                            <button (click)="ContinuePublisherForm()" class="btn btn-primary btn-md" id="publisher_continue_btn" [disabled]="!publisher.name">Continue</button>
+                        </div>
+                        <p id="user_message_author" [hidden]="publisher.name">
+                            <span style="font-size:0.8em; color: red;">*all fields required</span>
+                        </p>
                         <span *ngIf="message != ''">{{message}}</span>
                     </div>
                     <br>
@@ -125,6 +149,7 @@
                     <div *ngIf="isShown_category">
                         <label>Category: </label> &nbsp;
                         <select [(ngModel)]="book.categoryId" name="category">
+              <option selected></option>
             <option *ngFor="let category of categorys" [value]="category.id">{{category.categoryName}}</option>
           </select>
                     </div>
@@ -133,17 +158,24 @@
                     <div *ngIf="isShown_image">
                         <label>Image: </label> &nbsp;
                         <select [(ngModel)]="book.image" name="image">
-              <option [ngValue]="null" selected disabled>Select Image</option>
+              <option selected></option>
               <option *ngFor="let img of imageArray" [ngValue]="img.name.toString()">{{img.name}}</option>
             </select>
                     </div>
                     <br>
-                    <br>
-                    <button (click)="save_book()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <!-- (!book.title) || (!book.language) || (!book.description) || (!book.publishYear) || (!book.image) || (!book.categoryId) || (!book.authorId && !book.publisherId && author.firstName && author.lastName && publisher.name)                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    <div *ngIf="!showCreateBtn">
+                        <button id="createBtn" (click)="save_book()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" name="save_book" [disabled]="(!book.title) || (!book.language) || (!book.description) || (!book.publishYear) || (!book.image) || (!book.categoryId) || (!book.authorId && !book.publisherId && author.firstName && author.lastName && publisher.name)">Create</button>
+
+                        <p id="user_message" [hidden]="book.image && book.title && book.language && book.description && book.publishYear && book.categoryId && book.authorId && book.publisherId || book.image && book.title && book.language && book.description && book.publishYear && this.author.firstName && this.publisher.name && this.book.categoryId || book.image && book.title && book.language && book.description && book.publishYear && this.author.firstName && this.book.publisherId && this.book.categoryId || book.image && book.title && book.language && book.description && book.publishYear && this.book.authorId && this.publisher.name && this.book.categoryId">
+                          <span style="font-size:0.8em; color: red;">*all fields required</span>
+                        </p>
+                    </div>
+                 
                 </form>
             </div>
             <div class="modal-footer">
-                <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                <button (click)="cancel()" type="button" class="btn btn-warning btn-md" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -155,34 +187,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-danger" id="exampleModalLabel">EDIT BOOK DETAILS</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title text-danger" id="exampleModalLabel">EDIT BOOK DETAILS</h4>
                 <form>
                     <div class="mb-3">
-                        <!-- <label for="title" class="form-label">Title</label> -->
+                        <label for="title" class="form-label">Title</label>
                         <input [(ngModel)]="book.title" type="text" class="form-control" id="title" name="title">
                     </div>
+                    <br>
                     <div class="mb-3">
-                        <!-- <label for="language" class="form-label">language</label> -->
+                        <label for="language" class="form-label">Language</label>
                         <input [(ngModel)]="book.language" type="text" class="form-control" id="language" name="language">
                     </div>
+                    <br>
                     <div class="mb-3">
-                        <!-- <label for="description" class="form-label">Description</label> -->
+                        <label for="description" class="form-label">Description</label>
                         <input [(ngModel)]="book.description" type="text" class="form-control" id="description" name="description">
                     </div>
+                    <br>
                     <div class="mb-3">
-                        <!-- <label for="publishYear" class="form-label">publishYear</label> -->
+                        <label for="publishYear" class="form-label">PublishYear</label>
                         <input [(ngModel)]="book.publishYear" type="text" class="form-control" id="publishYear" name="publishYear">
                     </div>
 
-                    &nbsp;&nbsp;
-                    <button (click)="save_book()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button (click)="save_book()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button (click)="cancel()" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                <button (click)="cancel()" type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

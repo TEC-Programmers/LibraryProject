@@ -37,7 +37,9 @@ export class AdminCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCustomers();
     this.getAllAdmins();
+    
   }
+
 
   edit_member(customer: User): void {
     this.message = '';
@@ -118,7 +120,6 @@ export class AdminCustomerComponent implements OnInit {
   }
 
 
-  
   save_member(): void {
     console.log(this.customer)
     this.message = '';
@@ -176,7 +177,7 @@ export class AdminCustomerComponent implements OnInit {
           const key = Object.keys(Role)[indexOf_Customer];
 
           this.customers = this.total_users.filter((obj) => {
-            return obj.role.toString() === key
+          return obj.role.toString() === key        
           });
         },
         error: (err: any) => {

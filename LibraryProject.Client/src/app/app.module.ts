@@ -14,8 +14,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
 import { LoginComponent } from './login/login.component';
-
-
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -26,10 +24,10 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JW
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
-import { SearchComponent } from './search/search.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
-
+import { AdminBookComponent } from './admin-book/admin-book.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 
 @NgModule({
@@ -46,8 +44,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BookDetailsComponent,
     LoanComponent,
     CategoryBooksComponent,
-    SearchComponent
-
+    AdminBookComponent,
+    AdminCategoryComponent,
+    ReservationComponent,
   ],
 
   imports: [
