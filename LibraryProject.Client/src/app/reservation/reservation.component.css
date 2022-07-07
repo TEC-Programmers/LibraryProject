@@ -1,0 +1,26 @@
+
+.cal {
+    height: 160px;
+    margin-left: 32px;
+    margin-top: 23px;
+}
+
+.submit {
+    margin-left: 102px;
+    margin-left: 74px;
+}
+
+.container {
+    max-width: 296px;
+    margin-left: 613px;
+    margin-top: 180px;
+    border: 5px double gray;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}

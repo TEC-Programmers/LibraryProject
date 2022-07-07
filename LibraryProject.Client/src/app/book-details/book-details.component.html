@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <ng-container  >
-            <div class="card col-md-3" id="card" >
+            <div class="card col-md-3"  >
                 <img src="/assets/images/{{book.image}}" alt="picture of book">
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;"><strong>Title: </strong>{{book.title}}
                 </h5>
@@ -15,12 +15,9 @@
                     <span >{{product.quantity}}</span>
                     <button class="btns" type="button" ><i class="fa fa-minus"></i></button>
                 </div> -->
-                
-                <button class="btn w3-brown" id="button-format" (click)="loan(book)">LÅN </button> &nbsp; &nbsp;
-           
-               
-                <button class="btn w3-brown" id="button-format" (click)="reserve(book)" >RESERVER  </button>
-                
+                <button class="btn btn-primary" id="button-format" (click)="loan(book)" [disabled]="isDisabled_loanBtn">LÅN </button>
+
+                <button class="btn btn-primary" id="button-format" (click)="reserve(book)" [disabled]="isDisabled_reserveBtn">RESERVER  </button>           
             </div>
         </ng-container>
     </div>

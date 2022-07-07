@@ -1,16 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
 
-.pageOptions {
-
-}
-
 .role_admin {
   position: absolute;
-  /* top: 208px; */
+  left: 160px;
   top: 232px;
   margin-top: 42px;
 }
 
+.all_content {
+  position: absolute;
+  margin-left: 160px;
+}
+
+#Modal {
+  opacity:1 !important;
+  margin-top: 50px;
+}
+
+#Modal_Members {
+  opacity:1 !important;
+  margin-top: 140px;
+}
+
+#edit-btn-admin {
+  margin-left: 468px;
+  margin-top: -2px;
+}
+
+#myModal {
+  opacity:0.5 !important;
+}
 .choose_type {
   top: -170px;
   position: absolute;

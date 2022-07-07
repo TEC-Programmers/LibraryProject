@@ -1,6 +1,6 @@
-/* #catDiv {
+#catDiv {
     position: absolute;
-    left: 500px;
+    left: 555px;
 }
 
 a {
@@ -9,12 +9,9 @@ a {
 
 * {
     margin: 0px;
-} */
-
-#card{
-    background-color:rgb(212, 148, 69)
 }
-a{
-    color:black;
-    font-size:large;
+
+h1 {
+    font-size: 50px;
+    padding-bottom: 30px;
 }

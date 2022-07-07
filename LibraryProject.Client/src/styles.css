@@ -1,40 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
- @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 
-*{
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+ *{
     border: 0px;
     padding:0px;
     margin:0px;
     box-sizing: border-box;
   
     
-}
-body {
-    background: url("/assets/images/Library.jpg") no-repeat center center fixed;
-    background-size:cover;
-    height:100vh;
-   
+} 
 
- }
- img{
-    width: 60px;
-    
-}
-
-/*app component*/
-/*
- a.nav-link{
+/* app component */
+  a.nav-link{
    color: white;
    font-family: cursive;
    font-size: 25px;
 }
 #no-bullets{
     list-style-type: none;
-}*/
+} 
 /*Category component*/
-/*
-.card-top{
+ .card-top{
     position:relative;
     display: flex;
     flex-direction: column;
@@ -79,5 +67,4 @@ body {
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
- */
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } 

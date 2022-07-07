@@ -1,12 +1,13 @@
-#button-format {
-    display:inline-block;
-    margin-right:5px;
+.btn-primary {
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
     width: 100px;
     text-align: center;
-    justify-content: space-between;
-    
- }
- #card{
-    background-color: rgb(212, 148, 69);
-    align-items: center;
- }
+}
+
+button#button-format:disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
