@@ -103,7 +103,7 @@ input a i {
     margin: 10px;
 }
 
-#MenuAboveAll {
+.nav-item li a {
     position: relative;
-    z-index: 1px;
+    z-index: 1;
 }

@@ -56,25 +56,25 @@ export class BookDetailsComponent implements OnInit {
       this.bookId = +params['id'];
     });
 
-    this.bookService.getBookById(this.bookId).subscribe(x => { 
+    this.bookService.getBookById(this.bookId).subscribe(x => {
       this.book = x,
       console.log('book-details on load: ',this.book);
     });
 
-     
-    this.check_Loan();   
-    // this.check_Reservation(); 
-    this.checkStatus();
-    this.deleteOutdatedLoans();
+
+    // this.check_Loan();
+    // this.check_Reservation();
+    // this.checkStatus();
+    // this.deleteOutdatedLoans();
   }
 
-  
+
 
   deleteOutdatedLoans() {
     this.loanService.getAllLoans().subscribe({
       next: (all_loans) => {
         this.total_loans = all_loans;
-        
+
         var storedDates = this.total_loans[0].return_date;
 
         var storedDates_converted = new Date(storedDates)
@@ -83,7 +83,7 @@ export class BookDetailsComponent implements OnInit {
           // console.log('date: ',storedDates_converted)
           var result = formatDate(storedDates_converted, 'yyyy/MM/dd', 'en-US');
           // console.log('date2: ',result)
-          
+
 
 
           // get all loans that has higher 'return_date' than current day today and then delete them.
@@ -97,17 +97,17 @@ export class BookDetailsComponent implements OnInit {
 
           // this.isDisabled_loanBtn = false; // NOT Active
           // this.isDisabled_reserveBtn = false;
-        }     
+        }
         else {
           // alert('Given date is not greater than the current date.');
           // console.log('NOT | storedDates: ',storedDates_converted)
           // console.log('return_date in string: ',storedDates)
-      }   
+      }
 
         // let parsedDate = moment(this.total_loans[0].return_date,"DD-MM-YYYY");
         // this.outputDate = parsedDate.format("DD-MM-YYYY");
-        
-        
+
+
         // var getExpiredLoans = this.total_loans.filter((loan) => {
         //   return ((loan["return_date"] > Date.now))
         // })
@@ -133,7 +133,7 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
-  
+
   check_Reservation() {
     this.reserveService.getAllReservations().subscribe({
       next: (all_reservations) => {
@@ -147,7 +147,7 @@ export class BookDetailsComponent implements OnInit {
        })
 
        this.bookReserved = this.reservations.find((res) => {
-         return ((res["bookId"] === this.bookId) && (res["userId"] !== this.userID));    
+         return ((res["bookId"] === this.bookId) && (res["userId"] !== this.userID));
        })
 
       //  var bookAvailable = this.reservations.find((res) => {
@@ -157,10 +157,10 @@ export class BookDetailsComponent implements OnInit {
 
       if (this.userLoggedIn_res) {
         this.isDisabled_reserveBtn = true; // NOT Active
-        console.log('userLoggedIn reserve')       
+        console.log('userLoggedIn reserve')
       }
       else if (this.bookReserved)
-      {             
+      {
         this.isDisabled_reserveBtn = true;
         console.log('bookReserved reserve')
       }
@@ -173,13 +173,13 @@ export class BookDetailsComponent implements OnInit {
           this.isDisabled_reserveBtn = false
         }
         console.log('bookAvailable reserve')
-        
+
       }
 
       }
     })
   }
-  
+
 
   // (CHECK) if Loan already exists
   check_Loan() {
@@ -190,27 +190,27 @@ export class BookDetailsComponent implements OnInit {
         // console.log('check_Loan: userID: ',this.userID)
         // console.log('check_Loan: bookId: ',this.bookId)
 
-        //  user: logged in | check if user logged in has borrowed a book  
+        //  user: logged in | check if user logged in has borrowed a book
         this.userLoggedIn = this.loans.find((loan) => {
            return ((loan["bookId"] === this.bookId) && (loan["userId"] === this.userID));
         })
 
         // user: (NOT) logged in | check if book is borrowed by another
         this.bookBorrowed = this.loans.find((loan) => {
-          return ((loan["bookId"] === this.bookId) && (loan["userId"] !== this.userID));    
+          return ((loan["bookId"] === this.bookId) && (loan["userId"] !== this.userID));
         })
 
         // check if book is (NOT) in loan table
         // var bookAvailable = this.loans.find((loan) => {
         //   return ((loan["bookId"] == 0));
         // })
-        
+
         if (this.userLoggedIn) {
           this.isDisabled_loanBtn = true; // NOT Active
-          console.log('userLoggedIn')       
+          console.log('userLoggedIn')
         }
         else if (this.bookBorrowed)
-        {             
+        {
           this.isDisabled_loanBtn = true;
           // this.isDisabled_reserveBtn = false;
           console.log('bookBorrowed')
@@ -219,10 +219,10 @@ export class BookDetailsComponent implements OnInit {
           this.isDisabled_loanBtn = false;
           console.log('bookAvailable')
         }
-      
-        
+
+
       },
-    });    
+    });
 
     this.check_Reservation();
 }
@@ -233,12 +233,12 @@ export class BookDetailsComponent implements OnInit {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
       this.router.navigate(['login']);
     }
-    else 
+    else
     {
       this.bookId = this.book.id;
       console.log('book-details: bookId: ',this.bookId)
       this.router.navigate(['/loan',this.bookId]);
-    }  
+    }
   }
 
   reserve(book:Book){
@@ -246,12 +246,12 @@ export class BookDetailsComponent implements OnInit {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
       this.router.navigate(['login']);
     }
-    else 
+    else
     {
       this.bookId = this.book.id;
       console.log('book-details: bookId: ',this.bookId)
       this.router.navigate(['/reserve',this.bookId]);
-    } 
+    }
   }
 
 }
