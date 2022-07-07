@@ -31,7 +31,7 @@
                     <td style="background-color: #686868;"><img src="/assets/images/{{book.image}}" alt="picture of book" id="img"></td>
                     <td style="color: whitesmoke;">{{ book.title }}</td>
                     <td style="color: whitesmoke;">{{ book.language }}</td>
-                    <td style="color: whitesmoke;">{{ book.description }}</td>
+                    <td style="color: whitesmoke;">{{ (book.description.length > 40)? (book.description | slice:0:40)+'..':(book.description) }}</td>
                     <td style="color: whitesmoke;">{{ book.publishYear }}</td>
                 </tr>
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -78,7 +78,7 @@
 
                         <div *ngIf="authorId_value">
                             <label>Author: </label> &nbsp;
-                            <input [(ngModel)]="author.firstName" [value]="author.firstName" name="author">
+                            <input [(ngModel)]="author.firstName" [value]="author.firstName" name="authorName" [disabled]="disable_author">
                         </div>
                         <div>
                             <div style="float: left;" id="select_author" *ngIf="isShown_author">
@@ -90,6 +90,8 @@
                                     </select> &nbsp;
                                 </div>
                             </div>
+                            <br>
+                            <br>
                             <div style="float: center;" id="author_btn">
                                 <button (click)="newAuthor()" type="button" id="btn_new_author" class="btn btn-primary btn-md" *ngIf="btn_new_author">new author</button>
                             </div>
@@ -116,7 +118,7 @@
                     <br>
                     <div *ngIf="publisherId_value">
                         <label>Publisher: </label> &nbsp;
-                        <input [(ngModel)]="publisher.name" [value]="publisher.name" name="publisher">
+                        <input [(ngModel)]="publisher.name" [value]="publisher.name" name="publisher" [disabled]="disable_publisher">
                     </div>
                     <div style="float: left;" *ngIf="isShown_publisher">
                         <div *ngIf="publisher_dropdown">
@@ -137,7 +139,7 @@
                         <br>
                         <br>
                         <div class="center">
-                            <button (click)="ContinuePublisherForm()" class="btn btn-primary btn-md" id="publisher_continue_btn" [disabled]="!publisher.name">Continue</button>
+                            <button (click)="ContinuePublisherForm()" class="btn btn-primary btn-lg" id="publisher_continue_btn" [disabled]="!publisher.name">Continue</button>
                         </div>
                         <p id="user_message_author" [hidden]="publisher.name">
                             <span style="font-size:0.8em; color: red;">*all fields required</span>
@@ -165,7 +167,7 @@
                     <br>
                     <!-- (!book.title) || (!book.language) || (!book.description) || (!book.publishYear) || (!book.image) || (!book.categoryId) || (!book.authorId && !book.publisherId && author.firstName && author.lastName && publisher.name)                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                     <div *ngIf="!showCreateBtn">
-                        <button id="createBtn" (click)="save_book()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" name="save_book" [disabled]="(!book.title) || (!book.language) || (!book.description) || (!book.publishYear) || (!book.image) || (!book.categoryId) || (!book.authorId && !book.publisherId && author.firstName && author.lastName && publisher.name)">Create</button>
+                        <button id="createBtn" (click)="save_book()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" name="save_book" [disabled]="(!book.title || !book.language || !book.description || !book.publishYear || !book.image || !book.categoryId || !book.authorId || !book.publisherId) && (!book.title || !book.language || !book.description || !book.publishYear || !book.image || !book.categoryId && (!author.firstName || !author.lastName) && (!publisher.name))">Create</button>
 
                         <p id="user_message" [hidden]="book.image && book.title && book.language && book.description && book.publishYear && book.categoryId && book.authorId && book.publisherId || book.image && book.title && book.language && book.description && book.publishYear && this.author.firstName && this.publisher.name && this.book.categoryId || book.image && book.title && book.language && book.description && book.publishYear && this.author.firstName && this.book.publisherId && this.book.categoryId || book.image && book.title && book.language && book.description && book.publishYear && this.book.authorId && this.publisher.name && this.book.categoryId">
                           <span style="font-size:0.8em; color: red;">*all fields required</span>

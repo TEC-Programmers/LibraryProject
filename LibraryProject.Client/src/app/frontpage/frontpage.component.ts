@@ -26,7 +26,7 @@ export class FrontpageComponent implements OnInit {
   public x: number = 0;
   z: any;
 
-  constructor(private bookService: BookService, private authService: AuthService, private userService: UserService) { }
+  constructor(private bookService: BookService, private authService: AuthService, private userService: UserService, private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.authService.currentUser.subscribe(x => this.currentUser = x);
@@ -37,25 +37,28 @@ export class FrontpageComponent implements OnInit {
   }
 
   ngAfterContentChecked(): void {
+    this.ref.detectChanges();
     this.showOrhideAdminBtn();  
   }
 
   showOrhideAdminBtn() {
-    this.authService.currentUser.subscribe(x => {
-    this.currentUser = x;
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
   
-    if (this.currentUser) {
-      this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
-        if (this.currentUser.role.toString() === 'Administrator') {
-          this.userService.getRole_(1);
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
         }
         else {
           this.userService.getRole_(0);
-        }
-      }
-      else {
-        this.userService.getRole_(0);
-      } 
+        } 
+    }
     });
   }
 

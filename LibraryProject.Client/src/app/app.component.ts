@@ -52,8 +52,16 @@ export class AppComponent {
       // subscribe to the changes in currentUser, and load Home component
       this.authService.currentUser.subscribe(x => {
         this.currentUser = x
-        this.router.navigate(['/']);
+        this.router.navigate(['Login']);
       });
+    }
+    else {
+      if (this.x === 1) {
+        this.router.navigate(['Admin']);
+      }
+      else {
+        this.router.navigate(['Frontpage']);
+      }
     }
   }
 
