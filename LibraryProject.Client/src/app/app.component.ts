@@ -22,7 +22,7 @@ export class AppComponent {
   allBooks: Book[] = [];
   filterTerm!: string;
   searchBooks: Book[] = [];
-  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '' };
+  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
   public searchTerm: string = "";
 
   constructor(private bookService: BookService,

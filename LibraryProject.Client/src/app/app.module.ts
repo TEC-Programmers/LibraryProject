@@ -14,7 +14,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
 import { LoginComponent } from './login/login.component';
-import { ContactComponent } from './contact/contact.component';
+
 
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
 import { SearchComponent } from './search/search.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -37,14 +38,11 @@ import { SearchComponent } from './search/search.component';
     FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
-
     ProfileComponent,
     RegisterComponent,
-
     CategoryComponent,
     BookComponent,
     LoginComponent,
-    ContactComponent,
     BookDetailsComponent,
     LoanComponent,
     CategoryBooksComponent,
@@ -63,6 +61,7 @@ import { SearchComponent } from './search/search.component';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
+    NgxPaginationModule
     ],
 
   providers: [

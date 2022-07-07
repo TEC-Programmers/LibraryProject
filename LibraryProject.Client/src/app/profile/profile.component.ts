@@ -1,5 +1,4 @@
 import {User } from '../_models/User';
-import { Role } from 'app/_models/Role';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
