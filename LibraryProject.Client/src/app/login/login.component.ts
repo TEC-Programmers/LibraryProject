@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           this.showOrhideAdminBtn();
-          this.router.navigate(['/book_details',this.bookId]);
+          this.router.navigate(['/Frontpage']);
           Swal.fire({
             title: 'Success!',
             text: 'Logged In Successfully',
