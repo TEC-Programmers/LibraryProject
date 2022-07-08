@@ -11,7 +11,16 @@
   
     
 } 
-
+body{
+    background: url("./assets/images/Library2.png") no-repeat center center fixed ;
+   
+    background-size: cover;
+    height: 100vh;
+    
+}
+img{
+    width:60px;
+}
 /* app component */
   a.nav-link{
    color: white;

@@ -8,6 +8,14 @@ body {
     box-sizing: border-box;
 }
 
+form{
+    background-color: rgb(240, 173, 49);
+    width:400px;
+    height:auto;
+    margin:auto;
+
+ 
+}
 
 /* Add padding to containers */
 

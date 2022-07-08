@@ -254,7 +254,7 @@ export class BookDetailsComponent implements OnInit {
   loan(book:Book){
     if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
-      this.router.navigate(['login']);
+      this.router.navigate(['/Login']);
     }
     else 
     {
