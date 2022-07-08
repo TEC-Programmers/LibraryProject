@@ -64,12 +64,9 @@ ul li ul:focus {
     /* opacity: 1; */
 }
 
-#searchDiv {
-    font-size: medium;
-    color: blue;
-    max-width: 450px;
-    top: 220px;
-    left: 1510px;
+#searchDiv td tr {
+    color: skyblue;
+    cursor: pointer;
 }
 
 .search {

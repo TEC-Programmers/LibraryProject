@@ -24,10 +24,6 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Reservation</a>
-                </li>
-
 
                 <li class="nav-item" *ngIf="currentUser != null">
                     <a class="nav-link" routerLink="/profile">Profile</a>
@@ -51,7 +47,7 @@
                     <a class="nav-link" routerLink="/Register" r><span class="glyphicon glyphicon-user"></span> Register</a>
                 </li>
                 <li class="nav-item" *ngIf="currentUser == null">
-                    <a class="nav-link" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+                    <a class="nav-link" routerLink="/Login"><span class="glyphicon glyphicon-log-in"></span>Login</a>
                 </li>
                 <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
                     <a class="nav-link" routerLink="/" (click)="logout()"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
@@ -64,7 +60,7 @@
 
 <div class="searchDiv">
     <!--to display the search result-->
-    <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
+    <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
         <td>
             {{book.title}}
             <br> Description: {{book.description}}
