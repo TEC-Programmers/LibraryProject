@@ -40,7 +40,7 @@ export class FrontpageComponent implements OnInit {
 
 
 
-  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) {
+    constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private ref: ChangeDetectorRef, private authService: AuthService, private userService: UserService) {
 
   }
 
@@ -58,7 +58,6 @@ export class FrontpageComponent implements OnInit {
             console.log(this.searchBooks, this.books);
             this.searchBooks = this.books.filter(x =>
               x.title.toLowerCase().includes(this.filterTerm.toLowerCase()) || x.description.toLowerCase().includes(this.filterTerm.toLowerCase())
-
             )
           });
         });
@@ -75,6 +74,34 @@ export class FrontpageComponent implements OnInit {
 
 
 
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
+  
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
+    }
+    });
+    })
+
+
+
+
+  }
+  ngAfterContentChecked(): void {
+    this.ref.detectChanges();
+    this.showOrhideAdminBtn();  
   }
 
 }

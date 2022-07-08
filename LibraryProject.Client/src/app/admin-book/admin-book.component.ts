@@ -4,10 +4,13 @@ import { Author } from 'app/_models/Author';
 import { Book } from 'app/_models/Book';
 import { Category } from 'app/_models/Category';
 import { Publisher } from 'app/_models/Publisher';
+import { User } from 'app/_models/User';
+import { AuthService } from 'app/_services/auth.service';
 import { AuthorService } from 'app/_services/author.service';
 import { BookService } from 'app/_services/book.service';
 import { CategoryService } from 'app/_services/category.service';
 import { PublisherService } from 'app/_services/publisher.service';
+import { UserService } from 'app/_services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -41,11 +44,14 @@ export class AdminBookComponent implements OnInit {
   message: string = '';
   searchText!: string;
   p: any;
+  x:any;
   category: Category = { id: 0, categoryName: '' }
   showErrorMess: boolean = true;
   showCreateBtn: boolean = false;
   showAuthorContinueBtn: boolean = false;
-
+  disable_author: boolean = false;
+  disable_publisher: boolean = false;
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
 
   selectedImg = null;
   imageArray = [
@@ -57,13 +63,46 @@ export class AdminBookComponent implements OnInit {
     {"name": "Tor_Fanger_Tyve.jpg"}
 ]
 
-  constructor(private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
+  constructor(private userService: UserService, private authService: AuthService, private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
     this.bookService.getAllBooks().subscribe(x => this.books = x);
     this.authorService.getAllAuthors().subscribe(a => this.authors = a);
     this.publisherService.getAllPublishers().subscribe(p => this.publishers = p);
     this.categoryService.getAllCategories().subscribe(c => this.categorys = c);
+    console.log('admin-book ngOnInit | x = ',this.x)
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
+  }
+
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
+  
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
+    }
+    });
+
+    console.log('x line 97: ',this.x)
   }
 
   newPublisher(): void {
@@ -76,7 +115,6 @@ export class AdminBookComponent implements OnInit {
     this.isShown_author = false;
     this.btn_new_author = false;
     this.publisher = { id: 0, name: ''}
-
     this.showCreateBtn = true;
   }
 
@@ -89,7 +127,6 @@ export class AdminBookComponent implements OnInit {
     this.author_dropdown = false;
     this.btn_new_publisher = false;
     this.author = { id: 0, firstName: '', middleName: '', lastName: ''}
-
     this.showCreateBtn = true;
   }
 
@@ -105,6 +142,7 @@ export class AdminBookComponent implements OnInit {
       this.isShown_publisher_form = false;
       this.btn_new_publisher = false;
       this.showCreateBtn = false;
+      this.disable_publisher = true;
     }
     else if (this.author.firstName && this.author.lastName) {
         this.btn_new_publisher = false;
@@ -115,6 +153,7 @@ export class AdminBookComponent implements OnInit {
         this.publisherId_value = true;
         this.isShown_publisher_form = false;
         this.showCreateBtn = false;
+        this.disable_publisher = true;
       }
       else {
         this.btn_new_author = true;
@@ -127,6 +166,7 @@ export class AdminBookComponent implements OnInit {
         this.publisherId_value = true;
         this.isShown_publisher_form = false;
         this.showCreateBtn = false;
+        this.disable_publisher = true;
       }
   }
 
@@ -142,6 +182,7 @@ export class AdminBookComponent implements OnInit {
       this.isShown_author_form = false;
       this.btn_new_author = false;
       this.showCreateBtn = false;
+      this.disable_author = true;
     }
     else if (this.publisher.name) {
         this.btn_new_author = false;
@@ -152,6 +193,7 @@ export class AdminBookComponent implements OnInit {
         this.authorId_value = true;
         this.isShown_author_form = false;
         this.showCreateBtn = false;
+        this.disable_author = true;
       }
       else {
         this.btn_new_publisher = true;
@@ -164,6 +206,7 @@ export class AdminBookComponent implements OnInit {
         this.authorId_value = true;
         this.isShown_author_form = false;
         this.showCreateBtn = false;
+        this.disable_author = true;
       }
   }
 
@@ -181,16 +224,16 @@ export class AdminBookComponent implements OnInit {
   }
 
   cancel_new_author(): void {
-  this.isShown_author_form = false;
-  this.isShown_author = true;
-  this.isShown_publisher = true;
-  this.isShown_category = true;
-  this.isShown_image= true;
-  this.btn_new_author = true;
-  this.author_dropdown = true;
-  this.btn_new_publisher = true;
-  this.author = { id: 0, firstName: '', middleName: '', lastName: ''}
-  this.showCreateBtn = false;
+    this.isShown_author_form = false;
+    this.isShown_author = true;
+    this.isShown_publisher = true;
+    this.isShown_category = true;
+    this.isShown_image= true;
+    this.btn_new_author = true;
+    this.author_dropdown = true;
+    this.btn_new_publisher = true;
+    this.author = { id: 0, firstName: '', middleName: '', lastName: ''}
+    this.showCreateBtn = false;
   }
 
   cancel(): void {
@@ -229,12 +272,6 @@ export class AdminBookComponent implements OnInit {
     }
   }
 
-  save_book2(): void {
-    if (this.book.authorId > 0) {
-      console.log('authorId True')
-    }
-    
-  }
 
   save_book(): void {
     // INSERT AUTHOR
