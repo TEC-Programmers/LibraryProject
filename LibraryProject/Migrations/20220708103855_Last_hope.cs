@@ -2,8 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-
-    public partial class Library : Migration
+    public partial class Last_hope : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +12,9 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    MiddleName = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(32)", nullable: true)
+                    FirstName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,7 +27,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(20)", nullable: true)
+                    CategoryName = table.Column<string>(type: "nvarchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,8 +43,7 @@ namespace LibraryProject.API.Migrations
                     userId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    status = table.Column<int>(type: "int", nullable: false)
+                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,7 +56,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(62)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,11 +85,11 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    MiddleName = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(128)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -105,10 +103,10 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Language = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    Language = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(MAX)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     PublishYear = table.Column<short>(type: "smallint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
@@ -157,11 +155,11 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Loan",
-                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "status", "userId" },
+                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "userId" },
                 values: new object[,]
                 {
-                    { 1, 2, "06/05/22", "13/05/22", 0, 2 },
-                    { 3, 5, "27/06/22", "27/07/22", 0, 4 }
+                    { 1, 2, "06/05/22", "13/05/22", 2 },
+                    { 3, 5, "27/06/22", "27/07/22", 4 }
                 });
 
             migrationBuilder.InsertData(

@@ -9,12 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-
-    [Migration("20220629102245_last-hope")]
-    partial class lasthope
-
+    [Migration("20220708103855_Last_hope")]
+    partial class Last_hope
     {
-        protected void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +36,6 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("return_date")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("status")
-                        .HasColumnType("int");
-
                     b.Property<int>("userId")
                         .HasColumnType("int");
 
@@ -55,7 +50,6 @@ namespace LibraryProject.API.Migrations
                             bookId = 2,
                             loaned_At = "06/05/22",
                             return_date = "13/05/22",
-                            status = 0,
                             userId = 2
                         },
                         new
@@ -64,7 +58,6 @@ namespace LibraryProject.API.Migrations
                             bookId = 5,
                             loaned_At = "27/06/22",
                             return_date = "27/07/22",
-                            status = 0,
                             userId = 4
                         });
                 });
@@ -77,7 +70,7 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(62)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -146,13 +139,13 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -189,13 +182,13 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(MAX)");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Language")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<short>("PublishYear")
                         .HasColumnType("smallint");
@@ -204,7 +197,7 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
@@ -251,7 +244,7 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -278,19 +271,19 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");

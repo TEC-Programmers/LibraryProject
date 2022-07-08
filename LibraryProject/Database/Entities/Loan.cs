@@ -1,5 +1,4 @@
-﻿using LibraryProject.API.Helpers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace LibraryProject.API.Database.Entities
@@ -14,6 +13,5 @@ namespace LibraryProject.API.Database.Entities
         public string loaned_At { get; set; }
         public string return_date { get; set; }
 
-        public Status status { get; set; }
     }
 }
