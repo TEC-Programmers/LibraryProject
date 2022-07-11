@@ -87,3 +87,25 @@
         left: 20px;
         opacity: 1;
         }
+
+        @media(max-width:540px) 
+        {
+              
+        .search button
+        {display:none;}
+        
+          
+        }
+
+        @media(max-width:540px) 
+        {
+              .search{
+                     padding: 200px;
+                     position: relative;
+                     width:100%;                
+                                      
+                     }
+                     .search .fa-search{
+                            display: none;
+                     }
+        }

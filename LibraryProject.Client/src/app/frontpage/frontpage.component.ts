@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Author } from '../_models/Author';
 import { Book } from '../_models/Book';
-import { Category } from '../_models/Category';
-import { User } from '../_models/User';
+import { Loan } from '../_models/Loan';
+import { AuthorService } from '../_services/author.service';
+import { LoanService } from '../_services/loan.service';
 import { BookService } from '../_services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AuthService } from 'app/_services/auth.service';
+import { UserService } from 'app/_services/user.service';
+import { User } from 'app/_models/User';
 
 
 @Component({
@@ -15,19 +19,35 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
-  
-  allBooks: Book[] = [];
+  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+  x:any;
 
-
-  constructor(private bookService: BookService,
-    private categoryService: CategoryService,  
-    private router: Router) {    
+  book: Book = {
+    id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
+    language: '',
+    authorId: 0,
+    author: {
+      id: 0,
+      firstName: '',
+      lastName: ''
+    },
+    publisher: {
+      id: 0,
+      name: ''
     }
+  }
+  books: Book[] = [];
+  bookId: number = 0;
+  public filterTerm: string = "";
+  searchBooks: Book[] = [];
 
 
 
 
-  constructor(private bookService: BookService) { }
+
+    constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private ref: ChangeDetectorRef, private authService: AuthService, private userService: UserService) {
+
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -56,7 +76,7 @@ export class FrontpageComponent implements OnInit {
       }
     })
 
-
+  }
 
 
   showOrhideAdminBtn() {
@@ -78,17 +98,15 @@ export class FrontpageComponent implements OnInit {
         } 
     }
     });
-    })
-
-
-
-
   }
+
+
+
+
+  
   ngAfterContentChecked(): void {
     this.ref.detectChanges();
     this.showOrhideAdminBtn();  
   }
 
-  }
-
-
+}

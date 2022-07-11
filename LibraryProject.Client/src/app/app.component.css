@@ -125,7 +125,7 @@ ul li ul:focus {
   width: 100%;
   bottom: 0;
   text-align: center;
-  background-color: gray;
+  background-color: black;
   color: white;
   z-index: 1;
 
