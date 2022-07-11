@@ -1,54 +1,63 @@
 <ul>
 
-        <li class="nav-item">  
-        <img src="assets/images/logo2.png" ></li>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <li class="nav-item">
+        <img src="assets/images/logo2.png">
+    </li>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-  
- 
-     
-        <li class="nav-item active">
-            <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
-        </li>
-        <li class="nav-item" *ngIf="currentUser == null">
-            <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
-        </li>
-        <li class="nav-item">
-            <a  routerLink="/Admin" routerLinkActive="active-link w3-brown" *ngIf="currentUser != null">Administrator</a>
-        </li>
-        <li class="nav-item">
-            <a routerLinkActive="active-link w3-brown">Kategorier</a>
-            <ul class="row">
-                <ng-container *ngFor="let category of categories">
-                    <li >
+
+
+
+    <li class="nav-item active">
+        <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
+    </li>
+    <li class="nav-item" *ngIf="currentUser == null">
+        <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
+    </li>
+    <li class="nav-item">
+        <a routerLink="/Admin" routerLinkActive="active-link w3-brown" *ngIf="currentUser != null">Administrator</a>
+    </li>
+    <li class="nav-item">
+        <a routerLinkActive="active-link w3-brown">Kategorier</a>
+        <ul class="col">
+            <ng-container *ngFor="let category of categories; let i=index">
+                <li *ngIf="i<4">
+                    <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
+
+                    <!-- <ul *ngIf="i > 4 && i < 7">
                         <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
+    
+    
+                    </ul> -->
+                </li>
+                
 
+            </ng-container>
 
-                    </li>
-                </ng-container>
-
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
-        </li>
-        <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
-            <a routerLink="/" (click)="logout()">Logout</a>
-
-        </li>
-
-        <li class="nav-item" *ngIf="currentUser == null">
-            <a routerLink="/Login" routerLinkActive="active-link w3-brown">Login</a>
-        </li>
-        <div>
-            <input id="searchInput" name="searchInput" 
-        (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
-        placeholder="Search for Books" size="35">
+        </ul>
         
-        <i class="fa-solid fa-magnifying-glass" (click)= "click()" (keydown.enter)="checkSearch($event)"style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
+    </li>
+    <li class="nav-item">
+        <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
+    </li>
+    <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+        <a routerLink="/" (click)="logout()">Logout</a>
+
+    </li>
+
+    <li class="nav-item" *ngIf="currentUser == null">
+        <a routerLink="/Login" routerLinkActive="active-link w3-brown">Login</a>
+    </li>
+    <div>
+        <input id="searchInput" name="searchInput" (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm"
+            type="text" placeholder="Search for Books" size="35">
+
+        <i class="fa-solid fa-magnifying-glass" (click)="click()" (keydown.enter)="checkSearch($event)"
+            style="color: aliceblue; margin-top: 15px; margin-right: -5px;"></i>
     </div>
-       <!--  <div  >
+    <!--  <div  >
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
         (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
         placeholder="Search for Books" size="35">
@@ -73,11 +82,11 @@
         <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="bookTitle">
     </div>
     <span class="fas fa-search search-icon " style="color:white"></span> -->
-    
-    
-</ul>   
 
- <!-- <nav id="nav">
+
+</ul>
+
+<!-- <nav id="nav">
     <ul>
 
         <li><a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
@@ -158,8 +167,37 @@
 
     </ul>
 </nav>  -->
-  
 
+<header class="menu-wrapper">
+    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
+
+        <!-- the standard dropdown items -->
+        <a class="dropdown-item" href="#">What we do</a>
+        <a class="dropdown-item" href="#">How we fit your needs</a>
+
+        <!-- next, a divider to tidy things up -->
+        <div class="dropdown-divider"></div>
+
+        <!-- finally, using flex to create your layout -->
+        <div class="d-md-flex align-items-start justify-content-start">
+
+            <div>
+                <div class="dropdown-header">Development</div>
+                <a class="dropdown-item" href="#">Bespoke software</a>
+                <a class="dropdown-item" href="#">Mobile apps</a>
+                <a class="dropdown-item" href="#">Websites</a>
+            </div>
+
+            <div>
+                <div class="dropdown-header">Professional Services</div>
+                <a class="dropdown-item" href="#">Project rescue</a>
+                <a class="dropdown-item" href="#">Source code recovery</a>
+                <a class="dropdown-item" href="#">Application support &amp; maintenance</a>
+            </div>
+        </div>
+    </div>
+</header>
 
 
 
