@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { Author } from '../_models/Author';
 import { Book } from '../_models/Book';
-import { Loan } from '../_models/Loan';
-import { AuthorService } from '../_services/author.service';
-import { LoanService } from '../_services/loan.service';
+import { Category } from '../_models/Category';
+import { User } from '../_models/User';
 import { BookService } from '../_services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -16,33 +15,19 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
+  
+  allBooks: Book[] = [];
 
-  book: Book = {
-    id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
-    language: '',
-    authorId: 0,
-    author: {
-      id: 0,
-      firstName: '',
-      lastName: ''
-    },
-    publisher: {
-      id: 0,
-      name: ''
+
+  constructor(private bookService: BookService,
+    private categoryService: CategoryService,  
+    private router: Router) {    
     }
-  }
-  books: Book[] = [];
-  bookId: number = 0;
-  public filterTerm: string = "";
-  searchBooks: Book[] = [];
 
 
 
 
-
-    constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private ref: ChangeDetectorRef, private authService: AuthService, private userService: UserService) {
-
-  }
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -104,4 +89,6 @@ export class FrontpageComponent implements OnInit {
     this.showOrhideAdminBtn();  
   }
 
-}
+  }
+
+
