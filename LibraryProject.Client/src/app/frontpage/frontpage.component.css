@@ -1,27 +1,50 @@
        body{
-        margin:0px;
-      
+        margin:0px;      
         font-family: "Poppins", sans-serif;
         font-weight: 300;
-      
        }
-
+       
+       
        .height{
         height: 30vh;
        }
+       .bg-1 { 
+              background-color: #1abc9c; /* Green */
+              color: #ffffff;
+            }
+
+       #banner
+       {
+              background-image: url(/assets/images/Library.jpg);
+              background-size:cover;
+              margin-top: -20px;;
+              width: 100%;
+              height: 450px;
+              max-width: 1920px;   
+        }
        
+        #books{
+            
+              z-index: -1;
+        }
+      
 
        .search{
-      
+       padding: 200px;
        position: relative;
+       width:60%;
+       margin: 0 auto;
+       display:block;
        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
          
        }
+    
 
        .search input{
+    
        
-        height: 60px;
-        text-indent: 25px;
+        height: 60px;       
+        text-indent: 35px;
         border: 2px solid #d6d4d4;
 
 
@@ -35,15 +58,19 @@
 
        .search .fa-search{
 
+        padding: 200px;
         position: absolute;
         top: 20px;
         left: 16px;
+        color: blue;
 
        }
 
        .search button{
 
-        position: absolute;
+        margin-top: 200px;
+        margin-right: 200px;
+        position: absolute;        
         top: 5px;
         right: 5px;
         height: 50px;

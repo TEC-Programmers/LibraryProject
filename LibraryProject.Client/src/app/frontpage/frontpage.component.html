@@ -1,8 +1,37 @@
-<div class="container">
+<div class="container-fluid" >
 
     <div class="row height d-flex justify-content-center align-items-center">
+<div id="banner" >
+ 
 
- <div class="container">
+    <div class="p-8" >
+        <div class="search p-6 " id="search-block">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Search Books">
+            <button class="btn btn-primary " >Search</button>  
+      </div>
+    </div>
+  </div>
+  </div>
+<br><br><br><br><br><br><br><br><br>
+
+      <!-- <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
+    
+        <td>
+        {{book.title}}
+            <br>
+        Description:
+        {{book.description}}
+            <br>
+        Publish Year:
+        {{book.publishYear}}
+         <br>
+        </td>
+    </tr> -->
+
+
+
+ <div class="container" id="books">
     <div class="row">
          <ng-container *ngFor="let item of searchBooks | filter:filterTerm" >
             <div class="card col-md-3">
@@ -14,31 +43,5 @@
     </div>
 
 </div> 
-      <div class="col-md-8">
-        <div class="search">
-          <i class="fa fa-search"></i>
-          <input type="text" class="form-control" placeholder="Search Books" (keydown.enter)="showSearch()"
-          (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
-          <button class="btn btn-primary "  (click)="click()">Search</button>  
-          <div class="searchDiv">
-          <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
-        
-            <td>
-            {{book.title}}
-                <br>
-            Description:
-            {{book.description}}
-                <br>
-            Publish Year:
-            {{book.publishYear}}
-             <br>
-            </td>
-        </tr>
-    </div>  
-        </div>
-        
-      </div>
-      
-    </div>
-</div>
+     
 

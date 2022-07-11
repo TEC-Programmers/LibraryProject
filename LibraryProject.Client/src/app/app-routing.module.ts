@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'Register', component: RegisterComponent},
 
   {path: 'Book', component:BookComponent},
-  {path: 'loan/:id', component: LoanComponent}
+  {path: 'loan/:id', component: LoanComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
   // {path: 'Admin/Books', component: AdministratorComponent},
   {path: 'Book/:filterTerm', component:FrontpageComponent},

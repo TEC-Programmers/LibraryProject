@@ -41,7 +41,7 @@
                         
                   <div class="search" >    
                     <i class="fa fa-search"></i>             
-                    <input type="text" class="form-control" placeholder="Search Books" (keydown.enter)="showSearch()"
+                    <input type="text" class="form-control" placeholder="Search Books" 
                     (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
                         </div>   </li>
                               
@@ -80,13 +80,13 @@
   </div>
   
 
-     <footer class="">
+     <div class="footer"  >
     <!--fixed-bottom laver footer sticky p� bunden -->
       
           <p>Online Library �2022. All rights reserved.<br>CVR-1234656</p>
         <a href="mailto:librarysupport@abc.com" style="color:red">librarysupport@abc.com</a>
           
-</footer>
+     </div>
   
 
   
