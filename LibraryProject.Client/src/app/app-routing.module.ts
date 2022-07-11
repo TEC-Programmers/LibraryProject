@@ -17,6 +17,7 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
 import { AdminBookComponent } from './admin-book/admin-book.component';
 import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 
 
@@ -37,6 +38,12 @@ const routes: Routes = [
 
   {path: 'Book', component:BookComponent},
   {path: 'loan/:id', component: LoanComponent}
+ // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
+  // {path: 'Admin/Books', component: AdministratorComponent},
+  {path: 'Book/:filterTerm', component:FrontpageComponent},
+  {path: 'loan/:id', component: LoanComponent},
+  {path: 'reserve/:id', component: ReservationComponent},
+  
 
 ];
 

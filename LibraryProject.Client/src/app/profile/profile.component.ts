@@ -1,5 +1,4 @@
 import {User } from '../_models/User';
-import { Role } from 'app/_models/Role';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
@@ -17,8 +16,8 @@ export class ProfileComponent implements OnInit {
   users: User[] = [];
   user: User = this.newUser();
   message: string[] = [];
-  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role:0};
-
+  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+  x:any;
 
   constructor(
     private router: Router,
@@ -32,11 +31,41 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
+  }
+
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
+  
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
+    }
+    });
 
   }
 
   newUser(): User {
-    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: '', role:0};
+    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   }
 
   edit(user: User): void {

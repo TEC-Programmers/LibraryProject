@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { Author } from '../_models/Author';
 import { Book } from '../_models/Book';
-import { Category } from '../_models/Category';
-import { User } from '../_models/User';
+import { Loan } from '../_models/Loan';
+import { AuthorService } from '../_services/author.service';
+import { LoanService } from '../_services/loan.service';
 import { BookService } from '../_services/book.service';
-import { CategoryService } from '../_services/category.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @Component({
@@ -14,56 +16,92 @@ import { CategoryService } from '../_services/category.service';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
-  
-  title = 'LibraryProject-Client';
 
-  book!: Book;
-  counter = 0;
-  total: number = 0;
-  categories: Category[] = [];
-  allBooks: Book[] = [];
-  filterTerm!: string;
-  currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role:0 };
-
-
-  constructor(private bookService: BookService,
-    private categoryService: CategoryService,  
-    private router: Router) {    
+  book: Book = {
+    id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
+    language: '',
+    authorId: 0,
+    author: {
+      id: 0,
+      firstName: '',
+      lastName: ''
+    },
+    publisher: {
+      id: 0,
+      name: ''
     }
+  }
+  books: Book[] = [];
+  bookId: number = 0;
+  public filterTerm: string = "";
+  searchBooks: Book[] = [];
+
+
+
+
+
+    constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router, private ref: ChangeDetectorRef, private authService: AuthService, private userService: UserService) {
+
+  }
 
   ngOnInit(): void {
-    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
-  }
-showSearch(): void {
+    this.route.params.subscribe(params => {
+      if (params['filterTerm']) {
+        this.bookService.getAllBooks().subscribe(x => {
+          this.books = x;
+          this.searchBooks = this.books;
 
-    if (this.filterTerm == null || this.filterTerm == '') {
-     alert("The input field is empty")
-    }
 
-    else if (this.filterTerm.length >= 0 ){
-      this.bookService.getAllBooks()
-    .subscribe(p => this.allBooks = p);
-    console.log(this.allBooks);
-    }
-  }
-  click(){
-      if (this.filterTerm == null || this.filterTerm == '') {
-        alert("The input field is empty")
-       }
+          this.bookService.search.subscribe((value: string) => {
 
-       else if (this.filterTerm.length >= 0 ){
-         this.bookService.getAllBooks()
-       .subscribe(p => this.allBooks = p);
-       console.log(this.allBooks)
-       }
-    }
-    checkSearch(event:any){
-      if (event.key === "Backspace" || this.filterTerm == null) {
-        this.allBooks = [];
-        console.log(event);
+            this.filterTerm = value
+            console.log(this.searchBooks, this.books);
+            this.searchBooks = this.books.filter(x =>
+              x.title.toLowerCase().includes(this.filterTerm.toLowerCase()) || x.description.toLowerCase().includes(this.filterTerm.toLowerCase())
+            )
+          });
+        });
+
       }
+      else {
+        this.bookService.getAllBooks().subscribe(x => {
+          this.books = x;
+          this.searchBooks = this.books;
+        });
+      }
+    })
+
+
+
+
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
+  
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
     }
+    });
+    })
+
+
+
 
   }
+  ngAfterContentChecked(): void {
+    this.ref.detectChanges();
+    this.showOrhideAdminBtn();  
+  }
 
-
+}

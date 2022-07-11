@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   newUser(): User {
-    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+    return this.user = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
   }
 
   getUsers(): void {
@@ -64,8 +64,6 @@ export class RegisterComponent implements OnInit {
 
     if (this.message.length == 0) {
       if (this.user.id == 0) {
-        console.log("ko");
-
         this.userService.registerUser(this.user)
            .subscribe({
             next: a => {
