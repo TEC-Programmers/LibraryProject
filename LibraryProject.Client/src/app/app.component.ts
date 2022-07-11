@@ -24,11 +24,11 @@ export class AppComponent {
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role:0 };
 
 
-  constructor(private bookService: BookService, 
-    private categoryService: CategoryService,  
+  constructor(private bookService: BookService,
+    private categoryService: CategoryService,
     private authService: AuthService,
-    private router: Router) 
-    {   
+    private router: Router)
+    {
     this.authService.currentUser.subscribe(x => this.currentUser= x); // get the current user from authentication service
   }
   ngOnInit(): void {
@@ -70,15 +70,15 @@ showSearch(): void {
       if (confirm('Are you sure you want to log out?')) {
         // ask authentication service to perform logout
         this.authService.logout();
-        
-  
+
+
         // subscribe to the changes in currentUser, and load Home component
         this.authService.currentUser.subscribe(x => {
           this.currentUser = x
           this.router.navigate(['/']);
         });
       }
-  
+
     }
 
 

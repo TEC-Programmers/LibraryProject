@@ -1,19 +1,18 @@
 body {
-
     background-color: black;
-    
 }
 
 * {
     box-sizing: border-box;
-
 }
 
-.container{
-    background-color:rgb(212, 148, 69); 
+.container {
+    background-color: rgb(212, 148, 69);
     width: 400px;
-    margin-top: 70px; 
-   }
+    margin-top: 70px;
+}
+
+
 /* Add padding to containers */
 
 
@@ -23,17 +22,17 @@ input[type=text],
 input[type=email],
 input[type=password] {
     width: 75%;
-    padding: 10px; 
-    margin: 5px ;
+    padding: 10px;
+    margin: 5px;
     margin-top: 5px;
     align-items: center;
-    display:block;
+    display: block;
     border: #eee;
     background: #f1f1f1;
 }
 
-button{
-    width:100px;
+button {
+    width: 100px;
     margin-left: 25px;
 }
 
@@ -52,14 +51,10 @@ hr {
 }
 
 
-
-
-
 /* Add a blue text color to links */
 
 a {
     color: dodgerblue;
-   
 }
 
 
