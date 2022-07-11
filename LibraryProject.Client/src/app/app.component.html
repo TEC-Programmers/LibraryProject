@@ -33,9 +33,9 @@
             <ul class="nav navbar-nav ms-auto">
                 <li class="nav-item nav-link">
 
-                    <div class="search">
+                    <div id="search">
                         <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" placeholder="Search Books" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
+                        <input type="text" class="form-control" placeholder="Search in the library" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
                     </div>
                 </li>
 
@@ -58,13 +58,11 @@
     </div>
 </nav>
 
-<div class="searchDiv">
+<div id="searchDiv">
     <!--to display the search result-->
     <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
-        <td>
-            {{book.title}}
-            <br> Description: {{book.description}}
-            <br> Publish Year: {{book.publishYear}}
+        <td><br>
+          <img src="/assets/images/{{book.image}}">{{book.title}}
             <br>
         </td>
     </tr>

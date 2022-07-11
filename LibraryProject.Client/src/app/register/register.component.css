@@ -7,9 +7,23 @@ body {
 }
 
 .container {
-    background-color: rgb(212, 148, 69);
+
+    background-color:transparent;
     width: 400px;
     margin-top: 70px;
+}
+
+#div{
+  font-family:'Courier New', Courier, monospace;
+  color: khaki;
+}
+
+#div p{
+  font-size: 24px !important;
+}
+
+#div h1{
+  font-size: 44px !important;
 }
 
 

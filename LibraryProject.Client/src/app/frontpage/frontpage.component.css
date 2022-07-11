@@ -1,25 +1,25 @@
        body{
         margin:0px;
-      
+
         font-family: "Poppins", sans-serif;
         font-weight: 300;
-      
+
        }
 
        .height{
         height: 30vh;
        }
-       
+
 
        .search{
-      
+
        position: relative;
        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
-         
+
        }
 
        .search input{
-       
+
         height: 60px;
         text-indent: 25px;
         border: 2px solid #d6d4d4;
@@ -52,11 +52,19 @@
 
        }
        .searchDiv{
-        font-size: medium;
-        color: black;
-        background-color: beige;
-        max-width: 450px;
+        cursor: pointer;
+        font-weight: 750;
+        font-size: large;
+        color: khaki;
+        background-color: transparent;
+         max-width: 450px;
         top: 80px;
         left: 20px;
         opacity: 1;
         }
+
+
+.searchDiv img{
+  display:inline-block;
+  margin-right: 50px;
+ }

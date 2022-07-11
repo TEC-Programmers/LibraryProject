@@ -1,21 +1,27 @@
-    .card {
-        top: 100px;
-        margin: 10px;
-        max-width: 200px;
-        text-align: center;
-        background-color: transparent;
-        border: none;
-    }
-    
-    a {
-        margin: 10px 0px 15px 0px;
-    }
-    
-    h5 {
-        color: skyblue;
-        font-size: small;
-    }
-    
-    #pic {
-        width: 150px;
-    }
+                .card {
+                    top: 100px;
+                    margin: 10px;
+                    max-width: 200px;
+                    text-align: center;
+                    background-color: transparent;
+                    border: none;
+                }
+
+                .card:hover{
+                    transition: 0.3s ease-in-out;
+                    transform: scale(1.2);
+                }
+
+                a {
+                    margin: 10px 0px 15px 0px;
+                }
+
+                h5 {
+                    color: skyblue;
+                    font-size: small;
+                }
+
+
+                #pic {
+                    width: 150px;
+                }

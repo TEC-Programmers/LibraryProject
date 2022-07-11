@@ -64,8 +64,9 @@ ul li ul:focus {
     /* opacity: 1; */
 }
 
-#searchDiv td tr {
-    color: skyblue;
+#searchDiv{
+  max-width: 300px;
+    color: khaki;
     cursor: pointer;
 }
 
@@ -86,6 +87,7 @@ ul li ul:focus {
 }
 
 .search .fa-search {
+  cursor: pointer;;
     position: absolute;
     top: 15px;
     left: 16px;

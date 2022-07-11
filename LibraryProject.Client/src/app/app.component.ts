@@ -32,6 +32,7 @@ export class AppComponent {
     this.authService.currentUser.subscribe(x => this.currentUser= x); // get the current user from authentication service
   }
   ngOnInit(): void {
+    console.log(this.currentUser)
     // this.categoryService.getAllCategories()
     // .subscribe(c => this.categories = c);
     this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);

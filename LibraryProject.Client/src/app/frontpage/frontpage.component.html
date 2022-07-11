@@ -7,26 +7,21 @@
           <i class="fa fa-search"></i>
           <input type="text" class="form-control" placeholder="Search Books" (keydown.enter)="showSearch()"
           (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
-          <button class="btn btn-primary "  (click)="click()">Search</button>  
+          <button class="btn btn-primary "  (click)="click()">Search</button>
           <div class="searchDiv">
-          <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
-        
+          <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
+
             <td>
-            {{book.title}}
                 <br>
-            Description:
-            {{book.description}}
+                <img src="/assets/images/{{book.image}}">{{book.title}}
                 <br>
-            Publish Year:
-            {{book.publishYear}}
-             <br>
             </td>
         </tr>
-    </div>  
+    </div>
         </div>
-        
+
       </div>
-      
+
     </div>
 </div>
 
