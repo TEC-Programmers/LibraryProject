@@ -88,7 +88,7 @@
           </select>
 
           &nbsp;&nbsp;
-          <button (click)="save_member()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
+          <button (click)="save_member()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" [disabled]="customer.role === 0">Update</button>
         </form>
       </div>
       <div class="modal-footer">

@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
-import { Loan } from 'app/_models/Loan';
-import { LoanService } from 'app/_services/loan.service';
 
 
 @Component({
@@ -15,17 +13,16 @@ import { LoanService } from 'app/_services/loan.service';
 })
 export class ProfileComponent implements OnInit {
 
-  userId = 0
   users: User[] = [];
   user: User = this.newUser();
   message: string[] = [];
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+  x:any;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private userService: UserService,
-    private loanService: LoanService
+    private userService: UserService
 
   ) {
     // get the current user from authentication service
@@ -34,7 +31,37 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loanService.getLoan
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
+  }
+
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
+  
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
+    }
+    });
+
   }
 
   newUser(): User {

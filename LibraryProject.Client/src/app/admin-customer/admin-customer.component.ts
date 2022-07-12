@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { AuthService } from 'app/_services/auth.service';
 
 @Component({
   selector: 'app-admin-customer',
@@ -31,13 +32,23 @@ export class AdminCustomerComponent implements OnInit {
   roles!: Role
   selectedValue = 0;
   p: any;
+  x:any;
+  currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
 
-  constructor(private userService: UserService, private http: HttpClient, private formBuilder: FormBuilder) {}
+  constructor(private userService: UserService, private http: HttpClient, private formBuilder: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
     this.getAllCustomers();
     this.getAllAdmins();
-    
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.showOrhideAdminBtn();
+    });
   }
 
 
@@ -208,6 +219,27 @@ export class AdminCustomerComponent implements OnInit {
         complete: () => {
           console.log('getAllAdmins() - Completed Successfully');
         },
+      });
+    }
+
+    showOrhideAdminBtn() {
+      this.authService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    
+      if (this.x !== 1) {
+        if (this.currentUser) {
+          this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+            if (this.currentUser.role.toString() === 'Administrator') {
+              this.userService.getRole_(1);
+            }
+            else {
+              this.userService.getRole_(0);
+            }
+          }
+          else {
+            this.userService.getRole_(0);
+          } 
+      }
       });
     }
 }
