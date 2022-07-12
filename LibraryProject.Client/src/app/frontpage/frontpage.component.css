@@ -1,13 +1,19 @@
        body{
         margin:0px;
-
         font-family: "Poppins", sans-serif;
         font-weight: 300;
-
        }
 
+       #intro{
+
+        display: flex;
+        justify-content: center;
+        position: relative;
+        
+      }
+
        .height{
-        height: 30vh;
+        height: 30vw;
        }
 
 
@@ -53,7 +59,7 @@
 
        }
        .searchDiv{
-
+        position: absolute;
         cursor: pointer;
          color: navy;
         background-color: transparent;
@@ -63,6 +69,6 @@
         opacity: 1;
         }
 
-        .searchDiv tr td img{
-          max-width: 150px;
+        .searchDiv p {
+          position: sticky;
         }

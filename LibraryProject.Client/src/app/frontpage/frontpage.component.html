@@ -1,5 +1,6 @@
 <div class="container">
 
+  <h1 id="intro">Welcome to the online library <br> </h1>
     <div class="row height d-flex justify-content-center align-items-center">
 
       <div class="col-md-8">
@@ -13,7 +14,8 @@
           <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
             <td>
                 <br>
-                <img src="/assets/images/{{book.image}}">{{book.title}}
+                <img src="/assets/images/{{book.image}}">
+               <p> {{book.title}} </p>
                 <br>
             </td>
         </tr>
