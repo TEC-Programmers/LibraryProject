@@ -5,12 +5,12 @@
       <div class="col-md-8">
         <div class="search">
           <i class="fa fa-search"></i>
-          <input type="text" class="form-control" placeholder="Search Books" (keydown.enter)="showSearch()"
+          <input type="text" class="form-control" placeholder="Search Books from homepage" (keydown.enter)="showSearch()"
           (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
           <button class="btn btn-primary "  (click)="click()">Search</button>
+
           <div class="searchDiv">
           <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
-
             <td>
                 <br>
                 <img src="/assets/images/{{book.image}}">{{book.title}}

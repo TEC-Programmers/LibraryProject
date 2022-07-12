@@ -15,13 +15,14 @@
 
        position: relative;
        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+       color: navy;
 
        }
 
        .search input{
 
         height: 60px;
-        text-indent: 25px;
+        text-indent: 30px;
         border: 2px solid #d6d4d4;
 
 
@@ -52,19 +53,16 @@
 
        }
        .searchDiv{
+
         cursor: pointer;
-        font-weight: 750;
-        font-size: large;
-        color: khaki;
+         color: navy;
         background-color: transparent;
-         max-width: 450px;
+        max-width: 150px;
         top: 80px;
         left: 20px;
         opacity: 1;
         }
 
-
-.searchDiv img{
-  display:inline-block;
-  margin-right: 50px;
- }
+        .searchDiv tr td img{
+          max-width: 150px;
+        }

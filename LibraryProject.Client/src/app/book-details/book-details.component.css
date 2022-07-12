@@ -17,6 +17,7 @@ button#button-format:disabled {
     align-items: center;
     background: transparent;
     border: none;
+    color: navy;
 }
 
 img {
