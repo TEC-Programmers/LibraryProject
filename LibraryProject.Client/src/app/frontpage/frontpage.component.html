@@ -1,47 +1,40 @@
-<div class="container-fluid" >
+<div class="container-fluid">
 
     <div class="row height d-flex justify-content-center align-items-center">
-<div id="banner" >
+        <div id="banner">
+
+
+            <div class="col-md-8">
+                <div class="search">
+                    <i class="fa fa-search" (click)="click()"></i>
+                    <input type="text" class="form-control" placeholder="Search Books" 
+                        (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm">
  
 
-    <div >
-        <div class="search row d-flex justify-content-center" >
-            <i class="fa fa-search"></i>
-            <input type="text" class="form-control" placeholder="Search Books">
-            <button class="btn btn-primary " >Search</button>  
-      </div>
+                </div>
+              
+            </div>
+        </div>
     </div>
-  </div>
-  </div>
-<br><br><br><br><br><br><br><br><br>
-
-      <!-- <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/book_details', book.id]">
-    
-        <td>
-        {{book.title}}
-            <br>
-        Description:
-        {{book.description}}
-            <br>
-        Publish Year:
-        {{book.publishYear}}
-         <br>
-        </td>
-    </tr> -->
+</div>
 
 
 
- <div class="container" id="books">
+
+
+
+
+<div class="container" id="books" style="margin-top: 10%; padding-top: 25px;">
     <div class="row">
-         <ng-container *ngFor="let item of searchBooks | filter:filterTerm" >
-            <div class="card col-md-3">
-                <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}" alt="picture of products"></a>
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
+        <ng-container *ngFor="let item of searchBooks | filter:filterTerm">
+            <div class="card col-md-2 align-items-center bg-success" style="border:none ">
+                <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}"
+                        alt="picture of products"></a>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}
+                </h5>
 
             </div>
-        </ng-container> 
+        </ng-container>
     </div>
 
-</div> 
-     
-
+</div>

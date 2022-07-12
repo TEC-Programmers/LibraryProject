@@ -1,8 +1,8 @@
 
 <div class="container ms-auto">
-    <div class="row align-items-center">
+    <div class="row">
         <ng-container *ngFor="let item of books">
-            <div class="card col-md-3" style="background-color: rgb(240, 173, 49) ;">
+            <div class="card col-md-3 align-items-center" style="background-color: rgb(240, 173, 49) ;">
                 <a routerLink="/book_details/{{item.id}}"> <img src="/assets/images/{{item.image}}" alt="picture of book"> </a>
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
 
