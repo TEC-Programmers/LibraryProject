@@ -9,6 +9,13 @@
         display: flex;
         justify-content: center;
         position: relative;
+        top: 5vw;
+
+       /* Gennemsigtig tekst der matcher baggrund*/
+        background-image: linear-gradient(to right,rgba(38, 22, 185, 0.822),  rgba(192, 61, 9, 0.822),rgba(75, 146, 212, 0.705));
+        background-clip: text;
+        background-size: 100%;
+        -webkit-text-fill-color: transparent;
         
       }
 
