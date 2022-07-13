@@ -17,7 +17,7 @@
        #banner
        {
               padding-bottom: 25.5%;
-              background-image: url(/assets/images/Library.jpg);              
+             background-image: url(/assets/images/Library.jpg);          
               background-size:cover;
               margin-top: -20px;;
               width: 100%;
@@ -39,6 +39,7 @@
        margin: 0 auto;
        display:inline-flex;
        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+ 
          
        }
 

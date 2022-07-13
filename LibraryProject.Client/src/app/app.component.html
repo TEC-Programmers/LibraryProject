@@ -12,10 +12,13 @@
             <ul class="nav navbar-nav ml-auto" >
                 <li class="nav-item active">
                     <a class="nav-link" routerLink="/" routerLinkActive="active-link "
-                        [routerLinkActiveOptions]="{exact:true}">Home</a>
+                        [routerLinkActiveOptions]="{exact:true}"> <span
+                        class="glyphicon glyphicon-home"> Home</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active-link ">Categories</a>
+                    <a class="nav-link" routerLinkActive="active-link "><span
+                        class="glyphicon glyphicon-book"> Categories</span></a>
+                    
                     <ul>
                         <ng-container *ngFor="let category of categories">
                             <li>
@@ -36,8 +39,7 @@
             </ul>
 
             <ul class="nav navbar-nav ms-auto"  id="myNavbar">
-                <li class="nav-item nav-link">
-
+                <li class="nav-item nav-link" *ngIf= "router.url!=='/Frontpage'">                   
                     <div class="search">
                         <i class="fa fa-search"  (click)="click()" (keydown.enter)="checkSearch($event)"></i>
                         <input type="text" name="searchInput" class="form-control" placeholder="Search Books"
@@ -50,16 +52,28 @@
                     <a class="nav-link" routerLink="/Admin" >Admin Panel</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/Register" ><span class="glyphicon glyphicon-user"></span>
+                    <a class="nav-link" routerLink="/Register" ><span class="glyphicon glyphicon-edit"></span>
                         Register</a>
                 </li>
                 <li class="nav-item" *ngIf="currentUser == null">
                     <a class="nav-link" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a>
                 </li>
+          
                 <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
-                    <a class="nav-link" routerLink="/" (click)="logout()"><span
-                            class="glyphicon glyphicon-log-out"></span>Logout</a>
+                    <a class="nav-link" ><span class="glyphicon glyphicon-user">&nbsp;{{currentUser.firstName+' '+currentUser.lastName}}</span></a>
+                    <ul>
+                       
+                        <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+                            <a class="nav-link" routerLink="/" (click)="logout()"><span
+                                    class="glyphicon glyphicon-log-out"></span>Logout</a>
+                        </li>
+                     
+                    </ul>
+
                 </li>
+
+
+               
             </ul>
 
         </div>

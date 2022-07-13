@@ -1,3 +1,6 @@
+  
+        
+        <br>
 <div class="container-fluid">
 
     <div class="row height d-flex justify-content-center align-items-center">
@@ -26,6 +29,7 @@
 
 <div class="container" id="books" style="margin-top: 10%; padding-top: 25px;">
     <div class="row">
+        
         <ng-container *ngFor="let item of searchBooks | filter:filterTerm">
             <div class="card col-md-2 align-items-center bg-success" style="border:none ">
                 <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}"

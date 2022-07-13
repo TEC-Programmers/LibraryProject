@@ -29,7 +29,7 @@ export class AppComponent {
   constructor(private bookService: BookService,
     private categoryService: CategoryService,
     private authService: AuthService,
-    private router: Router, private route: ActivatedRoute,
+    public router: Router, private route: ActivatedRoute,
     private userService:UserService) {   // get the current user from authentication service
     this.authService.currentUser.subscribe(x => this.currentUser = x);
     // console.log('user role: ',this.currentUser.role)
