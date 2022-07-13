@@ -21,24 +21,45 @@
     </li>
     <li class="nav-item">
         <a routerLinkActive="active-link w3-brown">Kategorier</a>
+
         <ul class="col">
-            <ng-container *ngFor="let category of categories; let i=index">
-                <li *ngIf="i<4">
-                    <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
+           
+               <!--  <ng-container *ngFor="let category of categories; let i=index">
+                    <tr>
+                        <td *ngIf="i<3">
+                            <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
 
-                    <!-- <ul *ngIf="i > 4 && i < 7">
-                        <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
-    
-    
-                    </ul> -->
-                </li>
-                
 
-            </ng-container>
+                    </tr>
+                </ng-container> -->
+                <table  class="table table-sm table-dark">
+                   
+                    <tbody>
+                        <tr  class="common">
+                           
+                            <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                                
+                        </tr>
+                          <tr  class="float-left square">
+                            <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                            
+                          </tr>
+                          <tr  class="float-left square">
+                            <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                            
+                          </tr>
+                          <tr  class="float-left square">
+                            <td colspan="6" *ngFor="let category of categories |slice: 12:15; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                            
+                          </tr>
+                    </tbody>
+                  </table>
 
         </ul>
-        
+
     </li>
+
+
     <li class="nav-item">
         <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
     </li>
@@ -57,6 +78,7 @@
         <i class="fa-solid fa-magnifying-glass" (click)="click()" (keydown.enter)="checkSearch($event)"
             style="color: aliceblue; margin-top: 15px; margin-right: -5px;"></i>
     </div>
+
     <!--  <div  >
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
         (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
@@ -167,38 +189,6 @@
 
     </ul>
 </nav>  -->
-
-<header class="menu-wrapper">
-    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
-
-        <!-- the standard dropdown items -->
-        <a class="dropdown-item" href="#">What we do</a>
-        <a class="dropdown-item" href="#">How we fit your needs</a>
-
-        <!-- next, a divider to tidy things up -->
-        <div class="dropdown-divider"></div>
-
-        <!-- finally, using flex to create your layout -->
-        <div class="d-md-flex align-items-start justify-content-start">
-
-            <div>
-                <div class="dropdown-header">Development</div>
-                <a class="dropdown-item" href="#">Bespoke software</a>
-                <a class="dropdown-item" href="#">Mobile apps</a>
-                <a class="dropdown-item" href="#">Websites</a>
-            </div>
-
-            <div>
-                <div class="dropdown-header">Professional Services</div>
-                <a class="dropdown-item" href="#">Project rescue</a>
-                <a class="dropdown-item" href="#">Source code recovery</a>
-                <a class="dropdown-item" href="#">Application support &amp; maintenance</a>
-            </div>
-        </div>
-    </div>
-</header>
-
 
 
 

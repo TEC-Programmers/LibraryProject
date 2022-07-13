@@ -159,10 +159,11 @@
                     <br>
                     <div *ngIf="isShown_image">
                         <label>Image: </label> &nbsp;
-                        <select [(ngModel)]="book.image" name="image">
+                        <input [(ngModel)]="book.image" type="text" class="form-control" id="name" name="image" placeholder="image">
+                        <!-- <select [(ngModel)]="book.image" name="image">
               <option selected></option>
               <option *ngFor="let img of imageArray" [ngValue]="img.name.toString()">{{img.name}}</option>
-            </select>
+            </select> -->
                     </div>
                     <br>
                     <!-- (!book.title) || (!book.language) || (!book.description) || (!book.publishYear) || (!book.image) || (!book.categoryId) || (!book.authorId && !book.publisherId && author.firstName && author.lastName && publisher.name)                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Book } from './_models/Book';
 import { Category } from './_models/Category';
@@ -7,6 +8,8 @@ import { AuthService } from './_services/auth.service';
 import { BookService } from './_services/book.service';
 import { CategoryService } from './_services/category.service';
 import { UserService } from './_services/user.service';
+
+
 
 @Component({
   selector: 'app-root',
@@ -27,6 +30,9 @@ export class AppComponent {
   public searchTerm: string = "";
   x:any;
  
+  displayedColumns:string[]=[' categoryName', 'categoryName'];
+  dataSource =new MatTableDataSource<Category>();
+
 
   constructor(private bookService: BookService,
     private categoryService: CategoryService,
@@ -65,6 +71,7 @@ export class AppComponent {
     // .subscribe(c => this.categories = c);
 
       this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
+      
       this.showOrhideAdminBtn();
 
     this.route.params.subscribe(params => {
@@ -95,6 +102,9 @@ export class AppComponent {
                 this.userService.getRole_(0);
             }
         });
+    }
+    itemClicked(item){
+      
     }
 
   // search():void{
