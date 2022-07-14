@@ -33,6 +33,7 @@
     "ngx-filter-pipe": "^2.1.2",
     "ngx-pagination": "^6.0.2",
     "pagination": "^0.4.6",
+    "query-string": "^7.1.1",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.4.17",
     "tslib": "^2.4.0",

@@ -1,80 +1,109 @@
 .background {
   left: 0px;
   position: absolute;
-  top: 191px;
+  top: 193px;
   width: 2000px;
   height: 1000px;
 }
+.container{
+  padding-top: 60px;
 
-#user_message_cat {
-  margin-left: 183px;
+}
+/* height="40px" width="50px" style="padding-left: 17px;" */
+#img {
+  height: 43px;
+  width: 58px;
+  padding-left: 17px;
 }
 
-#Modal_Category_Update {
-  opacity:1 !important;
-  top: 163px;
+#btn_new_author {
+  margin-top: -26px;
 }
 
-#Modal_Category_Create {
+#author_continue_btn {
+  margin-top: -10px;
+}
+
+#publisher_continue_btn {
+  margin-top: -29px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+#author_btn, #select_author {
+  display: inline;
+}
+
+#createBtn {
+  margin-left: 205px;
+  margin-top: 90px;
+}
+
+#user_message_author {
+  margin-left: 174px;
+}
+
+#user_message {
+  margin-left: 174px;
+}
+
+#btn_close_create {
+  position: absolute;
+  top: 31px;
+}
+
+#Modal_Create_Book {
   opacity:1 !important;
-  top: 163px;
+  top: 79px;
 }
 
 .btn-close {
-  margin-left: 467px;
-  position: absolute;
-  margin-top: -50px;
+  margin-left: 468px;
+  margin-top: -1px;
 }
 
-#exampleModalLabel {
-  margin-top: 31px;
+#Modal_Book {
+  opacity:1.5 !important;
+  top: 130px;
 }
 
 .createBookBtn {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border: none;
   border-radius: 100px;
   outline: none;
   background: #04AA6D;
-  color: white;
+  color: white; 
   cursor: pointer;
-  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
-  margin-left: 65px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin-left: 39px;
+  margin-top: 14px;
   position: absolute;
-  right: -103px;
-  margin-top: 3px;
   font-size: x-large;
-  }
-  
-  .createBookBtn:hover {
-    background: #1bc762;
-  }
-  
-  .btnAndTitle {
-    margin-top: 11px;
-    margin-left: 440px;
-    background-color: rgb(51, 49, 49);
-    width: 113px;
-    height: 38px;
-  }
-  
-  .btnTitle {
-    margin-left: 16px;
-    font-size: 20px;
-    color: white;
-    position: absolute;
-    margin-top: 8px;
-  }
-
-#operation {
-    /* width: 8px; */
-    width: 40px;
 }
 
-#cat_column {
-    /* width: 96%; */
-    width: 400px;
+.createBookBtn:hover {
+  background: #1bc762;
+}
+
+.btnAndTitle {
+  margin-top: 37px;
+  margin-left: 1252px;
+  background-color: rgb(51, 49, 49);
+  width: 118px;
+  height: 86px;
+}
+
+.btnTitle {
+  position: absolute;
+  margin-top: 9px;
+  margin-left: 13px;
+  font-size: 20px;
+  color: white;
 }
 
 .label {
@@ -89,9 +118,9 @@
   }
   
   .table {
-    margin-left: 559px;
-    margin-top: 55px;
-    /* width: 500px;   */
+    margin-left: 252px;
+    margin-top: -87px;
+          /* column-width: 700px; */
   }
   
   .container {
@@ -99,8 +128,8 @@
   }
   
   .search-bar {
-    width: 437px;
-    margin-left: 559px;
+    width: 357px;
+    margin-left: 609px;
     position: absolute;
     margin-top: 11px;
   }

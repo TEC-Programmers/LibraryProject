@@ -23,8 +23,8 @@ export class ReservationComponent implements OnInit {
   reservations: Reservation[] = [];
   reservation: Reservation = { id: 0, bookId: 0, userId: 0, reserved_At: '', reserved_To: ''}
   bookId: number = 0;
-  return_date: string = ''
-  reserved_at: string = ''
+  return_date: string = '';
+  reserved_at: string = '';
   currentDate = new Date();
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   // minDate = new Date(this.dateNow);
@@ -33,7 +33,10 @@ export class ReservationComponent implements OnInit {
   public formatted_return_date;
   public formatted_reserved_at;
   public minDate = new Date();
+  public maxDate = new Date();
   total_loans: Loan[] = [];
+  dateHolder;
+  // returnDate_converted: Date = new Date();
 
   constructor(private loanService: LoanService, private router: Router, private reservationService: ReservationService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private bookService: BookService, private route:ActivatedRoute, private authService: AuthService) { }
 
@@ -67,7 +70,8 @@ export class ReservationComponent implements OnInit {
           return ((loan["bookId"] == this.bookId))
         })
         var returnDate_converted = new Date(getBookReturnDate[0].return_date)
-        this.minDate = returnDate_converted;
+        this.minDate.setDate(returnDate_converted.getDate() + 1);  
+        this.maxDate.setDate(this.minDate.getDate() + 1);
       }
     })
   }

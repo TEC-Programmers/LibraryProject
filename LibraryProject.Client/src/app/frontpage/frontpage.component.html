@@ -1,29 +1,37 @@
-<div class="container">
+  
+        
 
-  <h1 id="intro">Welcome to the online library <br> </h1>
+<div class="container-fluid">
+
     <div class="row height d-flex justify-content-center align-items-center">
+        <div id="banner">
 
-      <div class="col-md-8">
-        <div class="search">
-          <i class="fa fa-search"></i>
-          <input type="text" class="form-control" placeholder="Search Books from homepage" (keydown.enter)="showSearch()"
-          (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
-          <button class="btn btn-primary "  (click)="click()">Search</button>
 
-          <div class="searchDiv">
-          <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
-            <td>
-                <br>
-                <img src="/assets/images/{{book.image}}">
-               <p> {{book.title}} </p>
-                <br>
-            </td>
-        </tr>
-    </div>
+            <div class="container" >
+                <div class="search">
+                    <i class="fa fa-search" (click)="click()"></i>
+                    <input type="text" class="form-control" placeholder="Search Books" 
+                        (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm">
+
+                </div>
+              
+            </div>
         </div>
-
-      </div>
-
     </div>
 </div>
 
+<div class="container" id="books" style="margin-top: 8.5%; padding-top: 25px;">
+    <div class="row">
+        
+        <ng-container *ngFor="let item of searchBooks | filter:filterTerm">
+            <div class="card col-md-2 auto align-items-center bg-success" style="border:none ">
+                <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}"
+                        alt="picture of products"></a>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}
+                </h5>
+
+            </div>
+        </ng-container>
+    </div>
+
+</div>

@@ -26,6 +26,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              {
+                "ignore": ["**/.DS_Store"],
+                "glob": "**/*",
+                "input": "src/assets/images",
+                "output": "/"
+              },
               "src/favicon.ico",
               "src/assets"
             ],
