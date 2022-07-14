@@ -220,10 +220,12 @@ input a i{
 table, tr , td  {
   border: none;
   border-collapse: collapse;
-  width: 300px;
-  padding: 5px;
-  background-color: rgb(212, 148, 69);
+  width: 350px;
+  padding:2.5px;
+  background-color: bisque;
+
 }
 tr a:hover{
- background-color: rgb(221, 9, 62)
+ background-color:rgb(149, 240, 149);
+ 
 }

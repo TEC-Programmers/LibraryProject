@@ -22,7 +22,7 @@
     <li class="nav-item">
         <a routerLinkActive="active-link w3-brown">Kategorier</a>
 
-        <ul class="col">
+        <ul class="col" style="list-style:disc">
            
                <!--  <ng-container *ngFor="let category of categories; let i=index">
                     <tr>
@@ -32,24 +32,24 @@
 
                     </tr>
                 </ng-container> -->
-                <table  class="table table-sm table-dark">
+                <table  >
                    
-                    <tbody>
-                        <tr  class="common">
+                    <tbody class="dropdown">
+                        <tr  >
                            
-                            <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                            <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a routerLink="/category_books/{{category.id}}"> <li>{{category.categoryName}}</li></a></td>
                                 
                         </tr>
-                          <tr  class="float-left square">
-                            <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                          <tr  >
+                            <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a routerLink="/category_books/{{category.id}}"> <li>{{category.categoryName}}</li></a></td>
                             
                           </tr>
-                          <tr  class="float-left square">
-                            <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                          <tr  >
+                            <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a routerLink="/category_books/{{category.id}}"><li>{{category.categoryName}}</li></a></td>
                             
                           </tr>
-                          <tr  class="float-left square">
-                            <td colspan="6" *ngFor="let category of categories |slice: 12:15; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                          <tr >
+                            <td colspan="6" *ngFor="let category of categories |slice: 12:15; index as i" ><a routerLink="/category_books/{{category.id}}"> <li>{{category.categoryName}}</li></a></td>
                             
                           </tr>
                     </tbody>
