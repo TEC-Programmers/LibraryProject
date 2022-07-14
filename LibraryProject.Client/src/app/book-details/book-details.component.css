@@ -4,7 +4,18 @@
     margin-top: 5px;
     width: 100px;
     text-align: center;
-    width: 21em;
+}
+
+.container {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top: 60px;
+}
+
+#bookCard {
+    align-items: center;
+    width: 270px;
 }
 
 button#button-format:disabled {
@@ -13,14 +24,16 @@ button#button-format:disabled {
     color: #666666;
 }
 
-.card {
-    align-items: center;
-    background: transparent;
-    border: none;
-    color: navy;
+#back {
+    width: 80px;
+    height: 35px;
+    border-radius: 12px;
+    margin-left: 60px;
+    /* margin-left: 189px;
+    top: 392px;
+    position: absolute; */
 }
 
-img {
-    width: 200px;
-    margin: 30px;
+.buttons {
+    /* margin-left: 32px; */
 }

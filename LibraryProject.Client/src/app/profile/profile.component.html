@@ -1,8 +1,5 @@
- <div  class="w3-container mx-auto">
-
-    <h3>Profile Information:</h3><br>
-
-        <h3>Hi {{currentUser.firstName}}!</h3>
+<div class="w3-container">
+    <h4>Your Profile:</h4><br>
 
     <table class="w3-table w3-bordered w3-striped">
         <tbody>
@@ -11,7 +8,7 @@
                 <th>Password</th>
                 <th>FirstName</th>
                 <th>MiddleName</th>
-                <th>LastName</th>
+                <th>LastName</th>             
                 <th>Role</th>
                 <th>Actions</th>
             </tr>
@@ -21,40 +18,40 @@
                 <td>{{ currentUser.password }}</td>
                 <td>{{ currentUser.firstName }}</td>
                 <td>{{ currentUser.middleName }}</td>
-                <td>{{ currentUser.lastName }}</td>
+                <td>{{ currentUser.lastName }}</td>             
                 <td>{{ currentUser.role }}</td>
                 <td>
                     <button class="w3-btn w3-yellow w3-ripple" (click)="edit(currentUser)">&#9998; Edit</button>
-
+             
                 </td>
             </tr>
     </table>
     <br>
     <hr>
 
-    <form>
+    <div>
         <label>Email</label>
-        <input class="w3-input w3-border" name="email" [(ngModel)]="user.email">
+        <input class="w3-input w3-border" [(ngModel)]="user.email">
 
         <label>Password</label>
-        <input class="w3-input w3-border" name="password" [(ngModel)]="user.password">
+        <input class="w3-input w3-border" [(ngModel)]="user.password">
 
         <label>FirstName</label>
-        <input class="w3-input w3-border" name="firstname" [(ngModel)]="user.firstName">
-
+        <input class="w3-input w3-border" [(ngModel)]="user.firstName">
+       
         <label>MiddleName</label>
-        <input class="w3-input w3-border" name="middlename" [(ngModel)]="user.middleName">
+        <input class="w3-input w3-border" [(ngModel)]="user.middleName">
 
         <label>LastName</label>
-        <input class="w3-input w3-border" name="lastname" [(ngModel)]="user.lastName">
+        <input class="w3-input w3-border" [(ngModel)]="user.lastName">  
 
+      
 
+    </div><br>
 
-    </form><br>
-
-
+    <div>
         <button class="w3-btn w3-green w3-ripple" (click)="save()">Save</button>&nbsp;&nbsp;
-        <button class="w3-btn w3-blue w3-ripple" (click)="cancel()">Cancel</button> <br><br>
+        <button class="w3-btn w3-blue w3-ripple" (click)="cancel()">Cancel</button>&nbsp;&nbsp;
+        <button class="w3-btn w3-red w3-ripple" routerLink="customerpanel">Back</button> <br><br>
         <span class="w3-red">{{ message }}</span>
-
-</div>
+    </div>

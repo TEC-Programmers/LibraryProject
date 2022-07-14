@@ -52,6 +52,7 @@ export class AdminBookComponent implements OnInit {
   disable_author: boolean = false;
   disable_publisher: boolean = false;
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+
   selectedImg = null;
   imageArray = [
     {"name": "Book_Pippi.jpg"},
@@ -59,10 +60,13 @@ export class AdminBookComponent implements OnInit {
     {"name": "Br¢drene_L¢vehjerte.jpeg"},
     {"name": "Emil_Fra_L¢nneberg.jpg"},
     {"name": "Romaner_Books.png"},
-    {"name": "Tor_Fanger_Tyve.jpg"}
+    {"name": "Tor_Fanger_Tyve.jpg"}, 
+    {"name": "Aadhi-Raat-Ka-Shehar.jpg"},
+    {"name": "Hemu.jpg"},
+]
 
-  ]
-
+  imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
+  isImageSelected: boolean = false;
 
   constructor(private userService: UserService, private authService: AuthService, private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
 
@@ -70,12 +74,12 @@ export class AdminBookComponent implements OnInit {
     setTimeout(() => {
       this.showOrhideAdminBtn();
     });
+
     this.bookService.getAllBooks().subscribe(x => this.books = x);
     this.authorService.getAllAuthors().subscribe(a => this.authors = a);
     this.publisherService.getAllPublishers().subscribe(p => this.publishers = p);
     this.categoryService.getAllCategories().subscribe(c => this.categorys = c);
     console.log('admin-book ngOnInit | x = ',this.x)
-
   }
 
   ngAfterViewInit() {
@@ -84,13 +88,31 @@ export class AdminBookComponent implements OnInit {
     });
   }
 
+  showPreview(event: Event) {
+    let selectedFile = (event.target as HTMLInputElement).files?.item(0)
+
+    if (selectedFile) {
+      if (["image/jpeg", "image/png", "image/svg+xml"].includes(selectedFile.type)) {
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(selectedFile);
+
+        fileReader.addEventListener('load', (event) => {
+          this.imagePreviewSrc = event.target?.result;
+          this.isImageSelected = true
+        })
+      }
+    } else {
+      this.isImageSelected = false
+    }
+  }
+
   showOrhideAdminBtn() {
     this.authService.currentUser.subscribe(user => {
     this.currentUser = user;
-
+  
     if (this.x !== 1) {
       if (this.currentUser) {
-        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
           if (this.currentUser.role.toString() === 'Administrator') {
             this.userService.getRole_(1);
           }
@@ -100,11 +122,9 @@ export class AdminBookComponent implements OnInit {
         }
         else {
           this.userService.getRole_(0);
-        }
+        } 
     }
     });
-
-    console.log('x line 97: ',this.x)
   }
 
   newPublisher(): void {
@@ -134,7 +154,7 @@ export class AdminBookComponent implements OnInit {
 
   ContinuePublisherForm(): void {
     if (this.book.authorId) {
-      this.btn_new_author = false;
+      this.btn_new_author = true;
       this.isShown_author = true;
       this.isShown_publisher = false;
       this.isShown_category= true;
@@ -196,6 +216,7 @@ export class AdminBookComponent implements OnInit {
         this.isShown_author_form = false;
         this.showCreateBtn = false;
         this.disable_author = true;
+        this.publisherId_value = true;
       }
       else {
         this.btn_new_publisher = true;
@@ -252,9 +273,10 @@ export class AdminBookComponent implements OnInit {
     this.author_dropdown = true;
     this.publisherId_value = false;
     this.isShown_publisher = true;
-    this.isShown_publisher_form = false;
+    this.isShown_publisher_form = false;  
     this.btn_new_publisher = true;
     this.publisher_dropdown = true;
+    this.isImageSelected = false;
   }
 
 
@@ -321,21 +343,21 @@ export class AdminBookComponent implements OnInit {
                         console.log(err.error);
                         this.message = Object.values(err.error.errors).join(", ");
                       }
-                    });
-                  }
+                    }); 
+                  } 
                 },
                   error: (err) => {
                   console.log(err.error);
                   this.message = Object.values(err.error.errors).join(", ");
                   }
-              });
+              }); 
             }
           },
           error: (err) => {
             console.log(err.error);
             this.message = Object.values(err.error.errors).join(", ");
           }
-      });
+      });  
     }
-  }
+  } 
 }
