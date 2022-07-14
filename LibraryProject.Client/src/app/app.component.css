@@ -31,9 +31,6 @@
   padding-right:60px;
 }
 
-.home-header{
-  background-image: linear-gradient(rgba);
-}
 
 .navbar li ul {
   background: lightgrey;
@@ -53,16 +50,9 @@ ul li ul:focus {
   visibility: visible;
   opacity: 1;
   display: inline;
-  list-style: none
+
 
 }
-#searchDiv{
-  font-size: medium;
-  color: blue;
-  max-width: 450px;
-  top: 220px;
-  left: 1510px;
-  }
 
 
   .search{
@@ -98,6 +88,19 @@ ul li ul:focus {
 
      }
 
+     /*category navbar*/
+table, tr , td  {
+  border: none;
+  border-collapse: collapse;
+  width: 350px;
+  padding:2.5px;
+  background-color: bisque;
+
+}
+tr a:hover{
+ background-color:rgb(149, 240, 149);
+ 
+}
 
      
 @media(max-width:786px) 

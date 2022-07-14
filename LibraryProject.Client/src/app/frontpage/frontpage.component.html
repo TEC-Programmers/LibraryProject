@@ -1,18 +1,17 @@
   
         
-        <br>
+
 <div class="container-fluid">
 
     <div class="row height d-flex justify-content-center align-items-center">
         <div id="banner">
 
 
-            <div class="col-md-8">
+            <div class="container" >
                 <div class="search">
                     <i class="fa fa-search" (click)="click()"></i>
                     <input type="text" class="form-control" placeholder="Search Books" 
                         (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm">
- 
 
                 </div>
               
@@ -21,17 +20,11 @@
     </div>
 </div>
 
-
-
-
-
-
-
-<div class="container" id="books" style="margin-top: 10%; padding-top: 25px;">
+<div class="container" id="books" style="margin-top: 8.5%; padding-top: 25px;">
     <div class="row">
         
         <ng-container *ngFor="let item of searchBooks | filter:filterTerm">
-            <div class="card col-md-2 align-items-center bg-success" style="border:none ">
+            <div class="card col-md-2 auto align-items-center bg-success" style="border:none ">
                 <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}"
                         alt="picture of products"></a>
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}

@@ -16,26 +16,47 @@
                         class="glyphicon glyphicon-home"> Home</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active-link "><span
+                    <a class="nav-link" routerLinkActive="active-link"><span
                         class="glyphicon glyphicon-book"> Categories</span></a>
                     
-                    <ul>
-                        <ng-container *ngFor="let category of categories">
-                            <li>
-                                <a class="nav-link"
-                                    routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
-                            </li>
-                        </ng-container>
+                    <ul class="col" style="list-style:disc">
+                       
+                        <table>
+              <tbody class="dropdown">
+               
+                                <tr>                                   
+                                    <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                        <li>{{category.categoryName}}</li></a></td>                                        
+                                </tr>
+
+                                  <tr>
+                                    <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                        <li>{{category.categoryName}}</li></a></td>
+                                    
+                                  </tr>
+                                  <tr  >
+                                    <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                    <li>  {{category.categoryName}}</li></a></td>
+                                    
+                                  </tr>
+                                  <tr >
+                                    <td colspan="6" *ngFor="let category of categories |slice: 12:16; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                        <li>{{category.categoryName}}</li></a></td>
+                                    
+                                  </tr>
+                              
+                                </tbody>
+                          </table>
+                       
+                      
                     </ul>
                 </li>
 
                 <li class="nav-item"> 
-                    <a class="nav-link" routerLink="/Reservation">Reservation</a>
+                    <a class="nav-link" routerLink="reserve/:id"><span class="glyphicon glyphicon-calendar"></span>Reservation</a>
                 </li>
 
-                <li class="nav-item" *ngIf="currentUser != null">
-                    <a class="nav-link" routerLink="/profile">Profile</a>
-                </li>
+               
             </ul>
 
             <ul class="nav navbar-nav ms-auto"  id="myNavbar">
@@ -49,9 +70,9 @@
 
 
                 <li class="nav-item" *ngIf="this.x === 1">
-                    <a class="nav-link" routerLink="/Admin" >Admin Panel</a>
+                    <a class="nav-link" routerLink="/Admin"> <span class="glyphicon glyphicon-dashboard"></span>Admin Panel</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="currentUser == null">
                     <a class="nav-link" routerLink="/Register" ><span class="glyphicon glyphicon-edit"></span>
                         Register</a>
                 </li>
@@ -60,12 +81,15 @@
                 </li>
           
                 <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
-                    <a class="nav-link" ><span class="glyphicon glyphicon-user">&nbsp;{{currentUser.firstName+' '+currentUser.lastName}}</span></a>
-                    <ul>
-                       
+                    <a class="nav-link" ><span class="glyphicon glyphicon-user">&nbsp;</span>{{currentUser.firstName+' '+currentUser.lastName}}</a>
+                    <ul>                     
                         <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
                             <a class="nav-link" routerLink="/" (click)="logout()"><span
                                     class="glyphicon glyphicon-log-out"></span>Logout</a>
+                        </li>
+
+                        <li style="display:inline-block" class="nav-item" *ngIf="currentUser != null">
+                            <a class="nav-link" routerLink="/profile"> <span class="glyphicon glyphicon-cog"></span>Profile</a>
                         </li>
                      
                     </ul>
