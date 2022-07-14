@@ -29,6 +29,9 @@ import { AdminCategoryComponent } from './admin-category/admin-category.componen
 import { ReservationComponent } from './reservation/reservation.component';
 
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +49,7 @@ import { ReservationComponent } from './reservation/reservation.component';
     AdminCategoryComponent,
     ReservationComponent,
     FrontpageComponent
+
   ],
 
   imports: [

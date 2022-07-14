@@ -9,8 +9,6 @@ import { BookService } from './_services/book.service';
 import { CategoryService } from './_services/category.service';
 import { UserService } from './_services/user.service';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,6 +27,7 @@ export class AppComponent {
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
   public searchTerm: string = "";
   x:any;
+
  
   displayedColumns:string[]=[' categoryName', 'categoryName'];
   dataSource =new MatTableDataSource<Category>();
@@ -39,8 +38,9 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router, private route: ActivatedRoute,
     private userService: UserService) {   // get the current user from authentication service
+
     this.authService.currentUser.subscribe(x => this.currentUser = x);
-    // console.log('user role: ',this.currentUser.role)
+
   }
 
   logout() {
@@ -107,27 +107,8 @@ export class AppComponent {
       
     }
 
-  // search():void{
 
-  //   if(this.searchTerm)
-  //   this.router.navigate(['/Book', this.searchTerm]);
-  // }
-
-  /* showSearch(): void {
- 
-     if (this.filterTerm == null || this.filterTerm == '') {
-      alert("The input field is empty")
-     }
- 
-     else if (this.filterTerm.length >= 0 ){
-       this.bookService.getAllBooks()
-     .subscribe(p => this.allBooks = p);
-     console.log(this.allBooks);
-     this.router.navigate(['/Book', this.filterTerm]);
-     }
- 
- 
-   } */
+  
   click() {
     if (this.filterTerm == null || this.filterTerm == '') {
       alert("The input field is empty")
@@ -151,49 +132,3 @@ export class AppComponent {
       this.router.navigate(['/Book', this.filterTerm]);
     }
   }
-/* 
-  logout() {
-    if (confirm('Are you sure you want to log out?')) {
-      // ask authentication service to perform logout
-      this.authService.logout();
-
-
-      // subscribe to the changes in currentUser, and load Home component
-      this.authService.currentUser.subscribe(x => {
-        this.currentUser = x
-        this.router.navigate(['/']);
-      });
-    }
-
-  } */
-
-  //   pageYoffset = 0;
-  //   @HostListener('window:scroll', ['$event']) onScroll(event){
-  //     this.pageYoffset = window.pageYOffset;
-  //  }
-  // @ViewChild('scroll')
-  // scroll!: ElementRef;
-
-  // categories: Category[] = [];
-
-
-
-
-
-  /* scrollToTop(){
-   // this.scroll.scrollToPosition([0,0]);
-   this.scroll.nativeElement.scrollToTop = 0;
- }
- 
- scrollToBottom(){
-   console.log(this.scroll.nativeElement.scrollHeight)
-   this.scroll.nativeElement.scrollToTop = this.scroll.nativeElement.scrollHeight;
- } */
-
-
-  // searchKey(event:any){
-  //   this.searchTerm=(event.target as HTMLInputElement).value;
-  //   console.log(this.searchTerm);
-  //   this.bookService.search.next(this.searchTerm);
-  // } 
-}
