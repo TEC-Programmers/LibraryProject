@@ -11,7 +11,7 @@ namespace LibraryProject.Database.Entities
         [Key]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(150)")]
+        [Column(TypeName = "nvarchar(255)")]
         public string Title { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]

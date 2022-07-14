@@ -4,19 +4,37 @@
         font-weight: 300;
        }
 
-       #intro{
+       #intro-titel{
 
-        display: flex;
+        display: inline-flex;
         justify-content: center;
         position: relative;
         top: 5vw;
 
        /* Gennemsigtig tekst der matcher baggrund*/
-        background-image: linear-gradient(to right,rgba(38, 22, 185, 0.822),  rgba(192, 61, 9, 0.822),rgba(75, 146, 212, 0.705));
+        background-image: linear-gradient(to right,rgba(38, 22, 185, 0.822),  rgba(192, 61, 9, 0.822),rgba(75, 146, 212, 0.705)), url("/assets/images/black.jpg");
         background-clip: text;
         background-size: 100%;
+        /* border: 5px outset aliceblue; */
+        border-radius: 50px;
         -webkit-text-fill-color: transparent;
-        
+        font-size: 4vw;
+      }
+
+      #intro-text{
+        display: inline-flex;
+        justify-content: center;
+        position: relative;
+        top: 5vw;
+
+       /* Gennemsigtig tekst der matcher baggrund*/
+        background-image: linear-gradient(to right,rgba(38, 22, 185, 0.822),  rgba(192, 61, 9, 0.822),rgba(75, 146, 212, 0.705)), url("/assets/images/black.jpg");
+        background-clip: text;
+        background-size: 100%;
+        /* border: 5px outset aliceblue; */
+        border-radius: 50px;
+        -webkit-text-fill-color: transparent;
+        font-size: 2vw;
       }
 
        .height{
