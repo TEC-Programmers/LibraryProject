@@ -14,6 +14,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {formatDate} from '@angular/common';
 import Swal from 'sweetalert2'
 import moment from 'moment';
+import { ReservationService } from 'app/_services/reservation.service';
 
 
 @Component({
@@ -25,10 +26,10 @@ import moment from 'moment';
 export class LoanComponent implements OnInit {
   dateRangeForm!: FormGroup;
   loans: Loan[] = [];
-  loan: Loan = { id: 0, bookId: 0, userID: 0, return_date: '', loaned_At: ''}
+  loan: Loan = { id: 0, bookId: 0, userId: 0, return_date: '', loaned_At: ''}
   bookId: number = 0;
-  return_date: string = ''
-  loaned_at: string = ''
+  return_date: string = '';
+  loaned_at: string = '';
   currentDate = new Date();
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   minDate = new Date(this.dateNow);
@@ -36,10 +37,11 @@ export class LoanComponent implements OnInit {
   public formatted_return_date;
   public formatted_loaned_at;
   total_loans: Loan[] = [];
+  maxDate = new Date();
 
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
-  constructor(private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
+  constructor(private reservationService: ReservationService, private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
 
   range = new FormGroup({
     fromDate: new FormControl('', Validators.required),
@@ -63,12 +65,28 @@ export class LoanComponent implements OnInit {
       this.loans = loan || [];
     })
 
-    this.setLoanMinDate();
   }
 
-  setLoanMinDate() {
-    this.return_date = this.loaned_at + 1;
-    console.log('return_date: ',this.return_date)
+  setResMinDate() {
+    // console.log('minDate: ',this.minDate);
+    this.maxDate.setDate(this.minDate.getDate() + 1);
+    console.log('maxDate: ',this.maxDate)
+  }
+
+  setReservationMinDate() {
+    this.loanService.getAllLoans().subscribe({
+      next: (all_loans) => {
+        this.total_loans = all_loans;
+
+        // get loan that contains clicked book
+        var getBookReturnDate = this.total_loans.filter((loan) => {
+          return ((loan["bookId"] == this.bookId))
+        })
+        var returnDate_converted = new Date(getBookReturnDate[0].return_date)
+        this.minDate.setDate(returnDate_converted.getDate() + 1);  
+        this.maxDate.setDate(this.minDate.getDate() + 1);
+      }
+    })
   }
 
 
@@ -82,7 +100,7 @@ export class LoanComponent implements OnInit {
 
         let loanitem: Loan = {
           id: this.book.id,
-          userID: this.authService.currentUserValue.id,
+          userId: this.authService.currentUserValue.id,
           bookId: this.book.id,
           return_date: this.formatted_return_date,
           loaned_At: this.formatted_loaned_at
@@ -96,7 +114,7 @@ export class LoanComponent implements OnInit {
             .subscribe({
             next: (x) => {
               this.loans.push(x);
-              this.loan = { id: 0, bookId: 0, userID: 0, return_date: '', loaned_At: ''}
+              this.loan = { id: 0, bookId: 0, userId: 0, return_date: '', loaned_At: ''}
               this.loaned_at = '';
               this.return_date = '';
               Swal.fire({

@@ -11,12 +11,12 @@
 
 <!--Here it displays all of the categories -->
 <div class="container">
+    <br>
+    <h1 id="title" style="font-family: Georgia, serif;">CATEGORIES</h1>
     <div class="row">
         <ng-container *ngFor="let category of categories">
             <div class="card col-md-3">
-                <a routerLink="/category_books/{{category.id}}">category Name: {{category.categoryName}}</a>
-                
-
+                <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>            
             </div>
         </ng-container>
     </div>

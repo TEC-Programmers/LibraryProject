@@ -8,9 +8,9 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input [(ngModel)]="return_date" [min]="loaned_at" matInput [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
+            <input [(ngModel)]="return_date" [min]="maxDate" matInput [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
+            <mat-datepicker-toggle (click)="setResMinDate()" matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker  #picker2></mat-datepicker>
         </mat-form-field>
 
         <br>

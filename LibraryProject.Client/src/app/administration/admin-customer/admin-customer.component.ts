@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from '../_models/User';
+import { User } from '../../_models/User';
 import { Role } from 'app/_models/Role';
-import { UserService } from '../_services/user.service';
+import { UserService } from '../../_services/user.service';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2'
 import { FormBuilder } from '@angular/forms';

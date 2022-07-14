@@ -60,8 +60,13 @@ export class AdminBookComponent implements OnInit {
     {"name": "Br¢drene_L¢vehjerte.jpeg"},
     {"name": "Emil_Fra_L¢nneberg.jpg"},
     {"name": "Romaner_Books.png"},
-    {"name": "Tor_Fanger_Tyve.jpg"}
+    {"name": "Tor_Fanger_Tyve.jpg"}, 
+    {"name": "Aadhi-Raat-Ka-Shehar.jpg"},
+    {"name": "Hemu.jpg"},
 ]
+
+  imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
+  isImageSelected: boolean = false;
 
   constructor(private userService: UserService, private authService: AuthService, private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
 
@@ -69,6 +74,7 @@ export class AdminBookComponent implements OnInit {
     setTimeout(() => {
       this.showOrhideAdminBtn();
     });
+
     this.bookService.getAllBooks().subscribe(x => this.books = x);
     this.authorService.getAllAuthors().subscribe(a => this.authors = a);
     this.publisherService.getAllPublishers().subscribe(p => this.publishers = p);
@@ -80,6 +86,24 @@ export class AdminBookComponent implements OnInit {
     setTimeout(() => {
       this.showOrhideAdminBtn();
     });
+  }
+
+  showPreview(event: Event) {
+    let selectedFile = (event.target as HTMLInputElement).files?.item(0)
+
+    if (selectedFile) {
+      if (["image/jpeg", "image/png", "image/svg+xml"].includes(selectedFile.type)) {
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(selectedFile);
+
+        fileReader.addEventListener('load', (event) => {
+          this.imagePreviewSrc = event.target?.result;
+          this.isImageSelected = true
+        })
+      }
+    } else {
+      this.isImageSelected = false
+    }
   }
 
   showOrhideAdminBtn() {
@@ -101,8 +125,6 @@ export class AdminBookComponent implements OnInit {
         } 
     }
     });
-
-    console.log('x line 97: ',this.x)
   }
 
   newPublisher(): void {
@@ -132,7 +154,7 @@ export class AdminBookComponent implements OnInit {
 
   ContinuePublisherForm(): void {
     if (this.book.authorId) {
-      this.btn_new_author = false;
+      this.btn_new_author = true;
       this.isShown_author = true;
       this.isShown_publisher = false;
       this.isShown_category= true;
@@ -194,6 +216,7 @@ export class AdminBookComponent implements OnInit {
         this.isShown_author_form = false;
         this.showCreateBtn = false;
         this.disable_author = true;
+        this.publisherId_value = true;
       }
       else {
         this.btn_new_publisher = true;
@@ -253,6 +276,7 @@ export class AdminBookComponent implements OnInit {
     this.isShown_publisher_form = false;  
     this.btn_new_publisher = true;
     this.publisher_dropdown = true;
+    this.isImageSelected = false;
   }
 
 

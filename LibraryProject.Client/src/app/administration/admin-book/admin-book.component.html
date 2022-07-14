@@ -26,12 +26,12 @@
             </thead>
             <tbody *ngIf="books?.length != 0">
                 <tr style="background-color: #686868;" class="head-values_" *ngFor="let book of books | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <button style="width: 45px; height: 58px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                    <button style="width: 45px; height: 58px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-toggle="modal" data-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+                    <button style="width: 49px; height: 58px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+                    <button style="width: 49px; height: 58px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-toggle="modal" data-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
                     <td style="background-color: #686868;"><img src="/assets/images/{{book.image}}" alt="picture of book" id="img"></td>
                     <td style="color: whitesmoke;">{{ book.title }}</td>
                     <td style="color: whitesmoke;">{{ book.language }}</td>
-                    <td style="color: whitesmoke;">{{ (book.description.length > 40)? (book.description | slice:0:40)+'..':(book.description) }}</td>
+                    <td style="color: whitesmoke;">{{ (book.description.length > 45)? (book.description | slice:0:45)+'..':(book.description) }}</td>
                     <td style="color: whitesmoke;">{{ book.publishYear }}</td>
                 </tr>
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -115,7 +115,6 @@
                         <span *ngIf="message != ''">{{message}}</span>
                     </div>
                     <br>
-                    <br>
                     <div *ngIf="publisherId_value">
                         <label>Publisher: </label> &nbsp;
                         <input [(ngModel)]="publisher.name" [value]="publisher.name" name="publisher" [disabled]="disable_publisher">
@@ -156,14 +155,33 @@
           </select>
                     </div>
                     <br>
-                    <br>
                     <div *ngIf="isShown_image">
-                        <label>Image: </label> &nbsp;
-                        <input [(ngModel)]="book.image" type="text" class="form-control" id="name" name="image" placeholder="image">
-                        <!-- <select [(ngModel)]="book.image" name="image">
-              <option selected></option>
-              <option *ngFor="let img of imageArray" [ngValue]="img.name.toString()">{{img.name}}</option>
-            </select> -->
+                        <div class="card mb-3 mt-5 " style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img *ngIf="isImageSelected" [src]="imagePreviewSrc" class="img-fluid rounded-start" alt="...">
+                                    <svg *ngIf="!isImageSelected" xmlns="http://www.w3.org/2000/svg" width="96" height="96"
+                                        fill="currentColor" class="bi bi-image mt-3 ms-5 " viewBox="0 0 16 16">
+                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                        <path
+                                            d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+                                    </svg>
+                                </div>
+                                <div class="col-md-8" style="width: 800px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Select an Image</h5>
+                                        <input [(ngModel)]="book.image" name="image" type="file" class="mt-3" (change)="showPreview($event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <label>Image: </label> &nbsp; -->
+                        <!-- `<a href="../../../assets/images" >File in c drive</a>` -->
+                        <!-- <input directory="C:\Users\emjo\Desktop\p4_project\LibraryProject.Client\src\assets" type="file" autocomplete="on"> -->
+                    <!-- <select [(ngModel)]="book.image" name="image">
+                    <option selected></option>
+                    <option *ngFor="let img of imageArray" [ngValue]="img.name.toString()">{{img.name}}</option>
+                    </select> -->
                     </div>
                     <br>
                     <!-- (!book.title) || (!book.language) || (!book.description) || (!book.publishYear) || (!book.image) || (!book.categoryId) || (!book.authorId && !book.publisherId && author.firstName && author.lastName && publisher.name)                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
