@@ -22,6 +22,7 @@ export class AppComponent {
   allBooks: Book[] = [];
   filterTerm!: string;
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role:0 };
+  x: any
 
 
   constructor(private bookService: BookService,
