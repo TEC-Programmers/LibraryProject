@@ -4,7 +4,6 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FrontpageComponent } from './frontpage/frontpage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
@@ -19,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core'
-
+import { FrontpageComponent } from './frontpage/frontpage.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
@@ -36,7 +35,6 @@ import { ReservationComponent } from './reservation/reservation.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FrontpageComponent,
     AdministratorComponent,
     AdminCustomerComponent,
     ProfileComponent,
@@ -50,9 +48,7 @@ import { ReservationComponent } from './reservation/reservation.component';
     AdminBookComponent,
     AdminCategoryComponent,
     ReservationComponent,
-    AdminCategoryComponent,
- 
- 
+    FrontpageComponent
 
   ],
 

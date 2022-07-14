@@ -8,11 +8,11 @@ import { LoanService } from '../_services/loan.service';
 import { BookService } from '../_services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AuthService } from 'app/_services/auth.service';
-import { UserService } from 'app/_services/user.service';
-import { User } from 'app/_models/User';
 import { CategoryService } from '../_services/category.service';
 import { Category } from 'app/_models/Category';
+import { User } from 'app/_models/User';
+import { AuthService } from 'app/_services/auth.service';
+import { UserService } from 'app/_services/user.service';
 
 
 @Component({
@@ -21,6 +21,7 @@ import { Category } from 'app/_models/Category';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
+
   title = 'LibraryProject-Client';
 
   book!: Book;
@@ -32,7 +33,11 @@ export class FrontpageComponent implements OnInit {
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
 
-  newbook: Book = {
+
+
+
+  book: Book = {
+
     id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
     language: '',
     authorId: 0,
@@ -94,18 +99,8 @@ export class FrontpageComponent implements OnInit {
     })
 
   }
-  showSearch(): void {
 
-    if (this.filterTerm == null || this.filterTerm == '') {
-     alert("The input field is empty")
-    }
 
-    else if (this.filterTerm.length >= 0 ){
-      this.bookService.getAllBooks()
-    .subscribe(p => this.allBooks = p);
-    console.log(this.allBooks);
-    }
-  }
   click() {
     if (this.filterTerm == null || this.filterTerm == '') {
       alert("The input field is empty")
@@ -116,9 +111,11 @@ export class FrontpageComponent implements OnInit {
         .subscribe(p => this.allBooks = p);
       console.log(this.allBooks);
 
+
       this.bookService.search.next(this.filterTerm);
       this.router.navigate(['/Book', this.filterTerm]);
     }
+
   }
   checkSearch(event: any) {
     if (event.key === "Enter" || this.filterTerm == null) {
@@ -134,6 +131,15 @@ export class FrontpageComponent implements OnInit {
 
 
 
+
+    });
+  }
+
+  
+  ngAfterContentChecked(): void {
+    this.ref.detectChanges();
+    this.showOrhideAdminBtn();  
+  }
 
 
 }

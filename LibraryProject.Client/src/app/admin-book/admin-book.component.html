@@ -26,8 +26,8 @@
             </thead>
             <tbody *ngIf="books?.length != 0">
                 <tr style="background-color: #686868;" class="head-values_" *ngFor="let book of books | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <button style="width: 49px; height: 58px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
-                    <button style="width: 49px; height: 58px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-toggle="modal" data-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
+                    <button style="width: 45px; height: 58px;" (click)="delete_book(book)"><i class="fa-solid fa-trash red-color" style="font-size: 20px;"></i></button>
+                    <button style="width: 45px; height: 58px; color: rgb(224, 211, 22);" (click)="edit_book(book)" data-toggle="modal" data-target="#Modal_Book"><i class="fas fa-edit" style="font-size: 20px;"></i></button>
                     <td style="background-color: #686868;"><img src="/assets/images/{{book.image}}" alt="picture of book" id="img"></td>
                     <td style="color: whitesmoke;">{{ book.title }}</td>
                     <td style="color: whitesmoke;">{{ book.language }}</td>
@@ -159,10 +159,11 @@
                     <br>
                     <div *ngIf="isShown_image">
                         <label>Image: </label> &nbsp;
-                        <select [(ngModel)]="book.image" name="image">
+                        <input [(ngModel)]="book.image" type="text" class="form-control" id="name" name="image" placeholder="image">
+                        <!-- <select [(ngModel)]="book.image" name="image">
               <option selected></option>
               <option *ngFor="let img of imageArray" [ngValue]="img.name.toString()">{{img.name}}</option>
-            </select>
+            </select> -->
                     </div>
                     <br>
                     <!-- (!book.title) || (!book.language) || (!book.description) || (!book.publishYear) || (!book.image) || (!book.categoryId) || (!book.authorId && !book.publisherId && author.firstName && author.lastName && publisher.name)                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
