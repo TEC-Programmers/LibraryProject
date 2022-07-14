@@ -1,17 +1,40 @@
+body{
+  margin-top: -30px;
+
+
+
+
+ 
+}
 .background {
-  position: absolute;
+
+  position: relative;
   width: 2000px;
   height: 1108px;
+
+
+
+
+
 }
 
 .content {
   margin: auto;
   width: 30%;
-  border: 5px outset rgb(105, 131, 170);
+  /* border: 5px solid rgb(10, 155, 180); */
+  border: 5px double rgb(105, 131, 170);
   padding: 27px;
   margin-top: 110px;
   text-align: center;
   margin-left: 634px;
+  background-color:  rgb(240, 173, 49);
+
+
+
+}
+
+.title {
+    left: 60;
 }
 
 .button-29 {
@@ -46,6 +69,7 @@
   white-space: nowrap;
   will-change: box-shadow,transform;
   font-size: 18px;
+ 
 }
 
 .button-29:focus {
@@ -60,19 +84,4 @@
 .button-29:active {
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
-}
-
-
-h1{
-
-  font-size:60px;
-  color:rgb(0, 0, 0);
-  margin:10px;
-  margin-left: 40px;
-}
-
-p{
-  font-size:20px;
-  color: rgb(0, 0, 0);
-  margin-left: 33px;
 }

@@ -1,61 +1,138 @@
-<div id="searchDiv">
-    <!--  -->
-    <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
-    <button class="click" (click)="click()">Search</button>
-    <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
-        <td>
-            <br> Book: {{book.title}}
-            <br> Description: {{book.description}}
-            <br> Publish Year: {{book.publishYear}}
-            <br>
-        </td>
-    </tr>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="#"> <img src="assets/images/logo1.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse " data-target="#myNavbar"
+            aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav ml-auto" >
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active-link "
+                        [routerLinkActiveOptions]="{exact:true}"> <span
+                        class="glyphicon glyphicon-home"> Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active-link"><span
+                        class="glyphicon glyphicon-book"> Categories</span></a>
+                    
+                    <ul class="col" style="list-style:disc">
+                       
+                        <table>
+              <tbody class="dropdown">
+               
+                                <tr>                                   
+                                    <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                        <li>{{category.categoryName}}</li></a></td>                                        
+                                </tr>
+
+                                  <tr>
+                                    <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                        <li>{{category.categoryName}}</li></a></td>
+                                    
+                                  </tr>
+                                  <tr  >
+                                    <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                    <li>  {{category.categoryName}}</li></a></td>
+                                    
+                                  </tr>
+                                  <tr >
+                                    <td colspan="6" *ngFor="let category of categories |slice: 12:16; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                        <li>{{category.categoryName}}</li></a></td>
+                                    
+                                  </tr>
+                              
+                                </tbody>
+                          </table>
+                       
+                      
+                    </ul>
+                </li>
+
+                <li class="nav-item"> 
+                    <a class="nav-link" routerLink="reserve/:id"><span class="glyphicon glyphicon-calendar"></span>Reservation</a>
+                </li>
+
+               
+            </ul>
+
+
+            <ul class="nav navbar-nav ms-auto"  id="myNavbar">
+                <li class="nav-item nav-link" *ngIf= "router.url!=='/Frontpage'">                   
+                    <div class="search">
+                        <i class="fa fa-search"  (click)="click()" (keydown.enter)="checkSearch($event)"></i>
+                        <input type="text" name="searchInput" class="form-control" placeholder="Search Books"
+                            (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm">
+                    </div>
+                </li>
+
+
+                <li class="nav-item" *ngIf="this.x === 1">
+                    <a class="nav-link" routerLink="/Admin"> <span class="glyphicon glyphicon-dashboard"></span>Admin Panel</a>
+                </li>
+                <li class="nav-item" *ngIf="currentUser == null">
+                    <a class="nav-link" routerLink="/Register" ><span class="glyphicon glyphicon-edit"></span>
+                        Register</a>
+                </li>
+                <li class="nav-item" *ngIf="currentUser == null">
+                    <a class="nav-link" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+                </li>
+          
+                <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+                    <a class="nav-link" ><span class="glyphicon glyphicon-user">&nbsp;</span>{{currentUser.firstName+' '+currentUser.lastName}}</a>
+                    <ul>                     
+                        <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+                            <a class="nav-link" routerLink="/" (click)="logout()"><span
+                                    class="glyphicon glyphicon-log-out"></span>Logout</a>
+                        </li>
+
+                        <li style="display:inline-block" class="nav-item" *ngIf="currentUser != null">
+                            <a class="nav-link" routerLink="/profile"> <span class="glyphicon glyphicon-cog"></span>Profile</a>
+                        </li>
+                     
+                    </ul>
+
+                </li>
+
+
+               
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="footer bg-dark">
+    <!--fixed-bottom laver footer sticky på bunden -->
+
+    <p>Online Library &copy;2022. All rights reserved.<br>CVR-1234656</p>
+    <a href="mailto:librarysupport@abc.com">librarysupport@abc.com</a>
+
 </div>
-<nav id="nav">
-    <ul>
 
-        <li><a routerLink="/" routerLinkActive="active-link w3-green" [routerLinkActiveOptions]="{exact:true}" *ngIf="this.x !== 1">Home</a>
-        </li>
 
-        <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 1">
-            <a routerLink="/admin/customer" routerLinkActive="active-link w3-green">Users</a>
-        </li>
 
-        <li style="display:inline-block" *ngIf="currentUser != null && currentUser.role == 1">
-            <a routerLink="/" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Author</a>
-
-        </li>
-
-        <li style="display:inline-block" *ngIf="currentUser != null">
-            <a routerLink="/customerpanel" routerLinkActive="active-link w3-green">Profile</a>
-
-        </li>
-
-        <li class="nav-item">
-            <a routerLink="/Admin" routerLinkActive="active-link w3-green" *ngIf="this.x === 1">Administrator</a>
-        </li>
-
-        <li class="nav-item">
-            <a routerLink="/Register" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Register</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link text-danger" *ngIf="currentUser != null && currentUser.firstName == 'username'">User</a>
-        </li>
-
-        <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
-            <a routerLink="/" (click)="logout()">Logout</a>
-
-        </li>
-
-        <li class="nav-item">
-            <a routerLink="/Login" routerLinkActive="active-link w3-green" *ngIf="currentUser == null">Login</a>
-        </li>
-
-        <!-- <li>
-            <a>{{currentUser.role}}</a>
-        </li> -->
-
-    </ul>
 
 <router-outlet></router-outlet>
+
+
+<!----------------------right code------------------------------------------------------------------------------------------------>
+
+ 
+     
+
+
+
+
+
+
+
+
+

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   username: number = 0;
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x: number = 0;
-
+ bookId:number=0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     
+   this.route.params.subscribe(params => {
+      this.bookId = +params['id'];
+    }); 
   }
 
   showOrhideAdminBtn() {

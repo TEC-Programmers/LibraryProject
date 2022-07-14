@@ -2,9 +2,16 @@ div {
     width: 50%;
     margin-left: 500px ;
     margin-top: 80px; 
-    opacity: 75%;  
+    border: 5px double gray;
     background-color:rgb(212, 148, 69); 
+    padding:10px;
    
+}
+
+.form{
+  margin-top: 25px;
+  margin-left: 200px;
+  border: none;
 }
 
 .common{
