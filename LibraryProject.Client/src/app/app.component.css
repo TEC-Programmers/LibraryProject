@@ -214,3 +214,16 @@ input a i{
   }
  
 }  */
+
+
+/*category navbar*/
+table, tr , td  {
+  border: none;
+  border-collapse: collapse;
+  width: 300px;
+  padding: 5px;
+  background-color: rgb(212, 148, 69);
+}
+tr a:hover{
+ background-color: rgb(221, 9, 62)
+}

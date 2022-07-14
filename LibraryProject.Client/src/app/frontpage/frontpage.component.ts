@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Author } from '../_models/Author';
 import { Book } from '../_models/Book';
@@ -8,6 +8,9 @@ import { LoanService } from '../_services/loan.service';
 import { BookService } from '../_services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { User } from 'app/_models/User';
+import { AuthService } from 'app/_services/auth.service';
+import { UserService } from 'app/_services/user.service';
 
 
 @Component({
@@ -16,6 +19,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
+  currentUser: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
 
   book: Book = {
     id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
@@ -35,7 +39,7 @@ export class FrontpageComponent implements OnInit {
   bookId: number = 0;
   public filterTerm: string = "";
   searchBooks: Book[] = [];
-
+  x:any;
 
 
 
@@ -71,8 +75,7 @@ export class FrontpageComponent implements OnInit {
       }
     })
 
-
-
+  }
 
   showOrhideAdminBtn() {
     this.authService.currentUser.subscribe(user => {
@@ -93,12 +96,9 @@ export class FrontpageComponent implements OnInit {
         } 
     }
     });
-    })
-
-
-
-
   }
+
+  
   ngAfterContentChecked(): void {
     this.ref.detectChanges();
     this.showOrhideAdminBtn();  

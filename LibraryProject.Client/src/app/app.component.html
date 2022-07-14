@@ -1,54 +1,85 @@
 <ul>
 
-        <li class="nav-item">  
-        <img src="assets/images/logo2.png" ></li>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <li class="nav-item">
+        <img src="assets/images/logo2.png">
+    </li>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-  
- 
-     
-        <li class="nav-item active">
-            <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
-        </li>
-        <li class="nav-item" *ngIf="currentUser == null">
-            <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
-        </li>
-        <li class="nav-item">
-            <a  routerLink="/Admin" routerLinkActive="active-link w3-brown" *ngIf="currentUser != null">Administrator</a>
-        </li>
-        <li class="nav-item">
-            <a routerLinkActive="active-link w3-brown">Kategorier</a>
-            <ul class="row">
-                <ng-container *ngFor="let category of categories">
-                    <li >
-                        <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
 
 
-                    </li>
-                </ng-container>
 
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
-        </li>
-        <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
-            <a routerLink="/" (click)="logout()">Logout</a>
+    <li class="nav-item active">
+        <a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
+    </li>
+    <li class="nav-item" *ngIf="currentUser == null">
+        <a routerLink="/Admin" routerLinkActive="active-link w3-brown">Administrator</a>
+    </li>
+    <li class="nav-item">
+        <a routerLink="/Admin" routerLinkActive="active-link w3-brown" *ngIf="currentUser != null">Administrator</a>
+    </li>
+    <li class="nav-item">
+        <a routerLinkActive="active-link w3-brown">Kategorier</a>
 
-        </li>
+        <ul class="col">
+           
+               <!--  <ng-container *ngFor="let category of categories; let i=index">
+                    <tr>
+                        <td *ngIf="i<3">
+                            <a routerLink="/category_books/{{category.id}}">{{category.categoryName}}</a>
 
-        <li class="nav-item" *ngIf="currentUser == null">
-            <a routerLink="/Login" routerLinkActive="active-link w3-brown">Login</a>
-        </li>
-        <div>
-            <input id="searchInput" name="searchInput" 
-        (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
-        placeholder="Search for Books" size="35">
-        
-        <i class="fa-solid fa-magnifying-glass" (click)= "click()" (keydown.enter)="checkSearch($event)"style="color: aliceblue; margin-top: 15px; margin-right: -5px;" ></i>
+
+                    </tr>
+                </ng-container> -->
+                <table  class="table table-sm table-dark">
+                   
+                    <tbody>
+                        <tr  class="common">
+                           
+                            <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                                
+                        </tr>
+                          <tr  class="float-left square">
+                            <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                            
+                          </tr>
+                          <tr  class="float-left square">
+                            <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                            
+                          </tr>
+                          <tr  class="float-left square">
+                            <td colspan="6" *ngFor="let category of categories |slice: 12:15; index as i" ><a routerLink="/category_books/{{category.id}}"> &#8226;{{category.categoryName}}</a></td>
+                            
+                          </tr>
+                    </tbody>
+                  </table>
+
+        </ul>
+
+    </li>
+
+
+    <li class="nav-item">
+        <a routerLink="/Register" routerLinkActive="active-link w3-brown">Register</a>
+    </li>
+    <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
+        <a routerLink="/" (click)="logout()">Logout</a>
+
+    </li>
+
+    <li class="nav-item" *ngIf="currentUser == null">
+        <a routerLink="/Login" routerLinkActive="active-link w3-brown">Login</a>
+    </li>
+    <div>
+        <input id="searchInput" name="searchInput" (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm"
+            type="text" placeholder="Search for Books" size="35">
+
+        <i class="fa-solid fa-magnifying-glass" (click)="click()" (keydown.enter)="checkSearch($event)"
+            style="color: aliceblue; margin-top: 15px; margin-right: -5px;"></i>
     </div>
-       <!--  <div  >
+
+    <!--  <div  >
         <input id="searchInput" name="searchInput" (keydown.enter)="showSearch()"
         (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text"
         placeholder="Search for Books" size="35">
@@ -73,11 +104,11 @@
         <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="bookTitle">
     </div>
     <span class="fas fa-search search-icon " style="color:white"></span> -->
-    
-    
-</ul>   
 
- <!-- <nav id="nav">
+
+</ul>
+
+<!-- <nav id="nav">
     <ul>
 
         <li><a routerLink="/" routerLinkActive="active-link w3-brown" [routerLinkActiveOptions]="{exact:true}">Home</a>
@@ -158,9 +189,6 @@
 
     </ul>
 </nav>  -->
-  
-
-
 
 
 
