@@ -8,8 +8,8 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
-import { AdministratorComponent } from './administrator/administrator.component';
-import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
+import { AdministratorComponent } from './administration/administrator/administrator.component';
+import { AdminCustomerComponent } from './administration/admin-customer/admin-customer.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import { BookComponent } from './book/book.component';
@@ -25,9 +25,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AdminBookComponent } from './admin-book/admin-book.component';
-import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { AdminBookComponent } from './administration/admin-book/admin-book.component';
+import { AdminCategoryComponent } from './administration/admin-category/admin-category.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { CustomerPanelComponent } from './customer/customer-panel/customer-panel.component';
+import { ActiveLoansComponent } from './customer/active-loans/active-loans.component';
+import { ActiveReservationsComponent } from './customer/active-reservations/active-reservations.component';
 
 
 @NgModule({
@@ -47,6 +50,9 @@ import { ReservationComponent } from './reservation/reservation.component';
     AdminBookComponent,
     AdminCategoryComponent,
     ReservationComponent,
+    CustomerPanelComponent,
+    ActiveLoansComponent,
+    ActiveReservationsComponent,
   ],
 
   imports: [

@@ -45,8 +45,6 @@ export class AdministratorComponent implements OnInit {
         } 
     }
     });
-
-    console.log('x line 97: ',this.x)
   }
 
 }

@@ -6,8 +6,34 @@
     text-align: center;
 }
 
+.container {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top: 60px;
+}
+
+#bookCard {
+    align-items: center;
+    width: 270px;
+}
+
 button#button-format:disabled {
     border: 1px solid #999999;
     background-color: #cccccc;
     color: #666666;
+}
+
+#back {
+    width: 80px;
+    height: 35px;
+    border-radius: 12px;
+    margin-left: 60px;
+    /* margin-left: 189px;
+    top: 392px;
+    position: absolute; */
+}
+
+.buttons {
+    /* margin-left: 32px; */
 }

@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
 
   cancel(): void {
     this.message = [];
-    this.user= this.newUser();
+    this.user = this.newUser();
   }
 
   save(): void {
