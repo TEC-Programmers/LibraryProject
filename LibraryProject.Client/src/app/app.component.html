@@ -39,10 +39,10 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/Admin" *ngIf="currentUser != null">Admin Panel</a>
+                <li class="nav-item" *ngIf="currentUser != null && currentUser.role != 1">
+                    <a class="nav-link" routerLink="/Admin" >Admin Panel</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="currentUser == null">
                     <a class="nav-link" routerLink="/Register" r><span class="glyphicon glyphicon-user"></span> Register</a>
                 </li>
                 <li class="nav-item" *ngIf="currentUser == null">
