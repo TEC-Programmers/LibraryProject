@@ -18,6 +18,11 @@
     width: 270px;
 }
 
+.card {
+    background-color: #DEB887;
+    top: 30px;
+}
+
 button#button-format:disabled {
     border: 1px solid #999999;
     background-color: #cccccc;

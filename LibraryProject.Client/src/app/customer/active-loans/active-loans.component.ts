@@ -106,7 +106,7 @@ export class ActiveLoansComponent implements OnInit {
           // console.log('Book Found: ', this.yourBooks)
         }
         else {
-          console.log('getActiveBookInLoan() Error: Book (NOT) Found!')
+          console.log('loan getActiveBookInLoan() Error: Book (NOT) Found!')
         }
       }          
     })

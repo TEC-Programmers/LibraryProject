@@ -11,6 +11,7 @@ import { BookService } from 'app/_services/book.service';
 import { CategoryService } from 'app/_services/category.service';
 import { PublisherService } from 'app/_services/publisher.service';
 import { UserService } from 'app/_services/user.service';
+import { merge } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -68,6 +69,10 @@ export class AdminBookComponent implements OnInit {
   imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
   isImageSelected: boolean = false;
 
+
+  obj1 = {"fparams":{"keys":["a","b"],"pairs":{"p":"qwert"}},"qparams":{"x":"xyz"}}
+  obj2 = {"fparams":{"keys":["c","d"],"pairs":{"q":"yuiop"}},"qparams":{"z":"zyx"}}
+
   constructor(private userService: UserService, private authService: AuthService, private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
@@ -79,7 +84,6 @@ export class AdminBookComponent implements OnInit {
     this.authorService.getAllAuthors().subscribe(a => this.authors = a);
     this.publisherService.getAllPublishers().subscribe(p => this.publishers = p);
     this.categoryService.getAllCategories().subscribe(c => this.categorys = c);
-    console.log('admin-book ngOnInit | x = ',this.x)
   }
 
   ngAfterViewInit() {
@@ -279,12 +283,15 @@ export class AdminBookComponent implements OnInit {
     this.isImageSelected = false;
   }
 
+ 
 
   edit_book(book: Book): void {
     this.message = '';
+    // this.book.image = this.book.image + '.jpg';
     this.book = book;
     this.book.id = book.id || 0;
     console.log(this.book);
+    console.log('image format: ',this.book.image) 
   }
 
   delete_book(book: Book): void {

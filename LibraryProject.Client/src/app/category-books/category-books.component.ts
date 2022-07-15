@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from '../_models/Book';
 import { BookService } from '../_services/book.service';
@@ -12,10 +12,11 @@ export class CategoryBooksComponent implements OnInit {
   categoryId:number=0; //declare and initialize a variable
   private sub: any;
   books:Book[]=[];
-  constructor( private bookService:BookService, private route:ActivatedRoute) { }    //Dependency Injection
+  constructor( private bookService:BookService, private route:ActivatedRoute, private elementRef: ElementRef) { }    //Dependency Injection
 
 
   ngOnInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
     this.sub = this.route.params.subscribe(params => {    //retrieving the value of id by subscribing to the params observable property 
       this.categoryId = +params['id'];  // (+) converts string 'id' to a number
       console.log("getting param");

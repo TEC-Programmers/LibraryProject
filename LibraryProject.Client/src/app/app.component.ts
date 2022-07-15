@@ -36,7 +36,7 @@ export class AppComponent {
   constructor(private bookService: BookService,
     private categoryService: CategoryService,
     private authService: AuthService,
-    private router: Router, private route: ActivatedRoute,
+    public router: Router, private route: ActivatedRoute,
     private userService: UserService) {   // get the current user from authentication service
 
     this.authService.currentUser.subscribe(x => this.currentUser = x);
@@ -103,6 +103,8 @@ export class AppComponent {
             }
         });
     }
+
+    
     itemClicked(item){
       
     }
@@ -123,6 +125,7 @@ export class AppComponent {
       this.router.navigate(['/Book', this.filterTerm]);
     }
   }
+
   checkSearch(event: any) {
     if (event.key === "Enter" || this.filterTerm == null) {
       this.allBooks = [];
@@ -132,3 +135,5 @@ export class AppComponent {
       this.router.navigate(['/Book', this.filterTerm]);
     }
   }
+
+}

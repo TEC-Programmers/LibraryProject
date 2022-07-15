@@ -21,10 +21,10 @@
 </div>
 
 <div class="container" id="books" style="margin-top: 8.5%; padding-top: 25px;">
+    <br><br>
     <div class="row">
-        
         <ng-container *ngFor="let item of searchBooks | filter:filterTerm">
-            <div class="card col-md-2 auto align-items-center bg-success" style="border:none ">
+            <div class="card col-md-2 auto align-items-center bg-success" style="border: none; max-width: 250px;">
                 <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}"
                         alt="picture of products"></a>
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}

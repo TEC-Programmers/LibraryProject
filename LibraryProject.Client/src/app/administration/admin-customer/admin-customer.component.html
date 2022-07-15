@@ -145,7 +145,7 @@
       </div>
       <div class="modal-body">
         <button id="edit-btn-admin" type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-        <h4 class="modal-title text-danger" id="ModalLabel">EDIT Administrator Info</h4>
+        <h4 class="modal-title text-danger" id="ModalLabel">EDIT Administrator Info</h4><br>
         <form>
           <div class="mb-3">
             <label for="firstName" class="form-label">Firstname</label>
@@ -170,10 +170,10 @@
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
-          
-          <button (click)="save_admin()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
-          <br>
-          <br>
+          <div class="updateBtn">
+            <button (click)="save_admin()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
+          </div>
+          <br><br>
           <label for="role" class="form-label">Role</label>
           &nbsp;
           <div class="mb-3">

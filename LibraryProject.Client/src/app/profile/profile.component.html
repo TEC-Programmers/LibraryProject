@@ -49,9 +49,9 @@
 
     </div><br>
 
-    <div>
+    <div style="justify-content: center; align-items:center; display: flex;">
         <button class="w3-btn w3-green w3-ripple" (click)="save()">Save</button>&nbsp;&nbsp;
         <button class="w3-btn w3-blue w3-ripple" (click)="cancel()">Cancel</button>&nbsp;&nbsp;
         <button class="w3-btn w3-red w3-ripple" routerLink="customerpanel">Back</button> <br><br>
-        <span class="w3-red">{{ message }}</span>
+        <span class="w3-red" id="error_message">{{ message }}</span>
     </div>

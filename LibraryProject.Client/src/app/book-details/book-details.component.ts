@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Book } from '../_models/Book';
 import { BookService } from '../_services/book.service';
@@ -47,9 +47,10 @@ export class BookDetailsComponent implements OnInit {
   dateToday = new Date();
   public outputDate;
 
-  constructor(private _datePipe: DatePipe, private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService ) { }
+  constructor(private _datePipe: DatePipe, private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
     this.bookService.getAllBooks().subscribe(b => this.books = b);
     this.userService.getAllUsers().subscribe(u => this.users = u)
 

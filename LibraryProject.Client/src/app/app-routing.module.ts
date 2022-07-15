@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'Frontpage', component: FrontpageComponent},
   {path: 'Category', component:CategoryComponent},   // it displays the Category component
   {path: 'category_books/:id', component: CategoryBooksComponent },  //this is the url which displays the books of the  specific categoryID
-  {path: 'Book-Details/:id', component: BookDetailsComponent},
+  {path: 'book_details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent},
   {path: 'Admin/Customers', component: AdministratorComponent},
   {path: 'Admin/Users', component: AdminCustomerComponent},
@@ -36,6 +36,7 @@ const routes: Routes = [
   {path: 'profile/customerpanel', component: CustomerPanelComponent },
   {path: 'activeLoans', component: ActiveLoansComponent},
   {path: 'customerpanel/activeReservations', component: ActiveReservationsComponent},
+  {path: 'profile/customerpanel/activeReservations', component: ActiveReservationsComponent},
   {path: 'Login', component: LoginComponent },
   {path: 'Register', component: RegisterComponent},
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },

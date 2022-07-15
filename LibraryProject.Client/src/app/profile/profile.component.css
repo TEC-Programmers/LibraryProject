@@ -1,17 +1,27 @@
 div {
-    width: 50%;
-    margin-left: 500px ;
-    margin-top: 80px; 
+    width: 45%;
+    margin-left: 226px;
+    margin-top: 25px;
     border: 5px double gray;
-    background-color:rgb(212, 148, 69); 
-    padding:10px;
-   
+    background-color: rgb(212, 148, 69);
+    padding: 10px;
+}
+
+#error_message {
+  position: absolute;
+  top: 338px;
 }
 
 .form{
   margin-top: 25px;
   margin-left: 200px;
   border: none;
+}
+
+.w3-container {
+    margin-left: 510px;
+    height: 727px;
+    margin-top: 70px;
 }
 
 .common{

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { User } from 'app/_models/User';
 import { AuthService } from 'app/_services/auth.service';
 import { UserService } from 'app/_services/user.service';
@@ -12,9 +12,10 @@ export class AdministratorComponent implements OnInit {
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(private userService: UserService, private authService: AuthService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#607D8B';
     setTimeout(() => {
       this.showOrhideAdminBtn();
     });

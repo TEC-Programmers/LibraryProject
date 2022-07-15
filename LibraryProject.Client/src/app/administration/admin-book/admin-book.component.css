@@ -9,6 +9,48 @@
   padding-top: 60px;
 
 }
+
+.createBookBtn {
+  border-radius: 20px;
+    width: 63px;
+    font-size: 30px;
+    margin-top: 14px;
+    margin-left: 26px;
+    height: 40px;
+}
+
+.createBookBtn:hover {
+  background: #aeb6b2;
+
+}
+
+#book_icon {
+  font-size: 27px;
+  position: absolute;
+  left: 1302px;
+  top: 93px;
+}
+
+#createBookPlus {
+  color: black;
+    font-size: 25px;
+    position: absolute;
+    left: 1285px;
+    top: 92px;
+}
+
+
+.updateBtn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#exampleModalLabel {
+  margin-top: -26px;
+  position: absolute;
+}
+
 /* height="40px" width="50px" style="padding-left: 17px;" */
 #img {
   height: 43px;
@@ -47,22 +89,23 @@
 }
 
 #user_message {
-  margin-left: 174px;
+  margin-left: 185px;
 }
 
 #btn_close_create {
   position: absolute;
-  top: 31px;
+  top: 10px;
+  left: 8px;
 }
 
 #Modal_Create_Book {
   opacity:1 !important;
-  top: 79px;
+  top: -12px;
 }
 
 .btn-close {
-  margin-left: 468px;
-  margin-top: -1px;
+  margin-left: 471px;
+  margin-top: -11px;
 }
 
 #Modal_Book {
@@ -70,25 +113,6 @@
   top: 130px;
 }
 
-.createBookBtn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 100px;
-  outline: none;
-  background: #04AA6D;
-  color: white; 
-  cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin-left: 39px;
-  margin-top: 14px;
-  position: absolute;
-  font-size: x-large;
-}
-
-.createBookBtn:hover {
-  background: #1bc762;
-}
 
 .btnAndTitle {
   margin-top: 37px;
@@ -96,12 +120,13 @@
   background-color: rgb(51, 49, 49);
   width: 118px;
   height: 86px;
+  border-radius: 8px;
 }
 
 .btnTitle {
   position: absolute;
-  margin-top: 9px;
-  margin-left: 13px;
+  margin-top: 1px;
+  margin-left: 11px;
   font-size: 20px;
   color: white;
 }

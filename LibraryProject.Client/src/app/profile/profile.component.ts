@@ -1,5 +1,5 @@
 import {User } from '../_models/User';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
@@ -19,18 +19,13 @@ export class ProfileComponent implements OnInit {
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
 
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private userService: UserService
-
-  ) {
+  constructor(private router: Router, private authService: AuthService, private userService: UserService, private elementRef: ElementRef) {
     // get the current user from authentication service
-
     this.authService.currentUser.subscribe(x=> this.currentUser=x);
   }
 
   ngOnInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#607D8B';
     setTimeout(() => {
       this.showOrhideAdminBtn();
     });
@@ -80,7 +75,6 @@ export class ProfileComponent implements OnInit {
 
   save(): void {
     if (this.user.email != '') {
-     (confirm('To view the updated profile kindly "Sign in" again....!'))
     }
     this.message = [];
 
@@ -115,6 +109,7 @@ export class ProfileComponent implements OnInit {
           });
       }
       else {
+     (confirm('To view the updated profile kindly "Sign in" again....!'))
         this.userService.updateUser(this.user.id , this.user)
           .subscribe(() => {
             this.user = this.newUser();

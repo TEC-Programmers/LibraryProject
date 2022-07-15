@@ -1,24 +1,19 @@
 <div class="container">
     <div class="row">
-        <ng-container>
+        <ng-container style="background-color: 8B4513;">
             <div class="card col-md-3" id="bookCard">
                 <img src="/assets/images/{{book.image}}" alt="picture of book">
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;"><strong>Title: </strong>{{book.title}}
                 </h5>
-                <p style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;"><strong>Description: </strong>
-                    {{book.description}}</p>
+                <p style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;"><strong>Description: </strong>{{ (book.description.length > 25)? (book.description | slice:0:25)+'..':(book.description) }}</p>
                 <p><strong>AuthorName: </strong>{{book.author.firstName + " " + book.author.lastName}}</p>
                 <p><strong>PublisherName: </strong>{{book.publisher.name}}</p>
-               <!--  <div class="relative">
-                    <button class="btns" type="button" ><i class="fa fa-plus"></i></button>
-                    <span >{{product.quantity}}</span>
-                    <button class="btns" type="button" ><i class="fa fa-minus"></i></button>
-                </div> -->
+                <br>
                 <div class="buttons">
                     <button class="btn btn-primary" id="button-format" (click)="loan(book)" [disabled]="isDisabled_loanBtn">LÅN </button>
                     <button class="btn btn-primary" id="button-format" (click)="reserve(book)" [disabled]="isDisabled_reserveBtn">RESERVER  </button> 
-                    <br><br><br>
-                    <button class="w3-btn w3-red w3-ripple" id="back" routerLink="/Book">Back</button> 
+                    <br><br>
+                    <button class="w3-btn w3-red w3-ripple" id="back" routerLink="/Frontpage">Back</button> 
                 </div>
                 
             </div>

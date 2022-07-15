@@ -1,7 +1,13 @@
 .table {
     position: absolute;
     left: 214px;
-    top: 98px;
+    top: 73px;
+}
+
+.container {
+    position: absolute;
+    margin-top: 71px;
+    margin-left: 27px;
 }
 
 * {
@@ -117,7 +123,7 @@ body {
 .clip-text_eight {
     background-image: url(../../../assets/images/all-white-pic.jpg);
     left: 407px;
-    top: -24px;
+    top: -21px;
     width: 1000px;
     height: 153px;
 }

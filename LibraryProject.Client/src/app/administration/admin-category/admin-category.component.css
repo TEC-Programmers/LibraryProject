@@ -25,11 +25,35 @@
 .btn-close {
   margin-left: 467px;
   position: absolute;
-  margin-top: -50px;
+  margin-top: -77px;
+}
+
+.message {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.title {
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 #exampleModalLabel {
-  margin-top: 31px;
+  margin-top: 4px;
+}
+
+#addIcon {
+  font-size: 25px;
+}
+
+#btnAdd {
+  margin-left: 71px;
+  border-radius: 8px;
+  height: 32px;
+  width: 35px;
+  margin-top: 3px;
 }
 
 .createBookBtn {
@@ -66,7 +90,7 @@
     font-size: 20px;
     color: white;
     position: absolute;
-    margin-top: 8px;
+    margin-top: 4px;
   }
 
 #operation {
