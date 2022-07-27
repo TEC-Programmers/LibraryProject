@@ -6,8 +6,9 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
-import { Data, Router } from '@angular/router';
+import { Role } from '../_models/Role';
 import { User } from 'app/_models/User';
+import { Data, Router } from '@angular/router';
 
 
 

@@ -1,6 +1,5 @@
 import { Role } from "./Role";
 
-
 export interface User
 {
     id: number;
@@ -13,7 +12,7 @@ export interface User
     token?:string;
 }
 
-// export enum Role {
+// export enum Role2 {
 //     customer = 'Customer',
 //     admin = 'Admin'
 // }

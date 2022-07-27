@@ -22,7 +22,7 @@ export class ReservationService {
     return this.http.get<Reservation[]>(this.apiUrl);
   }
 
-  getReservation(reservationId: number): Observable<Reservation> {
+  getReservationById(reservationId: number): Observable<Reservation> {
     return this.http.get<Reservation>(`${this.apiUrl}/${reservationId}`)
   }
 
@@ -38,4 +38,6 @@ export class ReservationService {
   deleteReservation(reservationId: number): Observable<Reservation> {
     return this.http.delete<Reservation>(`${this.apiUrl}/${reservationId}`, this.httpOptions);
   }
+
+  
 }

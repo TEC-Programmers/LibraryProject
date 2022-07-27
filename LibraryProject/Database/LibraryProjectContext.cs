@@ -119,36 +119,36 @@ namespace LibraryProject
                 new()
                 {
                     Id = 1,
-                    userID = 2,
+                    userId = 2,
                     bookId = 2,
-                    loaned_At = "06/05/22",
-                    return_date = "13/05/22",
+                    loaned_At = "2022/05/07",
+                    return_date = "2022/05/08"
                 },
                 new()
                 {
                     Id = 3,
-                    userID = 4,
+                    userId = 4,
                     bookId = 5,
-                    loaned_At = "27/06/22",
-                    return_date = "27/07/22"
+                    loaned_At = "2022/06/07",
+                    return_date = "2022/07/08",
                 }
                 );
             modelBuilder.Entity<Reservation>().HasData(
                 new()
                 {
                     Id = 1,
-                    userId = 1,
-                    bookId = 1,
-                    reserved_At = "06/05/22",
-                    reserved_To = "13/05/22"
+                    userId = 2,
+                    bookId = 2,
+                    reserved_At = "2022/08/08",
+                    reserved_To = "2022/09/09"
                 },
                 new()
                 {
                     Id = 2,
                     userId = 2,
-                    bookId = 2,
-                    reserved_At = "14/05/22",
-                    reserved_To = "21/05/22"
+                    bookId = 5,
+                    reserved_At = "2022/08/08",
+                    reserved_To = "2022/08/09"
                 }
                 );
         }

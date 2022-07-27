@@ -1,9 +1,5 @@
-<div id="bookDiv">
-    <h1>Alle Bøger</h1>
 
-
-    <li *ngFor="let book of Books;">
-        <a [routerLink]="['/Book-Details', book.id]">{{book.title}} </a>
-        
-    </li>
-</div>
+ <div>
+    <input type="text" placeholder="Search for Book"  [(ngModel)]="searchTerm" (change)="searchTerm">
+    <button (click)="search()">Search</button>
+</div> 

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Book } from '../_models/Book';
 import { Category } from '../_models/Category';
@@ -12,6 +12,8 @@ export class BookService {
 
   private apiUrl = environment.apiUrl + '/Book'
 
+  public search = new BehaviorSubject<string>("");
+  
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }

@@ -1,0 +1,209 @@
+.background {
+  left: 0px;
+  position: absolute;
+  top: 193px;
+  width: 2000px;
+  height: 1000px;
+}
+.container{
+  padding-top: 60px;
+
+}
+/* height="40px" width="50px" style="padding-left: 17px;" */
+#img {
+  height: 43px;
+  width: 58px;
+  padding-left: 17px;
+}
+
+#btn_new_author {
+  margin-top: -26px;
+}
+
+#author_continue_btn {
+  margin-top: -10px;
+}
+
+#publisher_continue_btn {
+  margin-top: -29px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+#author_btn, #select_author {
+  display: inline;
+}
+
+#createBtn {
+  margin-left: 205px;
+  margin-top: 90px;
+}
+
+#user_message_author {
+  margin-left: 174px;
+}
+
+#user_message {
+  margin-left: 174px;
+}
+
+#btn_close_create {
+  position: absolute;
+  top: 31px;
+}
+
+#Modal_Create_Book {
+  opacity:1 !important;
+  top: 79px;
+}
+
+.btn-close {
+  margin-left: 468px;
+  margin-top: -1px;
+}
+
+#Modal_Book {
+  opacity:1.5 !important;
+  top: 130px;
+}
+
+.createBookBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 100px;
+  outline: none;
+  background: #04AA6D;
+  color: white; 
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin-left: 39px;
+  margin-top: 14px;
+  position: absolute;
+  font-size: x-large;
+}
+
+.createBookBtn:hover {
+  background: #1bc762;
+}
+
+.btnAndTitle {
+  margin-top: 37px;
+  margin-left: 1252px;
+  background-color: rgb(51, 49, 49);
+  width: 118px;
+  height: 86px;
+}
+
+.btnTitle {
+  position: absolute;
+  margin-top: 9px;
+  margin-left: 13px;
+  font-size: 20px;
+  color: white;
+}
+
+.label {
+    word-wrap: normal;
+    position: absolute;
+    top: 185px;
+    left: 40px;
+  }
+  
+  .red-color {
+      color:red;
+  }
+  
+  .table {
+    margin-left: 252px;
+    margin-top: -87px;
+          /* column-width: 700px; */
+  }
+  
+  .container {
+      margin-left: 500px;
+  }
+  
+  .search-bar {
+    width: 357px;
+    margin-left: 609px;
+    position: absolute;
+    margin-top: 11px;
+  }
+  
+  .table-table-striped {
+      cursor: pointer;  
+  }
+  
+  .head {
+      cursor: pointer;
+  }
+  
+  .head-values {
+      cursor: pointer;
+  }
+  
+  
+  h1 {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    padding: 1px;
+    /* font-family: "Raleway", cursive; */
+    font-weight: 100;
+    position: relative;
+    width: 263%;
+    background: linear-gradient(to right, black, #eee, black);
+    white-space: nowrap;
+    left: -1050px;
+  }
+  h1::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -50px;
+    width: 68%;
+    margin-left: 277px;
+    margin-top: -220px;
+    height: 600px;
+    background: radial-gradient(ellipse closest-side, #444, black);
+    z-index: -1;
+  }
+  h1 a {
+    background: black;
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    letter-spacing: 30px;
+    color: white;
+    animation: comein 1.5s 1 ease-in-out forwards;
+    margin-left: -519px;
+    margin-top: 0px;
+    font-family: "Raleway", cursive;
+    }
+  
+  @keyframes comein {
+    0% {
+      letter-spacing: 80px;
+      color: rgba(255, 255, 255, 0);
+    }
+    70% {
+      letter-spacing: 20px;
+    }
+    100% {
+      letter-spacing: 25px;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+  
+  body {
+    background: black;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }

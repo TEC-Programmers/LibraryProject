@@ -1,0 +1,182 @@
+.background {
+  left: 0px;
+  position: absolute;
+  top: 191px;
+  width: 2000px;
+  height: 1000px;
+}
+.container{
+  margin-top: 60px;;
+}
+#user_message_cat {
+  margin-left: 183px;
+}
+
+#Modal_Category_Update {
+  opacity:1 !important;
+  top: 163px;
+}
+
+#Modal_Category_Create {
+  opacity:1 !important;
+  top: 163px;
+}
+
+.btn-close {
+  margin-left: 467px;
+  position: absolute;
+  margin-top: -50px;
+}
+
+#exampleModalLabel {
+  margin-top: 31px;
+}
+
+.createBookBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 100px;
+  outline: none;
+  background: #04AA6D;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+  margin-left: 65px;
+  position: absolute;
+  right: -103px;
+  margin-top: 3px;
+  font-size: x-large;
+  }
+  
+  .createBookBtn:hover {
+    background: #1bc762;
+  }
+  
+  .btnAndTitle {
+    margin-top: 11px;
+    margin-left: 440px;
+    background-color: rgb(51, 49, 49);
+    width: 113px;
+    height: 38px;
+  }
+  
+  .btnTitle {
+    margin-left: 16px;
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    margin-top: 8px;
+  }
+
+#operation {
+    /* width: 8px; */
+    width: 40px;
+}
+
+#cat_column {
+    /* width: 96%; */
+    width: 400px;
+}
+
+.label {
+    word-wrap: normal;
+    position: absolute;
+    top: 185px;
+    left: 40px;
+  }
+  
+  .red-color {
+      color:red;
+  }
+  
+  .table {
+    margin-left: 559px;
+    margin-top: 55px;
+    /* width: 500px;   */
+  }
+  
+  .container {
+      margin-left: 500px;
+  }
+  
+  .search-bar {
+    width: 437px;
+    margin-left: 559px;
+    position: absolute;
+    margin-top: 11px;
+  }
+  
+  .table-table-striped {
+      cursor: pointer;  
+  }
+  
+  .head {
+      cursor: pointer;
+  }
+  
+  .head-values {
+      cursor: pointer;
+  }
+  
+  
+  h1 {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    padding: 1px;
+    /* font-family: "Raleway", cursive; */
+    font-weight: 100;
+    position: relative;
+    width: 263%;
+    background: linear-gradient(to right, black, #eee, black);
+    white-space: nowrap;
+    left: -1050px;
+  }
+  h1::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -50px;
+    width: 68%;
+    margin-left: 277px;
+    margin-top: -220px;
+    height: 600px;
+    background: radial-gradient(ellipse closest-side, #444, black);
+    z-index: -1;
+  }
+  h1 a {
+    background: black;
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    letter-spacing: 30px;
+    color: white;
+    animation: comein 1.5s 1 ease-in-out forwards;
+    margin-left: -519px;
+    margin-top: 0px;
+    font-family: "Raleway", cursive;
+    }
+  
+  @keyframes comein {
+    0% {
+      letter-spacing: 80px;
+      color: rgba(255, 255, 255, 0);
+    }
+    70% {
+      letter-spacing: 20px;
+    }
+    100% {
+      letter-spacing: 25px;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+  
+  body {
+    background: black;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }

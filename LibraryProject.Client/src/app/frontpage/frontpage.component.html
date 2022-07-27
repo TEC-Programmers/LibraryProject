@@ -1,11 +1,37 @@
-<div id="divforside">
-    <h1>Forside</h1>
+  
+        
+
+<div class="container-fluid">
+
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div id="banner">
 
 
-    <nav id="navforside">
-        <a routerLink="/Category">Kategorier</a> |
-        <a routerLink="/Book">Bøger</a> |
-        <a routerLink="/Login">Login</a> |
-        <a routerLink="/Contact">Kontakt os</a> |
-    </nav>
+            <div class="container" >
+                <div class="search">
+                    <i class="fa fa-search" (click)="click()"></i>
+                    <input type="text" class="form-control" placeholder="Search Books" 
+                        (keydown.enter)="checkSearch($event)" [(ngModel)]="filterTerm">
+
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="books" style="margin-top: 8.5%; padding-top: 25px;">
+    <div class="row">
+        
+        <ng-container *ngFor="let item of searchBooks | filter:filterTerm">
+            <div class="card col-md-2 auto align-items-center bg-success" style="border:none ">
+                <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}"
+                        alt="picture of products"></a>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}
+                </h5>
+
+            </div>
+        </ng-container>
+    </div>
+
 </div>
