@@ -24,7 +24,7 @@ export class FrontpageComponent implements OnInit {
 
   title = 'LibraryProject-Client';
 
-  book!: Book;
+
   counter = 0;
   total: number = 0;
   categories: Category[] = [];
@@ -132,14 +132,12 @@ export class FrontpageComponent implements OnInit {
 
 
 
-    });
-  }
-
   
-  ngAfterContentChecked(): void {
+  
+/*   ngAfterContentChecked(): void {
     this.ref.detectChanges();
     this.showOrhideAdminBtn();  
-  }
+  } */
 
 
 }
