@@ -14,6 +14,7 @@ import { Data, Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  isLoggedIn=false;
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -25,6 +26,9 @@ export class AuthService {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser') as string));
     this.currentUser = this.currentUserSubject.asObservable();
   }
+
+  isAuthenticated(){ return this.currentUser;}
+
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
@@ -49,6 +53,7 @@ export class AuthService {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser') as string));
     // reset CurrentUser to the resat UserSubject, as an obserable
     this.currentUser = this.currentUserSubject.asObservable();
+    
   }
 
 

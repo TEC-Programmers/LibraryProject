@@ -10,20 +10,26 @@ export class AuthGuard implements CanActivate {
   ) { }
 //AuthGuard is used to protect the routes from unauthorized access in angular.
 // CanActivate is a Interface that a class can implement to be a guard deciding if a route can be activated
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):boolean {
     const currentUser = this.authService.currentUserValue;
-    if (currentUser) {
+    let isLoggedIn =this.authService.isAuthenticated();
+    if (currentUser ) {
       // send the user to login page, if requested endpoint has roles which user does not have
       if (route.data['roles'] && route.data['roles'].indexOf(currentUser.role) === -1)  {
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
       }
+      else
       // current user exists, meaning user logged in, so return true
       return true;
     }
-
+    else{
     // in general, if not currently logged in, redirect to login page with the return url
     this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
+    }
+   
+    
+    
   }
 }
