@@ -1,12 +1,10 @@
-<p>register works!</p>
+
 <form >
     <div class="container form-group">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
         <p class="text-center mt-4 w3-red"> {{ error }}</p>
         <hr>
-
-
 
         <input [(ngModel)]="user.firstName" type="text" placeholder="First Name" name="fn" id="fn" required>
         
@@ -17,16 +15,16 @@
         <input  [(ngModel)]="user.email" type="email" placeholder="Email" name="email" id="email" required>
 
         <input [(ngModel)]="user.password" type="password" placeholder=" Password" name="psw" id="psw" required>
-
        
         <br>
-        <button (click)="save()" type="submit" class="btn btn-primary w3-btn w3-green">Register</button> &nbsp; &nbsp;
-        <button (click)="cancel()" type="submit" class="btn btn-primary w3-btn w3-blue">Cancel</button>
-    </div>
-    
+        <button (click)="save()" type="submit" class="btn btn-primary " >Register</button> 
+        <button (click)="cancel()" type="submit" class="btn btn-primary">Cancel</button>
+ 
     <p class="text-center mt-4 w3-red">{{ message }}</p>
-    <br> <br>
+    
     <div class="container">
-        <p>Already have an account? <a routerLink="/Login">Sign in</a>.</p>
+        <p >Already have an account? <a routerLink="/login" class="text-center mt-4 w3-blue">Sign in</a></p>
     </div>
+</div>
+    
 </form>
