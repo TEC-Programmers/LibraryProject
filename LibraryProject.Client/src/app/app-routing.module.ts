@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
 import { CategoryComponent } from './category/category.component';
-import { AdministratorComponent } from './administrator/administrator.component';
+
 import { BookComponent } from './book/book.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -14,9 +14,11 @@ import { LoanComponent } from './loan/loan.component';
 import { LoginComponent } from './login/login.component';
 import { Role } from './_models/Role';
 import { AuthGuard } from './_helpers/auth.guard';
-import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
-import { AdminBookComponent } from './admin-book/admin-book.component';
-import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { AdministratorComponent } from './administration/administrator/administrator.component';
+import { AdminCustomerComponent } from './administration/admin-customer/admin-customer.component';
+
+import { AdminBookComponent } from './administration/admin-book/admin-book.component';
+import { AdminCategoryComponent } from './administration/admin-category/admin-category.component';
 import { ReservationComponent } from './reservation/reservation.component';
 
 
