@@ -55,9 +55,7 @@
 
 
  
-    <li class="nav-item">
-        <a routerLink="/Admin" routerLinkActive="active-link w3-brown" *ngIf="currentUser != null">Administrator</a>
-    </li>
+    
     
                 <li class="nav-item"> 
                     <a class="nav-link" routerLink="reserve/:id"><span class="glyphicon glyphicon-calendar"></span>Reservation</a>
@@ -92,7 +90,7 @@
                     <a class="nav-link" ><span class="glyphicon glyphicon-user">&nbsp;</span>{{currentUser.firstName+' '+currentUser.lastName}}</a>
                     <ul>                     
                         <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
-                            <a class="nav-link" routerLink="/" (click)="logout()"><span
+                            <a class="nav-link" routerLink="/login" (click)="logout()"><span
                                     class="glyphicon glyphicon-log-out"></span>Logout</a>
                         </li>
 
