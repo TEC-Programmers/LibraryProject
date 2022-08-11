@@ -142,9 +142,22 @@ tr a:hover{
 @media (max-width: 600px) {
  
 
-  .footer {width: 100%;  text-align: center; } }
+  .footer {width: 100%;  text-align: center; } 
 
 }  
 
 
 
+/*category navbar*/
+table, tr , td  {
+  border: none;
+  border-collapse: collapse;
+  width: 350px;
+  padding:2.5px;
+  background-color: bisque;
+
+}
+tr a:hover{
+ background-color:rgb(149, 240, 149);
+ 
+}

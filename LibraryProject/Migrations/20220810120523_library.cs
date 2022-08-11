@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class lastDb : Migration
+    public partial class library : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,8 +43,7 @@ namespace LibraryProject.API.Migrations
                     userId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    status = table.Column<int>(type: "int", nullable: false)
+                    return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,11 +155,11 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Loan",
-                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "status", "userId" },
+                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "userId" },
                 values: new object[,]
                 {
-                    { 1, 2, "06/05/22", "13/05/22", 0, 2 },
-                    { 3, 5, "27/06/22", "27/07/22", 0, 4 }
+                    { 1, 2, "06/05/22", "13/05/22", 2 },
+                    { 3, 5, "27/06/22", "27/07/22", 4 }
                 });
 
             migrationBuilder.InsertData(
