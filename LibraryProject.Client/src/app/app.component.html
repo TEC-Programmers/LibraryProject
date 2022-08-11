@@ -19,50 +19,50 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active-link"><span
                         class="glyphicon glyphicon-book"> Categories</span></a>
-                    
+
                     <ul class="col" style="list-style:disc">
-                       
+
                         <table>
               <tbody class="dropdown">
-               
-                                <tr>                                   
+
+                                <tr>
                                     <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
-                                        <li>{{category.categoryName}}</li></a></td>                                        
+                                        <li>{{category.categoryName}}</li></a></td>
                                 </tr>
 
                                   <tr>
                                     <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
                                         <li>{{category.categoryName}}</li></a></td>
-                                    
+
                                   </tr>
                                   <tr  >
                                     <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
                                     <li>  {{category.categoryName}}</li></a></td>
-                                    
+
                                   </tr>
                                   <tr >
                                     <td colspan="6" *ngFor="let category of categories |slice: 12:16; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
                                         <li>{{category.categoryName}}</li></a></td>
-                                    
+
                                   </tr>
-                              
+
                                 </tbody>
                           </table>
-                       
-                      
+
+
                     </ul>
                 </li>
 
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <a class="nav-link" routerLink="reserve/:id"><span class="glyphicon glyphicon-calendar"></span>Reservation</a>
                 </li>
 
-               
+
             </ul>
 
 
             <ul class="nav navbar-nav ms-auto"  id="myNavbar">
-                <li class="nav-item nav-link" *ngIf= "router.url!=='/Frontpage'">                   
+                <li class="nav-item nav-link" *ngIf= "router.url!=='/Frontpage'">
                     <div class="search">
                         <i class="fa fa-search"  (click)="click()" (keydown.enter)="checkSearch($event)"></i>
                         <input type="text" name="searchInput" class="form-control" placeholder="Search Books"
@@ -81,10 +81,10 @@
                 <li class="nav-item" *ngIf="currentUser == null">
                     <a class="nav-link" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a>
                 </li>
-          
+
                 <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
                     <a class="nav-link" ><span class="glyphicon glyphicon-user">&nbsp;</span>{{currentUser.firstName+' '+currentUser.lastName}}</a>
-                    <ul>                     
+                    <ul>
                         <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
                             <a class="nav-link" routerLink="/" (click)="logout()"><span
                                     class="glyphicon glyphicon-log-out"></span>Logout</a>
@@ -93,13 +93,13 @@
                         <li style="display:inline-block" class="nav-item" *ngIf="currentUser != null">
                             <a class="nav-link" routerLink="/profile"> <span class="glyphicon glyphicon-cog"></span>Profile</a>
                         </li>
-                     
+
                     </ul>
 
                 </li>
 
 
-               
+
             </ul>
 
         </div>
@@ -125,8 +125,8 @@
 
 <!----------------------right code------------------------------------------------------------------------------------------------>
 
- 
-     
+
+
 
 
 

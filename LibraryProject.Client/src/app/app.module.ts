@@ -31,8 +31,6 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { CustomerPanelComponent } from './customer/customer-panel/customer-panel.component';
 import { ActiveLoansComponent } from './customer/active-loans/active-loans.component';
 import { ActiveReservationsComponent } from './customer/active-reservations/active-reservations.component';
-
-
 @NgModule({
   declarations: [
     AppComponent,

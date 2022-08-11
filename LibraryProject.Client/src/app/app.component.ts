@@ -28,7 +28,7 @@ export class AppComponent {
   public searchTerm: string = "";
   x:any;
 
- 
+
   displayedColumns:string[]=[' categoryName', 'categoryName'];
   dataSource =new MatTableDataSource<Category>();
 
@@ -36,7 +36,7 @@ export class AppComponent {
   constructor(private bookService: BookService,
     private categoryService: CategoryService,
     private authService: AuthService,
-    private router: Router, private route: ActivatedRoute,
+    private router: Router, private route: ActivatedRoute, //Bilal har ændret til public pga private virkede ik for mig
     private userService: UserService) {   // get the current user from authentication service
 
     this.authService.currentUser.subscribe(x => this.currentUser = x);
@@ -45,7 +45,7 @@ export class AppComponent {
 
   logout() {
     if (confirm('Are you sure you want to log out?')) {
-      this.userService.getRole_(0);      
+      this.userService.getRole_(0);
       // ask authentication service to perform logout
       this.authService.logout();
 
@@ -71,7 +71,7 @@ export class AppComponent {
     // .subscribe(c => this.categories = c);
 
       this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
-      
+
       this.showOrhideAdminBtn();
 
     this.route.params.subscribe(params => {
@@ -92,7 +92,7 @@ export class AppComponent {
 
             if (this.currentUser) {
                 if (this.currentUser.role.toString() === 'Administrator') {
-                    this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+                    this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes
                 }
                 else {
                     this.userService.getRole_(0);
@@ -104,11 +104,11 @@ export class AppComponent {
         });
     }
     itemClicked(item){
-      
+
     }
 
 
-  
+
   click() {
     if (this.filterTerm == null || this.filterTerm == '') {
       alert("The input field is empty")
@@ -132,3 +132,4 @@ export class AppComponent {
       this.router.navigate(['/Book', this.filterTerm]);
     }
   }
+}

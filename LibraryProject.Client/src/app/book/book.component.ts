@@ -19,20 +19,20 @@ export class BookComponent implements OnInit {
 
 
   ngOnInit(): void {
-    /* this.bookService.getAllBooks().subscribe(x =>{ 
+     this.bookService.getAllBooks().subscribe(x =>{
       this.books = x;
       this.searchBooks=this.books;
-      
-    
+
+
       this.bookService.search.subscribe((value: string) => {
-        
+
         this.searchKey = value
         console.log(this.searchBooks, this.books);
-        this.searchBooks = this.books.filter(x => 
+        this.searchBooks = this.books.filter(x =>
           x.title.toLowerCase().includes(this.searchKey.toLowerCase()) || x.description.toLowerCase().includes(this.searchKey.toLowerCase())
-        
+
       )});
-    }); */
+    }); 
     this.route.queryParams.subscribe(params => {
       if(params['searchTerm'])
       this.searchTerm=params['searchTerm'];
