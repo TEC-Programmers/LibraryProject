@@ -52,24 +52,26 @@ export class BookDetailsComponent implements OnInit {
   constructor(private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService ) { }
 
   ngOnInit(): void {
-    this.bookService.getAllBooks().subscribe(b => this.books = b);
+    this.bookService.getAllBooks().subscribe(b => this.books = b); //get all books from the backend and subscribe it to the other componenet
     this.userService.getAllUsers().subscribe(u => this.users = u)
     // this.user = this.userService.getUser(this.authService.currentUserValue.id);
     // console.log('current user: ',this.user)
 
-    this.route.params.subscribe(params => {
+    //getting id from the route
+    this.route.params.subscribe(params => {   
       this.bookId = +params['id'];
     });
 
-    this.bookService.getBookById(this.bookId).subscribe(x => { 
+    //gets the book by id and subscribe it to the others
+    this.bookService.getBookById(this.bookId).subscribe(x => {  
       this.book = x,
       console.log('book-details on load: ',this.book);
     });
      
-    this.checkIfLoanOrReservationExists();   
-    this.checkStatus();
-    this.deleteOutdatedLoans();
-    this.deleteOutdatedReservations();
+    this.checkIfLoanOrReservationExists();  //checks that the person has any loan or reservation 
+    this.checkStatus();  //check the status of the persons book 
+    this.deleteOutdatedLoans();  //function call;  which removes the persons previous borrow information about book which has been already given back  
+    this.deleteOutdatedReservations();//function call, which removes the persons previous reservation info 
   }
 
   deleteOutdatedReservations() {
@@ -151,14 +153,14 @@ export class BookDetailsComponent implements OnInit {
     })
   }
 
-
+//to disable the reservebutton 
   checkStatus() {
     if (!this.bookBorrowed && !this.bookReserved) {
       this.isDisabled_reserveBtn = true;
     }
   }
 
-  
+  //checking for whether the book has been reserved or not
   check_Reservation() {
     this.reserveService.getAllReservations().subscribe({
       next: (all_reservations) => {
