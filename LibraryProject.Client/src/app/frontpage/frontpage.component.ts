@@ -13,6 +13,7 @@ import { Category } from 'app/_models/Category';
 import { User } from 'app/_models/User';
 import { AuthService } from 'app/_services/auth.service';
 import { UserService } from 'app/_services/user.service';
+import { Role } from 'app/_models/Role';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class FrontpageComponent implements OnInit {
 
 
 
+
     constructor(private bookService: BookService,
       private categoryService: CategoryService,
        private route: ActivatedRoute,
@@ -70,6 +72,7 @@ export class FrontpageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(Role)
 
     this.route.params.subscribe(params => {
       if (params['filterTerm']) {
