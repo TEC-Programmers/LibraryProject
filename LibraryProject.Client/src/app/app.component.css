@@ -3,7 +3,7 @@
   padding-left:10px;
   padding-right:10px;
   margin:0;
- 
+
 }
 
 .navbar-brand img{
@@ -17,7 +17,7 @@
   transform:translateX(-50%);
   top:10px;
   font-size:7.25rem  !important;
- 
+
 }
 
 #navBarSearchForm
@@ -56,9 +56,9 @@ ul li ul:focus {
 
 
   .search{
-    position: relative;   
+    position: relative;
     box-shadow: 0 0 40px rgba(51, 51, 51, .1);
-      
+
     }
     .search input{
 
@@ -82,7 +82,7 @@ ul li ul:focus {
       position:absolute;
       top: 3px;
       right: 5px;
-      height: 35px;  
+      height: 35px;
       width: 60px;
       background: blue;
 
@@ -99,13 +99,13 @@ table, tr , td  {
 }
 tr a:hover{
  background-color:rgb(149, 240, 149);
- 
+
 }
 
-     
-@media(max-width:786px) 
+
+@media(max-width:786px)
 {
-.search 
+.search
 {display:none;}
 
   .navbar-brand{
@@ -121,7 +121,7 @@ tr a:hover{
 
 }
 
-     
+
 .footer {
   position:fixed;
   padding: 10px 10px 0px 0px;
@@ -140,11 +140,11 @@ tr a:hover{
 
 
 @media (max-width: 600px) {
- 
 
-  .footer {width: 100%;  text-align: center; } }
 
-}  
+  .footer {width: 100%;  text-align: center; }
+
+}
 
 
 

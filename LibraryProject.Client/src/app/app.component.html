@@ -8,6 +8,20 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      <div id="searchDiv">
+        <!--  -->
+        <input name="searchInput" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm" type="text" placeholder="Search for Books" size="35">
+        <button class="click" (click)="click()">Search</button>
+        <tr *ngFor="let book of allBooks | filter: filterTerm" [routerLink]="['/Book-Details', book.id]">
+            <td>
+                <br> Book: {{book.title}}
+                <br> Description: {{book.description}}
+                <br> Publish Year: {{book.publishYear}}
+                <br>
+            </td>
+        </tr>
+    </div>
+
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class=" nav navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -31,12 +45,7 @@
             </ul>
 
             <ul class="nav navbar-nav ms-auto">
-                <li class="nav-item nav-link">
 
-                    <div id="search">
-                        <i  class="fa fa-search"></i><input type="text" class="form-control" placeholder="Search in the library" (keydown.enter)="showSearch()" (keydown.backspace)="checkSearch($event)" [(ngModel)]="filterTerm">
-                    </div>
-                </li>
 
 
                 <li class="nav-item" *ngIf="currentUser != null && currentUser.role != 1">

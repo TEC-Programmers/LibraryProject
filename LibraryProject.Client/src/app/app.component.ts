@@ -37,6 +37,8 @@ export class AppComponent {
     // .subscribe(c => this.categories = c);
     console.log(this.currentUser.role)
     this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
+
+    console.log(this.categories)
   }
 showSearch(): void {
 

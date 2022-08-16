@@ -24,7 +24,6 @@ export class FrontpageComponent implements OnInit {
 
   title = 'LibraryProject-Client';
 
-  book!: Book;
   counter = 0;
   total: number = 0;
   categories: Category[] = [];
@@ -61,17 +60,17 @@ export class FrontpageComponent implements OnInit {
 
 
     constructor(private bookService: BookService,
-      private categoryService: CategoryService,  
-       private route: ActivatedRoute, 
+      private categoryService: CategoryService,
+       private route: ActivatedRoute,
        private router: Router,
         private ref: ChangeDetectorRef,
-         private authService: AuthService, 
+         private authService: AuthService,
          private userService: UserService) {
 
   }
 
   ngOnInit(): void {
-    
+
     this.route.params.subscribe(params => {
       if (params['filterTerm']) {
         this.bookService.getAllBooks().subscribe(x => {
@@ -127,19 +126,32 @@ export class FrontpageComponent implements OnInit {
     }
   }
 
- 
 
 
 
-
-    });
-  }
-
-  
   ngAfterContentChecked(): void {
     this.ref.detectChanges();
-    this.showOrhideAdminBtn();  
+    this.showOrhideAdminBtn();
   }
 
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
 
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        }
+    }
+    });
+  }
 }
