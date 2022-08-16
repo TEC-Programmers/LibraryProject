@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class library : Migration
+    public partial class Project : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -158,8 +158,8 @@ namespace LibraryProject.API.Migrations
                 columns: new[] { "Id", "bookId", "loaned_At", "return_date", "userId" },
                 values: new object[,]
                 {
-                    { 1, 2, "06/05/22", "13/05/22", 2 },
-                    { 3, 5, "27/06/22", "27/07/22", 4 }
+                    { 1, 2, "2022/05/07", "2022/05/08", 2 },
+                    { 3, 5, "2022/06/07", "2022/07/08", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -176,8 +176,8 @@ namespace LibraryProject.API.Migrations
                 columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "userId" },
                 values: new object[,]
                 {
-                    { 1, 1, "06/05/22", "13/05/22", 1 },
-                    { 2, 2, "14/05/22", "21/05/22", 2 }
+                    { 1, 2, "2022/08/08", "2022/09/09", 2 },
+                    { 2, 5, "2022/08/08", "2022/08/09", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -185,8 +185,8 @@ namespace LibraryProject.API.Migrations
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "MiddleName", "Password", "Role" },
                 values: new object[,]
                 {
-                    { 1, "peter@abc.com", "Peter", "Aksten", "Per.", "password", 0 },
-                    { 2, "riz@abc.com", "Rizwanah", "Mustafa", "R.R", "password", 1 }
+                    { 1, "peter@abc.com", "Peter", "Aksten", "Per.", "password", 1 },
+                    { 2, "riz@abc.com", "Rizwanah", "Mustafa", "R.R", "password", 0 }
                 });
 
             migrationBuilder.InsertData(
