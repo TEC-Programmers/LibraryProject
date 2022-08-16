@@ -29,10 +29,10 @@ export class AdministratorComponent implements OnInit {
   showOrhideAdminBtn() {
     this.authService.currentUser.subscribe(user => {
     this.currentUser = user;
-  
+
     if (this.x !== 1) {
       if (this.currentUser) {
-        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes
           if (this.currentUser.role.toString() === 'Administrator') {
             this.userService.getRole_(1);
           }
@@ -42,7 +42,7 @@ export class AdministratorComponent implements OnInit {
         }
         else {
           this.userService.getRole_(0);
-        } 
+        }
     }
     });
   }
