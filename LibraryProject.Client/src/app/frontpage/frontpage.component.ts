@@ -13,7 +13,6 @@ import { Category } from 'app/_models/Category';
 import { User } from 'app/_models/User';
 import { AuthService } from 'app/_services/auth.service';
 import { UserService } from 'app/_services/user.service';
-import { Role } from 'app/_models/Role';
 
 
 @Component({
@@ -24,6 +23,7 @@ import { Role } from 'app/_models/Role';
 export class FrontpageComponent implements OnInit {
 
   title = 'LibraryProject-Client';
+
 
   counter = 0;
   total: number = 0;
@@ -60,20 +60,18 @@ export class FrontpageComponent implements OnInit {
 
 
 
-
     constructor(private bookService: BookService,
-      private categoryService: CategoryService,
-       private route: ActivatedRoute,
+      private categoryService: CategoryService,  
+       private route: ActivatedRoute, 
        private router: Router,
         private ref: ChangeDetectorRef,
-         private authService: AuthService,
+         private authService: AuthService, 
          private userService: UserService) {
 
   }
 
   ngOnInit(): void {
-    console.log(Role)
-
+    
     this.route.params.subscribe(params => {
       if (params['filterTerm']) {
         this.bookService.getAllBooks().subscribe(x => {
@@ -129,32 +127,17 @@ export class FrontpageComponent implements OnInit {
     }
   }
 
+ 
 
 
 
-  ngAfterContentChecked(): void {
+
+  
+  
+/*   ngAfterContentChecked(): void {
     this.ref.detectChanges();
-    this.showOrhideAdminBtn();
-  }
+    this.showOrhideAdminBtn();  
+  } */
 
-  showOrhideAdminBtn() {
-    this.authService.currentUser.subscribe(user => {
-    this.currentUser = user;
 
-    if (this.x !== 1) {
-      if (this.currentUser) {
-        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes
-          if (this.currentUser.role.toString() === 'Administrator') {
-            this.userService.getRole_(1);
-          }
-          else {
-            this.userService.getRole_(0);
-          }
-        }
-        else {
-          this.userService.getRole_(0);
-        }
-    }
-    });
-  }
 }

@@ -2,7 +2,11 @@
 
 namespace LibraryProject.API.Migrations
 {
+<<<<<<<< HEAD:LibraryProject/Migrations/20220708103855_Last_hope.cs
     public partial class Last_hope : Migration
+========
+    public partial class library : Migration
+>>>>>>>> dev:LibraryProject/Migrations/20220810120523_library.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
