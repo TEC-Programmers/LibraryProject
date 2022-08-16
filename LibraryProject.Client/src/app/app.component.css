@@ -50,13 +50,16 @@ ul li ul:focus {
   visibility: visible;
   opacity: 1;
   display: inline;
+
+
 }
 
 
   .search{
     position: relative;   
-    box-shadow: 0 0 40px rgba(51, 51, 51, .1);    
-  }
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+      
+    }
     .search input{
 
       height: 40px;
@@ -82,9 +85,10 @@ ul li ul:focus {
       height: 35px;  
       width: 60px;
       background: blue;
-    }
 
-/*category navbar*/
+     }
+
+     /*category navbar*/
 table, tr , td  {
   border: none;
   border-collapse: collapse;
@@ -138,9 +142,22 @@ tr a:hover{
 @media (max-width: 600px) {
  
 
-  .footer { width: 100%;  text-align: center; } 
+  .footer {width: 100%;  text-align: center; } 
 
 }  
 
 
 
+/*category navbar*/
+table, tr , td  {
+  border: none;
+  border-collapse: collapse;
+  width: 350px;
+  padding:2.5px;
+  background-color: bisque;
+
+}
+tr a:hover{
+ background-color:rgb(149, 240, 149);
+ 
+}
