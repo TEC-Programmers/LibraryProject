@@ -52,7 +52,7 @@ export class AppComponent {
       // subscribe to the changes in currentUser, and load Home component
       this.authService.currentUser.subscribe(x => {
         this.currentUser = x;
-        this.router.navigate(['Login']);
+        this.router.navigate(['login']);
       });
     }
     else {

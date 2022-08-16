@@ -149,7 +149,7 @@ ul li ul li {
 
 .table {
   margin-left: 141px;
-  margin-top: -10px;
+  margin-top: -11px;
 }
 
 .search-bar {
@@ -186,7 +186,8 @@ h1 {
   width: 263%;
   background: linear-gradient(to right, black, #eee, black);
   white-space: nowrap;
-  left: -785px;
+  left: -1256px;
+  top: 57px;
 }
 h1::before {
   content: "";

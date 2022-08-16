@@ -4,6 +4,7 @@ import { FormGroup, FormControl,FormBuilder } from '@angular/forms';
 
 import { UserService } from '../_services/user.service';
 import { User} from '../_models/User';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,10 +19,7 @@ export class RegisterComponent implements OnInit {
   message: string[] = [];
   error = '';
 
-  constructor(
-    private userService: UserService,
-
-  ) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -71,6 +69,7 @@ export class RegisterComponent implements OnInit {
 
             this.user = this.newUser();
             alert('Thanks for Signing Up!');
+            this.router.navigate(['login']); 
            },
            error: (err)=>{
                 alert("User already exists!");

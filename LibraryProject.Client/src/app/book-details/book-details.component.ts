@@ -13,6 +13,7 @@ import { filter } from 'rxjs';
 import { DatePipe, formatDate } from '@angular/common';
 import moment from 'moment';
 import { ThisReceiver } from '@angular/compiler';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-book-details',
@@ -141,6 +142,7 @@ export class BookDetailsComponent implements OnInit {
               else
               {
                 console.log("No Expired Loan's")
+                
               }
             }  
         }
@@ -180,7 +182,7 @@ export class BookDetailsComponent implements OnInit {
         else if (this.bookReserved)
         {             
           this.isDisabled_reserveBtn = true;
-          console.log('[ SOMEONE ] have an active reserve')
+          console.log('[ SOMEONE ] have an active reservation')
         }
         else {
 
@@ -193,7 +195,7 @@ export class BookDetailsComponent implements OnInit {
           else {
             this.isDisabled_reserveBtn = false
           }
-          console.log('[ ANY ] can reserve this book')     
+          console.log('[ ANY EXCEPT BURROWER ] can reserve this book')     
         }
       }
     })
@@ -219,16 +221,16 @@ export class BookDetailsComponent implements OnInit {
         
         if (this.userLoggedIn) {
           this.isDisabled_loanBtn = true; // inactive
-          console.log('[ YOU ]  have an active loan')       
+          console.log("[ YOU ] have active Burrow/Burrow's")       
         }
         else if (this.bookBorrowed)
         {             
           this.isDisabled_loanBtn = true;
-          console.log('[ SOMEONE ] have an active loan')
+          console.log("[ SOMEONE ] have active Burrow/Burrow's")
         }
         else {
           this.isDisabled_loanBtn = false; // active
-          console.log('[ ANY ] can loan this book')
+          console.log('[ ANY ] can Burrow this book')
         }
       },
     });
