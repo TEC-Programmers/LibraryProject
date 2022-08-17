@@ -20,7 +20,6 @@ import { ReservationService } from 'app/_services/reservation.service';
 @Component({
   selector: 'app-loan',
   templateUrl: './loan.component.html',
-
   styleUrls: ['./loan.component.css']
 })
 export class LoanComponent implements OnInit {
@@ -30,12 +29,14 @@ export class LoanComponent implements OnInit {
   bookId: number = 0;
   return_date: string = '';
   loaned_at: string = '';
+  getReturnDate: string = '';
   currentDate = new Date();
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   minDate = new Date(this.dateNow);
-  minDate2 = new Date(this.minDate)
+  minDate2 = new Date(this.loaned_at);
   public formatted_return_date;
   public formatted_loaned_at;
+  public getX;
   total_loans: Loan[] = [];
   maxDate = new Date();
 
@@ -64,35 +65,20 @@ export class LoanComponent implements OnInit {
     this.loanservice.getAllLoans().subscribe((loan) => {
       this.loans = loan || [];
     })
-
   }
 
-  setResMinDate() {
-    // console.log('minDate: ',this.minDate);
-    this.maxDate.setDate(this.minDate.getDate() + 1);
+  setLoanMinDate() {
+    // convert minDate(loaned_at) to Date format
+    var convStringToDate = new Date(this.loaned_at);
+
+    // Increment minDate(loaned_at) with 1 - To get the min date of return_date
+    this.maxDate.setDate(convStringToDate.getDate() + 1);
     console.log('maxDate: ',this.maxDate)
-  }
-
-  setReservationMinDate() {
-    this.loanService.getAllLoans().subscribe({
-      next: (all_loans) => {
-        this.total_loans = all_loans;
-
-        // get loan that contains clicked book
-        var getBookReturnDate = this.total_loans.filter((loan) => {
-          return ((loan["bookId"] == this.bookId))
-        })
-        var returnDate_converted = new Date(getBookReturnDate[0].return_date)
-        this.minDate.setDate(returnDate_converted.getDate() + 1);  
-        this.maxDate.setDate(this.minDate.getDate() + 1);
-      }
-    })
   }
 
 
   onFormSubmit() {
     console.log('Is Form Invalid', this.dateRangeForm.invalid);
-
     if (this.authService.currentUserValue.id != null && this.authService.currentUserValue.id > 0) {     
 
         this.formatted_return_date = moment(this.return_date).format("YYYY/MM/DD")  

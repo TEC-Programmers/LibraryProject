@@ -26,10 +26,10 @@ const routes: Routes = [
   {path: 'Category', component:CategoryComponent},   // it displays the Category component
   {path: 'category_books/:id', component: CategoryBooksComponent },  //this is the url which displays the books of the  specific categoryID
   {path: 'book_details/:id', component: BookDetailsComponent},
-  {path: 'Admin', component: AdministratorComponent},
-  {path: 'Admin/Customers', component: AdministratorComponent},
-  {path: 'Admin/Users', component: AdminCustomerComponent},
-  {path: 'Admin/Books', component: AdminBookComponent},
+  {path: 'Admin', component: AdministratorComponent, canActivate: [AuthGuard]},
+  {path: 'Admin/Customers', component: AdministratorComponent, canActivate: [AuthGuard]},
+  {path: 'Admin/Users', component: AdminCustomerComponent, canActivate: [AuthGuard]},
+  {path: 'Admin/Books', component: AdminBookComponent, canActivate: [AuthGuard]},
   {path: 'Admin/Categorys', component: AdminCategoryComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
   {path: 'customerpanel', component: CustomerPanelComponent },
