@@ -46,9 +46,9 @@ export class RegisterComponent implements OnInit {
     if (this.user.firstName == '') {
       this.message.push('Enter FirstName');
     }
-    if (this.user.middleName== '') {
-      this.message.push('Enter Middle Name');
-    }
+    // if (this.user.middleName== '') {
+    //   this.message.push('Enter Middle Name');
+    // }
     if (this.user.lastName == '') {
       this.message.push('Enter Lastname');
     }

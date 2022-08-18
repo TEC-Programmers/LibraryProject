@@ -51,6 +51,7 @@ export class BookDetailsComponent implements OnInit {
   constructor(private _datePipe: DatePipe, private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
+    this.checkUserStatus();
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
     this.bookService.getAllBooks().subscribe(b => this.books = b);
     this.userService.getAllUsers().subscribe(u => this.users = u)
@@ -153,8 +154,15 @@ export class BookDetailsComponent implements OnInit {
 
 
   checkStatus() {
+    // Check if current book is borrowed/reserved
     if (!this.bookBorrowed && !this.bookReserved) {
       this.isDisabled_reserveBtn = true;
+    }  
+  }
+
+  checkUserStatus() {
+    if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
+      this.isDisabled_loanBtn = true;
     }
   }
 
@@ -195,7 +203,7 @@ export class BookDetailsComponent implements OnInit {
           else {
             this.isDisabled_reserveBtn = false
           }
-          console.log('[ ANY EXCEPT BURROWER ] can reserve this book')     
+          console.log('[ ANY EXCEPT BORROWER ] can reserve this book')     
         }
       }
     })
@@ -221,16 +229,16 @@ export class BookDetailsComponent implements OnInit {
         
         if (this.userLoggedIn) {
           this.isDisabled_loanBtn = true; // inactive
-          console.log("[ YOU ] have active Burrow/Burrow's")       
+          console.log("[ YOU ] have an active Borrow/Borrow's")       
         }
         else if (this.bookBorrowed)
         {             
           this.isDisabled_loanBtn = true;
-          console.log("[ SOMEONE ] have active Burrow/Burrow's")
+          console.log("[ SOMEONE ] have an active Borrow/Borrow's")
         }
         else {
           this.isDisabled_loanBtn = false; // active
-          console.log('[ ANY ] can Burrow this book')
+          console.log('[ ANY ] can Borrow this book')
         }
       },
     });
@@ -241,7 +249,7 @@ export class BookDetailsComponent implements OnInit {
   checkIfLoanOrReservationExists() { 
     this.checkLoan();
     this.checkReservation();
-}
+  }
 
 
   loan(book:Book){

@@ -112,7 +112,7 @@ export class ReservationComponent implements OnInit {
                 confirmButtonText: 'Continue'
               });
               console.log('reservation added successfully!')
-              this.router.navigate(['Book-Details/',this.bookId]);
+              this.router.navigate(['book_details/',this.bookId]);
             },
             error: (err) => {
               console.log(err.error);

@@ -1,12 +1,25 @@
-body {
+.body {
+    height: 1000px;
+    background-color: rgb(71, 44, 25);
+}
 
-    background-color: black;
-    
+.title-form {
+    text-align: center;
 }
 
 * {
     box-sizing: border-box;
+}
 
+.content {
+    background-color:rgb(212, 148, 69); 
+    width: 400px;
+    margin-top: -50px; 
+    /* margin-left: 200px; */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .container{

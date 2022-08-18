@@ -58,7 +58,7 @@
                 <div class="modal-header">
 
                 </div>
-                    <h4 class="modal-title text-danger" id="exampleModalLabel">CREATE NEW BOOK</h4>
+                    <h4 class="modal-title text-danger" id="createBookTitle">CREATE NEW BOOK</h4>
                     <button (click)="cancel()" id="btn_close_create" type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button><br>
                     <form>
                         <div class="mb-3">
@@ -178,14 +178,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <label>Image: </label> &nbsp; -->
-                        <!-- `<a href="../../../assets/images" >File in c drive</a>` -->
-                        <!-- <input directory="C:\Users\emjo\Desktop\p4_project\LibraryProject.Client\src\assets" type="file" autocomplete="on"> -->
-                    <!-- <select [(ngModel)]="book.image" name="image">
-                    <option selected></option>
-                    <option *ngFor="let img of imageArray" [ngValue]="img.name.toString()">{{img.name}}</option>
-                    </select> -->
-                    </div>                   
+                    </div>    
+
                     <div *ngIf="!showCreateBtn">
                         <button id="createBtn" (click)="save_book()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" name="save_book" [disabled]="(!book.title || !book.language || !book.description || !book.publishYear || !book.image || !book.categoryId || !book.authorId || !book.publisherId) && (!book.title || !book.language || !book.description || !book.publishYear || !book.image || !book.categoryId && (!author.firstName || !author.lastName) && (!publisher.name))">Create</button>
 
@@ -234,7 +228,7 @@
                     </div>
                     <div class="updateBtn">
                         <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-                        <button (click)="save_book()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
+                        <button (click)="update_Book()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
                     </div>
                 </form>
             </div>

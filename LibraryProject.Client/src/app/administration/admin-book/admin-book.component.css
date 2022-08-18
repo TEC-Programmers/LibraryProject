@@ -47,8 +47,12 @@
 }
 
 #exampleModalLabel {
-  margin-top: -26px;
+  margin-top: 1px;
   position: absolute;
+}
+
+#createBookTitle {
+  margin-top: -27px;
 }
 
 /* height="40px" width="50px" style="padding-left: 17px;" */

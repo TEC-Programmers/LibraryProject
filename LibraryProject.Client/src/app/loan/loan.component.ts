@@ -29,16 +29,13 @@ export class LoanComponent implements OnInit {
   bookId: number = 0;
   return_date: string = '';
   loaned_at: string = '';
-  getReturnDate: string = '';
   currentDate = new Date();
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   minDate = new Date(this.dateNow);
-  minDate2 = new Date(this.loaned_at);
+  maxDate = new Date();
   public formatted_return_date;
   public formatted_loaned_at;
-  public getX;
   total_loans: Loan[] = [];
-  maxDate = new Date();
 
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
 
@@ -68,12 +65,11 @@ export class LoanComponent implements OnInit {
   }
 
   setLoanMinDate() {
-    // convert minDate(loaned_at) to Date format
-    var convStringToDate = new Date(this.loaned_at);
+    // convert minimum date: (loaned_at) to Date format
+    var convertStringToDate = new Date(this.loaned_at);
 
-    // Increment minDate(loaned_at) with 1 - To get the min date of return_date
-    this.maxDate.setDate(convStringToDate.getDate() + 1);
-    console.log('maxDate: ',this.maxDate)
+    // Increment minimum date: (loaned_at) with 1 day - To get the min date of return_date
+    this.maxDate.setDate(convertStringToDate.getDate() + 1);
   }
 
 
@@ -105,11 +101,10 @@ export class LoanComponent implements OnInit {
               this.return_date = '';
               Swal.fire({
                 title: 'Success!',
-                text: 'book burrow successfully!',
+                text: 'Book Borrowed Successfully!',
                 icon: 'success',
                 confirmButtonText: 'Continue'
               });
-              console.log('loan added successfully!')
               this.router.navigate(['book_details/',this.bookId]);
             },
             error: (err) => {

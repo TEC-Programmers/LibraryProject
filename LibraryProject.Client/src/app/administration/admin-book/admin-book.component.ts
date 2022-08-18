@@ -69,7 +69,6 @@ export class AdminBookComponent implements OnInit {
   imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
   isImageSelected: boolean = false;
 
-
   obj1 = {"fparams":{"keys":["a","b"],"pairs":{"p":"qwert"}},"qparams":{"x":"xyz"}}
   obj2 = {"fparams":{"keys":["c","d"],"pairs":{"q":"yuiop"}},"qparams":{"z":"zyx"}}
 
@@ -303,9 +302,36 @@ export class AdminBookComponent implements OnInit {
     }
   }
 
+  update_Book(): void {
+    console.log(this.book)
+    this.message = '';
+
+    // check if book exsist's
+    if(this.book.id != 0) {
+      this.bookService.updateBook(this.book.id, this.book)
+      .subscribe({
+        error: (err) => {
+          console.log(err.error);
+          this.message = Object.values(err.error.errors).join(", ");
+        },
+        complete: () => {
+          this.message = '';
+          this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };          
+          Swal.fire({
+            title: 'Success!',
+            text: 'Book updated successfully',
+            icon: 'success',
+            confirmButtonText: 'Continue'
+          });        
+        }
+      });
+    }
+  }
+
 
   save_book(): void {
     // INSERT AUTHOR
+    console.log('auhtorId: ',this.author.id)
     if(this.author.id == 0) {
       this.authorService.addAuthor(this.author)
       .subscribe({
@@ -316,6 +342,7 @@ export class AdminBookComponent implements OnInit {
           this.message = '';
           console.log('Author added successfully');
 
+          console.log('publisherId: ',this.publisher.id)
           // INSERT PUBLISHER
           if(this.publisher.id == 0) {
             this.publisherService.addPublisher(this.publisher)
@@ -327,6 +354,7 @@ export class AdminBookComponent implements OnInit {
                 this.message = '';
                 console.log('Publisher added successfully');
 
+                console.log('bookId: ',this.book.id)
                   // INSERT BOOK
                   if(this.book.id == 0) {
                     this.bookService.addBook(this.book)

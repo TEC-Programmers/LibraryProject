@@ -1,21 +1,23 @@
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-conten padding-y" style="min-width: none; height: 84px; ">
-
+<section class="section-conten padding-y" style="min-width: none; height: 1000px; background-color: rgb(71, 44, 25);
+">
     <!-- ============================ COMPONENT LOGIN   ================================= -->
-    <div class="card mx-auto" style="max-width:380px; margin-top:100px; background-color:rgb(212, 148, 69) ;">
+    <div class="card mx-auto" style="max-width:380px; margin-top:133px; background-color:rgb(212, 148, 69); position: absolute; left: 780px; height: 318px; width: 322px;">
         <div class="card-body">
 
             <p class="text-center mt-4 w3-red"> {{ error }}</p>
-
-            <h4 class="card-title mb-4">Login</h4>
+            <h4 id="title" class="card-title mb-4" style="font-size: 28px; margin-left: 100px; margin-top: -31px; font-family: Times New Roman;">Login</h4>
+            <br>
             <form #form="ngForm">
 
                 <div class="form-group">
-                    <input [(ngModel)]="email" name="email" class="form-control" ngModel placeholder="Email" type="text">
+                    <div class="icon"><i class="fas fa-user" style="position: absolute; font-size: 21px; left: 6px; top: 91px;"></i></div>
+                    <input [(ngModel)]="email" name="email" class="form-control" ngModel placeholder="Email" type="text" style="font-size: 12px;">
                 </div>
                 <!-- form-group// -->
                 <div class="form-group">
-                    <input [(ngModel)]="password" name="password" class="form-control" ngModel placeholder="Password" type="password">
+                    <div class="icon"><i class="fas fa-lock" style="position: absolute; font-size: 21px; left: 6px; top: 139px;"></i></div>
+                    <input [(ngModel)]="password" name="password" class="form-control" ngModel placeholder="Password" type="password" style="font-size: 12px;">
                 </div>
                 <!-- form-group// -->
 
@@ -25,18 +27,13 @@
                 </div>-->
                 <!-- form-group form-check .// -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block w3-brown" (click)="login()"> Login  </button>
+                    <button type="submit" class="btn btn-primary btn-block w3-brown" (click)="login()" style="font-size: 14px;"> Login  </button>
                 </div>
                 <!-- form-group// -->
             </form>
         </div>
-        <p class="text-center mt-4">Don't have account?<a  routerLink="/Register">Sign up</a></p>
+        <p class="text-center mt-4">Don't have account? <a  routerLink="/Register">Sign up</a></p>
         <!-- card-body.// -->
     </div>
     <!-- card .// -->
-
-   
-
-    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
-
 </section>
