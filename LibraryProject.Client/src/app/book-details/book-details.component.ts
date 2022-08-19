@@ -13,6 +13,7 @@ import { filter } from 'rxjs';
 import { formatDate } from '@angular/common';
 import moment from 'moment';
 import { ThisReceiver } from '@angular/compiler';
+import { Category } from 'app/_models/Category';
 
 @Component({
   selector: 'app-book-details',
@@ -20,7 +21,7 @@ import { ThisReceiver } from '@angular/compiler';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-
+  
   bookId: number = 0;
   book: Book = { id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
   isDisabled_loanBtn = false;
