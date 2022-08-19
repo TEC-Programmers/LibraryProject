@@ -20,6 +20,9 @@ import { AdminCustomerComponent } from './administration/admin-customer/admin-cu
 import { AdminBookComponent } from './administration/admin-book/admin-book.component';
 import { AdminCategoryComponent } from './administration/admin-category/admin-category.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { CustomerPanelComponent } from './customer/customer-panel/customer-panel.component';
+import { ActiveLoansComponent } from './customer/active-loans/active-loans.component';
+import { ActiveReservationsComponent } from './customer/active-reservations/active-reservations.component';
 
 
 
@@ -35,7 +38,15 @@ const routes: Routes = [
   {path: 'Admin/Books', component: AdminBookComponent, canActivate: [AuthGuard]},
   {path: 'Admin/Users', component: AdminCustomerComponent, canActivate: [AuthGuard]},
   {path: 'Admin/Categorys', component: AdminCategoryComponent, canActivate: [AuthGuard]},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
+  { path: 'profile', component: ProfileComponent },
+  {path: 'customerpanel', component: CustomerPanelComponent },
+  {path: 'activeLoans', component: ActiveLoansComponent},
+  {path: 'activeReservations', component: ActiveReservationsComponent},
+  {path: 'activeLoans/customerpanel', component: CustomerPanelComponent },
+  {path: 'activeReservations/customerpanel', component: CustomerPanelComponent },
+  {path: 'profile/customerpanel', component: CustomerPanelComponent },
+  {path: 'customerpanel/activeReservations', component: ActiveReservationsComponent},
+  {path: 'profile/customerpanel/activeReservations', component: ActiveReservationsComponent},
   { path: 'login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent},
 
