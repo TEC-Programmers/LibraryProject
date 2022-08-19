@@ -30,7 +30,7 @@ export class BookDetailsComponent implements OnInit {
   total_reservations: Reservation[] = [];
   loans: Loan[] | undefined = [];
   reservations: Reservation[] = [];
-  loanObjFound: Loan = { id: 0, userID: 0, bookId: 0, loaned_At: '', return_date: '' }
+  loanObjFound: Loan = { id: 0, userId: 0, bookId: 0, loaned_At: '', return_date: '' }
   userID: number = 0;
   books: Book[] = [];
   users: User[] = []
