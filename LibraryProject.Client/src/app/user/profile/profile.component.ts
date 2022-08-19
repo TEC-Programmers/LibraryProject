@@ -1,9 +1,8 @@
-import {User } from '../_models/User';
+import { User } from 'app/_models/User';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../_services/auth.service';
-import { UserService } from '../_services/user.service';
-
+import { AuthService } from 'app/_services/auth.service';
+import { UserService } from 'app/_services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,8 +10,8 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./profile.component.css']
 
 })
-export class ProfileComponent implements OnInit {
 
+export class ProfileComponent implements OnInit {
   users: User[] = [];
   user: User = this.newUser();
   message: string[] = [];
@@ -21,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService, private elementRef: ElementRef) {
     // get the current user from authentication service
-    this.authService.currentUser.subscribe(x=> this.currentUser=x);
+    this.authService.currentUser.subscribe(x=> this.currentUser = x);
   }
 
   ngOnInit(): void {
@@ -56,7 +55,6 @@ export class ProfileComponent implements OnInit {
         } 
     }
     });
-
   }
 
   newUser(): User {
@@ -99,7 +97,6 @@ export class ProfileComponent implements OnInit {
     }
 
 
-
     if (this.message.length == 0) {
       if (this.user.id == 0) {
         this.userService.registerUser(this.user)
@@ -117,5 +114,5 @@ export class ProfileComponent implements OnInit {
 
        }
     }
-
-  }}
+    
+}}

@@ -1,27 +1,23 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Book } from '../_models/Book';
-import { BookService } from '../_services/book.service';
-import { AuthService } from '../_services/auth.service';
+import { Book } from '../../_models/Book';
+import { BookService } from '../../_services/book.service';
+import { AuthService } from '../../_services/auth.service';
 import { LoanService } from 'app/_services/loan.service';
 import { Loan } from 'app/_models/Loan';
 import { ReservationService } from 'app/_services/reservation.service';
 import { Reservation } from 'app/_models/Reservation';
 import { User } from 'app/_models/User';
 import { UserService } from 'app/_services/user.service';
-import { filter } from 'rxjs';
-import { DatePipe, formatDate } from '@angular/common';
-import moment from 'moment';
-import { ThisReceiver } from '@angular/compiler';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.css']
 })
-export class BookDetailsComponent implements OnInit {
 
+export class BookDetailsComponent implements OnInit {
   bookId: number = 0;
   book: Book = { id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
   isDisabled_loanBtn = false;
@@ -46,9 +42,8 @@ export class BookDetailsComponent implements OnInit {
   public convert_string_to_date;
   public getDate;
   dateToday = new Date();
-  public outputDate;
 
-  constructor(private _datePipe: DatePipe, private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService, private elementRef: ElementRef) { }
+  constructor(private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.checkUserStatus();
@@ -105,7 +100,6 @@ export class BookDetailsComponent implements OnInit {
               }
           }
         }
- 
       }
     })
   }
@@ -120,7 +114,6 @@ export class BookDetailsComponent implements OnInit {
             for (let date of this.total_loans) {
               // get book return date
               var storedDates = date.return_date;
-              // console.log('storedDates: ',storedDates)          
     
               // convert return date to type Date
               var storedDates_converted = new Date(storedDates)
@@ -255,7 +248,7 @@ export class BookDetailsComponent implements OnInit {
   loan(book:Book){
     if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
-      this.router.navigate(['/Login']);
+      this.router.navigate(['/Login']);    
     }
     else 
     {

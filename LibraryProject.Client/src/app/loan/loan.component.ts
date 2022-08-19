@@ -1,21 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../_services/book.service';
 import { CategoryService } from '../_services/category.service';
-import { Observable } from 'rxjs';
 import { LoanService } from '../_services/loan.service';
 import { Loan } from '../_models/Loan';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../_models/Book';
 import { AuthService } from '../_services/auth.service';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import {formatDate} from '@angular/common';
 import Swal from 'sweetalert2'
 import moment from 'moment';
-import { ReservationService } from 'app/_services/reservation.service';
-
 
 @Component({
   selector: 'app-loan',
@@ -36,10 +30,10 @@ export class LoanComponent implements OnInit {
   public formatted_return_date;
   public formatted_loaned_at;
   total_loans: Loan[] = [];
-
   book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
+  message: string = '';
 
-  constructor(private reservationService: ReservationService, private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
+  constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
 
   range = new FormGroup({
     fromDate: new FormControl('', Validators.required),
@@ -47,12 +41,13 @@ export class LoanComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
     this.dateRangeForm = this.formBuilder.group({
       fromDate: new FormControl('', Validators.required),
       toDate: new FormControl('', Validators.required),
     });
 
-    // gets clicked book.id
+    // gets id of clicked book
     this.bookId = this.route.snapshot.params['id'];
 
     this.bookService.getBookById(this.bookId).subscribe(x => {
@@ -65,7 +60,7 @@ export class LoanComponent implements OnInit {
   }
 
   setLoanMinDate() {
-    // convert minimum date: (loaned_at) to Date format
+    // convert minimum date: (loaned_at) to Date() format
     var convertStringToDate = new Date(this.loaned_at);
 
     // Increment minimum date: (loaned_at) with 1 day - To get the min date of return_date
@@ -89,9 +84,8 @@ export class LoanComponent implements OnInit {
         }
           
           this.loan = loanitem;
-          // console.log('loanitem: ',this.loan)
           if (loanitem.id > 0) {
-            console.log('loan: ',this.loan)
+            console.log('Your Loan: ',this.loan)
             this.loanservice.addLoan(this.loan)
             .subscribe({
             next: (x) => {
@@ -109,13 +103,12 @@ export class LoanComponent implements OnInit {
             },
             error: (err) => {
               console.log(err.error);
-              // this.message = Object.values(err.error.errors).join(", ");
+              this.message = Object.values(err.error.errors).join(", ");
             }
           });
         }
       }
     }
-    
-    
-  }
+       
+}
   

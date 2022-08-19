@@ -83,6 +83,7 @@
     background-color: rgb(51, 49, 49);
     width: 113px;
     height: 38px;
+    border-radius: 3px;
   }
   
   .btnTitle {

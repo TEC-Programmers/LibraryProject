@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-import { FormGroup, FormControl,FormBuilder } from '@angular/forms';
-
-import { UserService } from '../_services/user.service';
-import { User} from '../_models/User';
+import { User } from 'app/_models/User';
+import { UserService } from 'app/_services/user.service';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-register',
@@ -13,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   users: User[] = [];
   user: User = this.newUser();
   message: string[] = [];
@@ -46,9 +41,9 @@ export class RegisterComponent implements OnInit {
     if (this.user.firstName == '') {
       this.message.push('Enter FirstName');
     }
-    // if (this.user.middleName== '') {
-    //   this.message.push('Enter Middle Name');
-    // }
+    if (this.user.middleName== '') {
+      this.message.push('Enter Middle Name');
+    }
     if (this.user.lastName == '') {
       this.message.push('Enter Lastname');
     }
@@ -69,7 +64,7 @@ export class RegisterComponent implements OnInit {
 
             this.user = this.newUser();
             alert('Thanks for Signing Up!');
-            this.router.navigate(['login']); 
+            this.router.navigate(['login']);
            },
            error: (err)=>{
                 alert("User already exists!");

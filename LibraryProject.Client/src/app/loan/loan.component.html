@@ -1,4 +1,5 @@
 <div class="container">
+    <span style="color: red;" *ngIf="message != ''">{{ message }}</span>
     <i class="bi bi-book" id="title_icon"></i>
     <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()" class="cal">
         <mat-form-field>

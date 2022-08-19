@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'app/_models/User';
 import { UserService } from 'app/_services/user.service';
 import Swal from 'sweetalert2';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -15,13 +15,10 @@ export class LoginComponent implements OnInit {
   username: number = 0;
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x: number = 0;
- bookId:number=0;
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService,
-    private userService: UserService,
-  ) {
+  bookId:number = 0;
+
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private userService: UserService) 
+  {
     // redirect to home if already logged in
     if (this.authService.currentUserValue != null && this.authService.currentUserValue.id > 0) {
       this.router.navigate(['Frontpage']); 
@@ -29,7 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    
    this.route.params.subscribe(params => {
       this.bookId = +params['id'];
     }); 
@@ -75,7 +71,6 @@ export class LoginComponent implements OnInit {
           });         
         },
         error: obj => {
-          // console.log('login error ', obj.error);
           if (obj.error.status == 400 || obj.error.status == 401 || obj.error.status == 500) {
             this.error = 'Incorrect Username or Password';
           }
@@ -83,8 +78,6 @@ export class LoginComponent implements OnInit {
             this.error = obj.error.title;
           }
         }
-      });
-    
+      });   
   }
-  
 }

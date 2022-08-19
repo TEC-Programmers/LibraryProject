@@ -15,10 +15,10 @@ export class AuthGuard implements CanActivate {
     const currentUser = this.authService.currentUserValue;
     let isLoggedIn = this.authService.isAuthenticated();
     if (currentUser) {
-      
+
       if (currentUser.role.toString() === 'Customer') {
         console.log('Customer logged in');
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        this.router.navigate(['/Frontpage'], { queryParams: { returnUrl: state.url } });
         return false;
       }
 
@@ -38,8 +38,6 @@ export class AuthGuard implements CanActivate {
     return false;
     }
    
-
-    
-    
+   
   }
 }

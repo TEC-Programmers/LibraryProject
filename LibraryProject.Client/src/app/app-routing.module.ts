@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Role } from './_models/Role';
 import { RouterModule, Routes } from '@angular/router';
-import { BookDetailsComponent } from './book-details/book-details.component';
+import { BookDetailsComponent } from './book/book-details/book-details.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
 import { CategoryComponent } from './category/category.component';
 import { AdministratorComponent } from './administration/administrator/administrator.component';
-import { BookComponent } from './book/book.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AuthGuard } from './_helpers/auth.guard';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { RegisterComponent } from './user/register/register.component';
 import { LoanComponent } from './loan/loan.component';
 import { AdminCustomerComponent } from './administration/admin-customer/admin-customer.component';
 import { AdminBookComponent } from './administration/admin-book/admin-book.component';
@@ -23,7 +22,7 @@ import { ActiveReservationsComponent } from './customer/active-reservations/acti
 const routes: Routes = [
   {path: '', redirectTo: '/Frontpage', pathMatch: 'full' },   //route for the frontpage
   {path: 'Frontpage', component: FrontpageComponent},
-  {path: 'Category', component:CategoryComponent},   // it displays the Category component
+  {path: 'Category', component: CategoryComponent},   // it displays the Category component
   {path: 'category_books/:id', component: CategoryBooksComponent },  //this is the url which displays the books of the  specific categoryID
   {path: 'book_details/:id', component: BookDetailsComponent},
   {path: 'Admin', component: AdministratorComponent, canActivate: [AuthGuard]},
@@ -42,13 +41,8 @@ const routes: Routes = [
   {path: 'profile/customerpanel/activeReservations', component: ActiveReservationsComponent},
   {path: 'login', component: LoginComponent },
   {path: 'Register', component: RegisterComponent},
- // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { roles: [Role.admin] } },
-  // {path: 'Admin/Books', component: AdministratorComponent},
-  {path: 'Book', component:BookComponent},
   {path: 'loan/:id', component: LoanComponent},
   {path: 'reserve/:id', component: ReservationComponent},
-  
-
 ];
 
 @NgModule({

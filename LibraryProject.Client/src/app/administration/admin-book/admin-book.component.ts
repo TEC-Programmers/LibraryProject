@@ -20,13 +20,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-book.component.css']
 })
 export class AdminBookComponent implements OnInit {
+  public _author: Author = { id: 0, firstName: '', middleName: '', lastName: ''}
   authors: Author[] = [];
   author: Author = { id: 0, firstName: '', middleName: '', lastName: ''}
   publishers: Publisher[] = [];
   publisher: Publisher = { id: 0, name: ''}
+  public _publisher: Publisher = { id: 0, name: ''}
   books: Book[] = [];
   book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
   categorys: Category[] = [];
+  _category: Category = { id: 0, categoryName: ''}
   isShown_author: boolean = true;
   isShown_publisher: boolean = true;
   isShown_category: boolean = true;
@@ -71,6 +74,8 @@ export class AdminBookComponent implements OnInit {
 
   obj1 = {"fparams":{"keys":["a","b"],"pairs":{"p":"qwert"}},"qparams":{"x":"xyz"}}
   obj2 = {"fparams":{"keys":["c","d"],"pairs":{"q":"yuiop"}},"qparams":{"z":"zyx"}}
+  file;
+  public getImageName: string = '';
 
   constructor(private userService: UserService, private authService: AuthService, private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
 
@@ -330,9 +335,75 @@ export class AdminBookComponent implements OnInit {
 
 
   save_book(): void {
-    // INSERT AUTHOR
-    console.log('auhtorId: ',this.author.id)
-    if(this.author.id == 0) {
+    this.book.image = this.getImageName;
+    // Pick author and publisher from dropdown
+    if (this.book.authorId > 0 && this.book.publisherId > 0) {
+
+    // GET Author
+    this.authorService.getAuthorById(this.book.authorId)
+    .subscribe({
+      next: (a) => {    
+        this._author = a;
+        console.log('auhtor: ',this._author)
+        this.authorService.addAuthor(this._author).subscribe({
+          next: (author_) => {
+            this.book.authorId = author_.id;
+            this.authors.push(author_);
+            this._author = { id: 0, firstName: '', middleName: '', lastName: '' };
+            this.message = '';
+            console.log('Author added successfully');     
+
+            // GET Publisher
+            this.publisherService.getPublisherById(this.book.publisherId)
+            .subscribe({
+              next: (p) => {
+                this._publisher = p;
+                console.log('publisher: ',this._publisher)
+                this.publisherService.addPublisher(this._publisher).subscribe({
+                  next: (publisher_) => {
+                    this.book.publisherId = publisher_.id;
+                    this.publishers.push(publisher_);
+                    this._publisher = { id: 0, name: '' };
+                    this.message = '';
+                    console.log('Publisher added successfully');
+
+                  // INSERT BOOK
+                  if(this.book.id == 0) {
+                    // this.book.image = this.getImageName;
+                    console.log('book.image = ',this.book.image)
+                    this.bookService.addBook(this.book)
+                    .subscribe({
+                      next: (x) => {
+                        this.books.push(x);
+                        this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+                        this.message = '';
+                        Swal.fire({
+                          title: 'Success!',
+                          text: 'Book added successfully',
+                          icon: 'success',
+                          confirmButtonText: 'Continue'
+                        });
+                        this.authorId_value = false;
+                        this.isShown_author_form = false;
+                        this.btn_new_author = true;
+                        this.isShown_author = true;
+                      },
+                      error: (err) => {
+                        console.log(err.error);
+                        this.message = Object.values(err.error.errors).join(", ");
+                      }
+                    }); 
+                  } 
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    });
+    }
+    else { // create new author and publisher
       this.authorService.addAuthor(this.author)
       .subscribe({
         next: (x) => {
@@ -357,6 +428,7 @@ export class AdminBookComponent implements OnInit {
                 console.log('bookId: ',this.book.id)
                   // INSERT BOOK
                   if(this.book.id == 0) {
+                    // this.book.image = this.getImageName;
                     this.bookService.addBook(this.book)
                     .subscribe({
                       next: (x) => {
@@ -392,7 +464,28 @@ export class AdminBookComponent implements OnInit {
             console.log(err.error);
             this.message = Object.values(err.error.errors).join(", ");
           }
-      });  
+      });
     }
   } 
+
+  getFileDetails(event) {
+      for (var i = 0; i < event.target.files.length; i++) { 
+        var name = event.target.files[i].name;
+        var type = event.target.files[i].type;
+        var size = event.target.files[i].size;
+        var modifiedDate = event.target.files[i].lastModifiedDate;
+        this.getImageName = name;
+        
+        console.log ('Name: ' + name + "\n" + 
+          'Type: ' + type + "\n" +
+          'Last-Modified-Date: ' + modifiedDate + "\n" +
+          'Size: ' + Math.round(size / 1024) + " KB");
+      }   
+  }
+
+  
 }
+
+
+
+   
