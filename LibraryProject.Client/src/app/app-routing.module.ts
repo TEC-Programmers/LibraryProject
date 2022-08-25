@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'Admin/Users', component: AdminCustomerComponent, canActivate: [AuthGuard]},
   {path: 'Admin/Books', component: AdminBookComponent, canActivate: [AuthGuard]},
   {path: 'Admin/Categorys', component: AdminCategoryComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { Roles: [Role.Customer, Role.Administrator] } },
+  {path: 'profile', component: ProfileComponent},
   {path: 'customerpanel', component: CustomerPanelComponent },
   {path: 'activeLoans', component: ActiveLoansComponent},
   {path: 'activeReservations', component: ActiveReservationsComponent},

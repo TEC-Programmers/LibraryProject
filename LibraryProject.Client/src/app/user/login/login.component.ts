@@ -56,12 +56,19 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           this.showOrhideAdminBtn();
+          console.log('role: ',this.currentUser.role.toString())
 
           if (this.currentUser.role.toString() !== 'Administrator') {
-            this.router.navigate(['Frontpage']);
+            this.router.navigate(['Frontpage'])
+            .then(() => {
+            window.location.reload();
+            })
           }
           else {
-            this.router.navigate(['Admin']);
+            this.router.navigate(['Admin'])
+            .then(() => {
+              window.location.reload();
+              })
           }
           Swal.fire({
             title: 'Success!',

@@ -27,7 +27,7 @@ export class AdminBookComponent implements OnInit {
   publisher: Publisher = { id: 0, name: ''}
   public _publisher: Publisher = { id: 0, name: ''}
   books: Book[] = [];
-  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   categorys: Category[] = [];
   _category: Category = { id: 0, categoryName: ''}
   isShown_author: boolean = true;
@@ -268,7 +268,7 @@ export class AdminBookComponent implements OnInit {
   }
 
   cancel(): void {
-    this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+    this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
     this.author = { id: 0, firstName: '', middleName: '', lastName: '' };
     this.publisher = { id: 0, name: ''}
     this.authorId_value = false;
@@ -321,7 +321,7 @@ export class AdminBookComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
-          this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };          
+          this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};      
           Swal.fire({
             title: 'Success!',
             text: 'Book updated successfully',
@@ -331,79 +331,86 @@ export class AdminBookComponent implements OnInit {
         }
       });
     }
+    else {
+      console.log("Didn't Find A Book To Update!")
+    }
   }
 
 
   save_book(): void {
     this.book.image = this.getImageName;
+
     // Pick author and publisher from dropdown
     if (this.book.authorId > 0 && this.book.publisherId > 0) {
 
     // GET Author
     this.authorService.getAuthorById(this.book.authorId)
     .subscribe({
-      next: (a) => {    
-        this._author = a;
+      next: (get_author) => {    
+        this._author = get_author;
+        this.book.authorId = this._author.id;
         console.log('auhtor: ',this._author)
-        this.authorService.addAuthor(this._author).subscribe({
-          next: (author_) => {
-            this.book.authorId = author_.id;
-            this.authors.push(author_);
-            this._author = { id: 0, firstName: '', middleName: '', lastName: '' };
-            this.message = '';
-            console.log('Author added successfully');     
+        this.authors.push(this._author);
+        this._author = { id: 0, firstName: '', middleName: '', lastName: '' };
+          
+          // GET Publisher
+          this.publisherService.getPublisherById(this.book.publisherId)
+          .subscribe({
+            next: (get_publisher) => {
+              this._publisher = get_publisher;
+              this.book.publisherId = this._publisher.id;
+              
+              console.log('publisher: ',this._publisher)
+              this.publishers.push(this._publisher);
+              this._publisher = { id: 0, name: '' };
 
-            // GET Publisher
-            this.publisherService.getPublisherById(this.book.publisherId)
-            .subscribe({
-              next: (p) => {
-                this._publisher = p;
-                console.log('publisher: ',this._publisher)
-                this.publisherService.addPublisher(this._publisher).subscribe({
-                  next: (publisher_) => {
-                    this.book.publisherId = publisher_.id;
-                    this.publishers.push(publisher_);
-                    this._publisher = { id: 0, name: '' };
-                    this.message = '';
-                    console.log('Publisher added successfully');
+              this.categoryService.getCategoryById(this.book.categoryId)
+              .subscribe({
+                next: (get_category) => {
+                  this._category = get_category;
+                  this.book.category.push(this._category);
+                  this._category = { id: 0, categoryName: '' };
+                  this.book.categoryId = get_category.id;
 
-                  // INSERT BOOK
-                  if(this.book.id == 0) {
-                    // this.book.image = this.getImageName;
-                    console.log('book.image = ',this.book.image)
-                    this.bookService.addBook(this.book)
-                    .subscribe({
-                      next: (x) => {
-                        this.books.push(x);
-                        this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
-                        this.message = '';
-                        Swal.fire({
-                          title: 'Success!',
-                          text: 'Book added successfully',
-                          icon: 'success',
-                          confirmButtonText: 'Continue'
-                        });
-                        this.authorId_value = false;
-                        this.isShown_author_form = false;
-                        this.btn_new_author = true;
-                        this.isShown_author = true;
-                      },
-                      error: (err) => {
-                        console.log(err.error);
-                        this.message = Object.values(err.error.errors).join(", ");
-                      }
-                    }); 
-                  } 
-                  }
-                })
-              }
-            })
-          }
-        })
+                // INSERT BOOK
+                if(this.book.id == 0) {
+                  // this.book.categoryId = this.book.categoryId;
+                  console.log('Book Before Add: ',this.book)
+                  this.bookService.addBook(this.book)
+                  .subscribe({
+                    next: (x) => {
+                      this.books.push(x);
+                      this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
+                      this.message = '';
+                      this.imagePreviewSrc = '';
+                      Swal.fire({
+                        title: 'Success!',
+                        text: 'Book added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                      });
+                      this.authorId_value = false;
+                      this.isShown_author_form = false;
+                      this.btn_new_author = true;
+                      this.isShown_author = true;
+                    },
+                    error: (err) => {
+                      console.log(err.error);
+                      this.message = Object.values(err.error.errors).join(", ");
+                    }
+                  }); 
+                } 
+
+                }
+              })
+                                                           
+            }
+          })                
       }
     });
     }
     else { // create new author and publisher
+      console.log('author: ',this.author)
       this.authorService.addAuthor(this.author)
       .subscribe({
         next: (x) => {
@@ -413,7 +420,6 @@ export class AdminBookComponent implements OnInit {
           this.message = '';
           console.log('Author added successfully');
 
-          console.log('publisherId: ',this.publisher.id)
           // INSERT PUBLISHER
           if(this.publisher.id == 0) {
             this.publisherService.addPublisher(this.publisher)
@@ -425,15 +431,15 @@ export class AdminBookComponent implements OnInit {
                 this.message = '';
                 console.log('Publisher added successfully');
 
-                console.log('bookId: ',this.book.id)
                   // INSERT BOOK
                   if(this.book.id == 0) {
                     // this.book.image = this.getImageName;
+                    // console.log('book: ',this.book)
                     this.bookService.addBook(this.book)
                     .subscribe({
                       next: (x) => {
                         this.books.push(x);
-                        this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+                        this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
                         this.message = '';
                         Swal.fire({
                           title: 'Success!',
@@ -466,20 +472,23 @@ export class AdminBookComponent implements OnInit {
           }
       });
     }
+    this.isImageSelected = false;
   } 
 
-  getFileDetails(event) {
+  getImageDetails(event) {
+    // loop through input image
       for (var i = 0; i < event.target.files.length; i++) { 
-        var name = event.target.files[i].name;
-        var type = event.target.files[i].type;
-        var size = event.target.files[i].size;
-        var modifiedDate = event.target.files[i].lastModifiedDate;
-        this.getImageName = name;
+        // save image-name from input
+        this.getImageName = event.target.files[i].name;
+      
+        // var type = event.target.files[i].type;
+        // var size = event.target.files[i].size;
+        // var modifiedDate = event.target.files[i].lastModifiedDate;
         
-        console.log ('Name: ' + name + "\n" + 
-          'Type: ' + type + "\n" +
-          'Last-Modified-Date: ' + modifiedDate + "\n" +
-          'Size: ' + Math.round(size / 1024) + " KB");
+        // console.log ('Name: ' + name + "\n" + 
+        //   'Type: ' + type + "\n" +
+        //   'Last-Modified-Date: ' + modifiedDate + "\n" +
+        //   'Size: ' + Math.round(size / 1024) + " KB");
       }   
   }
 

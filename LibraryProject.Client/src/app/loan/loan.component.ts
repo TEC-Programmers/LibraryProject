@@ -16,6 +16,7 @@ import moment from 'moment';
   templateUrl: './loan.component.html',
   styleUrls: ['./loan.component.css']
 })
+
 export class LoanComponent implements OnInit {
   dateRangeForm!: FormGroup;
   loans: Loan[] = [];
@@ -30,18 +31,18 @@ export class LoanComponent implements OnInit {
   public formatted_return_date;
   public formatted_loaned_at;
   total_loans: Loan[] = [];
-  book:Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   message: string = '';
 
   constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
 
-  range = new FormGroup({
-    fromDate: new FormControl('', Validators.required),
-    toDate: new FormControl('', Validators.required)
-  });
+  // range = new FormGroup({
+  //   fromDate: new FormControl('', Validators.required),
+  //   toDate: new FormControl('', Validators.required)
+  // });
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#472c19';
     this.dateRangeForm = this.formBuilder.group({
       fromDate: new FormControl('', Validators.required),
       toDate: new FormControl('', Validators.required),
@@ -59,11 +60,18 @@ export class LoanComponent implements OnInit {
     })
   }
 
+  resetForm() {
+    // this.dateRangeForm = this.formBuilder.group({
+    //   fromDate: new FormControl('', Validators.required),
+    //   toDate: new FormControl('', Validators.required),
+    // });
+  }
+
   setLoanMinDate() {
     // convert minimum date: (loaned_at) to Date() format
     var convertStringToDate = new Date(this.loaned_at);
 
-    // Increment minimum date: (loaned_at) with 1 day - To get the min date of return_date
+    // Increment minimum date: (loaned_at) with 1 day - Because You Atleast Need To Have The Book For 1 day 
     this.maxDate.setDate(convertStringToDate.getDate() + 1);
   }
 

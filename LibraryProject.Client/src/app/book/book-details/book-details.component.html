@@ -6,12 +6,12 @@
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;"><strong>Title: </strong>{{book.title}}
                 </h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;"><strong>Description: </strong>{{ (book.description.length > 25)? (book.description | slice:0:25)+'..':(book.description) }}</p>
-                <p><strong>AuthorName: </strong>{{book.author.firstName + " " + book.author.lastName}}</p>
-                <p><strong>PublisherName: </strong>{{book.publisher.name}}</p>
+                <!-- <p><strong>AuthorName: </strong>{{book.author.firstName + " " + book.author.lastName}}</p>
+                <p><strong>PublisherName: </strong>{{book.publisher.name}}</p> -->
                 <br>
                 <div class="buttons">
                     <button class="btn btn-primary" id="button-format" (click)="loan(book)" [disabled]="isDisabled_loanBtn">LÅN </button>
-                    <button class="btn btn-primary" id="button-format" (click)="reserve(book)" [disabled]="isDisabled_reserveBtn">RESERVER  </button> 
+                    <button class="btn btn-primary" id="button-format" (click)="reserve(book)" [disabled]="isDisabled_reserveBtn">RESERVER</button> 
                     <br><br>
                     <!-- <button type="button" class="btn btn-light" style="position: absolute; margin-left: 105px; margin-top: -1px; background-color: #272626; color: white; height: 38px; border: 1px solid white;"><span routerLink="/Admin" class="bi bi-arrow-return-left" style="font-size: 20px;"></span></button> -->
                     <button class="w3-btn w3-red w3-ripple" id="back" routerLink="/Frontpage">Back</button> 
@@ -21,3 +21,4 @@
         </ng-container>
     </div>
 </div>
+<!-- [disabled]="isDisabled_reserveBtn" -->

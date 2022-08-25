@@ -78,9 +78,9 @@
                             <a class="nav-link" (click)="logout()">
                                 <span class="glyphicon glyphicon-log-out"></span>Logout</a>
                         </li>
-
+                        <!-- routerLink="/profile/customerpanel" -->
                         <li style="display:inline-block" class="nav-item" *ngIf="currentUser != null">
-                            <a class="nav-link" routerLink="/profile/customerpanel"> <span class="glyphicon glyphicon-cog"></span>Profile</a>
+                            <a class="nav-link" (click)="navProfile()"> <span class="glyphicon glyphicon-cog"></span>Profile</a> 
                         </li>                  
                     </ul>
                 </li>         

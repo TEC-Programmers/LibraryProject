@@ -40,16 +40,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <h4 class="modal-title text-danger" id="exampleModalLabel">EDIT Category</h4>
+        <h4 class="modal-title text-danger" id="exampleModalLabel">EDIT Category</h4><br>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         <form>
           <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
+            <label for="category" class="form-label">Change Category</label>
             <input [(ngModel)]="category.categoryName" class="form-control" id="name" name="name" placeholder="enter category name">
           </div>
           <br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
+          <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" id="update_cat" [disabled]="category.categoryName">Update</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -67,12 +67,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
-          <h4 class="modal-title text-danger" id="exampleModalLabel">CREATE NEW Category</h4>
+          <h4 class="modal-title text-danger" id="exampleModalLabel">CREATE Category</h4>
           <br><br>
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="cancel()"></button>
           <form>
             <div class="mb-3">
-              <label for="category" class="form-label">Category</label>
+              <label for="category" class="form-label">Add Category</label>
               <input [(ngModel)]="category.categoryName" class="form-control" id="name" name="name" placeholder="enter category name">
             </div>
             <br>

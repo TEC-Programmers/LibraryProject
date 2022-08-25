@@ -30,7 +30,7 @@ export class AdminCustomerComponent implements OnInit {
 
   message: string = '';
   roles!: Role
-  selectedValue = 0;
+  selectedValue = 1;
   p: any;
   x:any;
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};

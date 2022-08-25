@@ -12,10 +12,8 @@
             <input [(ngModel)]="return_date" matInput [min]="maxDate" [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
             <mat-datepicker-toggle (click)="setLoanMinDate()" matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
-
-        <br>
-        <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Borrow&nbsp;<i class="bi bi-book"></i></button>
-        <button type="button" class="back" style="position: absolute; margin-left: -178px; margin-top: -171px; background-color: #696565; color: white; height: 30px;"><span routerLink="/book_details/{{book.id}}" class="bi bi-arrow-return-left" style="font-size: 20px;"></span></button>
+        </mat-form-field><br><br>
+        <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Borrow&nbsp;<i class="bi bi-book" id="submit_icon"></i></button>
+        <button type="button" class="back"><span routerLink="/book_details/{{book.id}}" class="bi bi-arrow-return-left" style="font-size: 18px;"></span></button>
     </form>
 </div>

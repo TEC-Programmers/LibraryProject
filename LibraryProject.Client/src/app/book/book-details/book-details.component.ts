@@ -19,7 +19,7 @@ import { formatDate } from '@angular/common';
 
 export class BookDetailsComponent implements OnInit {
   bookId: number = 0;
-  book: Book = { id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   isDisabled_loanBtn = false;
   isDisabled_reserveBtn = true;
   loan_found: boolean = false;
@@ -49,7 +49,8 @@ export class BookDetailsComponent implements OnInit {
     this.checkUserStatus();
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
     this.bookService.getAllBooks().subscribe(b => this.books = b);
-    this.userService.getAllUsers().subscribe(u => this.users = u)
+    this.userService.getAllUsers().subscribe(u => this.users = u);
+    
 
     this.route.params.subscribe(params => {
       this.bookId = +params['id'];
@@ -57,7 +58,6 @@ export class BookDetailsComponent implements OnInit {
 
     this.bookService.getBookById(this.bookId).subscribe(x => { 
       this.book = x;
-      // console.log('book-details on load: ',this.book);
     });
      
     this.checkIfLoanOrReservationExists();   
@@ -65,6 +65,7 @@ export class BookDetailsComponent implements OnInit {
     this.deleteOutdatedLoans();
     this.deleteOutdatedReservations();
   }
+
 
   deleteOutdatedReservations() {
     this.reserveService.getAllReservations().subscribe({
@@ -135,8 +136,7 @@ export class BookDetailsComponent implements OnInit {
             }
               else
               {
-                console.log("No Expired Loan's")
-                
+                console.log("No Expired Loan's")      
               }
             }  
         }
@@ -178,24 +178,15 @@ export class BookDetailsComponent implements OnInit {
 
         if (this.userLoggedIn_res) {
           this.isDisabled_reserveBtn = true; // NOT Active
-          console.log('[ YOU ]  have an active reservation')       
+          console.log('[ YOU ] have an active reservation')       
         }
         else if (this.bookReserved)
         {             
           this.isDisabled_reserveBtn = true;
           console.log('[ SOMEONE ] have an active reservation')
         }
-        else {
-
-          if (!this.bookBorrowed && !this.bookReserved) {
-            this.isDisabled_reserveBtn = true;
-          }
-          else if (!this.bookReserved) {
-            this.isDisabled_reserveBtn = false
-          }
-          else {
-            this.isDisabled_reserveBtn = false
-          }
+        else if (this.userLoggedIn && this.bookBorrowed && !this.bookReserved && !this.userLoggedIn_res) {
+          this.isDisabled_reserveBtn = false;
           console.log('[ ANY EXCEPT BORROWER ] can reserve this book')     
         }
       }
@@ -222,16 +213,19 @@ export class BookDetailsComponent implements OnInit {
         
         if (this.userLoggedIn) {
           this.isDisabled_loanBtn = true; // inactive
-          console.log("[ YOU ] have an active Borrow/Borrow's")       
+          console.log("[ YOU ] have an active Borrow/Borrow's")   
+          this.isDisabled_reserveBtn = true;
         }
-        else if (this.bookBorrowed)
+        else if (this.bookBorrowed && !this.userLoggedIn_res && !this.bookReserved)
         {             
           this.isDisabled_loanBtn = true;
           console.log("[ SOMEONE ] have an active Borrow/Borrow's")
+          this.isDisabled_reserveBtn = false;
         }
         else {
           this.isDisabled_loanBtn = false; // active
           console.log('[ ANY ] can Borrow this book')
+          this.isDisabled_reserveBtn = true;
         }
       },
     });

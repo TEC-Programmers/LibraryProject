@@ -32,26 +32,7 @@ export class FrontpageComponent implements OnInit {
   filterTerm!: string;
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
-
-
-
-
-  book: Book = {
-    id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
-    language: '',
-    authorId: 0,
-    author: {
-      id: 0,
-      firstName: '',
-      lastName: ''
-    },
-    publisher: {
-      id: 0,
-      name: ''
-    }
-  }
-
-
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   books: Book[] = [];
   bookId: number = 0;
   public searchTerm: string = "";

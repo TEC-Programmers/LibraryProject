@@ -20,7 +20,7 @@ export class ActiveReservationsComponent implements OnInit {
 
   total_books: Book[] = [];
   yourBooks: Book[] = [];
-  yourBook: Book | undefined = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+  yourBook: Book | undefined = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   getAll_books: Book[] = [];
 
   yourId: number = 0;

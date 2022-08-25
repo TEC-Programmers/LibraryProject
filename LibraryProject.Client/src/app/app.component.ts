@@ -41,6 +41,13 @@ export class AppComponent {
 
   }
 
+  navProfile() {
+    this.router.navigate(['profile/customerpanel'])
+    .then(() => {
+      window.location.reload();
+    });
+  }
+
   logout() {
     if (confirm('Are you sure you want to log out?')) {
       this.userService.getRole_(0);      
