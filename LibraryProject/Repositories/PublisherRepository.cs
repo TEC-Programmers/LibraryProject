@@ -15,15 +15,18 @@ namespace LibraryProject.API.Repositories
         Task<Publisher> UpdateExistingPublisher(int publisherId, Publisher publisher);
         Task<Publisher> DeletePublisher(int publisherId);
     }
-    public class PublisherRepository : IPublisherRepository
+    public class PublisherRepository : IPublisherRepository     // This class is inheriting interfcae IPublisherRepository and implement the interfaces
     {
-        private readonly LibraryProjectContext _context;
+        private readonly LibraryProjectContext _context;        //making an instance of the class LibraryProjectContext
 
-        public PublisherRepository(LibraryProjectContext context)
+        public PublisherRepository(LibraryProjectContext context)      //dependency injection with parameter 
         {
             _context = context;
         }
 
+        //**implementing the methods of IPublisherRepository interface**// 
+
+        //This method will remove one specific Publisher whose Id has been got
         public async Task<Publisher> DeletePublisher(int publisherId)
         {
             Publisher deletePublisher = await _context.Publisher
@@ -36,6 +39,7 @@ namespace LibraryProject.API.Repositories
             return deletePublisher;
         }
 
+        //This method will add a new Publisher to the system
         public async Task<Publisher> InsertNewPublisher(Publisher publisher)
         {
             _context.Publisher.Add(publisher);
@@ -44,17 +48,20 @@ namespace LibraryProject.API.Repositories
             return publisher;
         }
 
+        //this method will get all Publishers details
         public async Task<List<Publisher>> SelectAllPublishers()
         {
             return await _context.Publisher.ToListAsync();
         }
 
+        //this method will get info of one Publisher by specific ID
         public async Task<Publisher> SelectPublisherById(int publisherId)
         {
             return await _context.Publisher
                 .FirstOrDefaultAsync(Publisher => Publisher.Id == publisherId);
         }
 
+        //This method will update the information of the specific Publisher by ID
         public async Task<Publisher> UpdateExistingPublisher(int publisherId, Publisher Publisher)
         {
             Publisher upatePublisher = await _context.Publisher

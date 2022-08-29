@@ -28,6 +28,8 @@ namespace LibraryProject.API.Repositories
         }
 
         //implementing the methods of IBookRepository interface 
+
+        //This method will get all of the books information with category, author, publisher details
         public async Task<List<Book>> SelectAllBooks()   
         {
             return await _context.Book
@@ -39,7 +41,7 @@ namespace LibraryProject.API.Repositories
                 .OrderBy(p => p.PublisherId)
                 .ToListAsync();
         }
-
+        //This method will get one specific book info whoose bookId has been given including Category, author, publisher details
         public async Task<Book> SelectBookById(int bookId)
         {
             return await _context.Book
@@ -51,7 +53,7 @@ namespace LibraryProject.API.Repositories
                 .OrderBy(p => p.PublisherId)
                 .FirstOrDefaultAsync(book => book.Id == bookId);
         }
-
+        //This method will get all the books info by specific categoryId including category, author, publisher details
         public async Task<List<Book>> SelectAllBooksByCategoryId(int categoryId)
         {
             return await _context.Book
@@ -65,6 +67,7 @@ namespace LibraryProject.API.Repositories
                .ToListAsync();
 
         }
+        //With this method one book's info can be added
         public async Task<Book> InsertNewBook(Book book)
         {
             _context.Book.Add(book);
@@ -74,6 +77,7 @@ namespace LibraryProject.API.Repositories
 
             return insertBook;
         }
+        //Using this methos existing book info can be updated by giving specific bookId
         public async Task<Book> UpdateExistingBook(int bookId, Book book)
         {
             Book updateBook = await _context.Book.FirstOrDefaultAsync(book => book.Id == bookId);
@@ -92,7 +96,7 @@ namespace LibraryProject.API.Repositories
             }
             return updateBook;
         }
-
+        //This method will remove all the details of one book by bookID
         public async Task<Book> DeleteBookById(int bookId)
         {
             Book deleteBook = await _context.Book.

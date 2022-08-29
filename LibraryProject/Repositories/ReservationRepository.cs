@@ -15,15 +15,18 @@ namespace LibraryProject.API.Repositories
         Task<Reservation> DeleteReservationById(int reservationId);
 
     }
-    public class ReservationRepository : IReservationRepository
+    public class ReservationRepository : IReservationRepository      // This class is inheriting interfcae ILoanRepository and implement the interfaces
     {
-        private readonly LibraryProjectContext _context;
+        private readonly LibraryProjectContext _context;                //making an instance of the class LibraryProjectContext
 
-        public ReservationRepository(LibraryProjectContext context)
+        public ReservationRepository(LibraryProjectContext context)         //dependency injection with parameter 
         {
             _context = context;
         }
 
+        //**implementing the methods of IAuthorRepository interface**// 
+
+        //This method will remove one specific Reservation whose Id has been got
         public async Task<Reservation> DeleteReservationById(int reservationId)
         {
             Reservation deleteReservation = await _context.Reservation.FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
@@ -36,6 +39,7 @@ namespace LibraryProject.API.Repositories
             return deleteReservation;
         }
 
+        //This method will add a new Reservation to the system
         public async Task<Reservation> InsertNewReservation(Reservation reservation)
         {
             _context.Reservation.Add(reservation);
@@ -43,16 +47,20 @@ namespace LibraryProject.API.Repositories
             return reservation;
         }
 
+        //this method will get all Reservations details
         public async Task<List<Reservation>> SelectAllReservations()
         {
             return await _context.Reservation.ToListAsync();
         }
 
+        //this method will get info of one Reservation by specific ID
         public async Task<Reservation> SelectReservationById(int reservationId)
         {
             return await _context.Reservation
                 .FirstOrDefaultAsync(reservation => reservation.Id == reservationId);
         }
+
+        //This method will update the information of the specific Publisher by ID
 
         public async Task<Reservation> UpdateReservation(int reservationId, Reservation reservation)
         {
