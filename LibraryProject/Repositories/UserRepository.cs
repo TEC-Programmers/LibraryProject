@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.API.Repositories
 {
+    //Creating Interface of IUserRepository
     public interface IUserRepository
     {
         Task<List<User>> GetAll();
@@ -18,15 +19,18 @@ namespace LibraryProject.API.Repositories
         Task<User> Delete(int userId);
     }
 
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository            // This class is inheriting interfcae IUserRepository and implement the interfaces
     {
-        private readonly LibraryProjectContext _context;
+        private readonly LibraryProjectContext _context;         //making an instance of the class LibraryProjectContext
 
-        public UserRepository(LibraryProjectContext context)
+        public UserRepository(LibraryProjectContext context)         //dependency injection with parameter 
         {
             _context = context;
         }
 
+        //**implementing the methods of IAuthorRepository interface**// 
+
+        //This method will get all of the users information 
         public async Task<List<User>> GetAll()
         {
 
@@ -34,8 +38,7 @@ namespace LibraryProject.API.Repositories
 
         }
 
-       
-
+        //With this method one user's info can be added
         public async Task<User> Create(User user)
         {
             _context.User.Add(user);
@@ -43,16 +46,19 @@ namespace LibraryProject.API.Repositories
             return user;
         }
 
+        //This method will get one specific user info whoose userId has been given 
         public async Task<User> GetById(int userId)
         {
             return await _context.User.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
+        //This method will get one specific user info whoose email has been given 
         public async Task<User> GetByEmail(string Email)
         {
             return await _context.User.FirstOrDefaultAsync(u => u.Email == Email);
         }
 
+        //Using this method existing user info can be updated by giving specific userId
         public async Task<User> Update(int userId, User user)
         {
             User updateUser = await _context.User
@@ -71,6 +77,7 @@ namespace LibraryProject.API.Repositories
             return updateUser;
         }
 
+        //This method will remove all the details of one user by userID
         public async Task<User> Delete(int userId)
         {
             User deleteuser = await _context.User

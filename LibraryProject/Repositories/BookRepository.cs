@@ -27,7 +27,7 @@ namespace LibraryProject.API.Repositories
             _context = context;
         }
 
-        //implementing the methods of IBookRepository interface 
+        //** implementing the methods of IBookRepository interface  **// 
 
         //This method will get all of the books information with category, author, publisher details
         public async Task<List<Book>> SelectAllBooks()   
@@ -77,7 +77,7 @@ namespace LibraryProject.API.Repositories
 
             return insertBook;
         }
-        //Using this methos existing book info can be updated by giving specific bookId
+        //Using this method existing book info can be updated by giving specific bookId
         public async Task<Book> UpdateExistingBook(int bookId, Book book)
         {
             Book updateBook = await _context.Book.FirstOrDefaultAsync(book => book.Id == bookId);
