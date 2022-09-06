@@ -56,14 +56,12 @@ export class AdminCustomerComponent implements OnInit {
     this.message = '';
     this.customer = customer;
     this.customer.id = customer.id || 0;
-    console.log('role: '+this.customer.role);
   }
 
   edit_admin(administrator: User): void {
     this.message = '';
     this.administrator = administrator;
     this.administrator.id = administrator.id || 0;
-    // console.log(this.administrator);
   }
 
 
@@ -179,9 +177,10 @@ export class AdminCustomerComponent implements OnInit {
     }
   }
 
+
   cancel(): void {
     this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
-    this.customer.role = Role.Customer;
+    this.customer.role = Role.Customer | Role.Administrator;
   }
 
 

@@ -8,7 +8,7 @@ export interface User
     lastName: string;
     email: string;
     password: string;
-    role: Role;
+    role: Role.Customer | Role.Administrator;
     token?:string;
 }
 
