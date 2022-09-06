@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/_services/auth.service';
 import { UserService } from 'app/_services/user.service';
+import { Role } from 'app/_models/Role';
 
 @Component({
   selector: 'app-profile',
@@ -37,32 +38,30 @@ export class ProfileComponent implements OnInit {
   }
 
   showOrhideAdminBtn() {
-    this.authService.currentUser.subscribe(user => {
-    this.currentUser = user;
+    this.authService.currentUser.subscribe(x => {
+    this.currentUser = x;
   
-    if (this.x !== 1) {
-      if (this.currentUser) {
-        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
-          if (this.currentUser.role.toString() === 'Administrator') {
-            this.userService.getRole_(1);
-          }
-          else {
-            this.userService.getRole_(0);
-          }
+    if (this.currentUser) {
+      this.userService.getRole$.subscribe(x => this.x = x ); // start listening for changes 
+        if (this.currentUser.role.toString() === 'Administrator') {
+          this.userService.getRole_(1);
         }
         else {
           this.userService.getRole_(0);
-        } 
-    }
+        }
+      }
+      else {
+        this.userService.getRole_(0);
+      } 
     });
   }
 
   newUser(): User {
-    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
   }
 
   edit(user: User): void {
-    this.user=  user;
+    this.user = user;
     this.message = [];
   }
 
@@ -72,8 +71,6 @@ export class ProfileComponent implements OnInit {
   }
 
   save(): void {
-    if (this.user.email != '') {
-    }
     this.message = [];
 
     if (this.user.email == '') {
@@ -84,7 +81,7 @@ export class ProfileComponent implements OnInit {
       this.message.push('Enter Password');
     }
 
-    if (this.user.firstName== '') {
+    if (this.user.firstName == '') {
       this.message.push('Enter Firstname');
     }
 
@@ -92,10 +89,9 @@ export class ProfileComponent implements OnInit {
       this.message.push('Enter Middlename');
     }
 
-    if (this.user.lastName== '') {
+    if (this.user.lastName == '') {
       this.message.push('Enter Lastname');
     }
-
 
     if (this.message.length == 0) {
       if (this.user.id == 0) {
@@ -105,14 +101,34 @@ export class ProfileComponent implements OnInit {
           this.user= this.newUser();
           });
       }
-      else {
-     (confirm('To view the updated profile kindly "Sign in" again....!'))
-        this.userService.updateUser(this.user.id , this.user)
-          .subscribe(() => {
-            this.user = this.newUser();
-          });
+      else 
+      {
+        (confirm('To view the updated profile kindly "Sign in" again....!'))
+        
+        // ERROR HERE: WHEN UPDATING USER, USER.ROLE IS = 'ADMINISTRATOR' EVERYTIME
+        // this.userService.updateUser(this.user.id , this.user)
+        // .subscribe(() => {
+        //   this.user = this.newUser();
+        // });
 
-       }
+        if(this.user.role.toString() === 'Customer') {
+          console.log('True customer')
+          console.log('cus user: ',this.user)
+          this.userService.updateUser(this.user.id, this.user)
+              .subscribe(() => {
+                this.user = this.newUser();
+              });
+        }
+        else if(this.user.role.toString() === 'Administrator') {
+          console.log('True admin')
+          console.log('admin user: ',this.user)
+          this.userService.updateUser(this.user.id, this.user)
+              .subscribe(() => {
+                this.user = this.newUser();
+              });
+        }
+        
+      }
     }
     
 }}

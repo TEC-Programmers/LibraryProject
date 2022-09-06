@@ -21,7 +21,7 @@ namespace LibraryProject.API.Services
         Task<UserResponse> Register(UserRequest newUser);
         Task<UserResponse> Update(int UserId, UserRequest updateUser);
         Task<UserResponse> Delete(int UserId);
-
+        Task<UserResponse> UpdateRole(int UserId, UserRequest updateUser);
     }
 
     public class UserService : IUserService
@@ -118,7 +118,8 @@ namespace LibraryProject.API.Services
 
             return null;
         }
-        public async Task<UserResponse> Update(int UserId, UserRequest updateUser)
+
+        public async Task<UserResponse> UpdateRole(int UserId, UserRequest updateUser)
         {
             User user = new User
             {
@@ -127,10 +128,9 @@ namespace LibraryProject.API.Services
                 LastName = updateUser.LastName,
                 Email = updateUser.Email,
                 Password = updateUser.Password,
-
             };
 
-            user = await _userRepository.Update(UserId, user);
+            user = await _userRepository.UpdateRole(UserId, user);
 
             return user == null ? null : new UserResponse
             {
@@ -143,6 +143,57 @@ namespace LibraryProject.API.Services
                 Role = user.Role
             };
         }
+
+
+        public async Task<UserResponse> Update(int UserId, UserRequest updateUser)
+        {
+            User user = new User
+            {
+                FirstName = updateUser.FirstName,
+                MiddleName = updateUser.MiddleName,
+                LastName = updateUser.LastName,
+                Email = updateUser.Email,
+                Password = updateUser.Password,
+            };
+
+            user = await _userRepository.Update(UserId, user);
+
+            return user == null ? null : new UserResponse
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                //Role = user.Role
+            };
+        }
+
+        //public async Task<UserResponse> Update(int UserId, UserRequest updateUser)
+        //{
+        //    User user = new User
+        //    {
+        //        FirstName = updateUser.FirstName,
+        //        MiddleName = updateUser.MiddleName,
+        //        LastName = updateUser.LastName,
+        //        Email = updateUser.Email,
+        //        Password = updateUser.Password,
+        //    };
+
+        //    user = await _userRepository.Update(UserId, user);
+
+        //    return user == null ? null : new UserResponse
+        //    {
+        //        Id = user.Id,
+        //        FirstName = user.FirstName,
+        //        MiddleName = user.MiddleName,
+        //        LastName = user.LastName,
+        //        Email = user.Email,
+        //        Password = user.Password,
+        //        Role = user.Role
+        //    };
+        //}
 
         public async Task<UserResponse> Delete(int userId)
 
@@ -170,11 +221,8 @@ namespace LibraryProject.API.Services
                 LastName = user.LastName,
                 Password = user.Password,
                 Role = user.Role
-
             };
 
         }
-
-
     }
 }

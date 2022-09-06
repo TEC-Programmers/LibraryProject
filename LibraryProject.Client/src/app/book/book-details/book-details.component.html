@@ -10,8 +10,8 @@
                 <p><strong>PublisherName: </strong>{{book.publisher.name}}</p> -->
                 <br>
                 <div class="buttons">
-                    <button class="btn btn-primary" id="button-format" (click)="loan(book)" [disabled]="isDisabled_loanBtn">LÅN </button>
-                    <button class="btn btn-primary" id="button-format" (click)="reserve(book)" [disabled]="isDisabled_reserveBtn">RESERVER</button> 
+                    <button class="btn btn-primary" id="button-format" (click)="loan(book)" [disabled]="isDisabled_loanBtn">BORROW</button>
+                    <button class="btn btn-primary" id="button-format" (click)="reserve(book)" [disabled]="isDisabled_reserveBtn">RESERVE</button> 
                     <br><br>
                     <!-- <button type="button" class="btn btn-light" style="position: absolute; margin-left: 105px; margin-top: -1px; background-color: #272626; color: white; height: 38px; border: 1px solid white;"><span routerLink="/Admin" class="bi bi-arrow-return-left" style="font-size: 20px;"></span></button> -->
                     <button class="w3-btn w3-red w3-ripple" id="back" routerLink="/Frontpage">Back</button> 

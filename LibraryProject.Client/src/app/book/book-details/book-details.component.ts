@@ -46,24 +46,31 @@ export class BookDetailsComponent implements OnInit {
   constructor(private userService: UserService, private reserveService: ReservationService, private bookService:BookService, private route:ActivatedRoute, private router: Router, private authService: AuthService, private loanService: LoanService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-    this.checkUserStatus();
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
-    this.bookService.getAllBooks().subscribe(b => this.books = b);
-    this.userService.getAllUsers().subscribe(u => this.users = u);
-    
+    if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
+      alert("Do you have any account? If yes, then Login, otherwise create a new account..");
+      this.router.navigate(['/login']);    
+    }
+    else {
+      this.checkUserStatus();
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
+      this.bookService.getAllBooks().subscribe(b => this.books = b);
+      this.userService.getAllUsers().subscribe(u => this.users = u);
+      
+  
+      this.route.params.subscribe(params => {
+        this.bookId = +params['id'];
+      });
+  
+      this.bookService.getBookById(this.bookId).subscribe(x => { 
+        this.book = x;
+      });
+       
+      this.checkIfLoanOrReservationExists();   
+      this.checkStatus();
+      this.deleteOutdatedLoans();
+      this.deleteOutdatedReservations();
+    }
 
-    this.route.params.subscribe(params => {
-      this.bookId = +params['id'];
-    });
-
-    this.bookService.getBookById(this.bookId).subscribe(x => { 
-      this.book = x;
-    });
-     
-    this.checkIfLoanOrReservationExists();   
-    this.checkStatus();
-    this.deleteOutdatedLoans();
-    this.deleteOutdatedReservations();
   }
 
 

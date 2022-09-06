@@ -139,9 +139,37 @@ namespace LibraryProject.API.Controllers
 
         }
 
+
+        [AllowAnonymous]
+        [HttpPut("role/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateRole([FromRoute] int userId, [FromBody] UserRequest updateUser)
+        {
+            try
+            {
+                UserResponse user = await _userService.UpdateRole(userId, updateUser);
+
+                if (user == null)
+                {
+                    return Problem("User record didn't get updated, something went wrong.");
+                }
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+
+
+
         //update
-      //  [AllowAnonymous]
-       
+        //[AllowAnonymous]
         [Authorize(Role.Customer, Role.Administrator)]
         [HttpPut("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

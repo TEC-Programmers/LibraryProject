@@ -21,10 +21,7 @@ import { UserService } from 'app/_services/user.service';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
-
   title = 'LibraryProject-Client';
-
-  // book!: Book;
   counter = 0;
   total: number = 0;
   categories: Category[] = [];

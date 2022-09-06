@@ -11,11 +11,9 @@ namespace LibraryProject
     {
         public LibraryProjectContext() { }
         public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }  //creating instances of the class 
-
         public DbSet<Book> Book { get; set; }   //represents the set of book enitity in EFC(Entity Framework Core)
         public DbSet<Category> Category { get; set; }
         public DbSet<User> User { get; set; }
-
         public DbSet<Author> Author { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
@@ -33,8 +31,8 @@ namespace LibraryProject
               },
                new()
                {
-                   Id = 2,
-                   CategoryName = "Roman"
+                  Id = 2,
+                  CategoryName = "Roman"
                }
               );
             modelBuilder.Entity<Publisher>().HasData(
@@ -52,16 +50,14 @@ namespace LibraryProject
             modelBuilder.Entity<Author>().HasData(
               new()
               {
-                  Id = 1,
-               
+                  Id = 1,        
                   FirstName = "Astrid",
                   MiddleName = "",
                   LastName = " Lindgrens"
               },
                new()
                {
-                   Id = 2,
-                 
+                   Id = 2,             
                    FirstName = "Helle",
                    MiddleName = "",
                    LastName = "Helle"
@@ -151,11 +147,6 @@ namespace LibraryProject
                     reserved_To = "2022/08/09"
                 }
                 );
-        }
-            
-
-
+        }            
     }
-
-  
 }

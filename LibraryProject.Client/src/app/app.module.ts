@@ -18,7 +18,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core'
-
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
@@ -30,7 +29,6 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { CustomerPanelComponent } from './customer/customer-panel/customer-panel.component';
 import { ActiveLoansComponent } from './customer/active-loans/active-loans.component';
 import { ActiveReservationsComponent } from './customer/active-reservations/active-reservations.component';
-
 
 @NgModule({
   declarations: [

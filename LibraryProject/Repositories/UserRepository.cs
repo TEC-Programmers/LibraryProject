@@ -16,6 +16,8 @@ namespace LibraryProject.API.Repositories
         Task<User> GetById(int userId);
         Task<User> Update(int userId, User user);
         Task<User> Delete(int userId);
+        Task<User> UpdateRole(int userId, User user);
+
     }
 
     public class UserRepository : IUserRepository
@@ -29,9 +31,7 @@ namespace LibraryProject.API.Repositories
 
         public async Task<List<User>> GetAll()
         {
-
             return await _context.User.ToListAsync();
-
         }
 
        
@@ -53,10 +53,12 @@ namespace LibraryProject.API.Repositories
             return await _context.User.FirstOrDefaultAsync(u => u.Email == Email);
         }
 
-        public async Task<User> Update(int userId, User user)
+
+        public async Task<User> UpdateRole(int userId, User user)
         {
             User updateUser = await _context.User
                 .FirstOrDefaultAsync(a => a.Id == userId);
+
 
             if (updateUser != null)
             {
@@ -66,6 +68,26 @@ namespace LibraryProject.API.Repositories
                 updateUser.LastName = user.LastName;
                 updateUser.Password = user.Password;
                 updateUser.Role = user.Role;
+                await _context.SaveChangesAsync();
+            }
+            return updateUser;
+        }
+
+
+        public async Task<User> Update(int userId, User user)
+        {
+            User updateUser = await _context.User
+                .FirstOrDefaultAsync(a => a.Id == userId);
+            
+
+            if (updateUser != null)
+            {
+                updateUser.Email = user.Email;
+                updateUser.FirstName = user.FirstName;
+                updateUser.MiddleName = user.MiddleName;
+                updateUser.LastName = user.LastName;
+                updateUser.Password = user.Password;
+                //updateUser.Role = user.Role;
                 await _context.SaveChangesAsync();
             }
             return updateUser;

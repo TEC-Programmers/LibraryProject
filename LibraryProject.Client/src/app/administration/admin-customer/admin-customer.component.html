@@ -78,13 +78,13 @@
           </div>
           <label>Change Role: </label>
           &nbsp;
-          <select name="role">
-              <option [value]="customer.role">{{customer.role}}</option>
-              <option>Administrator</option>
+          <select name="role" [(ngModel)]="customer.role">
+              <option [value]="'Customer'">{{customer.role}}</option>
+              <option [value]="'Administrator'">Administrator</option>
           </select>
 
-          &nbsp;&nbsp;
-          <button (click)="save_member()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" [disabled]="customer.role === 0">Update</button>
+          &nbsp;&nbsp; <!--  [disabled]="customer.role.toString() === 'Customer'" -->
+          <button (click)="save_member()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" [disabled]="customer.role.toString() === 'Customer'">Update</button>
         </form>
       </div>
       <div class="modal-footer">

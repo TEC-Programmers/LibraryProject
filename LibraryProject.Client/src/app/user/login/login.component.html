@@ -17,7 +17,11 @@
                 <!-- form-group// -->
                 <div class="form-group">
                     <div class="icon"><i class="fas fa-lock" style="position: absolute; font-size: 21px; left: 6px; top: 139px;"></i></div>
-                    <input [(ngModel)]="password" name="password" class="form-control" ngModel placeholder="Password" type="password" style="font-size: 12px;">
+                    <!-- <input [(ngModel)]="password" name="password" class="form-control" ngModel placeholder="Password" type="password" style="font-size: 12px;"> -->
+                    <input #myPassInput [(ngModel)]="password" placeholder="Password" style="font-size: 12px;" [type]="showPassword ? 'text' : 'password' " class="form-control" name="password">
+                    <div class="input-group-append" (click)="changeType(myPassInput, 1)">
+                        <span class="input-group-text" style="margin-left: 226px; margin-top: -34px; position: absolute; height: 34px;"><i [ngClass]="toggle1 ? 'fas fa-eye' : 'fas fa-eye-slash'"></i></span>
+                      </div>
                 </div>
                 <!-- form-group// -->
 

@@ -5,7 +5,6 @@
         <input class="form-control" [(ngModel)]="searchText" type="text" name="search" autocomplete="off" placeholder="search by category">
         <div class="btnAndTitle">
           <strong style="height: 100px;" class="btnTitle">ADD</strong>
-          <!-- <button class="createBookBtn" data-toggle="modal" data-target="#Modal_Category_Create">+</button> -->
           <button id="btnAdd" class="" data-toggle="modal" data-target="#Modal_Category_Create"><i class="bi bi-folder-plus" id="addIcon"></i></button>
         </div>
       </div>
@@ -48,8 +47,8 @@
             <input [(ngModel)]="category.categoryName" class="form-control" id="name" name="name" placeholder="enter category name">
           </div>
           <br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" id="update_cat" [disabled]="category.categoryName">Update</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" id="update_cat">Update</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -81,7 +80,7 @@
               <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal"  [disabled]="!category.categoryName">Create</button>
             </div>
             <div class="message">
-              <p id="" [hidden]="category.categoryName">
+              <p [hidden]="category.categoryName">
                 <span style="font-size:0.8em; color: red;">*field required</span>
               </p>
             </div>
@@ -92,4 +91,4 @@
         </div>
       </div>
     </div>
-  </div>
+</div>

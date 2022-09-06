@@ -34,8 +34,6 @@ button#button-format:disabled {
     height: 37px;
     border-radius: 12px;
     margin-left: 60px;
-    /* margin-left: 189px;
-    top: 392px;
-    position: absolute; */
+    margin-top: 25px;
 }
 

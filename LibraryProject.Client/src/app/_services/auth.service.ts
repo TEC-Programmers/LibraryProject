@@ -52,8 +52,7 @@ export class AuthService {
     // reset CurrentUserSubject, by fetching the value in sessionStorage, which is null at this point
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser') as string));
     // reset CurrentUser to the resat UserSubject, as an obserable
-    this.currentUser = this.currentUserSubject.asObservable();
-    
+    this.currentUser = this.currentUserSubject.asObservable();    
   }
 
 

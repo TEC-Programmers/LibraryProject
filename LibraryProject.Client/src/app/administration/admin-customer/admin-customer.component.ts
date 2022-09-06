@@ -56,15 +56,16 @@ export class AdminCustomerComponent implements OnInit {
     this.message = '';
     this.customer = customer;
     this.customer.id = customer.id || 0;
-    console.log(this.customer);
+    console.log('role: '+this.customer.role);
   }
 
   edit_admin(administrator: User): void {
     this.message = '';
     this.administrator = administrator;
     this.administrator.id = administrator.id || 0;
-    console.log(this.administrator);
+    // console.log(this.administrator);
   }
+
 
 
   delete_member(customer: User): void {
@@ -132,7 +133,7 @@ export class AdminCustomerComponent implements OnInit {
 
 
   save_member(): void {
-    console.log(this.customer)
+    console.log('Before save_member: '+this.customer)
     this.message = '';
 
     if(this.customer.id == 0) {
@@ -155,7 +156,8 @@ export class AdminCustomerComponent implements OnInit {
         }
       });
     } else {
-      this.userService.updateUser(this.customer.id, this.customer)
+      console.log('user before update: ',this.customer)
+      this.userService.updateRole(this.customer.id, this.customer)
       .subscribe({
         error: (err) => {
           console.log(err.error);
@@ -163,6 +165,7 @@ export class AdminCustomerComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
+          // console.log('user after update: ',this.customer)
           this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
           Swal.fire({
             title: 'Success!',
@@ -170,6 +173,7 @@ export class AdminCustomerComponent implements OnInit {
             icon: 'success',
             confirmButtonText: 'Continue'
           });
+          window.location.reload();
         }
       });
     }
@@ -177,6 +181,7 @@ export class AdminCustomerComponent implements OnInit {
 
   cancel(): void {
     this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
+    this.customer.role = Role.Customer;
   }
 
 

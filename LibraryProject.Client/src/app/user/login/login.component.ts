@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x: number = 0;
   bookId:number = 0;
+  showPassword: boolean = false;
+  toggle1: boolean = false;
+  toggle2: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private userService: UserService) 
   {
@@ -30,6 +33,41 @@ export class LoginComponent implements OnInit {
       this.bookId = +params['id'];
     }); 
   }
+
+  changeType(input_field_password, num){
+    if(input_field_password.type=="password")
+      input_field_password.type = "text";
+    else
+      input_field_password.type = "password";
+
+    if(num == 1)
+      this.toggle1 = !this.toggle1;
+    else
+      this.toggle2 = !this.toggle2;
+  }
+
+  showHidePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  // showOrhideAdminBtn() {
+  //   this.authService.currentUser.subscribe(x => {
+  //   this.currentUser = x;
+  
+  //   if (this.currentUser) {
+  //     this.userService.getRole$.subscribe(x => this.x = x ); // start listening for changes 
+  //       if (this.currentUser.role.toString() === 'Administrator') {
+  //         this.userService.getRole_(0);
+  //       }
+  //       else {
+  //         this.userService.getRole_(1);
+  //       }
+  //     }
+  //     else {
+  //       this.userService.getRole_(1);
+  //     } 
+  //   });
+  // }
 
   showOrhideAdminBtn() {
     this.authService.currentUser.subscribe(x => {

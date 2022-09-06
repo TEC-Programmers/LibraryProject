@@ -16,7 +16,6 @@ import { UserService } from './_services/user.service';
 })
 export class AppComponent {
   title = 'LibraryProject-Client';
-
   book!: Book;
   counter = 0;
   total: number = 0;
@@ -95,21 +94,22 @@ export class AppComponent {
 
 
     showOrhideAdminBtn() {
-        this.authService.currentUser.subscribe(x => {
-            this.currentUser = x;
-
-            if (this.currentUser) {
-                if (this.currentUser.role.toString() === 'Administrator') {
-                    this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
-                }
-                else {
-                    this.userService.getRole_(0);
-                }
-            }
-            else {
-                this.userService.getRole_(0);
-            }
-        });
+      this.authService.currentUser.subscribe(x => {
+      this.currentUser = x;
+    
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x ); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
+      });
     }
 
     
