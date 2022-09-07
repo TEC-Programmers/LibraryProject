@@ -20,7 +20,7 @@ export class ActiveReservationsComponent implements OnInit {
 
   total_books: Book[] = [];
   yourBooks: Book[] = [];
-  yourBook: Book | undefined = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+  yourBook: Book | undefined = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   getAll_books: Book[] = [];
 
   yourId: number = 0;
@@ -110,7 +110,7 @@ export class ActiveReservationsComponent implements OnInit {
           this.bookArray.push(this.yourBook);
         }
         else {
-          console.log('getActiveBookInLoan() Error: Book (NOT) Found!')
+          console.log('res getActiveBookInLoan() Error: Book (NOT) Found!')
         }
       }          
     })
@@ -129,16 +129,25 @@ export class ActiveReservationsComponent implements OnInit {
           this.yourReservations = this.total_Reservations.filter((reservation) => {
           return reservation.userId === this.yourId;
         });
-      }
+
         
-        // loop through [ this.yourReservations ] to get specific book in your Reservation
-        this.yourReservations.forEach(reservation => {
-          this.bookId = reservation.bookId;
-          this.reservationArray.push(reservation)
-          if (this.reservationArray.length > 0) {
-            this.getActiveBookInRes(this.bookId);
-          }
-        });
+
+        if (this.yourReservations) {
+          // loop through [ this.yourReservations ] to get specific book in your Reservation
+          this.yourReservations.forEach(reservation => {
+            this.bookId = reservation.bookId;
+            this.reservationArray.push(reservation)
+            if (this.reservationArray.length > 0) {
+              this.getActiveBookInRes(this.bookId);
+            }
+          });
+        }
+        else {
+          this.yourReservations = [];
+        }
+      }
+        console.log('yourReservations: ',this.yourReservations)
+        
       },
       error: (err: any) => {
         console.log('getActiveReservations() Error: ',err)

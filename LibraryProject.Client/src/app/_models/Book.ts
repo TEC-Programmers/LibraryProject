@@ -10,10 +10,12 @@ export interface Book
     image: string;
     description: string;
     publishYear: number;
-    categoryId: Number;
-    category?: Category[];
+    categoryId: number;
+    category: Category[];
     authorId: number;
-    author:{id: number, firstName:string, lastName:string};
+    //author:{id: number, firstName:string, lastName:string};
     publisherId: number;
-    publisher:{id:number, name:string};
+    //publisher:{id:number, name:string};
 }
+
+// fjern {author} & {publisher} objects

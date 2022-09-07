@@ -1,5 +1,6 @@
 <div class="container">
-    <h2>Borrow</h2>
+    <span style="color: red;" *ngIf="message != ''">{{ message }}</span>
+    <i class="bi bi-book" id="title_icon"></i>
     <form [formGroup]="dateRangeForm" (ngSubmit)="onFormSubmit()" class="cal">
         <mat-form-field>
             <input [(ngModel)]="loaned_at" matInput [min]="minDate" [matDatepicker]="picker1" placeholder="Start date" formControlName="fromDate">
@@ -8,12 +9,11 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input [(ngModel)]="return_date" [min]="maxDate" matInput [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
-            <mat-datepicker-toggle (click)="setResMinDate()" matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker  #picker2></mat-datepicker>
-        </mat-form-field>
-
-        <br>
-        <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Borrow</button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <input [(ngModel)]="return_date" matInput [min]="maxDate" [matDatepicker]="picker2" placeholder="End date" formControlName="toDate">
+            <mat-datepicker-toggle (click)="setLoanMinDate()" matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field><br><br>
+        <button type="submit" class="submit" [disabled]="!loaned_at || !return_date">Borrow&nbsp;<i class="bi bi-book" id="submit_icon"></i></button>
+        <button type="button" class="back"><span routerLink="/book_details/{{book.id}}" class="bi bi-arrow-return-left" style="font-size: 18px;"></span></button>
     </form>
 </div>

@@ -207,9 +207,6 @@ namespace LibraryProject.Tests.Repositories
                 PublishYear = 1945,
                 CategoryId = 1,
                 AuthorId = 1
-
-
-
             };
 
 

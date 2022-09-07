@@ -1,32 +1,31 @@
-  <div id="body">
-  <div class="clip-text clip-text_eight">YOUR ACTIVE RESERVATION'S</div>
-  <div class="table">
-      <table style="width: 1000px; background-color: #686868; border: 8px solid white;" class="table table-striped table table-hover table table-bordered">
-          <thead>
-          <tr class="head">
-            <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
-            <th style="background-color: #212121; color: aliceblue; width: 23%;">Title</th>
-            <th style="background-color: #212121; color: aliceblue; width: 23%;">Image</th>
-            <th style="background-color: #212121; color: aliceblue; width: 23%;">Reserved At</th>
-            <th style="background-color: #212121; color: aliceblue; width: 23%;">Reserved To</th>
-          </tr>
-          </thead>
-          <!-- your active loans -->
-            <tbody *ngIf="yourReservations.length > 0">            
-                <tr style="background-color: #686868;" class="head-values" *ngFor="let index of bookArray | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index;" [attr.data-index]="i">
-                      <td style="color: whitesmoke;">{{ index?.title }}</td>
-                      <td><img src="/assets/images/{{ index?.image }}" alt="picture of book" id="img" style="height: 80px; width: 60px"></td>
-                      <td style="color: whitesmoke;">{{ yourReservations[i].reserved_At }}</td>
-                      <td style="color: whitesmoke;">{{ yourReservations[i].reserved_To }}</td>  
-                </tr>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-              </tbody>
-              <tbody *ngIf="yourReservations?.length === 0">
-                <tr>
-                  <td style="width: 100px;" colspan="3" class="no-data-available">You Currently Don't Have Any Active Reservations!</td>
-                </tr>
-            </tbody>     
+<div class="clip-text clip-text_eight">YOUR ACTIVE RESERVATION'S</div>
+  <button type="button" class="btn btn-light" style="position: absolute; margin-left: -622px; margin-top: 87px;" routerLink="customerpanel"><span class="bi bi-arrow-return-left" style="font-size: 20px;"></span></button>
+    <div class="table">
+        <table style="width: 1000px; background-color: #686868; border: 8px solid white;" class="table table-striped table table-hover table table-bordered">
+            <thead>
+            <tr class="head">
+              <!-- <th style="background-color: #212121; color: aliceblue; width: 20%;" *ngFor="let head of displayedColumns" scope="col">{{ head }} </th> -->
+              <th style="background-color: #212121; color: aliceblue; width: 23%;">Title</th>
+              <th style="background-color: #212121; color: aliceblue; width: 23%;">Image</th>
+              <th style="background-color: #212121; color: aliceblue; width: 23%;">Reserved At</th>
+              <th style="background-color: #212121; color: aliceblue; width: 23%;">Reserved To</th>
+            </tr>
+            </thead>
+            <!-- your active loans -->
+              <tbody *ngIf="yourReservations.length > 0">            
+                  <tr style="background-color: #686868;" class="head-values" *ngFor="let index of bookArray | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index;" [attr.data-index]="i">
+                        <td style="color: whitesmoke;">{{ index?.title }}</td>
+                        <td><img src="/assets/images/{{ index?.image }}" alt="picture of book" id="img" style="height: 80px; width: 60px"></td>
+                        <td style="color: whitesmoke;">{{ yourReservations[i].reserved_At }}</td>
+                        <td style="color: whitesmoke;">{{ yourReservations[i].reserved_To }}</td>  
+                  </tr>
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </tbody>
+                <tbody *ngIf="yourReservations?.length === 0">
+                  <tr>
+                    <td style="width: 100px;" colspan="3" class="no-data-available">You Currently Don't Have Any Active Reservations!</td>
+                  </tr>
+              </tbody>     
         </table>
-    </div> 
-  </div>
+  </div> 
 

@@ -1,6 +1,6 @@
 ﻿namespace LibraryProject.API.Helpers
 {
-    //For at definere enums enumbruges nøgleordet.
+    // For at definere enums, bruges enum nøgleordet.
     public enum Role
     {
         Administrator = 1,

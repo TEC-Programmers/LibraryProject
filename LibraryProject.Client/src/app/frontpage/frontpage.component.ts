@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Author } from '../_models/Author';
 import { Book } from '../_models/Book';
@@ -21,10 +21,7 @@ import { UserService } from 'app/_services/user.service';
   styleUrls: ['./frontpage.component.css']
 })
 export class FrontpageComponent implements OnInit {
-
   title = 'LibraryProject-Client';
-
-
   counter = 0;
   total: number = 0;
   categories: Category[] = [];
@@ -32,46 +29,16 @@ export class FrontpageComponent implements OnInit {
   filterTerm!: string;
   currentUser: User ={ id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
-
-
-
-
-  book: Book = {
-
-    id: 0, title: "", publishYear: 0, description: "", image: "", publisherId: 0, categoryId: 0,
-    language: '',
-    authorId: 0,
-    author: {
-      id: 0,
-      firstName: '',
-      lastName: ''
-    },
-    publisher: {
-      id: 0,
-      name: ''
-    }
-  }
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   books: Book[] = [];
   bookId: number = 0;
   public searchTerm: string = "";
   searchBooks: Book[] = [];
 
-
-
-
-
-    constructor(private bookService: BookService,
-      private categoryService: CategoryService,
-       private route: ActivatedRoute,
-       private router: Router,
-        private ref: ChangeDetectorRef,
-         private authService: AuthService,
-         private userService: UserService) {
-
-  }
+    constructor(private bookService: BookService, private categoryService: CategoryService, private route: ActivatedRoute, private router: Router, private ref: ChangeDetectorRef, private authService: AuthService, private userService: UserService, private elementRef: ElementRef) {}
 
   ngOnInit(): void {
-
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
     this.route.params.subscribe(params => {
       if (params['filterTerm']) {
         this.bookService.getAllBooks().subscribe(x => {
@@ -105,18 +72,16 @@ export class FrontpageComponent implements OnInit {
     if (this.filterTerm == null || this.filterTerm == '') {
       alert("The input field is empty")
     }
-
     else if (this.filterTerm.length >= 0) {
       this.bookService.getAllBooks()
         .subscribe(p => this.allBooks = p);
       console.log(this.allBooks);
 
-
       this.bookService.search.next(this.filterTerm);
       this.router.navigate(['/Book', this.filterTerm]);
     }
-
   }
+
   checkSearch(event: any) {
     if (event.key === "Enter" || this.filterTerm == null) {
       this.allBooks = [];
@@ -127,16 +92,35 @@ export class FrontpageComponent implements OnInit {
     }
   }
 
+ 
+  showOrhideAdminBtn() {
+    this.authService.currentUser.subscribe(user => {
+    this.currentUser = user;
+  
+    if (this.x !== 1) {
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
+    }
+    });
+  }
 
 
 
-
-
-
-/*   ngAfterContentChecked(): void {
+  
+  ngAfterContentChecked(): void {
     this.ref.detectChanges();
-    this.showOrhideAdminBtn();
-  } */
+    this.showOrhideAdminBtn();  
+  }
 
 
 }

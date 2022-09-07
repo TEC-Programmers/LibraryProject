@@ -24,17 +24,17 @@
   }
 
 
-
-
 .background {
     background-color: #b3d9ff;
     position: absolute;
     width: 2000px;
     height: 1108px;
+    top: 146px;
+    box-shadow: 0px 8px 8px 0px white inset;
   }
 
   .myBtns {
-    margin-left: -81px;
+    margin-left: -103px;
   }
   
   .content {

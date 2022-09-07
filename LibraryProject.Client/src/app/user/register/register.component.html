@@ -1,0 +1,35 @@
+
+<form>
+  <div class="body">
+    <div class="content form-group">
+        <button type="button" class="btn btn-light" style="position: absolute; margin-left: -1px; margin-top: -1px; background-color: rgb(212, 148, 69); color: white; height: 40px; width: 39px;" routerLink="/Frontpage"><span class="bi bi-arrow-return-left" style="font-size: 20px;"></span></button>
+            <div class="title-form">
+                <h1>Register</h1>
+                <p>Please fill in this form to create an account.</p>
+            </div>
+            
+            <p class="text-center mt-4 w3-red"> {{ error }}</p>
+            <hr>
+
+            <input [(ngModel)]="user.firstName" type="text" placeholder="First Name" name="fn" id="fn" required>
+            
+            <input [(ngModel)]="user.middleName" type="text" placeholder="Middle Name" name="add" id="mn">
+
+            <input [(ngModel)]="user.lastName" type="text" placeholder="Last Name" name="ln" id="ln" required>
+
+            <input  [(ngModel)]="user.email" type="email" placeholder="Email" name="email" id="email" required>
+
+            <input [(ngModel)]="user.password" type="password" placeholder=" Password" name="psw" id="psw" required>
+        
+            <br>
+            <button (click)="save()" type="submit" class="btn btn-success" style="font-size: 12px;">Register</button> 
+            <button (click)="cancel()" type="submit" class="btn btn-danger" style="font-size: 12px;">Cancel</button>
+    
+            <p class="text-center mt-4 w3-red">{{ message }}</p>
+        
+            <div class="container">
+                <p >Already have an account? <a routerLink="/login" class="text-center mt-4 w3-blue">Sign in</a></p>
+            </div>
+    </div> 
+  </div>
+</form>

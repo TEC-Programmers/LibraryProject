@@ -11,6 +11,7 @@ import { BookService } from 'app/_services/book.service';
 import { CategoryService } from 'app/_services/category.service';
 import { PublisherService } from 'app/_services/publisher.service';
 import { UserService } from 'app/_services/user.service';
+import { merge } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,13 +20,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-book.component.css']
 })
 export class AdminBookComponent implements OnInit {
+  public _author: Author = { id: 0, firstName: '', middleName: '', lastName: ''}
   authors: Author[] = [];
   author: Author = { id: 0, firstName: '', middleName: '', lastName: ''}
   publishers: Publisher[] = [];
   publisher: Publisher = { id: 0, name: ''}
+  public _publisher: Publisher = { id: 0, name: ''}
   books: Book[] = [];
-  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   categorys: Category[] = [];
+  _category: Category = { id: 0, categoryName: ''}
   isShown_author: boolean = true;
   isShown_publisher: boolean = true;
   isShown_category: boolean = true;
@@ -68,6 +72,11 @@ export class AdminBookComponent implements OnInit {
   imagePreviewSrc: string | ArrayBuffer | null | undefined = '';
   isImageSelected: boolean = false;
 
+  obj1 = {"fparams":{"keys":["a","b"],"pairs":{"p":"qwert"}},"qparams":{"x":"xyz"}}
+  obj2 = {"fparams":{"keys":["c","d"],"pairs":{"q":"yuiop"}},"qparams":{"z":"zyx"}}
+  file;
+  public getImageName: string = '';
+
   constructor(private userService: UserService, private authService: AuthService, private httpClient: HttpClient, private bookService: BookService, private authorService: AuthorService, private publisherService: PublisherService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
@@ -79,7 +88,6 @@ export class AdminBookComponent implements OnInit {
     this.authorService.getAllAuthors().subscribe(a => this.authors = a);
     this.publisherService.getAllPublishers().subscribe(p => this.publishers = p);
     this.categoryService.getAllCategories().subscribe(c => this.categorys = c);
-    console.log('admin-book ngOnInit | x = ',this.x)
   }
 
   ngAfterViewInit() {
@@ -260,7 +268,7 @@ export class AdminBookComponent implements OnInit {
   }
 
   cancel(): void {
-    this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+    this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
     this.author = { id: 0, firstName: '', middleName: '', lastName: '' };
     this.publisher = { id: 0, name: ''}
     this.authorId_value = false;
@@ -279,12 +287,15 @@ export class AdminBookComponent implements OnInit {
     this.isImageSelected = false;
   }
 
+ 
 
   edit_book(book: Book): void {
     this.message = '';
+    // this.book.image = this.book.image + '.jpg';
     this.book = book;
     this.book.id = book.id || 0;
     console.log(this.book);
+    console.log('image format: ',this.book.image) 
   }
 
   delete_book(book: Book): void {
@@ -296,10 +307,110 @@ export class AdminBookComponent implements OnInit {
     }
   }
 
+  update_Book(): void {
+    console.log(this.book)
+    this.message = '';
+
+    // check if book exsist's
+    if(this.book.id != 0) {
+      this.bookService.updateBook(this.book.id, this.book)
+      .subscribe({
+        error: (err) => {
+          console.log(err.error);
+          this.message = Object.values(err.error.errors).join(", ");
+        },
+        complete: () => {
+          this.message = '';
+          this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};      
+          Swal.fire({
+            title: 'Success!',
+            text: 'Book updated successfully',
+            icon: 'success',
+            confirmButtonText: 'Continue'
+          });        
+        }
+      });
+    }
+    else {
+      console.log("Didn't Find A Book To Update!")
+    }
+  }
+
 
   save_book(): void {
-    // INSERT AUTHOR
-    if(this.author.id == 0) {
+    this.book.image = this.getImageName;
+
+    // Pick author and publisher from dropdown
+    if (this.book.authorId > 0 && this.book.publisherId > 0) {
+
+    // GET Author
+    this.authorService.getAuthorById(this.book.authorId)
+    .subscribe({
+      next: (get_author) => {    
+        this._author = get_author;
+        this.book.authorId = this._author.id;
+        console.log('auhtor: ',this._author)
+        this.authors.push(this._author);
+        this._author = { id: 0, firstName: '', middleName: '', lastName: '' };
+          
+          // GET Publisher
+          this.publisherService.getPublisherById(this.book.publisherId)
+          .subscribe({
+            next: (get_publisher) => {
+              this._publisher = get_publisher;
+              this.book.publisherId = this._publisher.id;
+              
+              console.log('publisher: ',this._publisher)
+              this.publishers.push(this._publisher);
+              this._publisher = { id: 0, name: '' };
+
+              this.categoryService.getCategoryById(this.book.categoryId)
+              .subscribe({
+                next: (get_category) => {
+                  this._category = get_category;
+                  this.book.category.push(this._category);
+                  this._category = { id: 0, categoryName: '' };
+                  this.book.categoryId = get_category.id;
+
+                // INSERT BOOK
+                if(this.book.id == 0) {
+                  // this.book.categoryId = this.book.categoryId;
+                  console.log('Book Before Add: ',this.book)
+                  this.bookService.addBook(this.book)
+                  .subscribe({
+                    next: (x) => {
+                      this.books.push(x);
+                      this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
+                      this.message = '';
+                      this.imagePreviewSrc = '';
+                      Swal.fire({
+                        title: 'Success!',
+                        text: 'Book added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                      });
+                      this.authorId_value = false;
+                      this.isShown_author_form = false;
+                      this.btn_new_author = true;
+                      this.isShown_author = true;
+                    },
+                    error: (err) => {
+                      console.log(err.error);
+                      this.message = Object.values(err.error.errors).join(", ");
+                    }
+                  }); 
+                } 
+
+                }
+              })
+                                                           
+            }
+          })                
+      }
+    });
+    }
+    else { // create new author and publisher
+      console.log('author: ',this.author)
       this.authorService.addAuthor(this.author)
       .subscribe({
         next: (x) => {
@@ -322,11 +433,13 @@ export class AdminBookComponent implements OnInit {
 
                   // INSERT BOOK
                   if(this.book.id == 0) {
+                    // this.book.image = this.getImageName;
+                    // console.log('book: ',this.book)
                     this.bookService.addBook(this.book)
                     .subscribe({
                       next: (x) => {
                         this.books.push(x);
-                        this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+                        this.book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
                         this.message = '';
                         Swal.fire({
                           title: 'Success!',
@@ -357,7 +470,31 @@ export class AdminBookComponent implements OnInit {
             console.log(err.error);
             this.message = Object.values(err.error.errors).join(", ");
           }
-      });  
+      });
     }
+    this.isImageSelected = false;
   } 
+
+  getImageDetails(event) {
+    // loop through input image
+      for (var i = 0; i < event.target.files.length; i++) { 
+        // save image-name from input
+        this.getImageName = event.target.files[i].name;
+      
+        // var type = event.target.files[i].type;
+        // var size = event.target.files[i].size;
+        // var modifiedDate = event.target.files[i].lastModifiedDate;
+        
+        // console.log ('Name: ' + name + "\n" + 
+        //   'Type: ' + type + "\n" +
+        //   'Last-Modified-Date: ' + modifiedDate + "\n" +
+        //   'Size: ' + Math.round(size / 1024) + " KB");
+      }   
+  }
+
+  
 }
+
+
+
+   

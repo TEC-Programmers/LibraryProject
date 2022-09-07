@@ -16,7 +16,6 @@ import { UserService } from './_services/user.service';
 })
 export class AppComponent {
   title = 'LibraryProject-Client';
-
   book!: Book;
   counter = 0;
   total: number = 0;
@@ -28,10 +27,8 @@ export class AppComponent {
   public searchTerm: string = "";
   x:any;
 
- 
   displayedColumns:string[]=[' categoryName', 'categoryName'];
   dataSource =new MatTableDataSource<Category>();
-
 
   constructor(private bookService: BookService,
     private categoryService: CategoryService,
@@ -43,6 +40,13 @@ export class AppComponent {
 
   }
 
+  navProfile() {
+    this.router.navigate(['profile/customerpanel'])
+    .then(() => {
+      window.location.reload();
+    });
+  }
+
   logout() {
     if (confirm('Are you sure you want to log out?')) {
       this.userService.getRole_(0);      
@@ -52,7 +56,10 @@ export class AppComponent {
       // subscribe to the changes in currentUser, and load Home component
       this.authService.currentUser.subscribe(x => {
         this.currentUser = x;
-        this.router.navigate(['login']);
+        this.router.navigate(['login'])
+        .then(() => {
+          window.location.reload();
+        });
       });
     }
     else {
@@ -87,22 +94,25 @@ export class AppComponent {
 
 
     showOrhideAdminBtn() {
-        this.authService.currentUser.subscribe(x => {
-            this.currentUser = x;
-
-            if (this.currentUser) {
-                if (this.currentUser.role.toString() === 'Administrator') {
-                    this.userService.getRole$.subscribe(x => this.x = x); // start listening for changes 
-                }
-                else {
-                    this.userService.getRole_(0);
-                }
-            }
-            else {
-                this.userService.getRole_(0);
-            }
-        });
+      this.authService.currentUser.subscribe(x => {
+      this.currentUser = x;
+    
+      if (this.currentUser) {
+        this.userService.getRole$.subscribe(x => this.x = x ); // start listening for changes 
+          if (this.currentUser.role.toString() === 'Administrator') {
+            this.userService.getRole_(1);
+          }
+          else {
+            this.userService.getRole_(0);
+          }
+        }
+        else {
+          this.userService.getRole_(0);
+        } 
+      });
     }
+
+    
     itemClicked(item){
       
     }
@@ -123,6 +133,7 @@ export class AppComponent {
       this.router.navigate(['/Book', this.filterTerm]);
     }
   }
+
   checkSearch(event: any) {
     if (event.key === "Enter" || this.filterTerm == null) {
       this.allBooks = [];
@@ -132,4 +143,5 @@ export class AppComponent {
       this.router.navigate(['/Book', this.filterTerm]);
     }
   }
+
 }

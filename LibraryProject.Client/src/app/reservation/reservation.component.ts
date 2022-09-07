@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Reservation } from 'app/_models/Reservation';
@@ -27,18 +27,15 @@ export class ReservationComponent implements OnInit {
   reserved_at: string = '';
   currentDate = new Date();
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
-  // minDate = new Date(this.dateNow);
-  // minDate2 = new Date(this.minDate)
-  book: Book = {id: 0, title: "", description: "", language: "", image: "",publishYear:0, authorId:0, categoryId:0,publisherId:0, author:{id:0,firstName:"",lastName:""} , publisher: {id:0, name:""}};
+  book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   public formatted_return_date;
   public formatted_reserved_at;
   public minDate = new Date();
   public maxDate = new Date();
   total_loans: Loan[] = [];
-  dateHolder;
-  // returnDate_converted: Date = new Date();
+  isDisabled_reserveBtn = true;
 
-  constructor(private loanService: LoanService, private router: Router, private reservationService: ReservationService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private bookService: BookService, private route:ActivatedRoute, private authService: AuthService) { }
+  constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private reservationService: ReservationService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private bookService: BookService, private route:ActivatedRoute, private authService: AuthService) { }
 
   range = new FormGroup({
     fromDate: new FormControl('', Validators.required),
@@ -46,6 +43,7 @@ export class ReservationComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#472c19';
     this.dateRangeForm = this.formBuilder.group({
       fromDate: new FormControl('', Validators.required),
       toDate: new FormControl('', Validators.required),
@@ -53,11 +51,16 @@ export class ReservationComponent implements OnInit {
 
     // gets clicked reservation.id
     this.bookId = this.route.snapshot.params['id'];
-
-    this.bookService.getBookById(this.bookId).subscribe(x => {
-      this.book = x;
-    })
+    this.bookService.getBookById(this.bookId).subscribe(x => { this.book = x; })
     this.setReservationMinDate();
+  }
+
+  setReservationMaxDate() {
+    // convert minimum date: (reserved_at) to Date() format
+    var convertStringToDate = new Date(this.reserved_at);
+
+    // Increment minimum date: (reserved_at) with 1 day - Because You Atleast Need To Rent The Book For 1 day 
+    this.maxDate.setDate(convertStringToDate.getDate() + 1);
   }
 
   setReservationMinDate() {
@@ -69,18 +72,18 @@ export class ReservationComponent implements OnInit {
         var getBookReturnDate = this.total_loans.filter((loan) => {
           return ((loan["bookId"] == this.bookId))
         })
+
+        // save current loan's return_date
         var returnDate_converted = new Date(getBookReturnDate[0].return_date)
+
+        // set start reservation minimum date
         this.minDate.setDate(returnDate_converted.getDate() + 1);  
-        this.maxDate.setDate(this.minDate.getDate() + 1);
       }
     })
   }
 
 
   onFormSubmit() {
-    console.log('Is Form Invalid', this.dateRangeForm.invalid);
-    console.log('book id: ',this.book.id)
-
     if (this.authService.currentUserValue.id !== null && this.authService.currentUserValue.id > 0) {
 
       this.formatted_return_date = moment(this.return_date).format("YYYY/MM/DD")
@@ -94,7 +97,6 @@ export class ReservationComponent implements OnInit {
           reserved_At: this.formatted_reserved_at
         }
 
-        // console.log('reservationitem: ',reservationitem)
         this.reservation = reservationitem;
         console.log('reservation object: ',this.reservation)
         if (this.reservation) {
@@ -112,7 +114,8 @@ export class ReservationComponent implements OnInit {
                 confirmButtonText: 'Continue'
               });
               console.log('reservation added successfully!')
-              this.router.navigate(['Book-Details/',this.bookId]);
+              this.router.navigate(['book_details/',this.bookId]);
+              
             },
             error: (err) => {
               console.log(err.error);
@@ -122,5 +125,4 @@ export class ReservationComponent implements OnInit {
         }
       }
     }
-
 }

@@ -21,7 +21,7 @@ export class ActiveLoansComponent implements OnInit {
 
   total_books: Book[] = [];
   yourBooks: Book[] = [];
-  yourBook: Book | undefined = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: [], publisher: { id: 0, name: ''}, author: { id: 0, firstName: '', lastName: ''} };
+  yourBook: Book | undefined = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   getAll_books: Book[] = [];
 
   yourId: number = 0;
@@ -103,10 +103,9 @@ export class ActiveLoansComponent implements OnInit {
 
         if (this.yourBook) {
           this.bookArray.push(this.yourBook);
-          // console.log('Book Found: ', this.yourBooks)
         }
         else {
-          console.log('getActiveBookInLoan() Error: Book (NOT) Found!')
+          console.log('loan getActiveBookInLoan() Error: Book (NOT) Found!')
         }
       }          
     })
@@ -130,6 +129,7 @@ export class ActiveLoansComponent implements OnInit {
         this.yourLoans.forEach(loan => {
           this.bookId = loan.bookId;
           this.array.push(loan)
+
           if (this.array.length > 0) {
             this.getActiveBookInLoan(this.bookId);
           }

@@ -1,7 +1,7 @@
 .table {
     position: absolute;
-    left: 219px;
-    top: 144px;
+    left: 229px;
+    top: 195px;
 }
 
 * {
@@ -119,10 +119,11 @@ body {
 .clip-text_eight {
     background-image: url(../../../assets/images/all-white-pic.jpg);
     left: 417px;
-    top: -25px;
+    top: 66px;
     width: 1000px;
     height: 248px;
 }
+
 
 #body{
     /* background: radial-gradient(#e66465, #9198e5); */
