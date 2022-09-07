@@ -61,17 +61,17 @@ export class FrontpageComponent implements OnInit {
 
 
     constructor(private bookService: BookService,
-      private categoryService: CategoryService,  
-       private route: ActivatedRoute, 
+      private categoryService: CategoryService,
+       private route: ActivatedRoute,
        private router: Router,
         private ref: ChangeDetectorRef,
-         private authService: AuthService, 
+         private authService: AuthService,
          private userService: UserService) {
 
   }
 
   ngOnInit(): void {
-    
+
     this.route.params.subscribe(params => {
       if (params['filterTerm']) {
         this.bookService.getAllBooks().subscribe(x => {
@@ -127,16 +127,15 @@ export class FrontpageComponent implements OnInit {
     }
   }
 
- 
 
 
 
 
-  
-  
+
+
 /*   ngAfterContentChecked(): void {
     this.ref.detectChanges();
-    this.showOrhideAdminBtn();  
+    this.showOrhideAdminBtn();
   } */
 
 
