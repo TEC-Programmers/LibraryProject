@@ -32,7 +32,7 @@ export class BookComponent implements OnInit {
           x.title.toLowerCase().includes(this.searchKey.toLowerCase()) || x.description.toLowerCase().includes(this.searchKey.toLowerCase())
 
       )});
-    }); 
+    });
     this.route.queryParams.subscribe(params => {
       if(params['searchTerm'])
       this.searchTerm=params['searchTerm'];
