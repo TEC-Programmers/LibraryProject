@@ -9,6 +9,7 @@ using LibraryProject.API.DTO_s;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.Database.Entities;
+using BC = BCrypt.Net.BCrypt;
 
 namespace LibraryProject.API.Services
 {
@@ -63,14 +64,14 @@ namespace LibraryProject.API.Services
 
         public async Task<UserResponse> Register(UserRequest newuser)
         {
+
             User user = new User
             {
-
                 FirstName = newuser.FirstName,
                 MiddleName = newuser.MiddleName,
                 LastName = newuser.LastName,
                 Email = newuser.Email,
-                Password = newuser.Password,
+                Password = BC.HashPassword(newuser.Password),
                 Role = Helpers.Role.Customer // force all users created through Register, to Role.User
             };
 
@@ -99,8 +100,8 @@ namespace LibraryProject.API.Services
             {
                 return null;
             }
-
-            if (user.Password == login.Password)
+            //user.Password == login.Password
+            if (BC.Verify(login.Password, user.Password))
             {
                 LoginResponse response = new LoginResponse
                 {
@@ -153,6 +154,7 @@ namespace LibraryProject.API.Services
                 MiddleName = updateUser.MiddleName,
                 LastName = updateUser.LastName,
                 Email = updateUser.Email,
+                //Password = BC.HashPassword(updateUser.Password),
                 Password = updateUser.Password,
             };
 
@@ -166,6 +168,7 @@ namespace LibraryProject.API.Services
                 LastName = user.LastName,
                 Email = user.Email,
                 Password = user.Password,
+                //Password = BC.HashPassword(user.Password),
                 //Role = user.Role
             };
         }

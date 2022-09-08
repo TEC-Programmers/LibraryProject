@@ -1,10 +1,10 @@
-<div class="w3-container">
+<div class="w3-container" class="mainform">
     <h4>Your Profile:</h4><br>
       <table class="w3-table w3-bordered w3-striped">
           <tbody>
               <tr>
                 <th>Email</th>
-                <th>Password</th>
+                <!-- <th>Password</th> -->
                 <th>FirstName</th>
                 <th>MiddleName</th>
                 <th>LastName</th>             
@@ -13,24 +13,24 @@
               </tr>
               <tr>
                 <td>{{ currentUser.email}}</td>
-                <td>{{ currentUser.password }}</td>
+                <!-- <td>{{ currentUser.password }}</td> -->
                 <td>{{ currentUser.firstName }}</td>
                 <td>{{ currentUser.middleName }}</td>
                 <td>{{ currentUser.lastName }}</td>             
                 <td>{{ currentUser.role }}</td>
                 <td>
-                <button class="w3-btn w3-yellow w3-ripple" (click)="edit(currentUser)">&#9998; Edit</button>         
+                <button class="w3-btn w3-yellow w3-ripple" (click)="edit(currentUser)" [disabled]="!showForm">&#9998; Edit</button>         
                 </td>
               </tr>
       </table>
       <br>
       <hr>
-      <div>
+      <div *ngIf="showForm" class="editForm">
           <label>Email</label>
           <input class="w3-input w3-border" [(ngModel)]="user.email">
   
-          <label>Password</label>
-          <input class="w3-input w3-border" [(ngModel)]="user.password">
+          <!-- <label>Password</label> -->
+          <input class="w3-input w3-border" [(ngModel)]="user.password" hidden>
   
           <label>FirstName</label>
           <input class="w3-input w3-border" [(ngModel)]="user.firstName">
@@ -41,10 +41,26 @@
           <label>LastName</label>
           <input class="w3-input w3-border" [(ngModel)]="user.lastName">  
       </div><br>
-      <div style="justify-content: center; align-items:center; display: flex;">
-          <button class="w3-btn w3-green w3-ripple" (click)="save()">Save</button>&nbsp;&nbsp;
-          <button class="w3-btn w3-blue w3-ripple" (click)="cancel()">Cancel</button>&nbsp;&nbsp;
+      <div style="justify-content: center; align-items:center; display: flex;" *ngIf="showForm" class="editForm">
+          <button class="w3-btn w3-green w3-ripple" (click)="save()" [disabled]="!user.email || !user.password || !user.firstName || !user.middleName || !user.lastName">Save</button>&nbsp;&nbsp;
+          <button class="w3-btn w3-blue w3-ripple" (click)="cancel()" [disabled]="!user.email || !user.password || !user.firstName || !user.middleName || !user.lastName">Cancel</button>&nbsp;&nbsp;
           <button class="w3-btn w3-red w3-ripple" routerLink="customerpanel">Back</button> <br><br>
           <span class="w3-red" id="error_message">{{ message }}</span>
       </div>
+      <p class="text-center mt-4" (click)="hideForm(currentUser)" *ngIf="showForm"><a routerLink="/profile">Forgot password?</a></p>
+
+      <div class="forgotPass" *ngIf="!showForm">
+        <br>
+        <label>(enter) new password</label>
+        <input class="w3-input w3-border" [(ngModel)]="user.password" placeholder="new password" style="width: 300px;">
+        <br><br>
+        <div class="newPassBtns" *ngIf="!showForm">
+          <button class="w3-btn w3-green w3-ripple" (click)="save()" [disabled]="!user.password">Save</button>&nbsp;&nbsp;
+          <button class="w3-btn w3-blue w3-ripple" (click)="cancelNewPass()" [disabled]="!user.password">Cancel</button>&nbsp;&nbsp;
+          <button class="w3-btn w3-red w3-ripple" routerLink="/profile" (click)="returnFromNewPass()">Back</button> <br><br>
+          <span class="w3-red" id="error_message">{{ message }}</span>
+        </div>
+      </div><br>
+
+      
 </div>

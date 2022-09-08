@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'app/_services/auth.service';
 import { UserService } from 'app/_services/user.service';
 import { Role } from 'app/_models/Role';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,7 @@ export class ProfileComponent implements OnInit {
   message: string[] = [];
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
+  showForm: Boolean = true;
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService, private elementRef: ElementRef) {
     // get the current user from authentication service
@@ -35,6 +37,19 @@ export class ProfileComponent implements OnInit {
     setTimeout(() => {
       this.showOrhideAdminBtn();
     });
+  }
+
+  returnFromNewPass() {
+    this.showForm = true;
+    this.user = this.newUser();
+  }
+
+  hideForm(user: User) {
+    this.showForm = false;
+    this.user = user;
+    this.user.password = '';
+    this.message = [];
+    console.log('user: ',user)
   }
 
   showOrhideAdminBtn() {
@@ -65,6 +80,11 @@ export class ProfileComponent implements OnInit {
     this.message = [];
   }
 
+  cancelNewPass(): void {
+    this.message = [];
+    this.user.password = '';
+  }
+
   cancel(): void {
     this.message = [];
     this.user = this.newUser();
@@ -72,6 +92,10 @@ export class ProfileComponent implements OnInit {
 
   save(): void {
     this.message = [];
+
+    if (this.user.password.length < 6) {
+      this.message.push('Password length must be atleast 6 characters');
+    }
 
     if (this.user.email == '') {
       this.message.push('Enter Email');
@@ -105,18 +129,23 @@ export class ProfileComponent implements OnInit {
       {
         (confirm('To view the updated profile kindly "Sign in" again....!'))
         
-        // ERROR HERE: WHEN UPDATING USER, USER.ROLE IS = 'ADMINISTRATOR' EVERYTIME
-        // this.userService.updateUser(this.user.id , this.user)
-        // .subscribe(() => {
-        //   this.user = this.newUser();
-        // });
-
         if(this.user.role.toString() === 'Customer') {
           console.log('True customer')
           console.log('cus user: ',this.user)
           this.userService.updateUser(this.user.id, this.user)
               .subscribe(() => {
                 this.user = this.newUser();
+                if (this.showForm == false) {
+                  console.log('confirm message here')
+                  this.showForm = true;
+                  // confrim message
+                  Swal.fire({
+                    title: 'Success!',
+                    text: 'Password updated Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Continue'
+                  });        
+                }
               });
         }
         else if(this.user.role.toString() === 'Administrator') {

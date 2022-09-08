@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-    public partial class library : Migration
+    public partial class db_PassLength_update : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,7 +89,7 @@ namespace LibraryProject.API.Migrations
                     MiddleName = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(32)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(128)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -158,8 +158,8 @@ namespace LibraryProject.API.Migrations
                 columns: new[] { "Id", "bookId", "loaned_At", "return_date", "userId" },
                 values: new object[,]
                 {
-                    { 1, 2, "06/05/22", "13/05/22", 2 },
-                    { 3, 5, "27/06/22", "27/07/22", 4 }
+                    { 1, 2, "2022/05/07", "2022/05/08", 2 },
+                    { 3, 5, "2022/06/07", "2022/07/08", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -176,8 +176,8 @@ namespace LibraryProject.API.Migrations
                 columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "userId" },
                 values: new object[,]
                 {
-                    { 1, 1, "06/05/22", "13/05/22", 1 },
-                    { 2, 2, "14/05/22", "21/05/22", 2 }
+                    { 1, 2, "2022/08/08", "2022/09/09", 2 },
+                    { 2, 5, "2022/08/08", "2022/08/09", 2 }
                 });
 
             migrationBuilder.InsertData(

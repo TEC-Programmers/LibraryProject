@@ -9,7 +9,7 @@ namespace LibraryProject.API.DTO_s
         public string Email { get; set; }
 
         [Required]
-        [StringLength(32, ErrorMessage = "Password must be less than 32 chars")]
+        [StringLength(255, ErrorMessage = "Password must be less than 255 chars")]
         public string Password { get; set; }
 
         [Required]

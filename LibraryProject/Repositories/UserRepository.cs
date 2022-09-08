@@ -5,6 +5,7 @@ using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace LibraryProject.API.Repositories
 {
@@ -86,7 +87,9 @@ namespace LibraryProject.API.Repositories
                 updateUser.FirstName = user.FirstName;
                 updateUser.MiddleName = user.MiddleName;
                 updateUser.LastName = user.LastName;
-                updateUser.Password = user.Password;
+                //updateUser.Password = user.Password;
+                updateUser.Password = BC.HashPassword(user.Password);
+
                 //updateUser.Role = user.Role;
                 await _context.SaveChangesAsync();
             }

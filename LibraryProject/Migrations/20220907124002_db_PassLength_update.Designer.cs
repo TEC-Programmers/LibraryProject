@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.API.Migrations
 {
     [DbContext(typeof(LibraryProjectContext))]
-    [Migration("20220810120523_library")]
-    partial class library
+    [Migration("20220907124002_db_PassLength_update")]
+    partial class db_PassLength_update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,16 +48,16 @@ namespace LibraryProject.API.Migrations
                         {
                             Id = 1,
                             bookId = 2,
-                            loaned_At = "06/05/22",
-                            return_date = "13/05/22",
+                            loaned_At = "2022/05/07",
+                            return_date = "2022/05/08",
                             userId = 2
                         },
                         new
                         {
                             Id = 3,
                             bookId = 5,
-                            loaned_At = "27/06/22",
-                            return_date = "27/07/22",
+                            loaned_At = "2022/06/07",
+                            return_date = "2022/07/08",
                             userId = 4
                         });
                 });
@@ -116,17 +116,17 @@ namespace LibraryProject.API.Migrations
                         new
                         {
                             Id = 1,
-                            bookId = 1,
-                            reserved_At = "06/05/22",
-                            reserved_To = "13/05/22",
-                            userId = 1
+                            bookId = 2,
+                            reserved_At = "2022/08/08",
+                            reserved_To = "2022/09/09",
+                            userId = 2
                         },
                         new
                         {
                             Id = 2,
-                            bookId = 2,
-                            reserved_At = "14/05/22",
-                            reserved_To = "21/05/22",
+                            bookId = 5,
+                            reserved_At = "2022/08/08",
+                            reserved_To = "2022/08/09",
                             userId = 2
                         });
                 });
@@ -283,7 +283,7 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("nvarchar(32)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
