@@ -68,7 +68,7 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(62)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -137,13 +137,13 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -180,13 +180,13 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(MAX)");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Language")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<short>("PublishYear")
                         .HasColumnType("smallint");
@@ -195,7 +195,7 @@ namespace LibraryProject.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
@@ -242,7 +242,7 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -269,19 +269,23 @@ namespace LibraryProject.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
+<<<<<<< HEAD
                         .HasColumnType("nvarchar(255)");
+=======
+                        .HasColumnType("nvarchar(50)");
+>>>>>>> Bilal_Branch
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -299,7 +303,7 @@ namespace LibraryProject.API.Migrations
                             LastName = "Aksten",
                             MiddleName = "Per.",
                             Password = "password",
-                            Role = 0
+                            Role = 1
                         },
                         new
                         {
@@ -309,7 +313,7 @@ namespace LibraryProject.API.Migrations
                             LastName = "Mustafa",
                             MiddleName = "R.R",
                             Password = "password",
-                            Role = 1
+                            Role = 0
                         });
                 });
 

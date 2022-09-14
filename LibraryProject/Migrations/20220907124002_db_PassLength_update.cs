@@ -2,7 +2,11 @@
 
 namespace LibraryProject.API.Migrations
 {
+<<<<<<< HEAD:LibraryProject/Migrations/20220907124002_db_PassLength_update.cs
     public partial class db_PassLength_update : Migration
+=======
+    public partial class Project : Migration
+>>>>>>> Bilal_Branch:LibraryProject/Migrations/20220816060732_Project.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -185,8 +189,8 @@ namespace LibraryProject.API.Migrations
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "MiddleName", "Password", "Role" },
                 values: new object[,]
                 {
-                    { 1, "peter@abc.com", "Peter", "Aksten", "Per.", "password", 0 },
-                    { 2, "riz@abc.com", "Rizwanah", "Mustafa", "R.R", "password", 1 }
+                    { 1, "peter@abc.com", "Peter", "Aksten", "Per.", "password", 1 },
+                    { 2, "riz@abc.com", "Rizwanah", "Mustafa", "R.R", "password", 0 }
                 });
 
             migrationBuilder.InsertData(

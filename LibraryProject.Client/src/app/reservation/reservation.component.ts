@@ -86,8 +86,8 @@ export class ReservationComponent implements OnInit {
   onFormSubmit() {
     if (this.authService.currentUserValue.id !== null && this.authService.currentUserValue.id > 0) {
 
-      this.formatted_return_date = moment(this.return_date).format("YYYY/MM/DD")  
-      this.formatted_reserved_at = moment(this.reserved_at).format("YYYY/MM/DD")  
+      this.formatted_return_date = moment(this.return_date).format("YYYY/MM/DD")
+      this.formatted_reserved_at = moment(this.reserved_at).format("YYYY/MM/DD")
 
         let reservationitem: Reservation = {
           id: 0,

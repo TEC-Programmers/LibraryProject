@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Role } from './_models/Role';
 import { RouterModule, Routes } from '@angular/router';
-import { BookDetailsComponent } from './book/book-details/book-details.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
 import { CategoryComponent } from './category/category.component';
 import { AdministratorComponent } from './administration/administrator/administrator.component';

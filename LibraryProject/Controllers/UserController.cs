@@ -24,7 +24,7 @@ namespace LibraryProject.API.Controllers
         }
 
         //[Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
-        [AllowAnonymous]
+        [AllowAnonymous]// till alle 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -56,7 +56,7 @@ namespace LibraryProject.API.Controllers
         }
         
 
-        [AllowAnonymous]
+        [AllowAnonymous]// igen til allesammen
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
