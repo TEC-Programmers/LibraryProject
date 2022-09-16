@@ -29,16 +29,16 @@ namespace LibraryProject.API.Controllers
         {
             try
             {
-                List<BookResponse> productResponses = await _bookService.GetAllBooks();
-                if (productResponses == null)
+                List<BookResponse> bookResponses = await _bookService.GetAllBooks();  //getting 
+                if (bookResponses == null)
                 {
                     return Problem("Got no data, not even an empty list, this is unexpected");
                 }
-                if (productResponses.Count == 0)
+                if (bookResponses.Count == 0)
                 {
                     return NoContent();
                 }
-                return Ok(productResponses);
+                return Ok(bookResponses);
             }
             catch (Exception ex)
             {
