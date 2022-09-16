@@ -96,7 +96,7 @@ namespace LibraryProject.API.Repositories
             }
             return updateBook;
         }
-        //This method will remove all the details of one book by bookID
+        //This method will remove all the details of one specific book by bookID
         public async Task<Book> DeleteBookById(int bookId)
         {
             Book deleteBook = await _context.Book.

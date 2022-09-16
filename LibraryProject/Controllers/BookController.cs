@@ -29,7 +29,7 @@ namespace LibraryProject.API.Controllers
         {
             try
             {
-                List<BookResponse> bookResponses = await _bookService.GetAllBooks();  //getting 
+                List<BookResponse> bookResponses = await _bookService.GetAllBooks();  //getting all books info from service 
                 if (bookResponses == null)
                 {
                     return Problem("Got no data, not even an empty list, this is unexpected");
@@ -61,7 +61,7 @@ namespace LibraryProject.API.Controllers
         {
             try
             {
-                BookResponse bookResponse = await _bookService.GetBookById(bookId);
+                BookResponse bookResponse = await _bookService.GetBookById(bookId);     //getting one specific book's info( by id) from service and storing in an object
 
                 if (bookResponse == null)
                 {
@@ -89,16 +89,16 @@ namespace LibraryProject.API.Controllers
         {
             try
             {
-                List<BookResponse> productResponse = await _bookService.GetBooksByCategoryId(categoryId);
-                if (productResponse == null)
+                List<BookResponse> bookResponse = await _bookService.GetBooksByCategoryId(categoryId);
+                if (bookResponse == null)
                 {
                     return Problem("Got no data, not even an empty list, this is unexpected");
                 }
-                if (productResponse.Count == 0)
+                if (bookResponse.Count == 0)
                 {
                     return NoContent();
                 }
-                return Ok(productResponse);
+                return Ok(bookResponse);
             }
             catch (Exception ex)
             {
