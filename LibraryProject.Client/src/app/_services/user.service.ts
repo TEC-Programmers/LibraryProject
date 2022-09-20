@@ -35,7 +35,7 @@ export class UserService {
   }
 
   registerUser(user: User): Observable<User>{
-    return this.http.post<User>(this.apiUrl + `/register`, user, this.httpOptions);
+    return this.http.post<User>(this.apiUrl + `/registerWithProcedure`, user, this.httpOptions);
   }
 
   updateUser(id: number, user:User): Observable<User> {

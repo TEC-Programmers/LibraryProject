@@ -11,7 +11,7 @@ namespace LibraryProject.API.Database.Entities
         [Key]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "nvarchar(62)")]
         public string Name { get; set; }
 
     }

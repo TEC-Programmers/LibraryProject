@@ -7,6 +7,10 @@ section{
 
 }
 
+#w3-red{
+ margin-left: 10px;
+}
+
 #lock {
     position: absolute;
     margin-left: 289px;
@@ -17,6 +21,3 @@ section{
 
 }
 
-.input-group-append {
-
-}

@@ -25,7 +25,6 @@ export class LoanComponent implements OnInit {
   return_date: string = '';
   loaned_at: string = '';
   currentDate = new Date();
-  // dateNow = this.currentDate.getHours() + ":" + this.currentDate.getMinutes();
   dateNow = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   minDate = new Date(this.dateNow);
   maxDate = new Date();

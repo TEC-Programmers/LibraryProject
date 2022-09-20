@@ -7,6 +7,10 @@ using System;
 using System.Threading.Tasks;
 using LibraryProject.API.Helpers;
 using System.Collections.Generic;
+using LibraryProject.Database.Entities;
+using LibraryProject.API.Repositories;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace LibraryProject.API.Controllers
 {
@@ -18,13 +22,13 @@ namespace LibraryProject.API.Controllers
     {
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IUserRepository userRepository)
         {
             _userService = userService;
         }
 
         //[Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
-        [AllowAnonymous]// till alle 
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -54,19 +58,18 @@ namespace LibraryProject.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        
 
-        [AllowAnonymous]// igen til allesammen
+        //[AllowAnonymous]
+        [Authorize(Role.Customer, Role.Administrator)]
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register([FromBody] UserRequest newUser)
+        public async Task<IActionResult> RegisterWithProcedure([FromBody] UserRequest newUser)
         {
             try
-            {
-
-                UserResponse user = await _userService.Register(newUser);
+            {              
+                UserResponse user = await _userService.registerWithProcedure(newUser);
                 return Ok(user);
 
             }

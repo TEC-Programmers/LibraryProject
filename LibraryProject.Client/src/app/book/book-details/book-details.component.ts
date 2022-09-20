@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Book } from '../_models/Book';
-import { BookService } from '../_services/book.service';
-import { AuthService } from '../_services/auth.service';
+import { Book } from '../../_models/Book';
+import { BookService } from '../../_services/book.service';
+import { AuthService } from '../../_services/auth.service';
 import { LoanService } from 'app/_services/loan.service';
 import { Loan } from 'app/_models/Loan';
 import { ReservationService } from 'app/_services/reservation.service';
@@ -48,24 +48,24 @@ export class BookDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']);    
     }
     else {
       this.checkUserStatus();
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';
       this.bookService.getAllBooks().subscribe(b => this.books = b);
       this.userService.getAllUsers().subscribe(u => this.users = u);
-
-
+      
+  
       this.route.params.subscribe(params => {
         this.bookId = +params['id'];
       });
-
-      this.bookService.getBookById(this.bookId).subscribe(x => {
+  
+      this.bookService.getBookById(this.bookId).subscribe(x => { 
         this.book = x;
       });
-
-      this.checkIfLoanOrReservationExists();
+       
+      this.checkIfLoanOrReservationExists();   
       this.checkStatus();
       this.deleteOutdatedLoans();
       this.deleteOutdatedReservations();
@@ -86,15 +86,15 @@ export class BookDetailsComponent implements OnInit {
 
               // convert return date to type Date
               var storedDates_converted = new Date(storedDates)
-
+    
               if (this.dateToday > storedDates_converted) {
                 var storedDates_reverted = formatDate(storedDates_converted, 'yyyy/MM/dd', 'en-US');
-
+    
                 // get all loans that has higher 'return_date' than current day today and then delete them.
                 var getExpiredReservations = this.total_reservations.filter((reservation) => {
                 return ((reservation["reserved_To"] == storedDates_reverted))
               })
-
+    
                 // Delete All Outdated reservation's
                 this.reserveService.deleteReservation(getExpiredReservations[0].id)
                 .subscribe(() => {
@@ -112,7 +112,7 @@ export class BookDetailsComponent implements OnInit {
     })
   }
 
-
+  
 
   deleteOutdatedLoans() {
     this.loanService.getAllLoans().subscribe({
@@ -122,32 +122,32 @@ export class BookDetailsComponent implements OnInit {
             for (let date of this.total_loans) {
               // get book return date
               var storedDates = date.return_date;
-
+    
               // convert return date to type Date
               var storedDates_converted = new Date(storedDates)
-
+                  
               if (this.dateToday > storedDates_converted) {
                 var storedDates_reverted = formatDate(storedDates_converted, 'yyyy/MM/dd', 'en-US');
-
+    
                 // get all loans that has higher 'return_date' than current day today and then delete them.
                 var getExpiredLoans = this.total_loans.filter((loan) => {
                 return ((loan["return_date"] == storedDates_reverted))
               })
-
+           
                 // Delete All Outdated loan's
                 this.loanService.DeleteLoan(getExpiredLoans[0].id)
                 .subscribe(() => {
                 this.total_loans = this.total_loans.filter(loan => loan.id !== getExpiredLoans[0].id)
                 console.log('deleted Loans: ',getExpiredLoans)
-              })
+              })    
             }
               else
               {
-                console.log("No Expired Loan's")
+                console.log("No Expired Loan's")      
               }
-            }
+            }  
         }
-
+        
       }
     })
   }
@@ -157,7 +157,7 @@ export class BookDetailsComponent implements OnInit {
     // Check if current book is borrowed/reserved
     if (!this.bookBorrowed && !this.bookReserved) {
       this.isDisabled_reserveBtn = true;
-    }
+    }  
   }
 
   checkUserStatus() {
@@ -166,7 +166,7 @@ export class BookDetailsComponent implements OnInit {
     }
   }
 
-
+  
   checkReservation() {
     this.reserveService.getAllReservations().subscribe({
       next: (all_reservations) => {
@@ -177,24 +177,24 @@ export class BookDetailsComponent implements OnInit {
           this.userLoggedIn_res = this.reservations.find((res) => {
             return ((res["bookId"] === this.bookId) && (res["userId"] === this.userId));
          })
-
+  
          this.bookReserved = this.reservations.find((res) => {
-           return ((res["bookId"] === this.bookId) && (res["userId"] !== this.userId));
+           return ((res["bookId"] === this.bookId) && (res["userId"] !== this.userId));    
          })
         }
 
         if (this.userLoggedIn_res) {
           this.isDisabled_reserveBtn = true; // NOT Active
-          console.log('[ YOU ] have an active reservation')
+          console.log('[ YOU ] have an active reservation')       
         }
         else if (this.bookReserved)
-        {
+        {             
           this.isDisabled_reserveBtn = true;
           console.log('[ SOMEONE ] have an active reservation')
         }
         else if (this.userLoggedIn && this.bookBorrowed && !this.bookReserved && !this.userLoggedIn_res) {
           this.isDisabled_reserveBtn = false;
-          console.log('[ ANY EXCEPT BORROWER ] can reserve this book')
+          console.log('[ ANY EXCEPT BORROWER ] can reserve this book')     
         }
       }
     })
@@ -205,26 +205,26 @@ export class BookDetailsComponent implements OnInit {
       next: (all_loans) => {
         this.loans = all_loans;
         this.userId = this.authService.currentUserValue.id;
-
+ 
        if (this?.loans) {
-        // user: logged in | check if user logged in has borrowed a book
+        // user: logged in | check if user logged in has borrowed a book  
         this.userLoggedIn = this.loans.find((loan) => {
           return ((loan["bookId"] === this.bookId) && (loan["userId"] === this.userId));
         })
 
         // user: (NOT) logged in | check if book is borrowed by another
         this.bookBorrowed = this.loans.find((loan) => {
-          return ((loan["bookId"] === this.bookId) && (loan["userId"] !== this.userId));
+          return ((loan["bookId"] === this.bookId) && (loan["userId"] !== this.userId));    
         })
        }
-
+        
         if (this.userLoggedIn) {
           this.isDisabled_loanBtn = true; // inactive
-          console.log("[ YOU ] have an active Borrow/Borrow's")
+          console.log("[ YOU ] have an active Borrow/Borrow's")   
           this.isDisabled_reserveBtn = true;
         }
         else if (this.bookBorrowed && !this.userLoggedIn_res && !this.bookReserved)
-        {
+        {             
           this.isDisabled_loanBtn = true;
           console.log("[ SOMEONE ] have an active Borrow/Borrow's")
           this.isDisabled_reserveBtn = false;
@@ -237,10 +237,10 @@ export class BookDetailsComponent implements OnInit {
       },
     });
   }
-
+  
 
   // (CHECK) if Loan's/Reservation's already exist's
-  checkIfLoanOrReservationExists() {
+  checkIfLoanOrReservationExists() { 
     this.checkLoan();
     this.checkReservation();
   }
@@ -249,13 +249,13 @@ export class BookDetailsComponent implements OnInit {
   loan(book:Book){
     if (this.authService.currentUserValue == null || this.authService.currentUserValue.id == 0) {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
-      this.router.navigate(['/Login']);
+      this.router.navigate(['/Login']);    
     }
-    else
+    else 
     {
       this.bookId = this.book.id;
       this.router.navigate(['/loan',this.bookId]);
-    }
+    }  
   }
 
   reserve(book:Book){
@@ -263,11 +263,11 @@ export class BookDetailsComponent implements OnInit {
       alert("Do you have any account? If yes, then Login, otherwise create a new account..");
       this.router.navigate(['login']);
     }
-    else
+    else 
     {
       this.bookId = this.book.id;
       this.router.navigate(['/reserve',this.bookId]);
-    }
+    } 
   }
 
 }

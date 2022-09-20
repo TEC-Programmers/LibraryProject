@@ -19,6 +19,8 @@ export class AdminCustomerComponent implements OnInit {
   customer: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
 
   administrators: User[] = [];
+  _administrators: User[] = [];
+  _administrator: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
   administrator: User = { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 }
 
   Users: User[] = [];
@@ -34,6 +36,11 @@ export class AdminCustomerComponent implements OnInit {
   p: any;
   x:any;
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
+  getRole: Role = 0;
+  resetRole: boolean = false;
+  toggle1: boolean = false;
+  toggle2: boolean = false;
+  password: string = '';
 
   constructor(private userService: UserService, private http: HttpClient, private formBuilder: FormBuilder, private authService: AuthService) {}
 
@@ -86,7 +93,6 @@ export class AdminCustomerComponent implements OnInit {
 
 
   save_admin(): void {
-    console.log(this.administrator)
     this.message = '';
 
     if(this.administrator.id == 0) {
@@ -131,7 +137,6 @@ export class AdminCustomerComponent implements OnInit {
 
 
   save_member(): void {
-    console.log('Before save_member: '+this.customer)
     this.message = '';
 
     if(this.customer.id == 0) {
@@ -163,7 +168,6 @@ export class AdminCustomerComponent implements OnInit {
         },
         complete: () => {
           this.message = '';
-          // console.log('user after update: ',this.customer)
           this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
           Swal.fire({
             title: 'Success!',
@@ -177,10 +181,21 @@ export class AdminCustomerComponent implements OnInit {
     }
   }
 
+  showHidePassword() {
+    this.resetRole = !this.resetRole;
+  }
 
-  cancel(): void {
-    this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
-    this.customer.role = Role.Customer | Role.Administrator;
+  
+  resetRoleType(currentRole, num){
+    if(currentRole.value == "Administrator") 
+      currentRole.value = "Customer";  
+    else 
+      currentRole.value = "Customer";
+
+    if(num == 1)
+      this.toggle1 = !this.toggle1;
+    else
+      this.toggle2 = !this.toggle2;
   }
 
 

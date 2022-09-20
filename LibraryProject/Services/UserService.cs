@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -9,6 +11,8 @@ using LibraryProject.API.DTO_s;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.Database.Entities;
+using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Protocols;
 using BC = BCrypt.Net.BCrypt;
 
 namespace LibraryProject.API.Services
@@ -16,10 +20,9 @@ namespace LibraryProject.API.Services
     public interface IUserService
     {
         Task<List<UserResponse>> GetAll();
-        // Task<List<UserResponse>> GetAdmins();
         Task<UserResponse> GetById(int UserId);
         Task<LoginResponse> Authenticate(LoginRequest login);
-        Task<UserResponse> Register(UserRequest newUser);
+        Task<UserResponse> registerWithProcedure(UserRequest newUser);
         Task<UserResponse> Update(int UserId, UserRequest updateUser);
         Task<UserResponse> Delete(int UserId);
         Task<UserResponse> UpdateRole(int UserId, UserRequest updateUser);
@@ -36,8 +39,6 @@ namespace LibraryProject.API.Services
             _jwtUtils = jwtUtils;
 
         }
-
-      
 
 
         public async Task<List<UserResponse>> GetAll()
@@ -59,10 +60,8 @@ namespace LibraryProject.API.Services
 
         }
 
-        
 
-
-        public async Task<UserResponse> Register(UserRequest newuser)
+        public async Task<UserResponse> registerWithProcedure(UserRequest newuser)
         {
 
             User user = new User
@@ -75,7 +74,7 @@ namespace LibraryProject.API.Services
                 Role = Helpers.Role.Customer // force all users created through Register, to Role.User
             };
 
-            user = await _userRepository.Create(user);
+            user = await _userRepository.registerWithProcedure(user);
 
             return MapUserToUserResponse(user);
         }
@@ -100,6 +99,7 @@ namespace LibraryProject.API.Services
             {
                 return null;
             }
+            //BC.Verify(login.Password, user.Password)
             //user.Password == login.Password
             if (BC.Verify(login.Password, user.Password))
             {

@@ -19,7 +19,6 @@ namespace LibraryProject.Controllers
             _authorservice = authorService;
         }
 
-
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
