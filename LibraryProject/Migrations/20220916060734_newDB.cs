@@ -2,11 +2,7 @@
 
 namespace LibraryProject.API.Migrations
 {
-<<<<<<< HEAD:LibraryProject/Migrations/20220907124002_db_PassLength_update.cs
-    public partial class db_PassLength_update : Migration
-=======
-    public partial class Project : Migration
->>>>>>> Bilal_Branch:LibraryProject/Migrations/20220816060732_Project.cs
+    public partial class newDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,9 +12,9 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    MiddleName = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(32)", nullable: true)
+                    FirstName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,7 +27,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(20)", nullable: true)
+                    CategoryName = table.Column<string>(type: "nvarchar(255)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +56,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(62)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,10 +103,10 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Language = table.Column<string>(type: "nvarchar(32)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(32)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    Language = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(MAX)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     PublishYear = table.Column<short>(type: "smallint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),

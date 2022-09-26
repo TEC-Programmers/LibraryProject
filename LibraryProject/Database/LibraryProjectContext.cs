@@ -13,7 +13,7 @@ namespace LibraryProject
         public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }  //creating instances of the class 
         public DbSet<Book> Book { get; set; }   //represents the set of book enitity in EFC(Entity Framework Core)
         public DbSet<Category> Category { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<Users> Users { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
@@ -89,7 +89,7 @@ namespace LibraryProject
                     PublisherId = 2,
                 }
                 );
-            modelBuilder.Entity<User>().HasData(
+            modelBuilder.Entity<Users>().HasData(
                 new()
                 {
                     Id = 1,

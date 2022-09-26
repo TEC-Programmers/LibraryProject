@@ -11,13 +11,13 @@ namespace LibraryProject.API.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAll();
-        Task<User> Create(User user);
-        Task<User> GetByEmail(string email);
-        Task<User> GetById(int userId);
-        Task<User> Update(int userId, User user);
-        Task<User> Delete(int userId);
-        Task<User> UpdateRole(int userId, User user);
+        Task<List<Users>> GetAll();
+        Task<Users> Create(Users user);
+        Task<Users> GetByEmail(string email);
+        Task<Users> GetById(int userId);
+        Task<Users> Update(int userId, Users user);
+        Task<Users> Delete(int userId);
+        Task<Users> UpdateRole(int userId, Users user);
 
     }
 
@@ -30,34 +30,34 @@ namespace LibraryProject.API.Repositories
             _context = context;
         }
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<Users>> GetAll()
         {
-            return await _context.User.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
        
 
-        public async Task<User> Create(User user)
+        public async Task<Users> Create(Users user)
         {
-            _context.User.Add(user);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
         }
 
-        public async Task<User> GetById(int userId)
+        public async Task<Users> GetById(int userId)
         {
-            return await _context.User.FirstOrDefaultAsync(u => u.Id == userId);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
-        public async Task<User> GetByEmail(string Email)
+        public async Task<Users> GetByEmail(string Email)
         {
-            return await _context.User.FirstOrDefaultAsync(u => u.Email == Email);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == Email);
         }
 
 
-        public async Task<User> UpdateRole(int userId, User user)
+        public async Task<Users> UpdateRole(int userId, Users user)
         {
-            User updateUser = await _context.User
+            Users updateUser = await _context.Users
                 .FirstOrDefaultAsync(a => a.Id == userId);
 
 
@@ -75,9 +75,9 @@ namespace LibraryProject.API.Repositories
         }
 
 
-        public async Task<User> Update(int userId, User user)
+        public async Task<Users> Update(int userId, Users user)
         {
-            User updateUser = await _context.User
+            Users updateUser = await _context.Users
                 .FirstOrDefaultAsync(a => a.Id == userId);
             
 
@@ -96,14 +96,14 @@ namespace LibraryProject.API.Repositories
             return updateUser;
         }
 
-        public async Task<User> Delete(int userId)
+        public async Task<Users> Delete(int userId)
         {
-            User deleteuser = await _context.User
+            Users deleteuser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (deleteuser != null)
             {
-                _context.User.Remove(deleteuser);
+                _context.Users.Remove(deleteuser);
                 await _context.SaveChangesAsync();
             }
             return deleteuser;

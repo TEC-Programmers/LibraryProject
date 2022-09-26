@@ -29,7 +29,7 @@ namespace LibraryProject.Tests.Services
         {
             //Arrange
 
-            List<User> users = new();
+            List<Users> users = new();
 
 
             users.Add(new()
@@ -71,7 +71,7 @@ namespace LibraryProject.Tests.Services
         public async void GetAllUsers_ShouldReturnEmptyListOfUserResponses_WhenNoUsersExists()
         {
             //Arrange
-            List<User> users = new();
+            List<Users> users = new();
 
             _mockUserRepository
                 .Setup(x => x.GetAll())
@@ -92,7 +92,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             int userId = 1;
 
-            User user = new()
+            Users user = new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -156,7 +156,7 @@ namespace LibraryProject.Tests.Services
 
 
             _mockUserRepository
-            .Setup(x => x.Create(It.IsAny<User>()))
+            .Setup(x => x.Create(It.IsAny<Users>()))
             .ReturnsAsync(() => null);
 
             //Act
@@ -185,7 +185,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockUserRepository
-                .Setup(x => x.Create(It.IsAny<User>()))
+                .Setup(x => x.Create(It.IsAny<Users>()))
                 .ReturnsAsync(() => null);
 
             //Act
@@ -215,7 +215,7 @@ namespace LibraryProject.Tests.Services
             int userId = 1;
 
 
-            User user = new()
+            Users user = new()
             {
                 Id = userId,
                 FirstName = "Peter",
@@ -228,7 +228,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockUserRepository
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<User>()))
+                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<Users>()))
                 .ReturnsAsync(user);
 
             //Act
@@ -263,7 +263,7 @@ namespace LibraryProject.Tests.Services
             int userId = 1;
 
             _mockUserRepository
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<User>()))
+                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<Users>()))
                 .ReturnsAsync(() => null);
 
             //Act
@@ -283,7 +283,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             int userId = 1;
 
-            User deletedUser = new()
+            Users deletedUser = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",

@@ -43,7 +43,7 @@ namespace LibraryProject.API.Services
         public async Task<List<UserResponse>> GetAll()
         {
 
-            List<User> users = await _userRepository.GetAll();
+            List<Users> users = await _userRepository.GetAll();
           
 
             return users == null ? null : users.Select(u => new UserResponse
@@ -65,7 +65,7 @@ namespace LibraryProject.API.Services
         public async Task<UserResponse> Register(UserRequest newuser)
         {
 
-            User user = new User
+            Users user = new Users
             {
                 FirstName = newuser.FirstName,
                 MiddleName = newuser.MiddleName,
@@ -82,7 +82,7 @@ namespace LibraryProject.API.Services
 
         public async Task<UserResponse> GetById(int UserId)
         {
-            User User = await _userRepository.GetById(UserId);
+            Users User = await _userRepository.GetById(UserId);
 
             if (User != null)
             {
@@ -95,7 +95,7 @@ namespace LibraryProject.API.Services
         public async Task<LoginResponse> Authenticate(LoginRequest login)
         {
 
-            User user = await _userRepository.GetByEmail(login.Email);
+            Users user = await _userRepository.GetByEmail(login.Email);
             if (user == null)
             {
                 return null;
@@ -122,7 +122,7 @@ namespace LibraryProject.API.Services
 
         public async Task<UserResponse> UpdateRole(int UserId, UserRequest updateUser)
         {
-            User user = new User
+            Users user = new Users
             {
                 FirstName = updateUser.FirstName,
                 MiddleName = updateUser.MiddleName,
@@ -148,7 +148,7 @@ namespace LibraryProject.API.Services
 
         public async Task<UserResponse> Update(int UserId, UserRequest updateUser)
         {
-            User user = new User
+            Users user = new Users
             {
                 FirstName = updateUser.FirstName,
                 MiddleName = updateUser.MiddleName,
@@ -201,7 +201,7 @@ namespace LibraryProject.API.Services
         public async Task<UserResponse> Delete(int userId)
 
         {
-            User user = await _userRepository.Delete(userId);
+            Users user = await _userRepository.Delete(userId);
 
             if (user != null)
             {
@@ -212,7 +212,7 @@ namespace LibraryProject.API.Services
         }
 
 
-        private static UserResponse MapUserToUserResponse(User user)
+        private static UserResponse MapUserToUserResponse(Users user)
         {
            
             return user == null ? null : new UserResponse

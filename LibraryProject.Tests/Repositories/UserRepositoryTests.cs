@@ -40,7 +40,7 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            _context.User.Add(new()
+            _context.Users.Add(new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -52,7 +52,7 @@ namespace LibraryProject.Tests.Repositories
 
             });
 
-            _context.User.Add(new()
+            _context.Users.Add(new()
 
             {
                 Id = 2,
@@ -74,7 +74,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<List<User>>(result);
+            Assert.IsType<List<Users>>(result);
             Assert.Equal(2, result.Count);
         }
 
@@ -89,7 +89,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<List<User>>(result);
+            Assert.IsType<List<Users>>(result);
             Assert.Empty(result);
         }
 
@@ -102,7 +102,7 @@ namespace LibraryProject.Tests.Repositories
             int userId = 1;
 
 
-            _context.User.Add(new()
+            _context.Users.Add(new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -122,7 +122,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<User>(result);
+            Assert.IsType<Users>(result);
             Assert.Equal(userId, result.Id);
         }
 
@@ -149,7 +149,7 @@ namespace LibraryProject.Tests.Repositories
             int expectedNewId = 1;
 
 
-            User newUser = new()
+            Users newUser = new()
             {
                 Id = expectedNewId,
                 FirstName = "Peter",
@@ -170,7 +170,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<User>(result);
+            Assert.IsType<Users>(result);
             Assert.Equal(expectedNewId, result.Id);
         }
 
@@ -182,7 +182,7 @@ namespace LibraryProject.Tests.Repositories
 
             int expectedNewId = 1;
 
-            User user = new()
+            Users user = new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -201,7 +201,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Assert       
             Assert.NotNull(result);
-            Assert.IsType<User>(result);
+            Assert.IsType<Users>(result);
             Assert.Equal(expectedNewId, result.Id);
      
         }
@@ -215,7 +215,7 @@ namespace LibraryProject.Tests.Repositories
 
             int userId = 1;
 
-            User newUser = new()
+            Users newUser = new()
             {
 
                 Id = userId,
@@ -227,10 +227,10 @@ namespace LibraryProject.Tests.Repositories
                 Role = Role.Administrator
             };
 
-            _context.User.Add(newUser);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            User updateUser = new()
+            Users updateUser = new()
             {
 
                 Id = userId,
@@ -248,7 +248,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<User>(result);
+            Assert.IsType<Users>(result);
             Assert.Equal(userId, result.Id);
             Assert.Equal(updateUser.FirstName, result.FirstName);
             Assert.Equal(updateUser.MiddleName, result.MiddleName);
@@ -265,7 +265,7 @@ namespace LibraryProject.Tests.Repositories
 
             int userId = 1;
 
-            User updateUser = new()
+            Users updateUser = new()
             {
 
                 Id = userId,
@@ -294,7 +294,7 @@ namespace LibraryProject.Tests.Repositories
 
             int userId = 1;
 
-            User newUser = new()
+            Users newUser = new()
             {
 
                 Id = userId,
@@ -306,7 +306,7 @@ namespace LibraryProject.Tests.Repositories
                 Role = Role.Administrator
             };
 
-            _context.User.Add(newUser);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
 
@@ -316,7 +316,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<User>(result);
+            Assert.IsType<Users>(result);
             Assert.Equal(userId, result.Id);
             Assert.Null(user);
         }
