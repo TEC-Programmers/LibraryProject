@@ -68,6 +68,7 @@ export class AdminCustomerComponent implements OnInit {
   edit_admin(administrator: User): void {
     this.message = '';
     this.administrator = administrator;
+    this.password = administrator.password;
     this.administrator.id = administrator.id || 0;
   }
 
@@ -94,28 +95,10 @@ export class AdminCustomerComponent implements OnInit {
 
   save_admin(): void {
     this.message = '';
-
     if(this.administrator.id == 0) {
-      this.userService.registerUser(this.administrator)
-      .subscribe({
-        next: (x) => {
-          this.administrators.push(x);
-          this.administrator =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
-          this.message = '';
-          Swal.fire({
-            title: 'Success!',
-            text: 'administrator added successfully',
-            icon: 'success',
-            confirmButtonText: 'Continue'
-          });
-        },
-        error: (err) => {
-          console.log(err.error);
-          this.message = Object.values(err.error.errors).join(", ");
-        }
-      });
+      console.log('[Administrator] (NOT) Found...')
     } else {
-      this.userService.updateUser(this.administrator.id, this.administrator)
+      this.userService.updatePasswordWithProcedure(this.administrator.id, this.administrator)
       .subscribe({
         error: (err) => {
           console.log(err.error);
@@ -138,26 +121,8 @@ export class AdminCustomerComponent implements OnInit {
 
   save_member(): void {
     this.message = '';
-
     if(this.customer.id == 0) {
-      this.userService.registerUser(this.customer)
-      .subscribe({
-        next: (x) => {
-          this.customers.push(x);
-          this.customer =  { id: 0, firstName: '', lastName: '', middleName: '', email: '', password: '', role: 0 };
-          this.message = '';
-          Swal.fire({
-            title: 'Success!',
-            text: 'Customer added successfully',
-            icon: 'success',
-            confirmButtonText: 'Continue'
-          });
-        },
-        error: (err) => {
-          console.log(err.error);
-          this.message = Object.values(err.error.errors).join(", ");
-        }
-      });
+      console.log('[Customer] (NOT) Found...')
     } else {
       console.log('user before update: ',this.customer)
       this.userService.updateRole(this.customer.id, this.customer)

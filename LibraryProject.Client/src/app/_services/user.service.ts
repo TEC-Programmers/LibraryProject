@@ -34,16 +34,20 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/${id}`)
   }
 
-  registerUser(user: User): Observable<User>{
+  registerWithProcedure(user: User): Observable<User>{
     return this.http.post<User>(this.apiUrl + `/registerWithProcedure`, user, this.httpOptions);
   }
 
-  updateUser(id: number, user:User): Observable<User> {
+  updateProfileWithProcedure(id: number, user:User): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${id}`, user, this.httpOptions);
   }
 
-  updateRole(id: number, user:User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/role/${id}`, user, this.httpOptions);
+  updateRole(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/updateUserRole/${id}`, user, this.httpOptions);
+  }
+
+  updatePasswordWithProcedure(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/updateUserPassword/${id}`, user, this.httpOptions);
   }
 
 

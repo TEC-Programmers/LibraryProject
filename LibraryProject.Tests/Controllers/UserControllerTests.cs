@@ -206,11 +206,11 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockuserService
-                .Setup(x => x.Register(It.IsAny<UserRequest>()))
+                .Setup(x => x.registerWithProcedure(It.IsAny<UserRequest>()))
                 .ReturnsAsync(userResponse);
 
             //Act
-            var result = await _userController.Register(newUser);
+            var result = await _userController.RegisterWithProcedure(newUser);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -232,11 +232,11 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockuserService
-                .Setup(x => x.Register(It.IsAny<UserRequest>()))
+                .Setup(x => x.registerWithProcedure(It.IsAny<UserRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an Exception"));
 
             //Act
-            var result = await _userController.Register(newUser);
+            var result = await _userController.RegisterWithProcedure(newUser);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -271,7 +271,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockuserService
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<UserRequest>()))
+                .Setup(x => x.UpdateRoleWithProcedure(It.IsAny<int>(), It.IsAny<UserRequest>()))
                 .ReturnsAsync(userResponse);
 
             //Act
@@ -299,7 +299,7 @@ namespace LibraryProject.Tests.Controllers
 
 
             _mockuserService
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<UserRequest>()))
+                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<UserRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act

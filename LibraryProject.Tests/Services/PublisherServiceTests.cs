@@ -17,7 +17,6 @@ namespace LibraryProject.Tests.Services
         private readonly PublisherService _publisherService;
         private readonly Mock<IPublisherRepository> _mockPublisherRepository = new();
 
-        private readonly BookService _bookService;
         private readonly Mock<IBookRepository> _mockBookRepository = new();
 
         public PublisherServiceTests()

@@ -3,7 +3,6 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/_services/auth.service';
 import { UserService } from 'app/_services/user.service';
-import { Role } from 'app/_models/Role';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -42,10 +41,6 @@ export class ProfileComponent implements OnInit {
       this.showOrhideAdminBtn();
     });
   }
-
-  // showHidePassword() {
-  //   this.showPassword = !this.showPassword;
-  // }
 
   changeType2(input_field_password, num){
     if(input_field_password.type=="password")
@@ -135,8 +130,8 @@ export class ProfileComponent implements OnInit {
       if (this.user.id !== 0) {
         if((confirm('Are you sure to reset password?'))) {
           if(this.user.role.toString() === 'Customer') {
-            console.log('Customer: ',this.user)
-            this.userService.updateUser(this.user.id, this.user)
+            console.log('Customer before password update: ',this.user)
+            this.userService.updatePasswordWithProcedure(this.user.id, this.user)
                 .subscribe(() => {
                   this.user = this.newUser();
                     this.showForm = true;
@@ -149,8 +144,8 @@ export class ProfileComponent implements OnInit {
                 });
           }
           else if(this.user.role.toString() === 'Administrator') {
-            console.log('Administrator: ',this.user)
-            this.userService.updateUser(this.user.id, this.user)
+            console.log('Administrator before password update: ',this.user)
+            this.userService.updatePasswordWithProcedure(this.user.id, this.user)
                 .subscribe(() => {
                   this.user = this.newUser();
                   this.showForm = true;
@@ -197,7 +192,7 @@ export class ProfileComponent implements OnInit {
 
     if (this.message.length == 0) {
       if (this.user.id == 0) {
-        this.userService.registerUser(this.user)
+        this.userService.registerWithProcedure(this.user)
            .subscribe(a => {
           this.users.push(a)
           this.user= this.newUser();
@@ -206,17 +201,15 @@ export class ProfileComponent implements OnInit {
       else if ((confirm('Update profile?')))
       {    
         if(this.user.role.toString() === 'Customer') {
-          console.log('True customer')
-          console.log('cus user: ',this.user)
-          this.userService.updateUser(this.user.id, this.user)
+          console.log('customer before profile update: ',this.user)
+          this.userService.updateProfileWithProcedure(this.user.id, this.user)
               .subscribe(() => {
                 this.user = this.newUser();
               });
         }
         else if(this.user.role.toString() === 'Administrator') {
-          console.log('True admin')
-          console.log('admin user: ',this.user)
-          this.userService.updateUser(this.user.id, this.user)
+          console.log('admin before profile update: ',this.user)
+          this.userService.updateProfileWithProcedure(this.user.id, this.user)
               .subscribe(() => {
                 this.user = this.newUser();
               });
@@ -224,7 +217,7 @@ export class ProfileComponent implements OnInit {
         
       }
       else {
-        this.message.push('Update user canceled')
+        this.message.push('Update profile canceled')
         this.user = this.newUser();
       }
     }
