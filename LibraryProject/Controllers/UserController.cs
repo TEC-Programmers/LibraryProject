@@ -105,7 +105,8 @@ namespace LibraryProject.API.Controllers
         }
 
 
-        [Authorize(Role.Administrator)]
+        //[Authorize(Role.Administrator)]
+        [AllowAnonymous]
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -25,7 +25,6 @@ namespace LibraryProject.API.Repositories
         Task<User> registerWithProcedure(User user);
         Task<User> GetByEmail(string email);
         Task<User> GetById(int userId);
-        Task<User> Delete(int userId);
         Task<User> DeleteWithProcedure(int userId);
         Task<User> UpdateRoleWithProcedure(int userId, User user);
         Task<User> UpdateProfileWithProcedure(int userId, User user);
@@ -71,7 +70,13 @@ namespace LibraryProject.API.Repositories
 
         public async Task<User> GetById(int userId)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            //return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            //var getId = new SqlParameter("Id", userId);
+            //return await _context.Users.FromSqlRaw("getUserById @Id", getId).FirstOrDefaultAsync();
+
+            var result = _context.Users.FromSqlRaw("EXEC getUserById @Id", userId).AsEnumerable().First().value;
+            return result;
         }
 
         public async Task<User> GetByEmail(string Email)
@@ -131,29 +136,17 @@ namespace LibraryProject.API.Repositories
         
         public async Task<User> DeleteWithProcedure(int userId)
         {
-          User deleteuser = await _context.Users
-              .FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (deleteuser != null)
-            {
-                await _context.Database.ExecuteSqlRawAsync("EXEC deleteUser @Id", userId);
-                //_context.Users.Remove(deleteuser);
-                //await _context.SaveChangesAsync();
-            }
-            return deleteuser;
-        }
-
-        public async Task<User> Delete(int userId)
-        {
             User deleteuser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (deleteuser != null)
+            var parameter = new List<SqlParameter>
             {
-                _context.Users.Remove(deleteuser);
-                await _context.SaveChangesAsync();
-            }
+               new SqlParameter("@Id", userId)     
+            };
+
+            await _context.Database.ExecuteSqlRawAsync("EXEC deleteUser @Id", parameter.ToArray());
             return deleteuser;
         }
+  
     }
 }
