@@ -1,10 +1,10 @@
-﻿// Licence file C:\Users\emjo\Documents\ReversePOCO.txt not found.
+﻿// Licence file C:\Users\afm\Documents\ReversePOCO.txt not found.
 // Please obtain your licence file at www.ReversePOCO.co.uk, and place it in your documents folder shown above.
 // Defaulting to Trial version.
 
 
 // ------------------------------------------------------------------------------------------------
-// WARNING: Failed to load provider "System.Data.SqlClient" - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+// WARNING: Failed to load provider "System.Data.SqlClient" - Cannot open database "Northwind" requested by the login. The login failed. Login failed for user 'DESKTOP-H3CFCGF\afm'.
 // Allowed providers:
 //    "System.Data.Odbc"
 //    "System.Data.OleDb"
@@ -24,9 +24,9 @@
    at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
    at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
    at System.Data.SqlClient.SqlConnection.Open()
-   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.DatabaseReader.Init() in C:\Users\emjo\Desktop\p4_project\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 12212
-   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.SqlServerDatabaseReader.Init() in C:\Users\emjo\Desktop\p4_project\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 15616
-   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.Generator.Init(DatabaseReader databaseReader, String singleDbContextSubNamespace) in C:\Users\emjo\Desktop\p4_project\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 4141
-   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.GeneratorFactory.Create(FileManagementService fileManagementService, Type fileManagerType, String singleDbContextSubNamespace) in C:\Users\emjo\Desktop\p4_project\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 6293*/
+   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.DatabaseReader.Init() in C:\Users\afm\source\repos\LibraryProject\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 12212
+   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.SqlServerDatabaseReader.Init() in C:\Users\afm\source\repos\LibraryProject\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 15616
+   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.Generator.Init(DatabaseReader databaseReader, String singleDbContextSubNamespace) in C:\Users\afm\source\repos\LibraryProject\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 4141
+   at Microsoft.VisualStudio.TextTemplating1A7FF5DE2D50A0036F15CB161C726C6EBEAC3C0C30C3EFA105BC4D1DAD67F77D613E3143DDD63198DE09400FAECB3755C49A689AD5158D6FA41ACC12225185BC.GeneratedTextTransformation.GeneratorFactory.Create(FileManagementService fileManagementService, Type fileManagerType, String singleDbContextSubNamespace) in C:\Users\afm\source\repos\LibraryProject\LibraryProject\EF.Reverse.POCO.v3.ttinclude:line 6293*/
 // ------------------------------------------------------------------------------------------------
 
