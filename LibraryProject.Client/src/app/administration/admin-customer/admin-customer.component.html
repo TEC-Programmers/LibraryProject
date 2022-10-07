@@ -143,11 +143,7 @@
         <form>
           
           <div class="mb-3">
-            <label for="email" class="form-label">E-mail</label>
-            <input [(ngModel)]="administrator.email" type="email" class="form-control" id="email2" name="email">
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">Change Password</label>
             <input [(ngModel)]="administrator.password" type="password" class="form-control" id="password2" name="password">
           </div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -157,6 +153,10 @@
             <button (click)="save_admin()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" [disabled]="this.password === administrator.password">Update</button>
           </div>
           <br><br>
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input [(ngModel)]="administrator.email" type="email" class="form-control" id="email2" name="email" disabled="">
+          </div>
           <div class="mb-3">
             <label for="firstName" class="form-label">Firstname</label>
             <input [(ngModel)]="administrator.firstName" type="text" class="form-control" id="firstName2" name="firstName" disabled>

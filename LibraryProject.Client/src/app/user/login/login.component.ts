@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   toggle1: boolean = false;
   toggle2: boolean = false;
   showForm: Boolean = true;
+  user: User = this.newUser();
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private userService: UserService) 
   {
@@ -32,7 +33,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
    this.route.params.subscribe(params => {
       this.bookId = +params['id'];
-    }); 
+    });
+    
+  }
+
+  newUser(): User {
+    return { id: 0,  firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0 };
   }
   
 
@@ -95,6 +101,8 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.error = '';
+    console.log('email: ',this.email);
+    console.log('pass: ',this.password)
     this.authService.login(this.email, this.password)
       .subscribe({
         next: () => {

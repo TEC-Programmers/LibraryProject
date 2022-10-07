@@ -21,10 +21,10 @@ namespace LibraryProject.API.Repositories
 {
     public interface IUserRepository
     { 
-        Task<List<User>> GetAll();
+        Task<List<User>> GetAllWithProcedure();
         Task<User> registerWithProcedure(User user);
-        Task<User> GetByEmail(string email);
-        Task<User> GetById(int userId);
+        Task<User> GetByEmailWithProcedure(string email);
+        Task<User> GetByIdWithProcedure(int userId);
         Task<User> DeleteWithProcedure(int userId);
         Task<User> UpdateRoleWithProcedure(int userId, User user);
         Task<User> UpdateProfileWithProcedure(int userId, User user);
@@ -43,12 +43,11 @@ namespace LibraryProject.API.Repositories
             _connectionString = configuration.GetConnectionString("Default");
         }
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<User>> GetAllWithProcedure()
         {
             return await _context.Users.FromSqlRaw("selectAllUsers").ToListAsync();
         }
-
-
+        
         public async Task<User> registerWithProcedure(User user)
         {
             using SqlConnection sql = new SqlConnection(_connectionString);
@@ -67,23 +66,37 @@ namespace LibraryProject.API.Repositories
             return user;
         }
 
-
-        public async Task<User> GetById(int userId)
+        public async Task<User> GetByIdWithProcedure(int userId)
         {
             //return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+   
+            User getUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
-            //var getId = new SqlParameter("Id", userId);
-            //return await _context.Users.FromSqlRaw("getUserById @Id", getId).FirstOrDefaultAsync();
+            var parameter = new List<SqlParameter>
+            {
+               new SqlParameter("@Id", userId)
+            };
 
-            var result = _context.Users.FromSqlRaw("EXEC getUserById @Id", userId).AsEnumerable().First().value;
-            return result;
+            await _context.Database.ExecuteSqlRawAsync("EXEC selectUserById @Id", parameter.ToArray());
+            return getUser;
         }
 
-        public async Task<User> GetByEmail(string Email)
+        public async Task<User> GetByEmailWithProcedure(string Email)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == Email);
-        }
+            //return await _context.Users.FirstOrDefaultAsync(u => u.Email == Email);
 
+            User getUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == Email);
+
+            var parameter = new List<SqlParameter>
+            {
+               new SqlParameter("@Email", Email)
+            };
+
+            await _context.Database.ExecuteSqlRawAsync("EXEC selectUserByEmail @Email", parameter.ToArray());
+            return getUser;
+        }
 
         public async Task<User> UpdatePasswordWithProcedure(int userId, User user)
         {
@@ -101,7 +114,6 @@ namespace LibraryProject.API.Repositories
             return user;
         }
 
-
         public async Task<User> UpdateRoleWithProcedure(int userId, User user)
         {
             var parameters = new List<SqlParameter>
@@ -117,7 +129,6 @@ namespace LibraryProject.API.Repositories
             await _context.Database.ExecuteSqlRawAsync("EXEC updateUserRole @Id, @FirstName, @MiddleName, @LastName, @Email, @Role", parameters.ToArray());
             return user;
         }
-
 
         public async Task<User> UpdateProfileWithProcedure(int userId, User user)
         {

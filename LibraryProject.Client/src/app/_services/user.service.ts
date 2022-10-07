@@ -27,7 +27,7 @@ export class UserService {
 
   getAllUsers(): Observable<User[]>
   {
-    return this.http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(this.apiUrl + `/getAll`);
   }
 
   getUser(id: number): Observable<User> {
@@ -35,11 +35,11 @@ export class UserService {
   }
 
   registerWithProcedure(user: User): Observable<User>{
-    return this.http.post<User>(this.apiUrl + `/registerWithProcedure`, user, this.httpOptions);
+    return this.http.post<User>(this.apiUrl + `/register`, user, this.httpOptions);
   }
 
   updateProfileWithProcedure(id: number, user:User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, user, this.httpOptions);
+    return this.http.put<User>(`${this.apiUrl}/updateUserProfile/${id}`, user, this.httpOptions);
   }
 
   updateRole(id: number, user: User): Observable<User> {

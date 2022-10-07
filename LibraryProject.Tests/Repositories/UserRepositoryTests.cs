@@ -243,7 +243,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Update(userId, updateUser);
+            var result = await _userRepository.UpdateProfileWithProcedure(userId, updateUser);
 
             //Assert
             Assert.NotNull(result);
@@ -278,7 +278,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Update(userId, updateUser);
+            var result = await _userRepository.UpdateProfileWithProcedure(userId, updateUser);
 
             //Asert
             Assert.Null(result);
@@ -310,7 +310,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Delete(userId);
+            var result = await _userRepository.DeleteWithProcedure(userId);
             var user = await _userRepository.GetById(userId);
 
             //Assert
@@ -327,7 +327,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _userRepository.Delete(1);
+            var result = await _userRepository.DeleteWithProcedure(1);
 
 
             //Assert

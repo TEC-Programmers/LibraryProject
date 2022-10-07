@@ -29,7 +29,7 @@ namespace LibraryProject.API.Controllers
 
         //[Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("getAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -59,9 +59,9 @@ namespace LibraryProject.API.Controllers
             }
         }
 
+
         [AllowAnonymous]
-        //[Authorize(Role.Customer, Role.Administrator)]
-        [HttpPost("registerWithProcedure")]
+        [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -105,7 +105,7 @@ namespace LibraryProject.API.Controllers
         }
 
 
-        //[Authorize(Role.Administrator)]
+
         [AllowAnonymous]
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -139,7 +139,7 @@ namespace LibraryProject.API.Controllers
             catch (Exception ex)
             {
                 return Problem(ex.Message);
-            }      
+            }
 
         }
 
@@ -198,11 +198,9 @@ namespace LibraryProject.API.Controllers
 
 
 
-
-        //update
         //[Authorize(Role.Customer, Role.Administrator)]
         [AllowAnonymous]
-        [HttpPut("{userId}")]
+        [HttpPut("updateUserProfile/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

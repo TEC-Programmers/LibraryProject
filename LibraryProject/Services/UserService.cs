@@ -27,7 +27,6 @@ namespace LibraryProject.API.Services
         Task<UserResponse> Delete(int UserId);
         Task<UserResponse> UpdateRoleWithProcedure(int UserId, UserRequest updateUser);
         Task<UserResponse> UpdatePasswordWithProcedure(int UserId, UserRequest updateUser);
-
     }
 
     public class UserService : IUserService
@@ -46,7 +45,7 @@ namespace LibraryProject.API.Services
         public async Task<List<UserResponse>> GetAll()
         {
 
-            List<User> users = await _userRepository.GetAll();
+            List<User> users = await _userRepository.GetAllWithProcedure();
           
 
             return users == null ? null : users.Select(u => new UserResponse
@@ -62,7 +61,6 @@ namespace LibraryProject.API.Services
 
         }
 
-
         public async Task<UserResponse> registerWithProcedure(UserRequest newuser)
         {
 
@@ -73,7 +71,7 @@ namespace LibraryProject.API.Services
                 LastName = newuser.LastName,
                 Email = newuser.Email,
                 Password = BC.HashPassword(newuser.Password),
-                Role = Helpers.Role.Customer // force all users created through Register, to Role.User
+                Role = Helpers.Role.Customer // force all users created through Register, to Role.Customer
             };
 
             user = await _userRepository.registerWithProcedure(user);
@@ -83,7 +81,7 @@ namespace LibraryProject.API.Services
 
         public async Task<UserResponse> GetById(int UserId)
         {
-            User User = await _userRepository.GetById(UserId);
+            User User = await _userRepository.GetByIdWithProcedure(UserId);
 
             if (User != null)
             {
@@ -96,7 +94,7 @@ namespace LibraryProject.API.Services
         public async Task<LoginResponse> Authenticate(LoginRequest login)
         {
 
-            User user = await _userRepository.GetByEmail(login.Email);
+            User user = await _userRepository.GetByEmailWithProcedure(login.Email);
 
             if (user == null)
             {
@@ -123,8 +121,6 @@ namespace LibraryProject.API.Services
             return null;
         }
 
-
-        //UpdatePasswordWithProcedure
         public async Task<UserResponse> UpdatePasswordWithProcedure(int UserId, UserRequest updateUser)
         {
             User user = new()
@@ -175,7 +171,6 @@ namespace LibraryProject.API.Services
             };
         }
 
-
         public async Task<UserResponse> UpdateProfileWithProcedure(int UserId, UserRequest updateUser)
         {
             User user = new()
@@ -201,7 +196,6 @@ namespace LibraryProject.API.Services
             };
         }
 
-
         public async Task<UserResponse> Delete(int userId)
 
         {
@@ -214,7 +208,6 @@ namespace LibraryProject.API.Services
 
             return null;
         }
-
 
         private static UserResponse MapUserToUserResponse(User user)
         {
