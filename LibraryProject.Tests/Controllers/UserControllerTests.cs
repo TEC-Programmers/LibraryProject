@@ -270,7 +270,7 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockuserService
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<UserRequest>()))
+                .Setup(x => x.UpdateRoleWithProcedure(It.IsAny<int>(), It.IsAny<UserRequest>()))
                 .ReturnsAsync(userResponse);
 
             //Act
@@ -298,7 +298,7 @@ namespace LibraryProject.Tests.Controllers
 
 
             _mockuserService
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<UserRequest>()))
+                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<UserRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act

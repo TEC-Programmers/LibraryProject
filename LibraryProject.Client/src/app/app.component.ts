@@ -27,7 +27,7 @@ export class AppComponent {
   public searchTerm: string = "";
   x:any;
 
-  displayedColumns:string[]=[' categoryName', 'categoryName'];
+  displayedColumns:string[]=['categoryName', 'categoryName'];
   dataSource =new MatTableDataSource<Category>();
 
   constructor(private bookService: BookService,

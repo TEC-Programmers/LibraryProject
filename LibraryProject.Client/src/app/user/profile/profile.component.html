@@ -4,7 +4,6 @@
           <tbody>
               <tr>
                 <th>Email</th>
-                <!-- <th>Password</th> -->
                 <th>FirstName</th>
                 <th>MiddleName</th>
                 <th>LastName</th>             
@@ -13,7 +12,6 @@
               </tr>
               <tr>
                 <td>{{ currentUser.email}}</td>
-                <!-- <td>{{ currentUser.password }}</td> -->
                 <td>{{ currentUser.firstName }}</td>
                 <td>{{ currentUser.middleName }}</td>
                 <td>{{ currentUser.lastName }}</td>             
@@ -29,7 +27,6 @@
           <label>Email</label>
           <input class="w3-input w3-border" [(ngModel)]="user.email">
   
-          <!-- <label>Password</label> -->
           <input class="w3-input w3-border" [(ngModel)]="user.password" hidden>
   
           <label>FirstName</label>

@@ -1,6 +1,8 @@
 ﻿using LibraryProject.Database;
 using LibraryProject.Database.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,24 +11,54 @@ namespace LibraryProject.API.Repositories
     //creating Interface of ICategoryRepository
     public interface ICategoryRepository
     {
-        Task<List<Category>> SelectAllCategories();
+        Task<List<Category>> SelectAllCategoriesWithBooks();
         Task<Category> SelectCategoryById(int categoryId);
-        Task<List<Category>> SelectAllCategoriesWithoutBooks();
-        Task<Category> InsertNewCategory(Category category);
+        Task<List<Category>> SelectAllCategoriesWithProcedure();
+        Task<Category> InsertNewCategoryWithProcedure(Category category);
         Task<Category> UpdateExistingCategory(int categoryId, Category category);
-        Task<Category> DeleteCategoryById(int categoryId);
+        Task<Category> DeleteCategoryByIdWithProcedure(int categoryId);
     }
     public class CategoryRepository: ICategoryRepository      // This class is inheriting interfcae ICategoryRepository and implement the interfaces
     {
         private readonly LibraryProjectContext _context;  //making an instance of the class LibraryProjectContext
+        public string _connectionString;
 
-        public CategoryRepository(LibraryProjectContext context)    //dependency injection with parameter 
+        public CategoryRepository(LibraryProjectContext context, IConfiguration configuration)    //dependency injection with parameter 
         {
             _context = context;
-
+            _connectionString = configuration.GetConnectionString("Default");
         }
         //implementing the methods of ICategoryRepository interface 
-        public async Task<List<Category>> SelectAllCategories()
+        public async Task<Category> InsertNewCategoryWithProcedure(Category category)
+        {
+            using SqlConnection sql = new SqlConnection(_connectionString);
+            using SqlCommand cmd = new SqlCommand("insertCategory", sql);
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@CategoryName", category.CategoryName));
+
+            await sql.OpenAsync();
+            await cmd.ExecuteNonQueryAsync();
+            return category;
+        }
+        public async Task<List<Category>> SelectAllCategoriesWithProcedure()
+        {
+            return await _context.Category.FromSqlRaw("selectAllCategories").ToListAsync();
+        }
+        public async Task<Category> DeleteCategoryByIdWithProcedure(int categoryId)
+        {
+            Category deleteCategory = await _context.Category
+                .FirstOrDefaultAsync(u => u.Id == categoryId);
+
+            var parameter = new List<SqlParameter>
+            {
+               new SqlParameter("@Id", categoryId)
+            };
+
+            await _context.Database.ExecuteSqlRawAsync("EXEC deleteCategory @Id", parameter.ToArray());
+            return deleteCategory;
+        }
+        public async Task<List<Category>> SelectAllCategoriesWithBooks()
         {
             return await _context.Category
                 .Include(b => b.Books)
@@ -38,17 +70,6 @@ namespace LibraryProject.API.Repositories
                 .Include(a => a.Books)
                 .FirstOrDefaultAsync(category => category.Id == categoryId);
         }
-        public async Task<List<Category>> SelectAllCategoriesWithoutBooks()
-        {
-            return await _context.Category
-                        .ToListAsync();
-        }
-        public async Task<Category> InsertNewCategory(Category category)
-        {
-            _context.Category.Add(category);
-            await _context.SaveChangesAsync();
-            return category;
-        }
         public async Task<Category> UpdateExistingCategory(int categoryId, Category category)
         {
             Category updateCategory = await _context.Category.FirstOrDefaultAsync(category => category.Id == categoryId);
@@ -59,17 +80,6 @@ namespace LibraryProject.API.Repositories
                 await _context.SaveChangesAsync();
             }
             return updateCategory;
-        }
-        public async Task<Category> DeleteCategoryById(int categoryId)
-        {
-            Category deleteCategory = await _context.Category.FirstOrDefaultAsync(category => category.Id == categoryId);
-            if (deleteCategory != null)
-            {
-
-                _context.Remove(deleteCategory);
-                await _context.SaveChangesAsync();
-            }
-            return deleteCategory;
         }
     }
 }

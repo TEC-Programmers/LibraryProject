@@ -28,7 +28,7 @@ namespace LibraryProject.API.Services
         {
             Publisher publisher  = MapPublisherRequestToPublisher(newPublisher);
 
-            Publisher insertedPublisher = await _publisherRepository.InsertNewPublisher(publisher);
+            Publisher insertedPublisher = await _publisherRepository.InsertNewPublisherWithProcedure(publisher);
 
             if (insertedPublisher != null)
             {
@@ -39,7 +39,7 @@ namespace LibraryProject.API.Services
 
         public async Task<PublisherResponse> DeletePublisher(int publisherId)
         {
-            Publisher deletedPublisher = await _publisherRepository.DeletePublisher(publisherId);
+            Publisher deletedPublisher = await _publisherRepository.DeletePublisherWithProcedure(publisherId);
 
             if (deletedPublisher != null)
             {

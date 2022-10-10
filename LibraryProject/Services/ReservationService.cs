@@ -35,7 +35,7 @@ namespace LibraryProject.API.Services
             };
 
 
-            Reservation insertedReservation = await _reservationRepository.InsertNewReservation(reservation);
+            Reservation insertedReservation = await _reservationRepository.InsertNewReservationWithProcedure(reservation);
 
             if (insertedReservation != null)
             {
@@ -55,7 +55,7 @@ namespace LibraryProject.API.Services
 
         public async Task<ReservationResponse> DeleteReservation(int reservationId)
         {
-            Reservation deletedReservation = await _reservationRepository.DeleteReservationById(reservationId);
+            Reservation deletedReservation = await _reservationRepository.DeleteReservationByIdWithProcedure(reservationId);
 
             if (deletedReservation != null)
             {
@@ -73,7 +73,7 @@ namespace LibraryProject.API.Services
 
         public async Task<List<ReservationResponse>> GetAllReservations()
         {
-            List<Reservation> reservations = await _reservationRepository.SelectAllReservations();
+            List<Reservation> reservations = await _reservationRepository.SelectAllReservationsWithProcedure();
             return reservations.Select(reservation => MapReservationToReservationResponse(reservation)).ToList();           
         }
 

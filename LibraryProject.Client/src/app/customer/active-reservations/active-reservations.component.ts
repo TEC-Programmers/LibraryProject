@@ -131,13 +131,13 @@ export class ActiveReservationsComponent implements OnInit {
         });
 
         
-
         if (this.yourReservations) {
           // loop through [ this.yourReservations ] to get specific book in your Reservation
           this.yourReservations.forEach(reservation => {
+            var getLength = this.yourReservations.length;
             this.bookId = reservation.bookId;
             this.reservationArray.push(reservation)
-            if (this.reservationArray.length > 0) {
+            if (this.reservationArray.length <= getLength) {
               this.getActiveBookInRes(this.bookId);
             }
           });

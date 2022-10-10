@@ -21,6 +21,7 @@ export class AdminCategoryComponent implements OnInit {
   p: any;
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
+  categoryName: string = '';
 
   constructor(private categoryService: CategoryService, private userService: UserService, private authService: AuthService) { }
 
@@ -54,6 +55,7 @@ export class AdminCategoryComponent implements OnInit {
     this.message = '';
     this.category = category;
     this.category.id = category.id || 0;
+    this.categoryName = category.categoryName;
     console.log(this.category);
   }
 

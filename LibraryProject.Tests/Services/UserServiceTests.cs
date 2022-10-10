@@ -228,11 +228,11 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockUserRepository
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<User>()))
+                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<User>()))
                 .ReturnsAsync(user);
 
             //Act
-            var result = await _userService.Update(userId, userRequest);
+            var result = await _userService.UpdateRoleWithProcedure(userId, userRequest);
 
 
             //Assert
@@ -263,11 +263,11 @@ namespace LibraryProject.Tests.Services
             int userId = 1;
 
             _mockUserRepository
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<User>()))
+                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<User>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userService.Update(userId, userRequest);
+            var result = await _userService.UpdateProfileWithProcedure(userId, userRequest);
 
 
             //Assert
@@ -294,7 +294,7 @@ namespace LibraryProject.Tests.Services
 
             };
             _mockUserRepository
-               .Setup(x => x.Delete(It.IsAny<int>()))
+               .Setup(x => x.DeleteWithProcedure(It.IsAny<int>()))
                .ReturnsAsync(deletedUser);
              
             // Act
@@ -315,7 +315,7 @@ namespace LibraryProject.Tests.Services
             int userId = 1;
 
             _mockUserRepository
-                .Setup(x => x.Delete(It.IsAny<int>()))
+                .Setup(x => x.DeleteWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act

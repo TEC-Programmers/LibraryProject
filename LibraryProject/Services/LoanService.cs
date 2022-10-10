@@ -29,7 +29,7 @@ namespace LibraryProject.API.Services
         {
             Loan Loan = MapLoanRequestToLoan(newLoan);
 
-            Loan insertedLoan = await _loanRepository.InsertNewLoan(Loan);
+            Loan insertedLoan = await _loanRepository.InsertNewLoanWithProcedure(Loan);
 
             if (insertedLoan != null)
             {
@@ -40,7 +40,7 @@ namespace LibraryProject.API.Services
 
         public async Task<LoanResponse> DeleteLoan(int LoanId)
         {
-            Loan deletedLoan = await _loanRepository.DeleteLoanById(LoanId);
+            Loan deletedLoan = await _loanRepository.DeleteLoanByIdWithProcedure(LoanId);
 
             if (deletedLoan != null)
             {
@@ -51,7 +51,7 @@ namespace LibraryProject.API.Services
 
         public async Task<List<LoanResponse>> GetAllLoans()
         {
-            List<Loan> Loans = await _loanRepository.SelectAllLoans();
+            List<Loan> Loans = await _loanRepository.SelectAllLoansWithProcedure();
             return Loans.Select(Loan => MapLoanToLoanResponse(Loan)).ToList();
         }
 

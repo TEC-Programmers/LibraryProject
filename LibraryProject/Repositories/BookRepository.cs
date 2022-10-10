@@ -1,6 +1,9 @@
 ﻿using LibraryProject.Database;
 using LibraryProject.Database.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,18 +16,20 @@ namespace LibraryProject.API.Repositories
         Task<List<Book>> SelectAllBooks();
         Task<Book> SelectBookById(int bookId);
         Task<List<Book>> SelectAllBooksByCategoryId(int categoryId);
-        Task<Book> InsertNewBook(Book book);
-        Task<Book> UpdateExistingBook(int bookId, Book book);
-        Task<Book> DeleteBookById(int bookId);
+        Task<Book> InsertNewBookWithProcedure(Book book);
+        Task<Book> UpdateExistingBookWithProcedure(int bookId, Book book);
+        Task<Book> DeleteBookByIdWithProcedure(int bookId);
     }
     public class BookRepository : IBookRepository   // This class is inheriting interfcae IBookRepository and implement the interfaces
     {
 
         private readonly LibraryProjectContext _context;   //making an instance of the class LibraryProjectContext
+        public string _connectionString;
 
-        public BookRepository(LibraryProjectContext context)   //dependency injection with parameter 
+        public BookRepository(LibraryProjectContext context, IConfiguration configuration)   //dependency injection with parameter 
         {
             _context = context;
+            _connectionString = configuration.GetConnectionString("Default");
         }
 
         //implementing the methods of IBookRepository interface 
@@ -39,7 +44,6 @@ namespace LibraryProject.API.Repositories
                 .OrderBy(p => p.PublisherId)
                 .ToListAsync();
         }
-
         public async Task<Book> SelectBookById(int bookId)
         {
             return await _context.Book
@@ -51,7 +55,6 @@ namespace LibraryProject.API.Repositories
                 .OrderBy(p => p.PublisherId)
                 .FirstOrDefaultAsync(book => book.Id == bookId);
         }
-
         public async Task<List<Book>> SelectAllBooksByCategoryId(int categoryId)
         {
             return await _context.Book
@@ -65,45 +68,55 @@ namespace LibraryProject.API.Repositories
                .ToListAsync();
 
         }
-        public async Task<Book> InsertNewBook(Book book)
-        {
-            _context.Book.Add(book);
-            await _context.SaveChangesAsync();
+        public async Task<Book> InsertNewBookWithProcedure(Book book)
+        {          
+            using SqlConnection sql = new SqlConnection(_connectionString);
+            using SqlCommand cmd = new SqlCommand("insertBook", sql);
 
-            Book insertBook = await SelectBookById(book.Id);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@Title", book.Title));
+            cmd.Parameters.Add(new SqlParameter("@Language", book.Language));
+            cmd.Parameters.Add(new SqlParameter("@Description", book.Description));
+            cmd.Parameters.Add(new SqlParameter("@Image", book.Image));
+            cmd.Parameters.Add(new SqlParameter("@PublishYear", book.PublishYear));
+            cmd.Parameters.Add(new SqlParameter("@CategoryId", book.CategoryId));
+            cmd.Parameters.Add(new SqlParameter("@AuthorId", book.AuthorId));
+            cmd.Parameters.Add(new SqlParameter("@PublisherId", book.PublisherId));
 
-            return insertBook;
+            await sql.OpenAsync();
+            await cmd.ExecuteNonQueryAsync();
+            return book;
         }
-        public async Task<Book> UpdateExistingBook(int bookId, Book book)
+        public async Task<Book> UpdateExistingBookWithProcedure(int bookId, Book book)
         {
-            Book updateBook = await _context.Book.FirstOrDefaultAsync(book => book.Id == bookId);
-
-            if (updateBook != null)
+            var parameters = new List<SqlParameter>
             {
-                updateBook.Title = book.Title;
-                updateBook.Description = book.Description;
-                updateBook.Language = book.Language;
-                updateBook.Image    =book.Image;
-                updateBook.PublishYear = book.PublishYear;
-                
+               new SqlParameter("@Id", bookId),
+               new SqlParameter("@Title", book.Title),
+               new SqlParameter("@Description", book.Description),
+               new SqlParameter("@Language", book.Language),
+               new SqlParameter("@Image", book.Image),
+               new SqlParameter("@PublishYear", book.PublishYear),
+               new SqlParameter("@CategoryId", book.CategoryId),
+               new SqlParameter("@AuthorId", book.AuthorId),
+               new SqlParameter("@PublisherId", book.PublisherId),
+            };
 
-                await _context.SaveChangesAsync();
-
-            }
-            return updateBook;
+            await _context.Database.ExecuteSqlRawAsync("EXEC updateBook @Id, @Title, @Description, @Language, @Image, @PublishYear, @CategoryId, @AuthorId, @PublisherId", parameters.ToArray());
+            return book;
         }
+        public async Task<Book> DeleteBookByIdWithProcedure(int bookId)
+        {          
+            Book deletebook = await _context.Book
+               .FirstOrDefaultAsync(u => u.Id == bookId);
 
-        public async Task<Book> DeleteBookById(int bookId)
-        {
-            Book deleteBook = await _context.Book.
-                FirstOrDefaultAsync(book => book.Id == bookId);
-
-            if (deleteBook != null)
+            var parameter = new List<SqlParameter>
             {
-                _context.Book.Remove(deleteBook);
-                await _context.SaveChangesAsync();
-            }
-            return deleteBook;   
+               new SqlParameter("@Id", bookId)
+            };
+
+            await _context.Database.ExecuteSqlRawAsync("EXEC deleteBook @Id", parameter.ToArray());
+            return deletebook;
         }
     }
 }

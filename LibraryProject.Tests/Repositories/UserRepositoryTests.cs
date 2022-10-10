@@ -1,4 +1,5 @@
-﻿using LibraryProject.API.Database.Entities;
+﻿using Castle.Core.Configuration;
+using LibraryProject.API.Database.Entities;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.Database;
@@ -21,6 +22,7 @@ namespace LibraryProject.Tests.Repositories
         private readonly UserRepository _userRepository;
         private readonly Mock<API.Authorization.IJwtUtils> jwt = new();
 
+        
 
 
         public UserRepositoryTests()
@@ -28,10 +30,7 @@ namespace LibraryProject.Tests.Repositories
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProject")
                 .Options;
-
-            _context = new(_options);
-            _userRepository = new(_context);
-
+            _context = new(_options);  
         }
 
         [Fact]
@@ -40,7 +39,7 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            _context.User.Add(new()
+            _context.Users.Add(new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -52,7 +51,7 @@ namespace LibraryProject.Tests.Repositories
 
             });
 
-            _context.User.Add(new()
+            _context.Users.Add(new()
 
             {
                 Id = 2,
@@ -102,7 +101,7 @@ namespace LibraryProject.Tests.Repositories
             int userId = 1;
 
 
-            _context.User.Add(new()
+            _context.Users.Add(new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -227,7 +226,7 @@ namespace LibraryProject.Tests.Repositories
                 Role = Role.Administrator
             };
 
-            _context.User.Add(newUser);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
             User updateUser = new()
@@ -244,7 +243,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Update(userId, updateUser);
+            var result = await _userRepository.UpdateProfileWithProcedure(userId, updateUser);
 
             //Assert
             Assert.NotNull(result);
@@ -279,7 +278,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Update(userId, updateUser);
+            var result = await _userRepository.UpdateProfileWithProcedure(userId, updateUser);
 
             //Asert
             Assert.Null(result);
@@ -306,12 +305,12 @@ namespace LibraryProject.Tests.Repositories
                 Role = Role.Administrator
             };
 
-            _context.User.Add(newUser);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
 
             //Act
-            var result = await _userRepository.Delete(userId);
+            var result = await _userRepository.DeleteWithProcedure(userId);
             var user = await _userRepository.GetById(userId);
 
             //Assert
@@ -328,7 +327,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _userRepository.Delete(1);
+            var result = await _userRepository.DeleteWithProcedure(1);
 
 
             //Assert

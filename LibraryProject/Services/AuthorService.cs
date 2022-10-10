@@ -30,7 +30,7 @@ namespace LibraryProject.API.Services
         {
             Author author = MapAuthorRequestToAuthor(newAuthor);
 
-            Author insertedAuthor = await _authorRepository.InsertNewAuthor(author);
+            Author insertedAuthor = await _authorRepository.InsertNewAuthorWithProcedure(author);
 
             if (insertedAuthor != null)
             {
@@ -42,7 +42,7 @@ namespace LibraryProject.API.Services
 
         public async Task<AuthorResponse> DeleteAuthor(int authorId)
         {
-            Author deletedAuthor = await _authorRepository.DeleteAuthor(authorId);
+            Author deletedAuthor = await _authorRepository.DeleteAuthorWithProcedure(authorId);
 
             if (deletedAuthor != null)
             {
