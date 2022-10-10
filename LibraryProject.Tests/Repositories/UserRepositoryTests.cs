@@ -165,7 +165,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
 
-            var result = await _userRepository.Create(newUser);
+            var result = await _userRepository.registerWithProcedure(newUser);
 
 
             //Assert
@@ -196,7 +196,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _userRepository.Create(user);
+            var result = await _userRepository.registerWithProcedure(user);
           
 
             //Assert       

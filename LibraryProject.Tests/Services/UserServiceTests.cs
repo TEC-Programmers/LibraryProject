@@ -156,11 +156,11 @@ namespace LibraryProject.Tests.Services
 
 
             _mockUserRepository
-            .Setup(x => x.Create(It.IsAny<User>()))
+            .Setup(x => x.registerWithProcedure(It.IsAny<User>()))
             .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userService.Register(newUser);
+            var result = await _userService.registerWithProcedure(newUser);
 
             //Assert         
 
@@ -185,11 +185,11 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockUserRepository
-                .Setup(x => x.Create(It.IsAny<User>()))
+                .Setup(x => x.registerWithProcedure(It.IsAny<User>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userService.Register(newUser);
+            var result = await _userService.registerWithProcedure(newUser);
 
             //Assert
             Assert.Null(result);

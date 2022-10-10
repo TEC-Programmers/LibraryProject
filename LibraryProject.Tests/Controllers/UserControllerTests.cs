@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using LibraryProject.API.Controllers;
 using LibraryProject.API.DTO_s;
 using LibraryProject.API.Helpers;
@@ -206,11 +205,11 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockuserService
-                .Setup(x => x.Register(It.IsAny<UserRequest>()))
+                .Setup(x => x.registerWithProcedure(It.IsAny<UserRequest>()))
                 .ReturnsAsync(userResponse);
 
             //Act
-            var result = await _userController.Register(newUser);
+            var result = await _userController.RegisterWithProcedure(newUser);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -232,11 +231,11 @@ namespace LibraryProject.Tests.Controllers
             };
 
             _mockuserService
-                .Setup(x => x.Register(It.IsAny<UserRequest>()))
+                .Setup(x => x.registerWithProcedure(It.IsAny<UserRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an Exception"));
 
             //Act
-            var result = await _userController.Register(newUser);
+            var result = await _userController.RegisterWithProcedure(newUser);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
