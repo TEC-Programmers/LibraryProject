@@ -16,7 +16,7 @@ namespace LibraryProject.Tests.Repositories
     {
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
-        private readonly ReservationRepository _ReservationRepository;
+        private readonly ReservationRepository _reservationRepository;
 
         public ReservationRepositoryTests()
         {
@@ -26,7 +26,7 @@ namespace LibraryProject.Tests.Repositories
 
             _context = new(_options);
 
-            _ReservationRepository = new(_context);
+            _reservationRepository = new(_context);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _ReservationRepository.SelectAllReservationsWithProcedure();
+            var result = await _reservationRepository.SelectAllReservationsWithProcedure();
 
             //Assert
 
@@ -73,7 +73,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _ReservationRepository.SelectAllReservationsWithProcedure();
+            var result = await _reservationRepository.SelectAllReservationsWithProcedure();
 
             //Assert
 
@@ -103,7 +103,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _ReservationRepository.SelectReservationById(ReservationId);
+            var result = await _reservationRepository.SelectReservationById(ReservationId);
 
             //Assert
             Assert.NotNull(result);
@@ -119,7 +119,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _ReservationRepository.SelectReservationById(1);
+            var result = await _reservationRepository.SelectReservationById(1);
 
             //Assert
             Assert.Null(result);
@@ -145,7 +145,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _ReservationRepository.InsertNewReservationWithProcedure(Reservation);
+            var result = await _reservationRepository.InsertNewReservationWithProcedure(Reservation);
 
             //Assert
 
@@ -174,7 +174,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            async Task action() => await _ReservationRepository.InsertNewReservationWithProcedure(Reservation);
+            async Task action() => await _reservationRepository.InsertNewReservationWithProcedure(Reservation);
 
             //Assert
             var ex = await Assert.ThrowsAsync<ArgumentException>(action);
@@ -211,7 +211,7 @@ namespace LibraryProject.Tests.Repositories
             };
 
             //Act
-            var result = await _ReservationRepository.UpdateReservation(ReservationId, updateReservation);
+            var result = await _reservationRepository.UpdateReservation(ReservationId, updateReservation);
 
             //Assert
             Assert.NotNull(result);
@@ -246,7 +246,7 @@ namespace LibraryProject.Tests.Repositories
 
 
         //Act
-        var result = await _ReservationRepository.UpdateReservation(ReservationId, updatedReservation);
+        var result = await _reservationRepository.UpdateReservation(ReservationId, updatedReservation);
 
         //Assert
         Assert.Null(result);
@@ -275,8 +275,8 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _ReservationRepository.DeleteReservationByIdWithProcedure(ReservationId);
-            var Reservation = await _ReservationRepository.SelectReservationById(ReservationId);
+            var result = await _reservationRepository.DeleteReservationByIdWithProcedure(ReservationId);
+            var Reservation = await _reservationRepository.SelectReservationById(ReservationId);
 
             //Assert
             Assert.NotNull(result);
@@ -293,7 +293,7 @@ namespace LibraryProject.Tests.Repositories
            await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _ReservationRepository.DeleteReservationByIdWithProcedure(1);
+            var result = await _reservationRepository.DeleteReservationByIdWithProcedure(1);
 
             //Assert
             Assert.Null(result);

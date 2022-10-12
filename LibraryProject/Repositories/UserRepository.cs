@@ -9,12 +9,7 @@ using NPOI.SS.Formula.Functions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BC = BCrypt.Net.BCrypt;
-using System.Data;
-using System.Linq;
 using Microsoft.Data.SqlClient;
-using Dapper;
-using MySql.Data.MySqlClient;
-using System.Data.Entity.Infrastructure;
 using Microsoft.Extensions.Configuration;
 
 namespace LibraryProject.API.Repositories
