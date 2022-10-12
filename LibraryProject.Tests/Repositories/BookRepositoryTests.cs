@@ -213,7 +213,8 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _bookRepository.InsertNewBook(book);
+            
+            var result = await _bookRepository.InsertNewBookWithProcedure(book);
 
             //Assert
             Assert.NotNull(result);
@@ -246,7 +247,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            async Task action() => await _bookRepository.InsertNewBook(book);
+            async Task action() => await _bookRepository.InsertNewBookWithProcedure(book);
 
 
             //Assert
@@ -295,7 +296,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.UpdateExistingBook(bookId, updateBook);
+            var result = await _bookRepository.UpdateExistingBookWithProcedure(bookId, updateBook);
 
             //Assert
             Assert.NotNull(result);
@@ -335,7 +336,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.UpdateExistingBook(bookId, updateBook);
+            var result = await _bookRepository.UpdateExistingBookWithProcedure(bookId, updateBook);
 
             //Assert
             Assert.Null(result);
@@ -368,7 +369,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.DeleteBookById(bookId);
+            var result = await _bookRepository.DeleteBookByIdWithProcedure(bookId);
             var book = await _bookRepository.SelectBookById(bookId);
 
             //Assert
@@ -388,7 +389,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.DeleteBookById(1);
+            var result = await _bookRepository.DeleteBookByIdWithProcedure(1);
 
 
             //Assert

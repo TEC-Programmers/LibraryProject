@@ -54,7 +54,7 @@ namespace LibraryProject.Tests.Services
             });
 
              _mockReservationRepository
-              .Setup(x => x.SelectAllReservations())
+              .Setup(x => x.SelectAllReservationsWithProcedure())
               .ReturnsAsync(Reservations);
 
             //Act - kalder metoder og udføre de faktiske tests
@@ -73,7 +73,7 @@ namespace LibraryProject.Tests.Services
             List<Reservation> Reservations = new();
 
             _mockReservationRepository
-                .Setup(x => x.SelectAllReservations())
+                .Setup(x => x.SelectAllReservationsWithProcedure())
                 .ReturnsAsync(Reservations);
 
             //Act
@@ -159,7 +159,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockReservationRepository
-                .Setup(x=> x.InsertNewReservation(It.IsAny<Reservation>()))
+                .Setup(x=> x.InsertNewReservationWithProcedure(It.IsAny<Reservation>()))
                 .ReturnsAsync(createdReservation);
 
             //Act
@@ -189,7 +189,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockReservationRepository
-                 .Setup(x => x.InsertNewReservation(It.IsAny<Reservation>()))
+                 .Setup(x => x.InsertNewReservationWithProcedure(It.IsAny<Reservation>()))
                  .ReturnsAsync(() => null);
 
             //Act
@@ -285,7 +285,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockReservationRepository
-                   .Setup(x => x.DeleteReservationById(It.IsAny<int>()))
+                   .Setup(x => x.DeleteReservationByIdWithProcedure(It.IsAny<int>()))
                    .ReturnsAsync(deletedReservation);
 
             //Act
@@ -304,7 +304,7 @@ namespace LibraryProject.Tests.Services
             int reservationId = 1;
 
             _mockReservationRepository
-                  .Setup(x => x.DeleteReservationById(It.IsAny<int>()))
+                  .Setup(x => x.DeleteReservationByIdWithProcedure(It.IsAny<int>()))
                   .ReturnsAsync(() => null);
 
             //Act

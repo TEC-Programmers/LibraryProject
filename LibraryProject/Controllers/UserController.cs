@@ -129,12 +129,12 @@ namespace LibraryProject.API.Controllers
 
                 return Ok(user);
 
-                UserResponse currentUser = (UserResponse)HttpContext.Items["User"];
+                //UserResponse currentUser = (UserResponse)HttpContext.Items["User"];
 
-                if (userId != currentUser.Id && currentUser.Role != Role.Administrator)
-                {
-                    return Unauthorized(new { message = "Unauthorized" });      // only admins can access other user records
-                }
+                //if (userId != currentUser.Id && currentUser.Role != Role.Administrator)
+                //{
+                //    return Unauthorized(new { message = "Unauthorized" });      // only admins can access other user records
+                //}
             }
             catch (Exception ex)
             {

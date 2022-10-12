@@ -49,7 +49,7 @@ namespace LibraryProject.Tests.Services
             });
 
             _mockloanServiceRepository
-             .Setup(x => x.SelectAllLoans())
+             .Setup(x => x.SelectAllLoansWithProcedure())
              .ReturnsAsync(loans);
 
             //Act 
@@ -68,7 +68,7 @@ namespace LibraryProject.Tests.Services
             List<Loan> loans = new();
 
             _mockloanServiceRepository
-                .Setup(x => x.SelectAllLoans())
+                .Setup(x => x.SelectAllLoansWithProcedure())
                 .ReturnsAsync(loans);
 
             //Act
@@ -155,7 +155,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockloanServiceRepository
-                .Setup(x => x.InsertNewLoan(It.IsAny<Loan>()))
+                .Setup(x => x.InsertNewLoanWithProcedure(It.IsAny<Loan>()))
                 .ReturnsAsync(createloan);
 
             //Act
@@ -183,7 +183,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockloanServiceRepository
-                .Setup(x => x.InsertNewLoan(It.IsAny<Loan>()))
+                .Setup(x => x.InsertNewLoanWithProcedure(It.IsAny<Loan>()))
                 .ReturnsAsync(() => null);
 
             // Act
@@ -278,7 +278,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockloanServiceRepository
-                .Setup(x => x.DeleteLoanById(It.IsAny<int>()))
+                .Setup(x => x.DeleteLoanByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(deletedloan);
 
             // Act
@@ -296,7 +296,7 @@ namespace LibraryProject.Tests.Services
             int loanId = 1;
 
             _mockloanServiceRepository
-                .Setup(x => x.DeleteLoanById(It.IsAny<int>()))
+                .Setup(x => x.DeleteLoanByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act

@@ -136,7 +136,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockPublisherRepository
-                .Setup(x => x.InsertNewPublisher(It.IsAny<Publisher>()))
+                .Setup(x => x.InsertNewPublisherWithProcedure(It.IsAny<Publisher>()))
                 .ReturnsAsync(createdPublisher);
 
             // Act
@@ -159,7 +159,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockPublisherRepository
-                .Setup(x => x.InsertNewPublisher(It.IsAny<Publisher>()))
+                .Setup(x => x.InsertNewPublisherWithProcedure(It.IsAny<Publisher>()))
                 .ReturnsAsync(() => null);
 
             // Act
@@ -235,7 +235,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockPublisherRepository
-                .Setup(x => x.DeletePublisher(It.IsAny<int>()))
+                .Setup(x => x.DeletePublisherWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(deletedPublisher);
 
             // Act
@@ -254,7 +254,7 @@ namespace LibraryProject.Tests.Services
             int publisherId = 1;
 
             _mockPublisherRepository
-                .Setup(x => x.DeletePublisher(It.IsAny<int>()))
+                .Setup(x => x.DeletePublisherWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act

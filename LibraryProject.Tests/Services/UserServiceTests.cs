@@ -55,7 +55,7 @@ namespace LibraryProject.Tests.Services
             });
 
             _mockUserRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetAllWithProcedure())
                 .ReturnsAsync(users);
 
             //Act
@@ -74,7 +74,7 @@ namespace LibraryProject.Tests.Services
             List<User> users = new();
 
             _mockUserRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetAllWithProcedure())
                 .ReturnsAsync(users);
 
             //Act
@@ -104,7 +104,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockUserRepository
-                .Setup(x => x.GetById(It.IsAny<int>()))
+                .Setup(x => x.GetByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(user);
 
             //Act
@@ -129,7 +129,7 @@ namespace LibraryProject.Tests.Services
             int userId = 1;
 
             _mockUserRepository
-                .Setup(x => x.GetById(It.IsAny<int>()))
+                .Setup(x => x.GetByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act

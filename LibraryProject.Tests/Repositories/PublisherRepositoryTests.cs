@@ -127,7 +127,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             // Act
-            async Task action() => await _publisherRepository.InsertNewPublisher(publisher);
+            async Task action() => await _publisherRepository.InsertNewPublisherWithProcedure(publisher);
 
             // Assert
             var ex = await Assert.ThrowsAsync<ArgumentException>(action);
@@ -148,7 +148,7 @@ namespace LibraryProject.Tests.Repositories
             };
 
             // Act
-            var result = await _publisherRepository.InsertNewPublisher(publisher);
+            var result = await _publisherRepository.InsertNewPublisherWithProcedure(publisher);
 
             // Assert
             Assert.NotNull(result);
@@ -228,7 +228,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             // Act
-            var result = await _publisherRepository.DeletePublisher(publisherId);
+            var result = await _publisherRepository.DeletePublisherWithProcedure(publisherId);
             var Publisher = await _publisherRepository.SelectPublisherById(publisherId);
 
             // Assert
@@ -245,7 +245,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             // Act
-            var result = await _publisherRepository.DeletePublisher(1);
+            var result = await _publisherRepository.DeletePublisherWithProcedure(1);
 
             // Assert
             Assert.Null(result);

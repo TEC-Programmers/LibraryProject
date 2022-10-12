@@ -41,7 +41,7 @@ namespace LibraryProject.Tests.Services
             });
 
             _mockCategoryRepository
-                .Setup(x => x.SelectAllCategories())
+                .Setup(x => x.SelectAllCategoriesWithBooks())
                 .ReturnsAsync(Categories);
 
             // Act
@@ -59,7 +59,7 @@ namespace LibraryProject.Tests.Services
             List<Category> Categories = new();
 
             _mockCategoryRepository
-                .Setup(x => x.SelectAllCategories())
+                .Setup(x => x.SelectAllCategoriesWithBooks())
                 .ReturnsAsync(Categories);
 
             // Act
@@ -131,7 +131,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockCategoryRepository
-                .Setup(x => x.InsertNewCategory(It.IsAny<Category>()))
+                .Setup(x => x.InsertNewCategoryWithProcedure(It.IsAny<Category>()))
                 .ReturnsAsync(createdCategory);
 
             // Act
@@ -154,7 +154,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockCategoryRepository
-                .Setup(x => x.InsertNewCategory(It.IsAny<Category>()))
+                .Setup(x => x.InsertNewCategoryWithProcedure(It.IsAny<Category>()))
                 .ReturnsAsync(() => null);
 
             // Act
@@ -230,7 +230,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockCategoryRepository
-                .Setup(x => x.DeleteCategoryById(It.IsAny<int>()))
+                .Setup(x => x.DeleteCategoryByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(deletedCategory);
 
             // Act
@@ -248,7 +248,7 @@ namespace LibraryProject.Tests.Services
             int categoryId = 1;
 
             _mockCategoryRepository
-                .Setup(x => x.DeleteCategoryById(It.IsAny<int>()))
+                .Setup(x => x.DeleteCategoryByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act

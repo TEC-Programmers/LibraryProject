@@ -69,7 +69,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _userRepository.GetAll();
+            var result = await _userRepository.GetAllWithProcedure();
 
             //Assert
             Assert.NotNull(result);
@@ -84,7 +84,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _userRepository.GetAll();
+            var result = await _userRepository.GetAllWithProcedure();
 
             //Assert
             Assert.NotNull(result);
@@ -117,7 +117,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
 
-            var result = await _userRepository.GetById(userId);
+            var result = await _userRepository.GetByIdWithProcedure(userId);
 
             //Assert
             Assert.NotNull(result);
@@ -132,7 +132,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _userRepository.GetById(1);
+            var result = await _userRepository.GetByIdWithProcedure(1);
 
             //Assert
             Assert.Null(result);
@@ -311,7 +311,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
             var result = await _userRepository.DeleteWithProcedure(userId);
-            var user = await _userRepository.GetById(userId);
+            var user = await _userRepository.GetByIdWithProcedure(userId);
 
             //Assert
             Assert.NotNull(result);

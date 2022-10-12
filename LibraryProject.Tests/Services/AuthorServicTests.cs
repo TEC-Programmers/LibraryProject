@@ -145,7 +145,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockAuthorRepository
-                .Setup(x => x.InsertNewAuthor(It.IsAny<Author>()))
+                .Setup(x => x.InsertNewAuthorWithProcedure(It.IsAny<Author>()))
                 .ReturnsAsync(createdAuthor);
 
             // Act
@@ -172,7 +172,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockAuthorRepository
-                .Setup(x => x.InsertNewAuthor(It.IsAny<Author>()))
+                .Setup(x => x.InsertNewAuthorWithProcedure(It.IsAny<Author>()))
                 .ReturnsAsync(() => null);
 
             // Act
@@ -258,7 +258,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockAuthorRepository
-                .Setup(x => x.DeleteAuthor(It.IsAny<int>()))
+                .Setup(x => x.DeleteAuthorWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(deletedAuthor);
 
             // Act
@@ -277,7 +277,7 @@ namespace LibraryProject.Tests.Services
             int AuthorId = 1;
 
             _mockAuthorRepository
-                .Setup(x => x.DeleteAuthor(It.IsAny<int>()))
+                .Setup(x => x.DeleteAuthorWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act

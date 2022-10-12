@@ -61,7 +61,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //act
-            var result = await _loanRepository.SelectAllLoans();
+            var result = await _loanRepository.SelectAllLoansWithProcedure();
 
             //assert
             Assert.NotNull(result);
@@ -125,7 +125,7 @@ namespace LibraryProject.Tests.Repositories
             };
 
             //Act
-            var result = await _loanRepository.InsertNewLoan(loan);
+            var result = await _loanRepository.InsertNewLoanWithProcedure(loan);
 
             //Assert
             Assert.NotNull(result);
@@ -152,7 +152,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            async Task action() => await _loanRepository.InsertNewLoan(Loan);
+            async Task action() => await _loanRepository.InsertNewLoanWithProcedure(Loan);
 
             //Assert
             var ex = await Assert.ThrowsAsync<ArgumentException>(action);
@@ -248,7 +248,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             // Act
-            var result = await _loanRepository.DeleteLoanById(LoanId);
+            var result = await _loanRepository.DeleteLoanByIdWithProcedure(LoanId);
             var Loan = await _loanRepository.SelectLoanById(LoanId);
 
             // Assert
@@ -264,7 +264,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             // Act
-            var result = await _loanRepository.DeleteLoanById(1);
+            var result = await _loanRepository.DeleteLoanByIdWithProcedure(1);
 
             // Assert
             Assert.Null(result);
