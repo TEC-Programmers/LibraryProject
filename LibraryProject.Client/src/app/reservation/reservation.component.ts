@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Reservation } from 'app/_models/Reservation';
 import { AuthService } from 'app/_services/auth.service';
@@ -19,7 +19,7 @@ import { Loan } from 'app/_models/Loan';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent implements OnInit {
-  dateRangeForm!: FormGroup;
+  dateRangeForm!: UntypedFormGroup;
   reservations: Reservation[] = [];
   reservation: Reservation = { id: 0, bookId: 0, userId: 0, reserved_At: '', reserved_To: ''}
   bookId: number = 0;
@@ -35,18 +35,18 @@ export class ReservationComponent implements OnInit {
   total_loans: Loan[] = [];
   isDisabled_reserveBtn = true;
 
-  constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private reservationService: ReservationService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private bookService: BookService, private route:ActivatedRoute, private authService: AuthService) { }
+  constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private reservationService: ReservationService, private categoryService: CategoryService,  private formBuilder: UntypedFormBuilder, private bookService: BookService, private route:ActivatedRoute, private authService: AuthService) { }
 
-  range = new FormGroup({
-    fromDate: new FormControl('', Validators.required),
-    toDate: new FormControl('', Validators.required)
+  range = new UntypedFormGroup({
+    fromDate: new UntypedFormControl('', Validators.required),
+    toDate: new UntypedFormControl('', Validators.required)
   });
 
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#472c19';
     this.dateRangeForm = this.formBuilder.group({
-      fromDate: new FormControl('', Validators.required),
-      toDate: new FormControl('', Validators.required),
+      fromDate: new UntypedFormControl('', Validators.required),
+      toDate: new UntypedFormControl('', Validators.required),
     });
 
     // gets clicked reservation.id

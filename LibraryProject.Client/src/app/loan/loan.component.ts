@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { BookService } from '../_services/book.service';
 import { CategoryService } from '../_services/category.service';
 import { LoanService } from '../_services/loan.service';
@@ -18,7 +18,7 @@ import moment from 'moment';
 })
 
 export class LoanComponent implements OnInit {
-  dateRangeForm!: FormGroup;
+  dateRangeForm!: UntypedFormGroup;
   loans: Loan[] = [];
   loan: Loan = { id: 0, bookId: 0, userId: 0, return_date: '', loaned_At: ''}
   bookId: number = 0;
@@ -35,7 +35,7 @@ export class LoanComponent implements OnInit {
   book: Book = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
   message: string = '';
 
-  constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: FormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
+  constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: UntypedFormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
 
   // range = new FormGroup({
   //   fromDate: new FormControl('', Validators.required),
@@ -45,8 +45,8 @@ export class LoanComponent implements OnInit {
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#472c19';
     this.dateRangeForm = this.formBuilder.group({
-      fromDate: new FormControl('', Validators.required),
-      toDate: new FormControl('', Validators.required),
+      fromDate: new UntypedFormControl('', Validators.required),
+      toDate: new UntypedFormControl('', Validators.required),
     });
 
     // gets id of clicked book
