@@ -40,7 +40,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<int>(type: "int", nullable: false),
+                    UsersId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -69,7 +69,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<int>(type: "int", nullable: false),
+                    UsersId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     reserved_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     reserved_To = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -80,7 +80,7 @@ namespace LibraryProject.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -94,7 +94,7 @@ namespace LibraryProject.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,7 +155,7 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Loan",
-                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "userId" },
+                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "UsersId" },
                 values: new object[,]
                 {
                     { 1, 2, "2022/05/07", "2022/05/08", 2 },
@@ -173,7 +173,7 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reservation",
-                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "userId" },
+                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "UsersId" },
                 values: new object[,]
                 {
                     { 1, 2, "2022/08/08", "2022/09/09", 2 },
@@ -181,7 +181,7 @@ namespace LibraryProject.API.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "User",
+                table: "Users",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "MiddleName", "Password", "Role" },
                 values: new object[,]
                 {
@@ -227,7 +227,7 @@ namespace LibraryProject.API.Migrations
                 name: "Reservation");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Author");

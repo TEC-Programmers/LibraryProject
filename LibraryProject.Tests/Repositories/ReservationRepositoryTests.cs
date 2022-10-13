@@ -39,7 +39,7 @@ namespace LibraryProject.Tests.Repositories
             _context.Reservation.Add(new()
             {
                 Id = 1,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -48,7 +48,7 @@ namespace LibraryProject.Tests.Repositories
             _context.Reservation.Add(new()
             {
                 Id = 2,
-                userId = 2,
+                UsersId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
                 reserved_To = "27/05/22"
@@ -94,7 +94,7 @@ namespace LibraryProject.Tests.Repositories
             _context.Reservation.Add(new()
             {
                 Id = ReservationId,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -137,7 +137,7 @@ namespace LibraryProject.Tests.Repositories
             Reservation Reservation = new()
             {
                 Id = 1,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -164,7 +164,7 @@ namespace LibraryProject.Tests.Repositories
             Reservation Reservation = new()
             {
                 Id = 1,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -192,7 +192,7 @@ namespace LibraryProject.Tests.Repositories
             Reservation Reservation = new()
             {
                 Id = ReservationId,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -204,7 +204,7 @@ namespace LibraryProject.Tests.Repositories
             Reservation updateReservation = new()
             {
                 Id = ReservationId,
-                userId = 2,
+                UsersId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
                 reserved_To = "27/05/22"
@@ -217,7 +217,7 @@ namespace LibraryProject.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<Reservation>(result);
             Assert.Equal(ReservationId, result.Id);
-            Assert.Equal(updateReservation.userId, result.userId);
+            Assert.Equal(updateReservation.UsersId, result.UsersId);
             Assert.Equal(updateReservation.bookId, result.bookId);
             Assert.Equal(updateReservation.reserved_At, result.reserved_At);
             Assert.Equal(updateReservation.reserved_To, result.reserved_To);
@@ -236,7 +236,7 @@ namespace LibraryProject.Tests.Repositories
             Reservation updatedReservation = new()
             {
                 Id = ReservationId,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -265,7 +265,7 @@ namespace LibraryProject.Tests.Repositories
             Reservation newReservation = new()
             {
                 Id = ReservationId,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"

@@ -18,14 +18,14 @@ namespace LibraryProject.API.Authorization
             _appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService, IJwtUtils jwtUtils)
+        public async Task Invoke(HttpContext context, IUserService UsersService, IJwtUtils jwtUtils)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-            var userId = jwtUtils.ValidateJwtToken(token);
-            if (userId != null)
+            var UsersId = jwtUtils.ValidateJwtToken(token);
+            if (UsersId != null)
             {
                 // attach customer to context on successful jwt validation
-                context.Items["Customer"] = await userService.GetById(userId.Value);
+                context.Items["Customer"] = await UsersService.GetById(UsersId.Value);
             }
 
             await _next(context);

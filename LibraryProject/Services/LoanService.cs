@@ -82,7 +82,7 @@ namespace LibraryProject.API.Services
         {
             return new Loan()
             {
-                userId = loanRequest.userId,
+                UsersId = loanRequest.UsersId,
                 bookId = loanRequest.bookId,
                 loaned_At = loanRequest.loaned_At,
                 return_date = loanRequest.return_date,
@@ -94,7 +94,7 @@ namespace LibraryProject.API.Services
             return new LoanResponse()
             {
                 Id = loan.Id,
-                userId = loan.userId,
+                UsersId = loan.UsersId,
                 bookId = loan.bookId,
                 loaned_At = loan.loaned_At,
                 return_date = loan.return_date,

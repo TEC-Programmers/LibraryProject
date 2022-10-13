@@ -60,7 +60,7 @@ namespace LibraryProject.API.Repositories
 
             if (updateReservation != null)
             {
-                updateReservation.userId = reservation.userId;
+                updateReservation.UsersId = reservation.UsersId;
                 updateReservation.bookId = reservation.bookId;
                 updateReservation.reserved_At = reservation.reserved_At;
                 updateReservation.reserved_To = reservation.reserved_To;

@@ -43,7 +43,7 @@ namespace LibraryProject.API.Repositories
             Loan updateLoan = await _context.Loan.FirstOrDefaultAsync(loan => loan.Id == loanId);
             if (updateLoan != null)
             {
-                updateLoan.userId = loan.userId;
+                updateLoan.UsersId = loan.UsersId;
                 updateLoan.bookId = loan.bookId;
                 updateLoan.loaned_At = loan.loaned_At;
                 updateLoan.return_date = loan.return_date;

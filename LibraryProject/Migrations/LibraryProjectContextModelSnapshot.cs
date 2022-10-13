@@ -34,7 +34,7 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("return_date")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
+                    b.Property<int>("UsersId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -48,7 +48,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 2,
                             loaned_At = "2022/05/07",
                             return_date = "2022/05/08",
-                            userId = 2
+                            UsersId = 2
                         },
                         new
                         {
@@ -56,7 +56,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 5,
                             loaned_At = "2022/06/07",
                             return_date = "2022/07/08",
-                            userId = 4
+                            UsersId = 4
                         });
                 });
 
@@ -103,7 +103,7 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("reserved_To")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
+                    b.Property<int>("UsersId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -117,7 +117,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 2,
                             reserved_At = "2022/08/08",
                             reserved_To = "2022/09/09",
-                            userId = 2
+                            UsersId = 2
                         },
                         new
                         {
@@ -125,7 +125,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 5,
                             reserved_At = "2022/08/08",
                             reserved_To = "2022/08/09",
-                            userId = 2
+                            UsersId = 2
                         });
                 });
 
@@ -261,7 +261,7 @@ namespace LibraryProject.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LibraryProject.Database.Entities.User", b =>
+            modelBuilder.Entity("LibraryProject.Database.Entities.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -288,7 +288,7 @@ namespace LibraryProject.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
 
                     b.HasData(
                         new

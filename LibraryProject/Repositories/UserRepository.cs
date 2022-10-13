@@ -19,133 +19,138 @@ using Microsoft.Extensions.Configuration;
 
 namespace LibraryProject.API.Repositories
 {
-    public interface IUserRepository
+    public interface IUsersRepository
     { 
-        Task<List<User>> GetAll();
-        Task<User> registerWithProcedure(User user);
-        Task<User> GetByEmail(string email);
-        Task<User> GetById(int userId);
-        Task<User> DeleteWithProcedure(int userId);
-        Task<User> UpdateRoleWithProcedure(int userId, User user);
-        Task<User> UpdateProfileWithProcedure(int userId, User user);
-        Task<User> UpdatePasswordWithProcedure(int userId, User user);
+        Task<List<Users>> GetAll();
+        Task<Users> registerWithProcedure(Users Users);
+        Task<Users> GetByEmail(string email);
+        Task<Users> GetByIdWithProcedure(int UsersId);
+        Task<Users> DeleteWithProcedure(int UsersId);
+        Task<Users> UpdateRoleWithProcedure(int UsersId, Users Users);
+        Task<Users> UpdateProfileWithProcedure(int UsersId, Users Users);
+        Task<Users> UpdatePasswordWithProcedure(int UsersId, Users Users);
     }
 
-    public class UserRepository : IUserRepository
+    public class UsersRepository : IUsersRepository
     {
         private readonly LibraryProjectContext _context;
         public string _connectionString;
         
 
-        public UserRepository(LibraryProjectContext context, IConfiguration configuration)
+        public UsersRepository(LibraryProjectContext context, IConfiguration configuration)
         {
             _context = context;
             _connectionString = configuration.GetConnectionString("Default");
         }
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<Users>> GetAll()
         {
-            return await _context.Users.FromSqlRaw("selectAllUsers").ToListAsync();
+            return await _context.Users.FromSqlRaw("selectAllUserss").ToListAsync();
         }
 
 
-        public async Task<User> registerWithProcedure(User user)
+        public async Task<Users> registerWithProcedure(Users Users)
         {
             using SqlConnection sql = new SqlConnection(_connectionString);
-            using SqlCommand cmd = new SqlCommand("insertUser", sql);
+            using SqlCommand cmd = new SqlCommand("insertUsers", sql);
 
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
-            cmd.Parameters.Add(new SqlParameter("@MiddleName", user.MiddleName));
-            cmd.Parameters.Add(new SqlParameter("@LastName", user.LastName));
-            cmd.Parameters.Add(new SqlParameter("@Email", user.Email));
-            cmd.Parameters.Add(new SqlParameter("@Password", user.Password));
-            cmd.Parameters.Add(new SqlParameter("@Role", user.Role));
+            cmd.Parameters.Add(new SqlParameter("@FirstName", Users.FirstName));
+            cmd.Parameters.Add(new SqlParameter("@MiddleName", Users.MiddleName));
+            cmd.Parameters.Add(new SqlParameter("@LastName", Users.LastName));
+            cmd.Parameters.Add(new SqlParameter("@Email", Users.Email));
+            cmd.Parameters.Add(new SqlParameter("@Password", Users.Password));
+            cmd.Parameters.Add(new SqlParameter("@Role", Users.Role));
 
             await sql.OpenAsync();
             await cmd.ExecuteNonQueryAsync();
-            return user;
+            return Users;
         }
 
 
-        public async Task<User> GetById(int userId)
+        public async Task<Users> GetByIdWithProcedure(int userId)
         {
             //return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
-            //var getId = new SqlParameter("Id", userId);
-            //return await _context.Users.FromSqlRaw("getUserById @Id", getId).FirstOrDefaultAsync();
+            Users getUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var result = _context.Users.FromSqlRaw("EXEC getUserById @Id", userId).AsEnumerable().First().value;
-            return result;
+            var parameter = new List<SqlParameter>
+            {
+               new SqlParameter("@Id", userId)
+            };
+
+            await _context.Database.ExecuteSqlRawAsync("EXEC selectUserById @Id", parameter.ToArray());
+            return getUser;
         }
 
-        public async Task<User> GetByEmail(string Email)
+        public async Task<Users> GetByEmail(string Email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == Email);
         }
 
 
-        public async Task<User> UpdatePasswordWithProcedure(int userId, User user)
+        public async Task<Users> UpdatePasswordWithProcedure(int UsersId, Users Users)
         {
             var parameters = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId),
-               new SqlParameter("@FirstName", user.FirstName),
-               new SqlParameter("@MiddleName", user.MiddleName),
-               new SqlParameter("@LastName", user.LastName),
-               new SqlParameter("@Email", user.Email),
-               new SqlParameter("@Password", BC.HashPassword(user.Password)), 
+               new SqlParameter("@Id", UsersId),
+               new SqlParameter("@FirstName", Users.FirstName),
+               new SqlParameter("@MiddleName", Users.MiddleName),
+               new SqlParameter("@LastName", Users.LastName),
+               new SqlParameter("@Email", Users.Email),
+               new SqlParameter("@Password", BC.HashPassword(Users.Password)), 
             };
 
-            await _context.Database.ExecuteSqlRawAsync("EXEC updateUserPassword @Id, @FirstName, @MiddleName, @LastName, @Email, @Password", parameters.ToArray());
-            return user;
+            await _context.Database.ExecuteSqlRawAsync("EXEC updateUsersPassword @Id, @FirstName, @MiddleName, @LastName, @Email, @Password", parameters.ToArray());
+            return Users;
         }
 
 
-        public async Task<User> UpdateRoleWithProcedure(int userId, User user)
+        public async Task<Users> UpdateRoleWithProcedure(int UsersId, Users Users)
         {
             var parameters = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId),
-               new SqlParameter("@FirstName", user.FirstName),
-               new SqlParameter("@MiddleName", user.MiddleName),
-               new SqlParameter("@LastName", user.LastName),
-               new SqlParameter("@Email", user.Email),
-               new SqlParameter("@Role", user.Role)
+               new SqlParameter("@Id", UsersId),
+               new SqlParameter("@FirstName", Users.FirstName),
+               new SqlParameter("@MiddleName", Users.MiddleName),
+               new SqlParameter("@LastName", Users.LastName),
+               new SqlParameter("@Email", Users.Email),
+               new SqlParameter("@Role", Users.Role)
             };
 
-            await _context.Database.ExecuteSqlRawAsync("EXEC updateUserRole @Id, @FirstName, @MiddleName, @LastName, @Email, @Role", parameters.ToArray());
-            return user;
+            await _context.Database.ExecuteSqlRawAsync("EXEC updateUsersRole @Id, @FirstName, @MiddleName, @LastName, @Email, @Role", parameters.ToArray());
+            return Users;
         }
 
 
-        public async Task<User> UpdateProfileWithProcedure(int userId, User user)
+        public async Task<Users> UpdateProfileWithProcedure(int UsersId, Users Users)
         {
             var parameters = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId),
-               new SqlParameter("@FirstName", user.FirstName),
-               new SqlParameter("@MiddleName", user.MiddleName),
-               new SqlParameter("@LastName", user.LastName),
-               new SqlParameter("@Email", user.Email),
+               new SqlParameter("@Id", UsersId),
+               new SqlParameter("@FirstName", Users.FirstName),
+               new SqlParameter("@MiddleName", Users.MiddleName),
+               new SqlParameter("@LastName", Users.LastName),
+               new SqlParameter("@Email", Users.Email),
             };
 
-            await _context.Database.ExecuteSqlRawAsync("EXEC updateUserProfile @Id, @FirstName, @MiddleName, @LastName, @Email", parameters.ToArray());
-            return user;
+            await _context.Database.ExecuteSqlRawAsync("EXEC updateUsersProfile @Id, @FirstName, @MiddleName, @LastName, @Email", parameters.ToArray());
+            return Users;
         }
         
-        public async Task<User> DeleteWithProcedure(int userId)
+        public async Task<Users> DeleteWithProcedure(int UsersId)
         {
-            User deleteuser = await _context.Users
-                .FirstOrDefaultAsync(u => u.Id == userId);
+            Users deleteUsers = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == UsersId);
 
             var parameter = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId)     
+               new SqlParameter("@Id", UsersId)     
             };
 
-            await _context.Database.ExecuteSqlRawAsync("EXEC deleteUser @Id", parameter.ToArray());
-            return deleteuser;
+            await _context.Database.ExecuteSqlRawAsync("EXEC deleteUsers @Id", parameter.ToArray());
+            return deleteUsers;
         }
   
     }

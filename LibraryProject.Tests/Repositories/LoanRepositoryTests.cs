@@ -36,7 +36,7 @@ namespace LibraryProject.Tests.Repositories
             _context.Loan.Add(new()
             {
                 Id = 1,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -45,7 +45,7 @@ namespace LibraryProject.Tests.Repositories
             _context.Loan.Add(new()
             {
                 Id = 2,
-                userId = 2,
+                UsersId = 2,
                 bookId = 2,
                 loaned_At = "24/6/2022",
                 return_date = "24/7/2022"
@@ -80,7 +80,7 @@ namespace LibraryProject.Tests.Repositories
             _context.Loan.Add(new()
             {
                 Id = LoanId,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 loaned_At = "11/5/22",
                 return_date = "11/6/22"
@@ -119,7 +119,7 @@ namespace LibraryProject.Tests.Repositories
             Loan loan = new()
             {
                 bookId = 1,
-                userId = 1,
+                UsersId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
             };
@@ -143,7 +143,7 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = 1,
                 bookId = 1,
-                userId = 1,
+                UsersId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
             };
@@ -173,7 +173,7 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = LoanId,
                 bookId = 1,
-                userId = 1,
+                UsersId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
             };
@@ -185,7 +185,7 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = LoanId,
                 bookId = 1,
-                userId = 1,
+                UsersId = 1,
                 loaned_At = "updated 11/5/2022",
                 return_date = " updated 11/6/2022"
             };
@@ -198,7 +198,7 @@ namespace LibraryProject.Tests.Repositories
             Assert.IsType<Loan>(result);
             Assert.Equal(LoanId, result.Id);
             Assert.Equal(updateLoan.bookId, result.bookId);
-            Assert.Equal(updateLoan.userId, result.userId);
+            Assert.Equal(updateLoan.UsersId, result.UsersId);
             Assert.Equal(updateLoan.loaned_At, result.loaned_At);
             Assert.Equal(updateLoan.return_date, result.return_date);
 
@@ -215,7 +215,7 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = LoanId,
                 bookId = 1,
-                userId = 1,
+                UsersId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022",
             };
@@ -239,7 +239,7 @@ namespace LibraryProject.Tests.Repositories
             {
                 Id = LoanId,
                 bookId = 1,
-                userId = 1,
+                UsersId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
             };

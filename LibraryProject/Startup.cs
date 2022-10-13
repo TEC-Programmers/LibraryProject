@@ -49,7 +49,7 @@ namespace LibraryProject.API
 
             services.AddScoped<IJwtUtils, JwtUtils>();
 
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IBookRepository, BookRepository>();

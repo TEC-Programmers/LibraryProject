@@ -10,22 +10,22 @@ using Xunit;
 
 namespace LibraryProject.Tests.Controllers
 {
-    public class UserControllerTests
+    public class UsersControllerTests
     {
-        private readonly UserController _userController;
-        private readonly Mock<IUserService> _mockuserService = new();
+        private readonly UsersController _UsersController;
+        private readonly Mock<IUserService> _mockUsersService = new();
 
-        public UserControllerTests()
+        public UsersControllerTests()
         {
-            _userController = new(_mockuserService.Object);
+            _UsersController = new(_mockUsersService.Object);
         }
 
         [Fact]
-        public async void GetAll_ShouldReturnStatusCode200_WhenuserExists()
+        public async void GetAll_ShouldReturnStatusCode200_WhenUsersExists()
         {
             //Arrange
-            List<UserResponse> users = new();
-            users.Add(new()
+            List<UsersResponse> Userss = new();
+            Userss.Add(new()
             {
 
                 Id = 1,
@@ -38,7 +38,7 @@ namespace LibraryProject.Tests.Controllers
 
             });
 
-            users.Add(new()
+            Userss.Add(new()
             {
                 Id = 2,
                 FirstName = "Jack",
@@ -50,12 +50,12 @@ namespace LibraryProject.Tests.Controllers
 
             });
 
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.GetAll())
-                .ReturnsAsync(users);
+                .ReturnsAsync(Userss);
 
             //Act
-            var result = await _userController.GetAll();
+            var result = await _UsersController.GetAll();
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -63,18 +63,18 @@ namespace LibraryProject.Tests.Controllers
         }
 
         [Fact]
-        public async void GetAll_ShouldReturnStatusCode204_WhenNouserExists()
+        public async void GetAll_ShouldReturnStatusCode204_WhenNoUsersExists()
         {
             //Arrange
 
-            List<UserResponse> users = new();
+            List<UsersResponse> Userss = new();
 
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.GetAll())
-                .ReturnsAsync(users);
+                .ReturnsAsync(Userss);
 
             //Act
-            var result = await _userController.GetAll();
+            var result = await _UsersController.GetAll();
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -85,12 +85,12 @@ namespace LibraryProject.Tests.Controllers
         public async void GetAll_ShouldReturnStatusCode500_WhenNullIsReturnedFromService()
         {
             //Arrange                      
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.GetAll())
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userController.GetAll();
+            var result = await _UsersController.GetAll();
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -101,12 +101,12 @@ namespace LibraryProject.Tests.Controllers
         public async void GetAll_ShouldReturnStatusCode500_WhenExceptionIsRaised()
         {
             //Arrange                      
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.GetAll())
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act
-            var result = await _userController.GetAll();
+            var result = await _UsersController.GetAll();
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -117,10 +117,10 @@ namespace LibraryProject.Tests.Controllers
         public async void GetById_ShouldReturnStatusCode200_WhenDataExists()
         {
             //Arrange
-            int UserId = 1;
-            UserResponse User = new()
+            int UsersId = 1;
+            UsersResponse Users = new()
             {
-                Id = UserId,
+                Id = UsersId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -130,29 +130,29 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.GetById(It.IsAny<int>()))
-                .ReturnsAsync(User);
+                .ReturnsAsync(Users);
 
             //Act
-            var result = await _userController.GetById(UserId);
+            var result = await _UsersController.GetById(UsersId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(200, statusCodeResult.StatusCode);
         }
         [Fact]
-        public async void GetById_ShouldReturnStatusCode404_WhenUserDoesNotExists()
+        public async void GetById_ShouldReturnStatusCode404_WhenUsersDoesNotExists()
         {
             //Arrange
-            int userId = 1;
+            int UsersId = 1;
 
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.GetById(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userController.GetById(userId);
+            var result = await _UsersController.GetById(UsersId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -164,12 +164,12 @@ namespace LibraryProject.Tests.Controllers
         {
             //Arrange
 
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.GetById(It.IsAny<int>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an Exception"));
 
             //Act
-            var result = await _userController.GetById(1);
+            var result = await _UsersController.GetById(1);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -177,10 +177,10 @@ namespace LibraryProject.Tests.Controllers
         }
 
         [Fact]
-        public async void Create_ShouldReturnStatusCode200_WhenUserIsSuccessfullyCreated()
+        public async void Create_ShouldReturnStatusCode200_WhenUsersIsSuccessfullyCreated()
         {
             //Arrange
-            UserRequest newUser = new()
+            UsersRequest newUsers = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -191,11 +191,11 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            int userId = 1;
+            int UsersId = 1;
 
-            UserResponse userResponse = new()
+            UsersResponse UsersResponse = new()
             {
-                Id = userId,
+                Id = UsersId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -205,12 +205,12 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            _mockuserService
-                .Setup(x => x.registerWithProcedure(It.IsAny<UserRequest>()))
-                .ReturnsAsync(userResponse);
+            _mockUsersService
+                .Setup(x => x.registerWithProcedure(It.IsAny<UsersRequest>()))
+                .ReturnsAsync(UsersResponse);
 
             //Act
-            var result = await _userController.RegisterWithProcedure(newUser);
+            var result = await _UsersController.RegisterWithProcedure(newUsers);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -221,7 +221,7 @@ namespace LibraryProject.Tests.Controllers
         public async void Create_ShouldReturnStatusCode500_WhenExceptionIsRaised()
         {
             //Arrange
-            UserRequest newUser = new()
+            UsersRequest newUsers = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -231,12 +231,12 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            _mockuserService
-                .Setup(x => x.registerWithProcedure(It.IsAny<UserRequest>()))
+            _mockUsersService
+                .Setup(x => x.registerWithProcedure(It.IsAny<UsersRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an Exception"));
 
             //Act
-            var result = await _userController.RegisterWithProcedure(newUser);
+            var result = await _UsersController.RegisterWithProcedure(newUsers);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -244,10 +244,10 @@ namespace LibraryProject.Tests.Controllers
         }
 
         [Fact]
-        public async void Update_ShouldReturnStatusCode200_WhenUserIsSuccessfullyUpdate()
+        public async void Update_ShouldReturnStatusCode200_WhenUsersIsSuccessfullyUpdate()
         {
             //Arrange
-            UserRequest updateUser = new()
+            UsersRequest updateUsers = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -256,11 +256,11 @@ namespace LibraryProject.Tests.Controllers
                 Password = "password",
             };
 
-            int userId = 1;
+            int UsersId = 1;
 
-            UserResponse userResponse = new()
+            UsersResponse UsersResponse = new()
             {
-                Id = userId,
+                Id = UsersId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -270,12 +270,12 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            _mockuserService
-                .Setup(x => x.UpdateRoleWithProcedure(It.IsAny<int>(), It.IsAny<UserRequest>()))
-                .ReturnsAsync(userResponse);
+            _mockUsersService
+                .Setup(x => x.UpdateRoleWithProcedure(It.IsAny<int>(), It.IsAny<UsersRequest>()))
+                .ReturnsAsync(UsersResponse);
 
             //Act
-            var result = await _userController.Update(userId, updateUser);
+            var result = await _UsersController.Update(UsersId, updateUsers);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -286,7 +286,7 @@ namespace LibraryProject.Tests.Controllers
         public async void Update_ShouldReturnStatusCode500_WhenExceptionIsRaised()
         {
             //Arrange
-            UserRequest updateUser = new UserRequest
+            UsersRequest updateUsers = new UsersRequest
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -295,15 +295,15 @@ namespace LibraryProject.Tests.Controllers
                 Password = "password",
             };
 
-            int userId = 1;
+            int UsersId = 1;
 
 
-            _mockuserService
-                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<UserRequest>()))
+            _mockUsersService
+                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<UsersRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act
-            var result = await _userController.Update(userId, updateUser);
+            var result = await _UsersController.Update(UsersId, updateUsers);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -312,14 +312,14 @@ namespace LibraryProject.Tests.Controllers
 
 
         [Fact]
-        public async void Delete_ShouldReturnStatusCode200_WhenUserIsDeleted()
+        public async void Delete_ShouldReturnStatusCode200_WhenUsersIsDeleted()
         {
             //Arrange
-            int userId = 1;
+            int UsersId = 1;
 
-            UserResponse userResponse = new()
+            UsersResponse UsersResponse = new()
             {
-                Id = userId,
+                Id = UsersId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -329,12 +329,12 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            _mockuserService
+            _mockUsersService
                .Setup(x => x.Delete(It.IsAny<int>()))
-               .ReturnsAsync(userResponse);
+               .ReturnsAsync(UsersResponse);
 
             //Act
-            var result = await _userController.Delete(userId);
+            var result = await _UsersController.Delete(UsersId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -342,17 +342,17 @@ namespace LibraryProject.Tests.Controllers
         }
 
         [Fact]
-        public async void Delete_ShouldReturnStatusCode404_WhenTryingToDeleteUserWhichDoesNotExist()
+        public async void Delete_ShouldReturnStatusCode404_WhenTryingToDeleteUsersWhichDoesNotExist()
         {
             //Arrange
-            int userId = 1;
+            int UsersId = 1;
 
-            _mockuserService
+            _mockUsersService
                  .Setup(x => x.Delete(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userController.Delete(userId);
+            var result = await _UsersController.Delete(UsersId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -363,15 +363,15 @@ namespace LibraryProject.Tests.Controllers
         public async void Delete_ShouldReturnStatusCode500_WhenExceptionIsRaised()
         {
             //Arrange
-            int userId = 1;
+            int UsersId = 1;
 
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.Delete(It.IsAny<int>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
 
             //Act
-            var result = await _userController.Delete(userId);
+            var result = await _UsersController.Delete(UsersId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -392,11 +392,11 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            int userId = 1;
+            int UsersId = 1;
 
             LoginResponse loginResponse = new()
             {
-                Id = userId,
+                Id = UsersId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -406,12 +406,12 @@ namespace LibraryProject.Tests.Controllers
                 Token = ""
             };
 
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.Authenticate(It.IsAny<LoginRequest>()))
                 .ReturnsAsync(loginResponse);
 
             //Act
-            var result = await _userController.Authenticate(newLogin);
+            var result = await _UsersController.Authenticate(newLogin);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -428,12 +428,12 @@ namespace LibraryProject.Tests.Controllers
                 Password = "password"
 
             };
-            _mockuserService
+            _mockUsersService
                 .Setup(x => x.Authenticate(It.IsAny<LoginRequest>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an Exception"));
 
             //Act
-            var result = await _userController.Authenticate(newLogin);
+            var result = await _UsersController.Authenticate(newLogin);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
