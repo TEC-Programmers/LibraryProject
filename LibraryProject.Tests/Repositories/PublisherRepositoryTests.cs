@@ -3,6 +3,7 @@ using LibraryProject.API.Repositories;
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,17 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly PublisherRepository _publisherRepository;
+        private readonly IConfiguration _configuration;
 
-        public PublisherRepositoryTests()
+        public PublisherRepositoryTests(IConfiguration configuration)
         {
+            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProjekt_InMemoryDatabase_Publishers")
                 .Options;
 
             _context = new(_options);
-            _publisherRepository = new(_context);
+            _publisherRepository = new(_context, _configuration);
         }
 
         [Fact]

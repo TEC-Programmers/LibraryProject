@@ -2,6 +2,7 @@
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,16 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly CategoryRepository _categoryRepository;
-        public CategoryRepositoryTests()
+        private readonly IConfiguration _configuration;
+        public CategoryRepositoryTests(IConfiguration configuration)
         {
+            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProjectContext")
                 .Options;
 
             _context = new(_options);
-            _categoryRepository = new(_context);
+            _categoryRepository = new(_context, _configuration);
         }
         [Fact]
         public async void SelectAllCategories_ShouldReturnListOfCategories_WhenCategoryExists()

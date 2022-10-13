@@ -2,6 +2,7 @@
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,16 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly BookRepository _bookRepository;
-        public BookRepositoryTests()
+        private readonly IConfiguration _configuration;
+        public BookRepositoryTests(IConfiguration configuration)
         {
+            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProjectBooks")
                 .Options;
 
             _context = new(_options);
-            _bookRepository = new(_context);
+            _bookRepository = new(_context,_configuration);
         }
         [Fact]
         public async void SelectAllBooks_ShouldReturnListOfBooks_WhenBookExists()

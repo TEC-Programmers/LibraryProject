@@ -1,10 +1,10 @@
-﻿using Castle.Core.Configuration;
-using LibraryProject.API.Database.Entities;
+﻿
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -20,17 +20,22 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly UserRepository _userRepository;
+        private readonly IConfiguration _configuration;
         private readonly Mock<API.Authorization.IJwtUtils> jwt = new();
 
         
 
 
-        public UserRepositoryTests()
+        public UserRepositoryTests(IConfiguration configuration)
         {
+            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProject")
                 .Options;
-            _context = new(_options);  
+            _context = new(_options);
+
+
+            _userRepository = new(_context, _configuration);
         }
 
         [Fact]

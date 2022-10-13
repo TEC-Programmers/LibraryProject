@@ -3,6 +3,7 @@ using LibraryProject.API.Repositories;
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +18,18 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly ReservationRepository _reservationRepository;
+        private readonly IConfiguration _configuration;
 
-        public ReservationRepositoryTests()
+        public ReservationRepositoryTests(IConfiguration configuration)
         {
+            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProjectReservations")
                 .Options;
 
             _context = new(_options);
 
-            _reservationRepository = new(_context);
+            _reservationRepository = new(_context, _configuration);
         }
 
         [Fact]

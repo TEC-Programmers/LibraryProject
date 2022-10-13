@@ -2,6 +2,7 @@
 using LibraryProject.API.Repositories;
 using LibraryProject.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,18 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly LoanRepository _loanRepository;
+        private readonly IConfiguration _configuration;
 
-        public LoanRepositoryTests()
+        public LoanRepositoryTests(IConfiguration configuration)
         {
+            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
             .UseInMemoryDatabase(databaseName: "LibraryProjectLoans")
             .Options;
 
             _context = new(_options);
 
-            _loanRepository = new(_context);
+            _loanRepository = new(_context,_configuration);
         }
 
         [Fact]
