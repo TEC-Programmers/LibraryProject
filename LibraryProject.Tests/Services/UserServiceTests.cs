@@ -29,7 +29,7 @@ namespace LibraryProject.Tests.Services
         {
             //Arrange
 
-            List<Users> users = new();
+            List<User> users = new();
 
 
             users.Add(new()
@@ -71,7 +71,7 @@ namespace LibraryProject.Tests.Services
         public async void GetAllUsers_ShouldReturnEmptyListOfUserResponses_WhenNoUsersExists()
         {
             //Arrange
-            List<Users> users = new();
+            List<User> users = new();
 
             _mockUserRepository
                 .Setup(x => x.GetAll())
@@ -92,7 +92,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             int userId = 1;
 
-            Users user = new()
+            User user = new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -156,11 +156,11 @@ namespace LibraryProject.Tests.Services
 
 
             _mockUserRepository
-            .Setup(x => x.Create(It.IsAny<Users>()))
+            .Setup(x => x.registerWithProcedure(It.IsAny<User>()))
             .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userService.Register(newUser);
+            var result = await _userService.registerWithProcedure(newUser);
 
             //Assert         
 
@@ -185,11 +185,11 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockUserRepository
-                .Setup(x => x.Create(It.IsAny<Users>()))
+                .Setup(x => x.registerWithProcedure(It.IsAny<User>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userService.Register(newUser);
+            var result = await _userService.registerWithProcedure(newUser);
 
             //Assert
             Assert.Null(result);
@@ -215,7 +215,7 @@ namespace LibraryProject.Tests.Services
             int userId = 1;
 
 
-            Users user = new()
+            User user = new()
             {
                 Id = userId,
                 FirstName = "Peter",
@@ -228,11 +228,11 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockUserRepository
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<Users>()))
+                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<User>()))
                 .ReturnsAsync(user);
 
             //Act
-            var result = await _userService.Update(userId, userRequest);
+            var result = await _userService.UpdateRoleWithProcedure(userId, userRequest);
 
 
             //Assert
@@ -263,11 +263,11 @@ namespace LibraryProject.Tests.Services
             int userId = 1;
 
             _mockUserRepository
-                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<Users>()))
+                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<User>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userService.Update(userId, userRequest);
+            var result = await _userService.UpdateProfileWithProcedure(userId, userRequest);
 
 
             //Assert
@@ -283,7 +283,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             int userId = 1;
 
-            Users deletedUser = new()
+            User deletedUser = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",

@@ -27,8 +27,8 @@ namespace LibraryProject.API.Authorization
                 return;
 
             // authorization
-            var user = (UserResponse)context.HttpContext.Items["Customer"]; //tjekker hvis customer login
-            if (user == null || (_roles.Any() && !_roles.Contains(user.Role))) // user er null 
+            var user = (UserResponse)context.HttpContext.Items["Customer"];
+            if (user == null || (_roles.Any() && !_roles.Contains(user.Role)))
             {
                 // not logged in or role not authorized
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };

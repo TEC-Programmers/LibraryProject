@@ -7,6 +7,10 @@ using System;
 using System.Threading.Tasks;
 using LibraryProject.API.Helpers;
 using System.Collections.Generic;
+using LibraryProject.Database.Entities;
+using LibraryProject.API.Repositories;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace LibraryProject.API.Controllers
 {
@@ -24,7 +28,7 @@ namespace LibraryProject.API.Controllers
         }
 
         //[Authorize(Role.Administrator)] // only admins are allowed entry to this endpoint
-        [AllowAnonymous]// till alle 
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -54,19 +58,18 @@ namespace LibraryProject.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        
 
-        [AllowAnonymous]// igen til allesammen
-        [HttpPost("register")]
+        [AllowAnonymous]
+        //[Authorize(Role.Customer, Role.Administrator)]
+        [HttpPost("registerWithProcedure")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register([FromBody] UserRequest newUser)
+        public async Task<IActionResult> RegisterWithProcedure([FromBody] UserRequest newUser)
         {
             try
-            {
-
-                UserResponse user = await _userService.Register(newUser);
+            {              
+                UserResponse user = await _userService.registerWithProcedure(newUser);
                 return Ok(user);
 
             }
@@ -102,7 +105,8 @@ namespace LibraryProject.API.Controllers
         }
 
 
-        [Authorize(Role.Administrator)]
+        //[Authorize(Role.Administrator)]
+        [AllowAnonymous]
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -140,8 +144,35 @@ namespace LibraryProject.API.Controllers
         }
 
 
+
         [AllowAnonymous]
-        [HttpPut("role/{userId}")]
+        [HttpPut("updateUserPassword/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdatePassword([FromRoute] int userId, [FromBody] UserRequest updateUser)
+        {
+            try
+            {
+                UserResponse user = await _userService.UpdatePasswordWithProcedure(userId, updateUser);
+
+                if (user == null)
+                {
+                    return Problem("User record didn't get updated, something went wrong.");
+                }
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpPut("updateUserRole/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -150,7 +181,7 @@ namespace LibraryProject.API.Controllers
         {
             try
             {
-                UserResponse user = await _userService.UpdateRole(userId, updateUser);
+                UserResponse user = await _userService.UpdateRoleWithProcedure(userId, updateUser);
 
                 if (user == null)
                 {
@@ -169,8 +200,8 @@ namespace LibraryProject.API.Controllers
 
 
         //update
-        //[AllowAnonymous]
-        [Authorize(Role.Customer, Role.Administrator)]
+        //[Authorize(Role.Customer, Role.Administrator)]
+        [AllowAnonymous]
         [HttpPut("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -180,7 +211,7 @@ namespace LibraryProject.API.Controllers
         {
             try
             {
-                UserResponse user = await _userService.Update(userId, updateUser);
+                UserResponse user = await _userService.UpdateProfileWithProcedure(userId, updateUser);
 
                 if (user == null)
                 {

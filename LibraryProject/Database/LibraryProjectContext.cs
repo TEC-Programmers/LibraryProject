@@ -1,9 +1,16 @@
 
 ﻿using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-
 using LibraryProject.API.Database.Entities;
 using LibraryProject.API.Helpers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using System.Linq;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using BC = BCrypt.Net.BCrypt;
+
 
 namespace LibraryProject
 {
@@ -13,16 +20,15 @@ namespace LibraryProject
         public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }  //creating instances of the class 
         public DbSet<Book> Book { get; set; }   //represents the set of book enitity in EFC(Entity Framework Core)
         public DbSet<Category> Category { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Loan> Loan { get; set; }
-
+              
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //We override the method to configure the models of the set of entities
-
             modelBuilder.Entity<Category>().HasData(
               new()
               {
@@ -89,7 +95,7 @@ namespace LibraryProject
                     PublisherId = 2,
                 }
                 );
-            modelBuilder.Entity<Users>().HasData(
+            modelBuilder.Entity<User>().HasData(
                 new()
                 {
                     Id = 1,
@@ -97,7 +103,7 @@ namespace LibraryProject
                     MiddleName = "Per.",
                     LastName = "Aksten",
                     Email = "peter@abc.com",
-                    Password = "password",
+                    Password = BC.HashPassword("password"),
                     Role = Role.Administrator
                 },
                 new()
@@ -107,7 +113,7 @@ namespace LibraryProject
                     MiddleName = "R.R",
                     LastName = "Mustafa",
                     Email = "riz@abc.com",
-                    Password = "password",
+                    Password = BC.HashPassword("password"),
                     Role = Role.Customer
                 }
                 );
@@ -147,6 +153,6 @@ namespace LibraryProject
                     reserved_To = "2022/08/09"
                 }
                 );
-        }            
+        }
     }
 }

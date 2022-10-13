@@ -31,6 +31,7 @@ namespace LibraryProject.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddSingleton<LibraryProjectContext>();
             services.AddCors(options =>
             {
                 options.AddPolicy(name: CORSRules,

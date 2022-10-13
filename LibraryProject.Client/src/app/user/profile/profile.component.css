@@ -1,7 +1,7 @@
 .mainform {
   width: 45%;
   margin-left: 507px;
-  margin-top: 25px;
+  margin-top: 63px;
   border: 5px double gray;
   background-color: rgb(212, 148, 69);
   padding: 10px;
@@ -9,17 +9,48 @@
   justify-content: center;
 }
 
+#profileInfo {
+  border: 2px solid rgb(44, 43, 43);
+}
+
+.formTitle {
+  font-family: GEORGIA;
+  text-align: center;
+}
+
+.titleForResetPass {
+  text-align: center;
+  font-family: GEORGIA;
+  font-size: 30px;
+  margin-top: -88px;
+}
+
+.input-group-append {
+  margin-left: 37px;
+  margin-top: -3px;
+}
+
+.editFormBtns {
+  width: 30%;
+  margin-left: 289px;
+  margin-top: 25px;
+  border: 3px double rgb(44, 43, 43);
+  background-color: rgb(212, 148, 69);
+  padding: 5px;
+
+}
+
 .editForm {
   width: 45%;
   margin-left: 226px;
   margin-top: 25px;
-  border: 5px double gray;
+  border: 2px solid rgb(44, 43, 43);
   background-color: rgb(212, 148, 69);
   padding: 10px;
 }
 
 .forgotPass {
-  border: 5px double gray;
+  border: 4px double rgb(44, 43, 43);
   padding: 10px;
   width: 350px;
   margin: 0 auto;
@@ -38,7 +69,7 @@
 
 #error_message {
   position: absolute;
-  top: 338px;
+  top: 293px;
 }
 
 .form{

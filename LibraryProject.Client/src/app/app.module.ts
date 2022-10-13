@@ -7,18 +7,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryBooksComponent } from './category-books/category-books.component';
-import { BookDetailsComponent } from './book-details/book-details.component';
+import { BookDetailsComponent } from './book/book-details/book-details.component';
 import { AdministratorComponent } from './administration/administrator/administrator.component';
 import { AdminCustomerComponent } from './administration/admin-customer/admin-customer.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
-import { BookComponent } from './book/book.component';
+import { LoginComponent } from './user/login/login.component';
 import { LoanComponent } from './loan/loan.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core'
-import { LoginComponent } from './user/login/login.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';    // autoinject JWT into all requests
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
@@ -30,6 +29,7 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { CustomerPanelComponent } from './customer/customer-panel/customer-panel.component';
 import { ActiveLoansComponent } from './customer/active-loans/active-loans.component';
 import { ActiveReservationsComponent } from './customer/active-reservations/active-reservations.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +39,6 @@ import { ActiveReservationsComponent } from './customer/active-reservations/acti
     ProfileComponent,
     RegisterComponent,
     CategoryComponent,
-    BookComponent,
     LoginComponent,
     BookDetailsComponent,
     LoanComponent,

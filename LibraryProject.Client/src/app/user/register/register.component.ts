@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'app/_models/User';
 import { UserService } from 'app/_services/user.service';
 import { Router } from '@angular/router';
+import { Role } from 'app/_models/Role';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,9 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    if (this.getUsers.length > 0) {
+      this.getUsers();
+    }
   }
 
   newUser(): User {
@@ -36,7 +39,6 @@ export class RegisterComponent implements OnInit {
 
   save(): void {
     this.message = [];
-
 
     if (this.user.firstName == '') {
       this.message.push('Enter FirstName');
@@ -57,7 +59,9 @@ export class RegisterComponent implements OnInit {
 
     if (this.message.length == 0) {
       if (this.user.id == 0) {
-        this.userService.registerUser(this.user)
+        this.user.role = Role.Customer;
+        console.log('user before register: ',this.user)
+        this.userService.registerWithProcedure(this.user)
            .subscribe({
             next: a => {
             this.users.push(a)
@@ -71,10 +75,7 @@ export class RegisterComponent implements OnInit {
          }
          });
        } else {
-            this.userService.updateUser(this.user.id, this.user)
-              .subscribe(() => {
-                this.user = this.newUser();
-              });
+            console.log('[ ERROR ] Register User')
            }
   }}
 }

@@ -1,10 +1,9 @@
-<div class="w3-container" class="mainform">
-    <h4>Your Profile:</h4><br>
-      <table class="w3-table w3-bordered w3-striped">
+<div class="w3-container" class="mainform"><br>
+    <h1 class="formTitle" *ngIf="showForm">Your Profile:</h1><br>
+      <table class="w3-table w3-bordered w3-striped" id="profileInfo" *ngIf="showForm">
           <tbody>
               <tr>
                 <th>Email</th>
-                <!-- <th>Password</th> -->
                 <th>FirstName</th>
                 <th>MiddleName</th>
                 <th>LastName</th>             
@@ -13,7 +12,6 @@
               </tr>
               <tr>
                 <td>{{ currentUser.email}}</td>
-                <!-- <td>{{ currentUser.password }}</td> -->
                 <td>{{ currentUser.firstName }}</td>
                 <td>{{ currentUser.middleName }}</td>
                 <td>{{ currentUser.lastName }}</td>             
@@ -29,7 +27,6 @@
           <label>Email</label>
           <input class="w3-input w3-border" [(ngModel)]="user.email">
   
-          <!-- <label>Password</label> -->
           <input class="w3-input w3-border" [(ngModel)]="user.password" hidden>
   
           <label>FirstName</label>
@@ -41,26 +38,31 @@
           <label>LastName</label>
           <input class="w3-input w3-border" [(ngModel)]="user.lastName">  
       </div><br>
-      <div style="justify-content: center; align-items:center; display: flex;" *ngIf="showForm" class="editForm">
-          <button class="w3-btn w3-green w3-ripple" (click)="save()" [disabled]="!user.email || !user.password || !user.firstName || !user.middleName || !user.lastName">Save</button>&nbsp;&nbsp;
+      <div style="justify-content: center; align-items:center; display: flex;" *ngIf="showForm" class="editFormBtns">
+          <button class="w3-btn w3-green w3-ripple" (click)="save()" [disabled]="!user.email || !user.password || !user.firstName || !user.middleName || !user.lastName">Update</button>&nbsp;&nbsp;
           <button class="w3-btn w3-blue w3-ripple" (click)="cancel()" [disabled]="!user.email || !user.password || !user.firstName || !user.middleName || !user.lastName">Cancel</button>&nbsp;&nbsp;
           <button class="w3-btn w3-red w3-ripple" routerLink="customerpanel">Back</button> <br><br>
           <span class="w3-red" id="error_message">{{ message }}</span>
       </div>
       <p class="text-center mt-4" (click)="hideForm(currentUser)" *ngIf="showForm"><a routerLink="/profile">Forgot password?</a></p>
-
-      <div class="forgotPass" *ngIf="!showForm">
-        <br>
-        <label>(enter) new password</label>
-        <input class="w3-input w3-border" [(ngModel)]="user.password" placeholder="new password" style="width: 300px;">
-        <br><br>
-        <div class="newPassBtns" *ngIf="!showForm">
-          <button class="w3-btn w3-green w3-ripple" (click)="save()" [disabled]="!user.password">Save</button>&nbsp;&nbsp;
-          <button class="w3-btn w3-blue w3-ripple" (click)="cancelNewPass()" [disabled]="!user.password">Cancel</button>&nbsp;&nbsp;
-          <button class="w3-btn w3-red w3-ripple" routerLink="/profile" (click)="returnFromNewPass()">Back</button> <br><br>
-          <span class="w3-red" id="error_message">{{ message }}</span>
-        </div>
-      </div><br>
-
-      
+      <div class="changePass" *ngIf="!showForm">
+        <h1 class="titleForResetPass">Reset Password</h1><br><br><br>
+          <div class="forgotPass">
+            <br>
+            <label>(enter) new password</label>
+            <input #myPassInput class="w3-input w3-border" [(ngModel)]="user.password" placeholder="new password" style="width: 300px;" [type]="showPassword ? 'text' : 'password' ">
+            <div class="input-group-append" (click)="changeType(myPassInput, 1)" (click)="changeType2(myPassInput2, 1)">
+              <span class="input-group-text" style="margin-left: 226px; margin-top: -34px; position: absolute; height: 35px;"><i [ngClass]="toggle1 ? 'fas fa-eye' : 'fas fa-eye-slash'"></i></span>
+          </div><br>
+          <label>(confirm) password</label>
+          <input #myPassInput2 class="w3-input w3-border" [(ngModel)]="confirmPass" placeholder="confirm password" style="width: 300px;" [type]="showPassword ? 'text' : 'password' ">
+            <br><br>
+            <div class="newPassBtns" *ngIf="!showForm">
+              <button class="w3-btn w3-green w3-ripple" (click)="savePassword()" [disabled]="!user.password || !confirmPass || user.password !== confirmPass">Reset</button>&nbsp;&nbsp;
+              <button class="w3-btn w3-blue w3-ripple" (click)="cancelNewPass()" [disabled]="!user.password">Cancel</button>&nbsp;&nbsp;
+              <button class="w3-btn w3-red w3-ripple" routerLink="/profile" (click)="returnFromNewPass()">Back</button> <br><br>
+              <span class="w3-red" id="error_message">{{ message }}</span>
+            </div>
+          </div><br><br><br>
+      </div>   
 </div>

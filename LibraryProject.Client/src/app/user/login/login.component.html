@@ -1,35 +1,26 @@
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-conten padding-y" style="min-width: none; height: 1000px; background-color: rgb(71, 44, 25);
-">
+<section class="section-conten padding-y" style="min-width: none; height: 1000px; background-color: rgb(71, 44, 25);">
     <!-- ============================ COMPONENT LOGIN   ================================= -->
-    <div class="card mx-auto" style="max-width:380px; margin-top:133px; background-color:rgb(212, 148, 69); position: absolute; left: 780px; height: 318px; width: 322px;">
-        <div class="card-body">
+    <div class="card mx-auto" style="max-width:380px; margin-top:133px; background-color:rgb(212, 148, 69); position: absolute; left: 780px; height: 372px; width: 322px;">
 
-            <p class="text-center mt-4 w3-red"> {{ error }}</p>
+        <div class="card-body"><br>
             <h4 id="title" class="card-title mb-4" style="font-size: 28px; margin-left: 100px; margin-top: -31px; font-family: Times New Roman;">Login</h4>
+            <p class="text-center mt-4 w3-red" style="margin-top:133px; position: absolute;"> {{ error }}</p><br>
             <br>
             <form #form="ngForm">
 
                 <div class="form-group">
-                    <div class="icon"><i class="fas fa-user" style="position: absolute; font-size: 21px; left: 6px; top: 91px;"></i></div>
+                    <div class="icon"><i class="fas fa-user" style="position: absolute; font-size: 21px; left: 6px; top: 119px;"></i></div>
                     <input [(ngModel)]="email" name="email" class="form-control" ngModel placeholder="Email" type="text" style="font-size: 12px;">
                 </div>
-                <!-- form-group// -->
+                <!-- form-group -->
                 <div class="form-group">
-                    <div class="icon"><i class="fas fa-lock" style="position: absolute; font-size: 21px; left: 6px; top: 139px;"></i></div>
-                    <!-- <input [(ngModel)]="password" name="password" class="form-control" ngModel placeholder="Password" type="password" style="font-size: 12px;"> -->
+                    <div class="icon"><i class="fas fa-lock" style="position: absolute; font-size: 21px; left: 6px; top: 167px;"></i></div>
                     <input #myPassInput [(ngModel)]="password" placeholder="Password" style="font-size: 12px;" [type]="showPassword ? 'text' : 'password' " class="form-control" name="password">
-                    <div class="input-group-append" (click)="changeType(myPassInput, 1)">
+                    <div class="input-group-append" (click)="showOrHidePass(myPassInput, 1)">
                         <span class="input-group-text" style="margin-left: 226px; margin-top: -34px; position: absolute; height: 34px;"><i [ngClass]="toggle1 ? 'fas fa-eye' : 'fas fa-eye-slash'"></i></span>
-                      </div>
-                </div>
-                <!-- form-group// -->
-
-               <!--   <div class="form-group">
-                    <a href="#" class="float-right">Forgot password?</a>
-
-                </div>-->
-                <!-- form-group form-check .// -->
+                    </div>
+                </div>              
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block w3-brown" (click)="login()" style="font-size: 14px;"> Login  </button>
                 </div>
@@ -37,7 +28,5 @@
             </form>
         </div>
         <p class="text-center mt-4">Don't have account? <a  routerLink="/Register">Sign up</a></p>
-        <!-- card-body.// -->
     </div>
-    <!-- card .// -->
 </section>
