@@ -2,6 +2,7 @@
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace LibraryProject.Tests.Repositories
         }
 
         [Fact]
-        public async void SelectAllAuthors_ShouldReturnListOfAuthors_WhenAuthorsExists()
+        public async void SelectAllAuthorsWithProcedure_ShouldReturnListOfAuthors_WhenAuthorsExists()
         {
             // Arrange
             await _context.Database.EnsureDeletedAsync();
@@ -51,7 +52,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             // Act
-            var result = await _authorRepository.SelectAllAuthors();
+            var result = await _authorRepository.SelectAllAuthorsWithProcedure();
 
             // Assert
             Assert.NotNull(result);
@@ -60,13 +61,13 @@ namespace LibraryProject.Tests.Repositories
         }
 
         [Fact]
-        public async void SelectAllAuthors_ShouldReturnEmptyListOfAuthors_WhenNoAuthorsExists()
+        public async void SelectAllAuthorsWithProcedure_ShouldReturnEmptyListOfAuthors_WhenNoAuthorsExists()
         {
             // Arrange
             await _context.Database.EnsureDeletedAsync();
 
             // Act
-            var result = await _authorRepository.SelectAllAuthors();
+            var result = await _authorRepository.SelectAllAuthorsWithProcedure();
 
             // Assert
             Assert.NotNull(result);

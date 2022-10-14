@@ -261,17 +261,15 @@ namespace LibraryProject.Tests.Controllers
             UserResponse userResponse = new()
             {
                 Id = userId,
-                FirstName = "Peter",
-                MiddleName = "Per.",
-                LastName = "Aksten",
+                FirstName = "Peter updated",
+                MiddleName = "Per updated",
+                LastName = "Aksten updated",
                 Email = "peter@abc.com",
-                Password = "password",
-                Role = Role.Administrator
-
+                Password = "password",              
             };
 
             _mockuserService
-                .Setup(x => x.UpdateRoleWithProcedure(It.IsAny<int>(), It.IsAny<UserRequest>()))
+                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<UserRequest>()))
                 .ReturnsAsync(userResponse);
 
             //Act
@@ -377,9 +375,6 @@ namespace LibraryProject.Tests.Controllers
             var statusCodeResult = (IStatusCodeActionResult)result;
             Assert.Equal(500, statusCodeResult.StatusCode);
         }
-
-
-        /***/
 
         [Fact]
         public async void Create_ShouldReturnStatusCode200_WhenLoginIsSuccessfullyCreated()

@@ -74,6 +74,30 @@ namespace LibraryProject.Controllers
             }
         }
 
+        [HttpPost("WithProcedure")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> CreateAuthorWithProcedure([FromBody] AuthorRequest newAuthor)
+        {
+            try
+            {
+                AuthorResponse authorResponse = await _authorservice.CreateAuthorWithProcedure(newAuthor);
+
+                if (authorResponse == null)
+                {
+                    return Problem(" Author was NOT created, something went wrong");
+                }
+
+                return Ok(authorResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -132,6 +156,30 @@ namespace LibraryProject.Controllers
             try
             {
                 AuthorResponse authorResponse = await _authorservice.DeleteAuthor(authorId);
+
+                if (authorResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(authorResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+        [HttpDelete("WithProcedure/{authorId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteWithProcedure([FromRoute] int authorId)
+        {
+            try
+            {
+                AuthorResponse authorResponse = await _authorservice.DeleteAuthorWithProcedure(authorId);
 
                 if (authorResponse == null)
                 {

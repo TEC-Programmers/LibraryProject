@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using LibraryProject.API.Authorization;
 using LibraryProject.API.Database.Entities;
 using LibraryProject.API.DTO_s;
 using LibraryProject.API.Helpers;
@@ -14,19 +13,28 @@ using LibraryProject.Database.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Protocols;
 using BC = BCrypt.Net.BCrypt;
+using LibraryProject.DTO_s;
+using LibraryProject.API.Authorization;
 
 namespace LibraryProject.API.Services
 {
     public interface IUserService
     {
         Task<List<UserResponse>> GetAll();
+        Task<UserResponse> GetByIdWithProcedure(int UserId);
         Task<UserResponse> GetById(int UserId);
+
         Task<LoginResponse> Authenticate(LoginRequest login);
         Task<UserResponse> registerWithProcedure(UserRequest newUser);
+        Task<UserResponse> register(UserRequest newUser);
         Task<UserResponse> UpdateProfileWithProcedure(int UserId, UserRequest updateUser);
+        Task<UserResponse> DeleteWithProcedure(int UserId);
         Task<UserResponse> Delete(int UserId);
+
         Task<UserResponse> UpdateRoleWithProcedure(int UserId, UserRequest updateUser);
         Task<UserResponse> UpdatePasswordWithProcedure(int UserId, UserRequest updateUser);
+        Task<UserResponse> Update(int UserId, UserRequest updateUser);
+
     }
 
     public class UserService : IUserService
@@ -38,9 +46,7 @@ namespace LibraryProject.API.Services
         {
             _userRepository = userRepository;
             _jwtUtils = jwtUtils;
-
         }
-
 
         public async Task<List<UserResponse>> GetAll()
         {
@@ -60,7 +66,6 @@ namespace LibraryProject.API.Services
             }).ToList();
 
         }
-
         public async Task<UserResponse> registerWithProcedure(UserRequest newuser)
         {
 
@@ -78,14 +83,38 @@ namespace LibraryProject.API.Services
 
             return MapUserToUserResponse(user);
         }
+        public async Task<UserResponse> register(UserRequest newuser)
+        {
 
-        public async Task<UserResponse> GetById(int UserId)
+            User User = MapUserRequestToUser(newuser);
+
+            User insertedUser = await _userRepository.register(User);
+
+            if (insertedUser != null)
+            {
+
+                return MapUserToUserResponse(insertedUser);
+            }
+            return null;
+        }
+
+        public async Task<UserResponse> GetByIdWithProcedure(int UserId)
         {
             User User = await _userRepository.GetByIdWithProcedure(UserId);
 
             if (User != null)
             {
 
+                return MapUserToUserResponse(User);
+            }
+            return null;
+        }
+        public async Task<UserResponse> GetById(int UserId)
+        {
+            User User = await _userRepository.GetById(UserId);
+
+            if (User != null)
+            {
                 return MapUserToUserResponse(User);
             }
             return null;
@@ -120,6 +149,18 @@ namespace LibraryProject.API.Services
 
             return null;
         }
+        public async Task<UserResponse> Update(int UserId, UserRequest updateUser)
+        {
+            User User = MapUserRequestToUser(updateUser);
+
+            User updatedUser = await _userRepository.Update(UserId, User);
+
+            if (updatedUser != null)
+            {
+                return MapUserToUserResponse(updatedUser);
+            }
+            return null;
+        }
 
         public async Task<UserResponse> UpdatePasswordWithProcedure(int UserId, UserRequest updateUser)
         {
@@ -145,7 +186,6 @@ namespace LibraryProject.API.Services
                 Role = user.Role
             };
         }
-
         public async Task<UserResponse> UpdateRoleWithProcedure(int UserId, UserRequest updateUser)
         {
             User user = new()
@@ -170,7 +210,6 @@ namespace LibraryProject.API.Services
                 Role = user.Role
             };
         }
-
         public async Task<UserResponse> UpdateProfileWithProcedure(int UserId, UserRequest updateUser)
         {
             User user = new()
@@ -195,8 +234,7 @@ namespace LibraryProject.API.Services
                 Role = user.Role
             };
         }
-
-        public async Task<UserResponse> Delete(int userId)
+        public async Task<UserResponse> DeleteWithProcedure(int userId)
 
         {
             User user = await _userRepository.DeleteWithProcedure(userId);
@@ -207,6 +245,30 @@ namespace LibraryProject.API.Services
             }
 
             return null;
+        }
+        public async Task<UserResponse> Delete(int userId)
+
+        {
+            User deletedUser = await _userRepository.Delete(userId);
+
+            if (deletedUser != null)
+            {
+
+                return MapUserToUserResponse(deletedUser);
+            }
+            return null;
+        }
+
+        private User MapUserRequestToUser(UserRequest UserRequest)
+        {
+            return new User()
+            {
+                FirstName = UserRequest.FirstName,              
+                MiddleName = UserRequest.MiddleName,
+                LastName = UserRequest.LastName,
+                Email = UserRequest.Email,
+                Password = UserRequest.Password
+            };
         }
 
         private static UserResponse MapUserToUserResponse(User user)

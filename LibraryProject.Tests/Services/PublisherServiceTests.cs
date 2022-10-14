@@ -44,7 +44,7 @@ namespace LibraryProject.Tests.Services
             });
 
             _mockPublisherRepository
-                .Setup(x => x.SelectAllPublishers())
+                .Setup(x => x.SelectAllPublishersWithProcedure())
                 .ReturnsAsync(publishers);
 
             // Act
@@ -63,7 +63,7 @@ namespace LibraryProject.Tests.Services
             List<Publisher> publishers = new();
 
             _mockPublisherRepository
-                .Setup(x => x.SelectAllPublishers())
+                .Setup(x => x.SelectAllPublishersWithProcedure())
                 .ReturnsAsync(publishers);
 
             // Act

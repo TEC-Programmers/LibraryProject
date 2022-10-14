@@ -18,6 +18,7 @@ namespace LibraryProject.API.Controllers
         {
             _loanService = loanService;
         }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -74,6 +75,31 @@ namespace LibraryProject.API.Controllers
 
         }
 
+        [HttpPost("WithProcedure")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateWithProcedure([FromBody] LoanRequest newLoan)
+        {
+            try
+            {
+                LoanResponse loanResponse = await _loanService.CreateLoanWithProcedure(newLoan);
+                if (loanResponse == null)
+                {
+                    return Problem("Loan Was NOT created, something went wrong");
+                }
+
+                return Ok(loanResponse);
+
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -124,6 +150,32 @@ namespace LibraryProject.API.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpDelete("WithProcedure/{loanId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteWithProcedure([FromRoute] int loanId)
+        {
+            try
+            {
+                LoanResponse loanResponse = await _loanService.DeleteLoanWithProcedure(loanId);
+                if (loanResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(loanResponse);
+
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
         [HttpDelete("{loanId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

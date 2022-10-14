@@ -11,9 +11,12 @@ namespace LibraryProject.API.Services
     {
         Task<List<ReservationResponse>> GetAllReservations();
         Task<ReservationResponse> GetReservationById(int reservationId);
+        Task<ReservationResponse> CreateReservationWithProcedure(ReservationRequest newReservation);
         Task<ReservationResponse> CreateReservation(ReservationRequest newReservation);
         Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation);
+        Task<ReservationResponse> DeleteReservationWithProcedure(int reservationId);
         Task<ReservationResponse> DeleteReservation(int reservationId);
+
     }
     public class ReservationService : IReservationService
     {
@@ -24,7 +27,7 @@ namespace LibraryProject.API.Services
             _reservationRepository = reservationRepository;
         }
 
-        public async Task<ReservationResponse> CreateReservation(ReservationRequest newReservation)
+        public async Task<ReservationResponse> CreateReservationWithProcedure(ReservationRequest newReservation)
         {
             Reservation reservation = new()
             {
@@ -53,9 +56,55 @@ namespace LibraryProject.API.Services
 
         }
 
-        public async Task<ReservationResponse> DeleteReservation(int reservationId)
+        public async Task<ReservationResponse> CreateReservation(ReservationRequest newReservation)
+        {
+            Reservation reservation = new()
+            {
+                userId = newReservation.userId,
+                bookId = newReservation.bookId,
+                reserved_At = newReservation.reserved_At,
+                reserved_To = newReservation.reserved_To
+            };
+
+
+            Reservation insertedReservation = await _reservationRepository.InsertNewReservation(reservation);
+
+            if (insertedReservation != null)
+            {
+                return new ReservationResponse()
+                {
+                    Id = insertedReservation.Id,
+                    userId = insertedReservation.userId,
+                    bookId = insertedReservation.bookId,
+                    reserved_At = newReservation.reserved_At,
+                    reserved_To = newReservation.reserved_To
+                };
+            }
+
+            return null;
+
+        }
+
+        public async Task<ReservationResponse> DeleteReservationWithProcedure(int reservationId)
         {
             Reservation deletedReservation = await _reservationRepository.DeleteReservationByIdWithProcedure(reservationId);
+
+            if (deletedReservation != null)
+            {
+                return new ReservationResponse()
+                {
+                    Id = deletedReservation.Id,
+                    userId = deletedReservation.userId,
+                    bookId = deletedReservation.bookId,
+                    reserved_At = deletedReservation.reserved_At,
+                    reserved_To = deletedReservation.reserved_To
+                };
+            }
+            return null;
+        }
+        public async Task<ReservationResponse> DeleteReservation(int reservationId)
+        {
+            Reservation deletedReservation = await _reservationRepository.DeleteReservationById(reservationId);
 
             if (deletedReservation != null)
             {
@@ -76,7 +125,6 @@ namespace LibraryProject.API.Services
             List<Reservation> reservations = await _reservationRepository.SelectAllReservationsWithProcedure();
             return reservations.Select(reservation => MapReservationToReservationResponse(reservation)).ToList();           
         }
-
         public async Task<ReservationResponse> GetReservationById(int reservationId)
         {
             Reservation reservation = await _reservationRepository.SelectReservationById(reservationId);
@@ -94,7 +142,6 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
         public async Task<ReservationResponse> UpdateReservation(int reservationId, ReservationRequest updateReservation)
         {
             Reservation reservation = new()
@@ -122,8 +169,6 @@ namespace LibraryProject.API.Services
 
             return null;
         }
-
-
         private Reservation MapReservationRequestToReservation(ReservationRequest ReservationRequest)
         {
             return new Reservation()
@@ -134,7 +179,6 @@ namespace LibraryProject.API.Services
                 reserved_To = ReservationRequest.reserved_To
             };
         }
-
         private ReservationResponse MapReservationToReservationResponse(Reservation Reservation)
         {
             return new ReservationResponse()

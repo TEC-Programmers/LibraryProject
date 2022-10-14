@@ -49,7 +49,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _categoryRepository.SelectAllCategories();
+            var result = await _categoryRepository.SelectAllCategoriesWithProcedure();
 
             //Assert
             Assert.NotNull(result);
@@ -67,7 +67,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _categoryRepository.SelectAllCategories();
+            var result = await _categoryRepository.SelectAllCategoriesWithProcedure();
 
             //Assert
             Assert.NotNull(result);
@@ -253,7 +253,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _categoryRepository.DeleteCategoryById(categoryId);
+            var result = await _categoryRepository.Delete(categoryId);
             var category = await _categoryRepository.SelectCategoryById(categoryId);
 
             //Assert
@@ -272,7 +272,7 @@ namespace LibraryProject.Tests.Repositories
 
             _context.Add(new Category { Id = 1, CategoryName = "Toy" });
             //Act
-            var result = await _categoryRepository.DeleteCategoryById(1);
+            var result = await _categoryRepository.Delete(1);
 
 
             //Assert

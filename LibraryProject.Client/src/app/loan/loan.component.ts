@@ -55,12 +55,6 @@ export class LoanComponent implements OnInit {
     })
   }
 
-  resetForm() {
-    // this.dateRangeForm = this.formBuilder.group({
-    //   fromDate: new FormControl('', Validators.required),
-    //   toDate: new FormControl('', Validators.required),
-    // });
-  }
 
   setLoanMinDate() {
     // convert minimum date: (loaned_at) to Date() format

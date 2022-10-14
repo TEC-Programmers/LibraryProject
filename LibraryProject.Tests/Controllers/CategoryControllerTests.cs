@@ -362,7 +362,7 @@ namespace LibraryProject.Tests.Controllers
 
             };
             _mockCategoryService
-                .Setup(x => x.DeleteCategory(It.IsAny<int>()))
+                .Setup(x => x.Delete(It.IsAny<int>()))
                 .ReturnsAsync(categoryResponse);
 
 
@@ -385,7 +385,7 @@ namespace LibraryProject.Tests.Controllers
             int categoryId = 1;
 
             _mockCategoryService
-                .Setup(x => x.DeleteCategory(It.IsAny<int>()))
+                .Setup(x => x.Delete(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
 
@@ -407,7 +407,7 @@ namespace LibraryProject.Tests.Controllers
             int categoryId = 1;
 
             _mockCategoryService
-                .Setup(x => x.DeleteCategory(It.IsAny<int>()))
+                .Setup(x => x.Delete(It.IsAny<int>()))
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
 

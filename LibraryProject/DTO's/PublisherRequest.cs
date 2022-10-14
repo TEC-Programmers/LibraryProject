@@ -2,6 +2,7 @@
 
 namespace LibraryProject.API.DTO_s
 {
+    // PublisherRequest to retrieve data
     public class PublisherRequest
     {
         [Required]

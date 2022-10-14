@@ -54,7 +54,7 @@ namespace LibraryProject.Tests.Services
             });
 
              _mockReservationRepository
-              .Setup(x => x.SelectAllReservations())
+              .Setup(x => x.SelectAllReservationsWithProcedure())
               .ReturnsAsync(Reservations);
 
             //Act - kalder metoder og udføre de faktiske tests
@@ -73,7 +73,7 @@ namespace LibraryProject.Tests.Services
             List<Reservation> Reservations = new();
 
             _mockReservationRepository
-                .Setup(x => x.SelectAllReservations())
+                .Setup(x => x.SelectAllReservationsWithProcedure())
                 .ReturnsAsync(Reservations);
 
             //Act

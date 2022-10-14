@@ -27,7 +27,7 @@ export class PublisherService {
   }
 
   addPublisher(publisher: Publisher): Observable<Publisher>{
-    return this.http.post<Publisher>(this.apiUrl, publisher, this.httpOptions);
+    return this.http.post<Publisher>(this.apiUrl + `WithProcedure`, publisher, this.httpOptions);
   }
 
   updatePublisher(publisherId: number, publisher:Publisher): Observable<Publisher> {
@@ -35,6 +35,6 @@ export class PublisherService {
   }
 
   deletePublisher(publisherId: number): Observable<Publisher> {
-    return this.http.delete<Publisher>(`${this.apiUrl}/${publisherId}`, this.httpOptions);
+    return this.http.delete<Publisher>(`${this.apiUrl}/WithProcedure/${publisherId}`, this.httpOptions);
   }
 }

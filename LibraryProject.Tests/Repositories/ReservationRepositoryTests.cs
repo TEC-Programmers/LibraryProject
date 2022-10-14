@@ -25,7 +25,6 @@ namespace LibraryProject.Tests.Repositories
                 .Options;
 
             _context = new(_options);
-
             _ReservationRepository = new(_context);
         }
 
@@ -57,7 +56,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _ReservationRepository.SelectAllReservations();
+            var result = await _ReservationRepository.SelectAllReservationsWithProcedure();
 
             //Assert
 
@@ -73,7 +72,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _ReservationRepository.SelectAllReservations();
+            var result = await _ReservationRepository.SelectAllReservationsWithProcedure();
 
             //Assert
 

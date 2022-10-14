@@ -48,7 +48,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             // Act
-            var result = await _publisherRepository.SelectAllPublishers();
+            var result = await _publisherRepository.SelectAllPublishersWithProcedure();
 
             // Assert
             Assert.NotNull(result);
@@ -63,7 +63,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             // Act
-            var result = await _publisherRepository.SelectAllPublishers();
+            var result = await _publisherRepository.SelectAllPublishersWithProcedure();
 
             // Assert
             Assert.NotNull(result);

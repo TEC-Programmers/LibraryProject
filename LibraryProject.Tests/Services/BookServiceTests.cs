@@ -321,7 +321,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockBookRepository
-                .Setup(x => x.InsertNewBook(It.IsAny<Book>()))
+                .Setup(x => x.InsertNewBookWithProcedure(It.IsAny<Book>()))
                 .ReturnsAsync(() => null);
 
             // Act
@@ -388,7 +388,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockBookRepository
-                .Setup(x => x.UpdateExistingBook(It.IsAny<int>(), It.IsAny<Book>()))
+                .Setup(x => x.UpdateExistingBookWithProcedure(It.IsAny<int>(), It.IsAny<Book>()))
                 .ReturnsAsync(book);
             _mockCategoryRepository
                 .Setup(x => x.SelectCategoryById(It.IsAny<int>()))
@@ -438,7 +438,7 @@ namespace LibraryProject.Tests.Services
             int bookId = 1;
 
             _mockBookRepository
-                .Setup(x => x.UpdateExistingBook(It.IsAny<int>(), It.IsAny<Book>()))
+                .Setup(x => x.UpdateExistingBookWithProcedure(It.IsAny<int>(), It.IsAny<Book>()))
                 .ReturnsAsync(() => null);
 
             // Act
@@ -491,7 +491,7 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockBookRepository
-                .Setup(x => x.DeleteBookById(It.IsAny<int>()))
+                .Setup(x => x.DeleteBookByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(deletedBook);
             _mockCategoryRepository
                 .Setup(x => x.SelectCategoryById(It.IsAny<int>()))
@@ -520,7 +520,7 @@ namespace LibraryProject.Tests.Services
             int bookId = 1;
 
             _mockBookRepository
-                .Setup(x => x.DeleteBookById(It.IsAny<int>()))
+                .Setup(x => x.DeleteBookByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act

@@ -24,7 +24,6 @@ namespace LibraryProject.Tests.Repositories
             .Options;
 
             _context = new(_options);
-
             _loanRepository = new(_context);
         }
 
@@ -61,7 +60,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //act
-            var result = await _loanRepository.SelectAllLoans();
+            var result = await _loanRepository.SelectAllLoansWithProcedure();
 
             //assert
             Assert.NotNull(result);

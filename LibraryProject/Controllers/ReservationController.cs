@@ -75,6 +75,33 @@ namespace LibraryProject.API.Controllers
             }
         }
 
+
+        [HttpPost("WithProcedure")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateWithProcedure([FromBody] ReservationRequest newReservation)
+        {
+
+            try
+            {
+                ReservationResponse reservationResponse = await _reservationService.CreateReservationWithProcedure(newReservation);
+
+                if (reservationResponse == null)
+                {
+                    return Problem("Reservation could not be created, something went wrong");
+                }
+
+                return Ok(reservationResponse);
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -112,6 +139,32 @@ namespace LibraryProject.API.Controllers
             try
             {
                 ReservationResponse reservationResponse = await _reservationService.UpdateReservation(reservationId, updateReservation);
+
+                if (reservationResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(reservationResponse);
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
+        [HttpDelete("WithProcedure/{reservationId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteWithProcedure([FromRoute] int reservationId)
+        {
+
+            try
+            {
+                ReservationResponse reservationResponse = await _reservationService.DeleteReservationWithProcedure(reservationId);
 
                 if (reservationResponse == null)
                 {

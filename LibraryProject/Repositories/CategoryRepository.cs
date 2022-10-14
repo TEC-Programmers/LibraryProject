@@ -15,32 +15,37 @@ namespace LibraryProject.API.Repositories
         Task<Category> SelectCategoryById(int categoryId);
         Task<List<Category>> SelectAllCategoriesWithProcedure();
         Task<Category> InsertNewCategoryWithProcedure(Category category);
+        Task<Category> InsertNewCategory(Category category);
+
         Task<Category> UpdateExistingCategory(int categoryId, Category category);
         Task<Category> DeleteCategoryByIdWithProcedure(int categoryId);
+        Task<Category> Delete(int categoryId);
+
     }
     public class CategoryRepository: ICategoryRepository      // This class is inheriting interfcae ICategoryRepository and implement the interfaces
     {
         private readonly LibraryProjectContext _context;  //making an instance of the class LibraryProjectContext
-        public string _connectionString;
 
-        public CategoryRepository(LibraryProjectContext context, IConfiguration configuration)    //dependency injection with parameter 
+        public CategoryRepository(LibraryProjectContext context)    //dependency injection with parameter 
         {
             _context = context;
-            _connectionString = configuration.GetConnectionString("Default");
         }
         //implementing the methods of ICategoryRepository interface 
         public async Task<Category> InsertNewCategoryWithProcedure(Category category)
         {
-            using SqlConnection sql = new SqlConnection(_connectionString);
-            using SqlCommand cmd = new SqlCommand("insertCategory", sql);
+            var categoryName = new SqlParameter("@CategoryName", category.CategoryName);
 
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@CategoryName", category.CategoryName));
+            await _context.Database.ExecuteSqlRawAsync("exec insertCategory @CategoryName", categoryName);
+            return category;            
+        }
+        public async Task<Category> InsertNewCategory(Category category)
+        {
+            _context.Category.Add(category);
+            await _context.SaveChangesAsync();
 
-            await sql.OpenAsync();
-            await cmd.ExecuteNonQueryAsync();
             return category;
         }
+
         public async Task<List<Category>> SelectAllCategoriesWithProcedure()
         {
             return await _context.Category.FromSqlRaw("selectAllCategories").ToListAsync();
@@ -58,6 +63,18 @@ namespace LibraryProject.API.Repositories
             await _context.Database.ExecuteSqlRawAsync("EXEC deleteCategory @Id", parameter.ToArray());
             return deleteCategory;
         }
+        public async Task<Category> Delete(int categoryId)
+        {
+            Category deleteCategory = await _context.Category
+                .FirstOrDefaultAsync(category => category.Id == categoryId);
+            if (deleteCategory != null)
+            {
+                _context.Category.Remove(deleteCategory);
+                await _context.SaveChangesAsync();
+            }
+            return deleteCategory;
+        }
+
         public async Task<List<Category>> SelectAllCategoriesWithBooks()
         {
             return await _context.Category

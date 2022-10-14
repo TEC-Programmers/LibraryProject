@@ -41,7 +41,7 @@ namespace LibraryProject.Tests.Services
             });
 
             _mockCategoryRepository
-                .Setup(x => x.SelectAllCategories())
+                .Setup(x => x.SelectAllCategoriesWithBooks())
                 .ReturnsAsync(Categories);
 
             // Act
@@ -59,7 +59,7 @@ namespace LibraryProject.Tests.Services
             List<Category> Categories = new();
 
             _mockCategoryRepository
-                .Setup(x => x.SelectAllCategories())
+                .Setup(x => x.SelectAllCategoriesWithBooks())
                 .ReturnsAsync(Categories);
 
             // Act
@@ -230,11 +230,11 @@ namespace LibraryProject.Tests.Services
             };
 
             _mockCategoryRepository
-                .Setup(x => x.DeleteCategoryById(It.IsAny<int>()))
+                .Setup(x => x.DeleteCategoryByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(deletedCategory);
 
             // Act
-            var result = await _categoryService.DeleteCategory(categoryId);
+            var result = await _categoryService.Delete(categoryId);
 
             // Assert
             Assert.NotNull(result);
@@ -248,11 +248,11 @@ namespace LibraryProject.Tests.Services
             int categoryId = 1;
 
             _mockCategoryRepository
-                .Setup(x => x.DeleteCategoryById(It.IsAny<int>()))
+                .Setup(x => x.DeleteCategoryByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act
-            var result = await _categoryService.DeleteCategory(categoryId);
+            var result = await _categoryService.Delete(categoryId);
 
             // Assert
             Assert.Null(result);
