@@ -13,9 +13,12 @@ namespace LibraryProject.API.Services
         Task<List<CategoryResponse>> GetAllCategories();
         Task<CategoryResponse> GetCategoryById(int categoryId);
         Task<List<CategoryResponse>> GetAllCategoriesWithoutBooks();
+        Task<CategoryResponse> CreateCategoryWithProcedure(CategoryRequest newCategory);
         Task<CategoryResponse> CreateCategory(CategoryRequest newCategory);
         Task<CategoryResponse> UpdateCategory(int categoryId, CategoryRequest updateCategory);
-        Task<CategoryResponse> DeleteCategory(int categoryId);
+        Task<CategoryResponse> DeleteCategoryWithProcedure(int categoryId);
+        Task<CategoryResponse> Delete(int categoryId);
+
 
 
     }
@@ -32,8 +35,7 @@ namespace LibraryProject.API.Services
         //implementing the methods of ICategoryService interface 
         public async Task<List<CategoryResponse>> GetAllCategories()
         {
-            List<Category> categories = await _categoryRepository.SelectAllCategories();
-
+            List<Category> categories = await _categoryRepository.SelectAllCategoriesWithBooks();
             if (categories != null)
             {
                 return categories.Select(category => MapCategoryToCategoryResponse(category)).ToList();
@@ -41,7 +43,6 @@ namespace LibraryProject.API.Services
 
             return null;
         }
-
         public async Task<CategoryResponse> GetCategoryById(int categoryId)
         {
             Category category = await _categoryRepository.SelectCategoryById(categoryId);
@@ -55,7 +56,7 @@ namespace LibraryProject.API.Services
         }
         public async Task<List<CategoryResponse>> GetAllCategoriesWithoutBooks()
         {
-            List<Category> categories = await _categoryRepository.SelectAllCategoriesWithoutBooks();
+            List<Category> categories = await _categoryRepository.SelectAllCategoriesWithProcedure();
 
             if (categories != null)
             {
@@ -63,12 +64,24 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
         public async Task<CategoryResponse> CreateCategory(CategoryRequest newCategory)
         {
             Category category = MapCategoryRequestToCategory(newCategory);
 
             Category insertedCategory = await _categoryRepository.InsertNewCategory(category);
+
+            if (insertedCategory != null)
+            {
+                return MapCategoryToCategoryResponse(insertedCategory);
+
+            }
+            return null;
+        }
+        public async Task<CategoryResponse> CreateCategoryWithProcedure(CategoryRequest newCategory)
+        {
+            Category category = MapCategoryRequestToCategory(newCategory);
+
+            Category insertedCategory = await _categoryRepository.InsertNewCategoryWithProcedure(category);
 
             if (insertedCategory != null)
             {
@@ -90,10 +103,9 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
-        public async Task<CategoryResponse> DeleteCategory(int categoryId)
+        public async Task<CategoryResponse> DeleteCategoryWithProcedure(int categoryId)
         {
-            Category deletedCategory = await _categoryRepository.DeleteCategoryById(categoryId);
+            Category deletedCategory = await _categoryRepository.DeleteCategoryByIdWithProcedure(categoryId);
 
             if (deletedCategory != null)
             {
@@ -101,8 +113,16 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
+        public async Task<CategoryResponse> Delete(int categoryId)
+        {
+            Category deletedCategory = await _categoryRepository.DeleteCategoryByIdWithProcedure(categoryId);
 
-
+            if (deletedCategory != null)
+            {
+                return MapCategoryToCategoryResponse(deletedCategory);
+            }
+            return null;
+        }
         public static Category MapCategoryRequestToCategory(CategoryRequest category)
         {
             return new Category()

@@ -27,19 +27,19 @@ export class UserService {
 
   getAllUsers(): Observable<User[]>
   {
-    return this.http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(this.apiUrl + `/getAll`);
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`)
+    return this.http.get<User>(`${this.apiUrl}/WithProcedure/${id}`)
   }
 
   registerWithProcedure(user: User): Observable<User>{
-    return this.http.post<User>(this.apiUrl + `/registerWithProcedure`, user, this.httpOptions);
+    return this.http.post<User>(this.apiUrl + `/WithProcedure`, user, this.httpOptions);
   }
 
   updateProfileWithProcedure(id: number, user:User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, user, this.httpOptions);
+    return this.http.put<User>(`${this.apiUrl}/updateUserProfile/${id}`, user, this.httpOptions);
   }
 
   updateRole(id: number, user: User): Observable<User> {
@@ -52,7 +52,7 @@ export class UserService {
 
 
   deleteUser(id: number): Observable<User> {
-    return this.http.delete<User>(`${this.apiUrl}/${id}`, this.httpOptions);
+    return this.http.delete<User>(`${this.apiUrl}/WithProcedure/${id}`, this.httpOptions);
   }
 
 

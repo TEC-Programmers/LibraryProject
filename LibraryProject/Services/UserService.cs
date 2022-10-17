@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using LibraryProject.API.Authorization;
 using LibraryProject.API.Database.Entities;
 using LibraryProject.API.DTO_s;
 using LibraryProject.API.Helpers;
@@ -14,42 +13,48 @@ using LibraryProject.Database.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Protocols;
 using BC = BCrypt.Net.BCrypt;
+using LibraryProject.DTO_s;
+using LibraryProject.API.Authorization;
 
 namespace LibraryProject.API.Services
 {
     public interface IUserService
     {
-        Task<List<UsersResponse>> GetAll();
-        Task<UsersResponse> GetById(int UsersId);
+        Task<List<UserResponse>> GetAll();
+        Task<UserResponse> GetByIdWithProcedure(int UserId);
+        Task<UserResponse> GetById(int UserId);
+
         Task<LoginResponse> Authenticate(LoginRequest login);
-        Task<UsersResponse> registerWithProcedure(UsersRequest newUsers);
-        Task<UsersResponse> UpdateProfileWithProcedure(int UsersId, UsersRequest updateUsers);
-        Task<UsersResponse> Delete(int UsersId);
-        Task<UsersResponse> UpdateRoleWithProcedure(int UsersId, UsersRequest updateUsers);
-        Task<UsersResponse> UpdatePasswordWithProcedure(int UsersId, UsersRequest updateUsers);
+        Task<UserResponse> registerWithProcedure(UserRequest newUser);
+        Task<UserResponse> register(UserRequest newUser);
+        Task<UserResponse> UpdateProfileWithProcedure(int UserId, UserRequest updateUser);
+        Task<UserResponse> DeleteWithProcedure(int UserId);
+        Task<UserResponse> Delete(int UserId);
+
+        Task<UserResponse> UpdateRoleWithProcedure(int UserId, UserRequest updateUser);
+        Task<UserResponse> UpdatePasswordWithProcedure(int UserId, UserRequest updateUser);
+        Task<UserResponse> Update(int UserId, UserRequest updateUser);
 
     }
 
     public class UserService : IUserService
     {
-        private readonly IUsersRepository _UsersRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IJwtUtils _jwtUtils;
 
-        public UserService(IUsersRepository UsersRepository, IJwtUtils jwtUtils)
+        public UserService(IUserRepository userRepository, IJwtUtils jwtUtils)
         {
-            _UsersRepository = UsersRepository;
+            _userRepository = userRepository;
             _jwtUtils = jwtUtils;
-
         }
 
-
-        public async Task<List<UsersResponse>> GetAll()
+        public async Task<List<UserResponse>> GetAll()
         {
 
-            List<Users> Users = await _UsersRepository.GetAll();
+            List<User> users = await _userRepository.GetAllWithProcedure();
           
 
-            return Users == null ? null : Users.Select(u => new UsersResponse
+            return users == null ? null : users.Select(u => new UserResponse
             {
                 Id = u.Id,
                 Email = u.Email,
@@ -61,34 +66,56 @@ namespace LibraryProject.API.Services
             }).ToList();
 
         }
-
-
-        public async Task<UsersResponse> registerWithProcedure(UsersRequest newUsers)
+        public async Task<UserResponse> registerWithProcedure(UserRequest newuser)
         {
 
-            Users Users = new Users
+            User user = new User
             {
-                FirstName = newUsers.FirstName,
-                MiddleName = newUsers.MiddleName,
-                LastName = newUsers.LastName,
-                Email = newUsers.Email,
-                Password = BC.HashPassword(newUsers.Password),
-                Role = Helpers.Role.Customer // force all Users created through Register, to Role.Users
+                FirstName = newuser.FirstName,
+                MiddleName = newuser.MiddleName,
+                LastName = newuser.LastName,
+                Email = newuser.Email,
+                Password = BC.HashPassword(newuser.Password),
+                Role = Helpers.Role.Customer // force all users created through Register, to Role.Customer
             };
 
-            Users = await _UsersRepository.registerWithProcedure(Users);
+            user = await _userRepository.registerWithProcedure(user);
 
-            return MapUsersToUsersResponse(Users);
+            return MapUserToUserResponse(user);
         }
-
-        public async Task<UsersResponse> GetById(int UsersId)
+        public async Task<UserResponse> register(UserRequest newuser)
         {
-            Users Users = await _UsersRepository.GetByIdWithProcedure(UsersId);
 
-            if (Users != null)
+            User User = MapUserRequestToUser(newuser);
+
+            User insertedUser = await _userRepository.register(User);
+
+            if (insertedUser != null)
             {
 
-                return MapUsersToUsersResponse(Users);
+                return MapUserToUserResponse(insertedUser);
+            }
+            return null;
+        }
+
+        public async Task<UserResponse> GetByIdWithProcedure(int UserId)
+        {
+            User User = await _userRepository.GetByIdWithProcedure(UserId);
+
+            if (User != null)
+            {
+
+                return MapUserToUserResponse(User);
+            }
+            return null;
+        }
+        public async Task<UserResponse> GetById(int UserId)
+        {
+            User User = await _userRepository.GetById(UserId);
+
+            if (User != null)
+            {
+                return MapUserToUserResponse(User);
             }
             return null;
         }
@@ -96,136 +123,166 @@ namespace LibraryProject.API.Services
         public async Task<LoginResponse> Authenticate(LoginRequest login)
         {
 
-            Users Users = await _UsersRepository.GetByEmail(login.Email);
+            User user = await _userRepository.GetByEmailWithProcedure(login.Email);
 
-            if (Users == null)
+            if (user == null)
             {
                 return null;
             }
-            //BC.Verify(login.Password, Users.Password)
-            //Users.Password == login.Password
-            if (BC.Verify(login.Password, Users.Password))
+            //BC.Verify(login.Password, user.Password)
+            //user.Password == login.Password
+            if (BC.Verify(login.Password, user.Password))
             {
                 LoginResponse response = new LoginResponse
                 {
-                    Id = Users.Id,
-                    Email = Users.Email,
-                    FirstName = Users.FirstName,
-                    MiddleName = Users.MiddleName,
-                    LastName = Users.LastName,
-                    Password = Users.Password,
-                    Role = Users.Role,
-                    Token = _jwtUtils.GenerateJwtToken(Users)
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    MiddleName = user.MiddleName,
+                    LastName = user.LastName,
+                    Password = user.Password,
+                    Role = user.Role,
+                    Token = _jwtUtils.GenerateJwtToken(user)
                 };
                 return response;
             }
 
             return null;
         }
-
-
-        //UpdatePasswordWithProcedure
-        public async Task<UsersResponse> UpdatePasswordWithProcedure(int UsersId, UsersRequest updateUsers)
+        public async Task<UserResponse> Update(int UserId, UserRequest updateUser)
         {
-            Users Users = new()
-            {
-                FirstName = updateUsers.FirstName,
-                MiddleName = updateUsers.MiddleName,
-                LastName = updateUsers.LastName,
-                Email = updateUsers.Email,
-                Password = updateUsers.Password,
-            };
+            User User = MapUserRequestToUser(updateUser);
 
-            Users = await _UsersRepository.UpdatePasswordWithProcedure(UsersId, Users);
+            User updatedUser = await _userRepository.Update(UserId, User);
 
-            return Users == null ? null : new UsersResponse
+            if (updatedUser != null)
             {
-                Id = Users.Id,
-                FirstName = Users.FirstName,
-                MiddleName = Users.MiddleName,
-                LastName = Users.LastName,
-                Email = Users.Email,
-                Password = Users.Password,
-                Role = Users.Role
-            };
+                return MapUserToUserResponse(updatedUser);
+            }
+            return null;
         }
 
-        public async Task<UsersResponse> UpdateRoleWithProcedure(int UsersId, UsersRequest updateUsers)
+        public async Task<UserResponse> UpdatePasswordWithProcedure(int UserId, UserRequest updateUser)
         {
-            Users Users = new()
+            User user = new()
             {
-                FirstName = updateUsers.FirstName,
-                MiddleName = updateUsers.MiddleName,
-                LastName = updateUsers.LastName,
-                Email = updateUsers.Email,
-                Password = updateUsers.Password,
+                FirstName = updateUser.FirstName,
+                MiddleName = updateUser.MiddleName,
+                LastName = updateUser.LastName,
+                Email = updateUser.Email,
+                Password = updateUser.Password,
             };
 
-            Users = await _UsersRepository.UpdateRoleWithProcedure(UsersId, Users);
+            user = await _userRepository.UpdatePasswordWithProcedure(UserId, user);
 
-            return Users == null ? null : new UsersResponse
+            return user == null ? null : new UserResponse
             {
-                Id = Users.Id,
-                FirstName = Users.FirstName,
-                MiddleName = Users.MiddleName,
-                LastName = Users.LastName,
-                Email = Users.Email,
-                Password = Users.Password,
-                Role = Users.Role
+                Id = user.Id,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                Role = user.Role
             };
         }
-        public async Task<UsersResponse> UpdateProfileWithProcedure(int UsersId, UsersRequest updateUsers)
+        public async Task<UserResponse> UpdateRoleWithProcedure(int UserId, UserRequest updateUser)
         {
-            Users Users = new()
+            User user = new()
             {
-                FirstName = updateUsers.FirstName,
-                MiddleName = updateUsers.MiddleName,
-                LastName = updateUsers.LastName,
-                Email = updateUsers.Email,
-                Password = updateUsers.Password,
+                FirstName = updateUser.FirstName,
+                MiddleName = updateUser.MiddleName,
+                LastName = updateUser.LastName,
+                Email = updateUser.Email,
+                Password = updateUser.Password,
             };
 
-            Users = await _UsersRepository.UpdateProfileWithProcedure(UsersId, Users);
+            user = await _userRepository.UpdateRoleWithProcedure(UserId, user);
 
-            return Users == null ? null : new UsersResponse
+            return user == null ? null : new UserResponse
             {
-                Id = Users.Id,
-                FirstName = Users.FirstName,
-                MiddleName = Users.MiddleName,
-                LastName = Users.LastName,
-                Email = Users.Email,
-                Password = Users.Password,
-                Role = Users.Role
+                Id = user.Id,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                Role = user.Role
             };
         }
+        public async Task<UserResponse> UpdateProfileWithProcedure(int UserId, UserRequest updateUser)
+        {
+            User user = new()
+            {
+                FirstName = updateUser.FirstName,
+                MiddleName = updateUser.MiddleName,
+                LastName = updateUser.LastName,
+                Email = updateUser.Email,
+                Password = updateUser.Password,
+            };
 
+            user = await _userRepository.UpdateProfileWithProcedure(UserId, user);
 
-        public async Task<UsersResponse> Delete(int UsersId)
+            return user == null ? null : new UserResponse
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                Role = user.Role
+            };
+        }
+        public async Task<UserResponse> DeleteWithProcedure(int userId)
 
         {
-            Users Users = await _UsersRepository.DeleteWithProcedure(UsersId);
+            User user = await _userRepository.DeleteWithProcedure(userId);
 
-            if (Users != null)
+            if (user != null)
             {
-                return MapUsersToUsersResponse(Users);
+                return MapUserToUserResponse(user);
             }
 
             return null;
         }
+        public async Task<UserResponse> Delete(int userId)
 
+        {
+            User deletedUser = await _userRepository.Delete(userId);
 
-        private static UsersResponse MapUsersToUsersResponse(Users Users)
+            if (deletedUser != null)
+            {
+
+                return MapUserToUserResponse(deletedUser);
+            }
+            return null;
+        }
+
+        private User MapUserRequestToUser(UserRequest UserRequest)
+        {
+            return new User()
+            {
+                FirstName = UserRequest.FirstName,              
+                MiddleName = UserRequest.MiddleName,
+                LastName = UserRequest.LastName,
+                Email = UserRequest.Email,
+                Password = UserRequest.Password
+            };
+        }
+
+        private static UserResponse MapUserToUserResponse(User user)
         {
            
-            return Users == null ? null : new UsersResponse
+            return user == null ? null : new UserResponse
             {
-                Id = Users.Id,
-                Email = Users.Email,
-                FirstName = Users.FirstName,
-                MiddleName = Users.MiddleName,
-                LastName = Users.LastName,
-                Password = Users.Password,
-                Role = Users.Role
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Password = user.Password,
+                Role = user.Role
             };
 
         }

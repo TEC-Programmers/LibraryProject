@@ -13,26 +13,26 @@ namespace LibraryProject.Tests.Services
 {
     public class UserServiceTests
     {
-        private readonly UserService _UsersService;
-        private readonly Mock<IUsersRepository> _mockUsersRepository = new();
+        private readonly UserService _userService;
+        private readonly Mock<IUserRepository> _mockUserRepository = new();
         private readonly Mock<IJwtUtils> jwt = new();
 
 
         public UserServiceTests()
         {
-            _UsersService = new UserService(_mockUsersRepository.Object, jwt.Object);
+            _userService = new UserService(_mockUserRepository.Object, jwt.Object);
 
         }
 
         [Fact]
-        public async void GetAllUserss_ShouldReturnListOfUsersResponses_WhenUserssExists()
+        public async void GetAllUsers_ShouldReturnListOfUserResponses_WhenUsersExists()
         {
             //Arrange
 
-            List<Users> Userss = new();
+            List<User> users = new();
 
 
-            Userss.Add(new()
+            users.Add(new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -43,7 +43,7 @@ namespace LibraryProject.Tests.Services
                 Role = Role.Administrator
             });
 
-            Userss.Add(new()
+            users.Add(new()
             {
                 Id = 2,
                 FirstName = "Jack",
@@ -54,45 +54,45 @@ namespace LibraryProject.Tests.Services
                 Role = Role.Customer
             });
 
-            _mockUsersRepository
-                .Setup(x => x.GetAll())
-                .ReturnsAsync(Userss);
+            _mockUserRepository
+                .Setup(x => x.GetAllWithProcedure())
+                .ReturnsAsync(users);
 
             //Act
-            var result = await _UsersService.GetAll();
+            var result = await _userService.GetAll();
 
             //Assert
             Assert.NotNull(result);
             Assert.Equal(2, result.Count);
-            Assert.IsType<List<UsersResponse>>(result);
+            Assert.IsType<List<UserResponse>>(result);
         }
 
         [Fact]
-        public async void GetAllUserss_ShouldReturnEmptyListOfUsersResponses_WhenNoUserssExists()
+        public async void GetAllUsers_ShouldReturnEmptyListOfUserResponses_WhenNoUsersExists()
         {
             //Arrange
-            List<Users> Userss = new();
+            List<User> users = new();
 
-            _mockUsersRepository
-                .Setup(x => x.GetAll())
-                .ReturnsAsync(Userss);
+            _mockUserRepository
+                .Setup(x => x.GetAllWithProcedure())
+                .ReturnsAsync(users);
 
             //Act
-            var result = await _UsersService.GetAll();
+            var result = await _userService.GetAll();
 
             //Assert
             Assert.NotNull(result);
             Assert.Empty(result);
-            Assert.IsType<List<UsersResponse>>(result);
+            Assert.IsType<List<UserResponse>>(result);
         }
 
         [Fact]
-        public async void GetUsersByIdShouldReturnUsersResponseWhenUsersExists()
+        public async void GetUserByIdShouldReturnUserResponseWhenUserExists()
         {
             //Arrange
-            int UsersId = 1;
+            int userId = 1;
 
-            Users Users = new()
+            User user = new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -103,48 +103,48 @@ namespace LibraryProject.Tests.Services
                 Role = Role.Administrator
             };
 
-            _mockUsersRepository
-                .Setup(x => x.GetByIdWithProcedure(It.IsAny<int>()))
-                .ReturnsAsync(Users);
+            _mockUserRepository
+                .Setup(x => x.GetById(It.IsAny<int>()))
+                .ReturnsAsync(user);
 
             //Act
-            var result = await _UsersService.GetById(UsersId);
+            var result = await _userService.GetById(userId);
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<UsersResponse>(result);
-            Assert.Equal(Users.Id, result.Id);
-            Assert.Equal(Users.FirstName, result.FirstName);
-            Assert.Equal(Users.LastName, result.LastName);
-            Assert.Equal(Users.MiddleName, result.MiddleName);
-            Assert.Equal(Users.Email, result.Email);
-            Assert.Equal(Users.Password, result.Password);
+            Assert.IsType<UserResponse>(result);
+            Assert.Equal(user.Id, result.Id);
+            Assert.Equal(user.FirstName, result.FirstName);
+            Assert.Equal(user.LastName, result.LastName);
+            Assert.Equal(user.MiddleName, result.MiddleName);
+            Assert.Equal(user.Email, result.Email);
+            Assert.Equal(user.Password, result.Password);
 
         }
 
         [Fact]
-        public async void GetUsersByIdShloudReturnNullWhenUsersDoesNotExist()
+        public async void GetUserByIdShloudReturnNullWhenUserDoesNotExist()
         {
             //Arrage
-            int UsersId = 1;
+            int userId = 1;
 
-            _mockUsersRepository
+            _mockUserRepository
                 .Setup(x => x.GetByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _UsersService.GetById(UsersId);
+            var result = await _userService.GetById(userId);
 
             //Assert
             Assert.Null(result);
         }
 
         [Fact]
-        public async void CreateUsers_ShouldReturnUsersResponse_WhenCreateIsSuccess()
+        public async void CreateUser_ShouldReturnUserResponse_WhenCreateIsSuccess()
         {
             //Arrange
 
-            UsersRequest newUsers = new()
+            UserRequest newUser = new()
             {
 
                 FirstName = "Peter",
@@ -155,12 +155,12 @@ namespace LibraryProject.Tests.Services
             };
 
 
-            _mockUsersRepository
-            .Setup(x => x.registerWithProcedure(It.IsAny<Users>()))
+            _mockUserRepository
+            .Setup(x => x.registerWithProcedure(It.IsAny<User>()))
             .ReturnsAsync(() => null);
 
             //Act
-            var result = await _UsersService.registerWithProcedure(newUsers);
+            var result = await _userService.registerWithProcedure(newUser);
 
             //Assert         
 
@@ -171,10 +171,10 @@ namespace LibraryProject.Tests.Services
         }
 
         [Fact]
-        public async void CreateUsers_ShouldReturnNull_WhenRepositoryReturnsNull()
+        public async void CreateUser_ShouldReturnNull_WhenRepositoryReturnsNull()
         {
             //Arrange
-            UsersRequest newUsers = new()
+            UserRequest newUser = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -184,25 +184,25 @@ namespace LibraryProject.Tests.Services
 
             };
 
-            _mockUsersRepository
-                .Setup(x => x.registerWithProcedure(It.IsAny<Users>()))
+            _mockUserRepository
+                .Setup(x => x.registerWithProcedure(It.IsAny<User>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _UsersService.registerWithProcedure(newUsers);
+            var result = await _userService.registerWithProcedure(newUser);
 
             //Assert
             Assert.Null(result);
         }
 
         [Fact]
-        public async void UpdateUsers_ShouldReturnUsersResponse_WhenUpdateIsSuccess()
+        public async void UpdateUser_ShouldReturnUserResponse_WhenUpdateIsSuccess()
         {
             // NOTICE, we do not test id anything actually changed on the DB,
             // we only test that the returned values match the submitted values
 
             //Arrange
-            UsersRequest UsersRequest = new()
+            UserRequest userRequest = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -212,12 +212,12 @@ namespace LibraryProject.Tests.Services
 
             };
 
-            int UsersId = 1;
+            int userId = 1;
 
 
-            Users Users = new()
+            User user = new()
             {
-                Id = UsersId,
+                Id = userId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -227,31 +227,31 @@ namespace LibraryProject.Tests.Services
 
             };
 
-            _mockUsersRepository
-                .Setup(x => x.UpdateRoleWithProcedure(It.IsAny<int>(), It.IsAny<Users>()))
-                .ReturnsAsync(Users);
+            _mockUserRepository
+                .Setup(x => x.Update(It.IsAny<int>(), It.IsAny<User>()))
+                .ReturnsAsync(user);
 
             //Act
-            var result = await _UsersService.UpdateRoleWithProcedure(UsersId, UsersRequest);
+            var result = await _userService.Update(userId, userRequest);
 
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<UsersResponse>(result);
-            Assert.Equal(UsersId, result.Id);
-            Assert.Equal(UsersRequest.FirstName, result.FirstName);
-            Assert.Equal(UsersRequest.LastName, result.LastName);
-            Assert.Equal(UsersRequest.MiddleName, result.MiddleName);
-            Assert.Equal(UsersRequest.Email, result.Email);
-            Assert.Equal(UsersRequest.Password, result.Password);
+            Assert.IsType<UserResponse>(result);
+            Assert.Equal(userId, result.Id);
+            Assert.Equal(userRequest.FirstName, result.FirstName);
+            Assert.Equal(userRequest.LastName, result.LastName);
+            Assert.Equal(userRequest.MiddleName, result.MiddleName);
+            Assert.Equal(userRequest.Email, result.Email);
+            Assert.Equal(userRequest.Password, result.Password);
         }
 
         [Fact]
-        public async void UpdateUsers_ShouldReturnNull_WhenAuhtorDoesNotExist()
+        public async void UpdateUser_ShouldReturnNull_WhenAuhtorDoesNotExist()
         {
 
             //Arrange
-            UsersRequest UsersRequest = new()
+            UserRequest userRequest = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -260,14 +260,14 @@ namespace LibraryProject.Tests.Services
                 Password = "password",
             };
 
-            int UsersId = 1;
+            int userId = 1;
 
-            _mockUsersRepository
-                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<Users>()))
+            _mockUserRepository
+                .Setup(x => x.UpdateProfileWithProcedure(It.IsAny<int>(), It.IsAny<User>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _UsersService.UpdateProfileWithProcedure(UsersId, UsersRequest);
+            var result = await _userService.UpdateProfileWithProcedure(userId, userRequest);
 
 
             //Assert
@@ -277,13 +277,13 @@ namespace LibraryProject.Tests.Services
 
 
         [Fact]
-        public async void DeleteUsers_shouldReturnUsersResponse_WhenDeleteIsSuccess()
+        public async void DeleteUser_shouldReturnUserResponse_WhenDeleteIsSuccess()
         {
 
             //Arrange
-            int UsersId = 1;
+            int userId = 1;
 
-            Users deletedUsers = new()
+            User deletedUser = new()
             {
                 FirstName = "Peter",
                 MiddleName = "Per.",
@@ -293,33 +293,33 @@ namespace LibraryProject.Tests.Services
                 Role = Role.Administrator
 
             };
-            _mockUsersRepository
-               .Setup(x => x.DeleteWithProcedure(It.IsAny<int>()))
-               .ReturnsAsync(deletedUsers);
+            _mockUserRepository
+               .Setup(x => x.Delete(It.IsAny<int>()))
+               .ReturnsAsync(deletedUser);
              
             // Act
-            var result = await _UsersService.Delete(UsersId);
+            var result = await _userService.Delete(userId);
 
             // Assert
 
             Assert.NotNull(result);
-            Assert.IsType<UsersResponse>(result);
+            Assert.IsType<UserResponse>(result);
         
         }
 
         [Fact]
-        public async void DeletUsers_ShouldNotReturnNull_whenUsersDoesNotExist()
+        public async void DeletUser_ShouldNotReturnNull_whenUserDoesNotExist()
         {
 
             //Arrange
-            int UsersId = 1;
+            int userId = 1;
 
-            _mockUsersRepository
+            _mockUserRepository
                 .Setup(x => x.DeleteWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _UsersService.Delete(UsersId);
+            var result = await _userService.Delete(userId);
 
             //Assert
             Assert.Null(null);

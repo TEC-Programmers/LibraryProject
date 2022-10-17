@@ -294,6 +294,7 @@ export class AdminBookComponent implements OnInit {
     // this.book.image = this.book.image + '.jpg';
     this.book = book;
     this.book.id = book.id || 0;
+    
     console.log(this.book);
     console.log('image format: ',this.book.image) 
   }

@@ -295,7 +295,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.UpdateExistingBook(bookId, updateBook);
+            var result = await _bookRepository.Update(bookId, updateBook);
 
             //Assert
             Assert.NotNull(result);
@@ -335,7 +335,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.UpdateExistingBook(bookId, updateBook);
+            var result = await _bookRepository.Update(bookId, updateBook);
 
             //Assert
             Assert.Null(result);
@@ -368,7 +368,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.DeleteBookById(bookId);
+            var result = await _bookRepository.Delete(bookId);
             var book = await _bookRepository.SelectBookById(bookId);
 
             //Assert
@@ -388,7 +388,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.DeleteBookById(1);
+            var result = await _bookRepository.Delete(1);
 
 
             //Assert

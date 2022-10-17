@@ -1,6 +1,7 @@
 ﻿using LibraryProject.API.Repositories;
 using LibraryProject.Database.Entities;
 using LibraryProject.DTO_s;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,8 +13,10 @@ namespace LibraryProject.API.Services
         Task<List<AuthorResponse>> GetAllAuthors();
         Task<AuthorResponse> GetAuthorById(int authorId);
         Task<AuthorResponse> CreateAuthor(AuthorRequest newAuthor);
+        Task<AuthorResponse> CreateAuthorWithProcedure(AuthorRequest newAuthor);
         Task<AuthorResponse> UpdateAuthor(int authorId, AuthorRequest newAuthor);
         Task<AuthorResponse> DeleteAuthor(int authorId);
+        Task<AuthorResponse> DeleteAuthorWithProcedure(int authorId);
     }
     public class AuthorService : IAuthorService
     {
@@ -39,7 +42,19 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
+        public async Task<AuthorResponse> CreateAuthorWithProcedure(AuthorRequest newAuthor)
+        {
+            Author author = MapAuthorRequestToAuthor(newAuthor);
 
+            Author insertedAuthor = await _authorRepository.InsertNewAuthorWithProcedure(author);
+
+            if (insertedAuthor != null)
+            {
+
+                return MapAuthorToAuthorResponse(insertedAuthor);
+            }
+            return null;
+        }
         public async Task<AuthorResponse> DeleteAuthor(int authorId)
         {
             Author deletedAuthor = await _authorRepository.DeleteAuthor(authorId);
@@ -51,19 +66,22 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
+        public async Task<AuthorResponse> DeleteAuthorWithProcedure(int authorId)
+        {
+            Author deletedAuthor = await _authorRepository.DeleteAuthorWithProcedure(authorId);
 
+            if (deletedAuthor != null)
+            {
 
-
-
-
+                return MapAuthorToAuthorResponse(deletedAuthor);
+            }
+            return null;
+        }
         public async Task<List<AuthorResponse>> GetAllAuthors()
         {
-            List<Author> authors = await _authorRepository.SelectAllAuthors();
+            List<Author> authors = await _authorRepository.SelectAllAuthorsWithProcedure();
             return authors.Select(author => MapAuthorToAuthorResponse(author)).ToList();
         }
-
-
-
         public async Task<AuthorResponse> GetAuthorById(int authorId)
         {
             Author author = await _authorRepository.SelectAuthorById(authorId);
@@ -73,7 +91,6 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
         public async Task<AuthorResponse> UpdateAuthor(int authorId, AuthorRequest updateAuthor)
         {
             Author author = MapAuthorRequestToAuthor(updateAuthor);
@@ -87,10 +104,6 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
-
-
-
         private Author MapAuthorRequestToAuthor(AuthorRequest authorRequest)
         {
             return new Author()
@@ -100,10 +113,6 @@ namespace LibraryProject.API.Services
                 MiddleName = authorRequest.MiddleName,
             };
         }
-
-
-
-
         private AuthorResponse MapAuthorToAuthorResponse(Author author)
         {
             return new AuthorResponse()

@@ -11,9 +11,13 @@ namespace LibraryProject.API.Services
     {
         Task<List<PublisherResponse>> GetAllPublishers();
         Task<PublisherResponse> GetPublisherById(int publisherId);
+        Task<PublisherResponse> CreatePublisherWithProcedure(PublisherRequest newPublisher);
         Task<PublisherResponse> CreatePublisher(PublisherRequest newPublisher);
+
         Task<PublisherResponse> UpdatePublisher(int publisherId, PublisherRequest newPublisher);
+        Task<PublisherResponse> DeletePublisherWithProcedure(int publisherId);
         Task<PublisherResponse> DeletePublisher(int publisherId);
+
     }
     public class PublisherService : IPublisherService
     {
@@ -24,9 +28,22 @@ namespace LibraryProject.API.Services
             _publisherRepository = PublisherRepository;
         }
 
-        public async Task<PublisherResponse> CreatePublisher(PublisherRequest newPublisher)
+        public async Task<PublisherResponse> CreatePublisherWithProcedure(PublisherRequest newPublisher)
         {
             Publisher publisher  = MapPublisherRequestToPublisher(newPublisher);
+
+            Publisher insertedPublisher = await _publisherRepository.InsertNewPublisherWithProcedure(publisher);
+
+            if (insertedPublisher != null)
+            {
+                return MapPublisherToPublisherResponse(insertedPublisher);
+            }
+            return null;
+        }
+
+        public async Task<PublisherResponse> CreatePublisher(PublisherRequest newPublisher)
+        {
+            Publisher publisher = MapPublisherRequestToPublisher(newPublisher);
 
             Publisher insertedPublisher = await _publisherRepository.InsertNewPublisher(publisher);
 
@@ -36,7 +53,16 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
+        public async Task<PublisherResponse> DeletePublisherWithProcedure(int publisherId)
+        {
+            Publisher deletedPublisher = await _publisherRepository.DeletePublisherWithProcedure(publisherId);
 
+            if (deletedPublisher != null)
+            {
+                return MapPublisherToPublisherResponse(deletedPublisher);
+            }
+            return null;        
+        }
         public async Task<PublisherResponse> DeletePublisher(int publisherId)
         {
             Publisher deletedPublisher = await _publisherRepository.DeletePublisher(publisherId);
@@ -47,13 +73,11 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
         public async Task<List<PublisherResponse>> GetAllPublishers()
         {
-            List<Publisher> Publishers = await _publisherRepository.SelectAllPublishers();
+            List<Publisher> Publishers = await _publisherRepository.SelectAllPublishersWithProcedure();
             return Publishers.Select(Publisher => MapPublisherToPublisherResponse(Publisher)).ToList();
         }
-
         public async Task<PublisherResponse> GetPublisherById(int publisherId)
         {
             Publisher Publisher = await _publisherRepository.SelectPublisherById(publisherId);
@@ -63,7 +87,6 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
         public async Task<PublisherResponse> UpdatePublisher(int publisherId, PublisherRequest updatePublisher)
         {
             Publisher Publisher = MapPublisherRequestToPublisher(updatePublisher);
@@ -76,7 +99,6 @@ namespace LibraryProject.API.Services
             }
             return null;
         }
-
         private Publisher MapPublisherRequestToPublisher(PublisherRequest publisherRequest)
         {
             return new Publisher()
@@ -84,7 +106,6 @@ namespace LibraryProject.API.Services
                 Name = publisherRequest.Name,            
             };
         }
-
         private PublisherResponse MapPublisherToPublisherResponse(Publisher Publisher)
         {
             return new PublisherResponse()

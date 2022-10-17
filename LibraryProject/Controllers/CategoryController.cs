@@ -107,6 +107,32 @@ namespace LibraryProject.API.Controllers
         }
 
         //HTTPPOST method for sending data to the server from an http client
+        [HttpPost("WithProcedure")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateWithProcedure([FromBody] CategoryRequest newCategory)
+        {
+            try
+            {
+                CategoryResponse categoryResponse = await _categoryService.CreateCategoryWithProcedure(newCategory);
+
+                if (categoryResponse == null)
+                {
+                    return Problem("Category Was not created, something went wrong");
+                }
+
+                return Ok(categoryResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -159,16 +185,16 @@ namespace LibraryProject.API.Controllers
         }
 
         //HTTPDelete method to delete a resource from the server
-        [HttpDelete("{categoryId}")]
+        [HttpDelete("WithProcedure/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete([FromRoute] int categoryId)
+        public async Task<IActionResult> DeleteWithProcedure([FromRoute] int categoryId)
         {
             try
             {
-                CategoryResponse categoryResponse = await _categoryService.DeleteCategory(categoryId);
+                CategoryResponse categoryResponse = await _categoryService.DeleteCategoryWithProcedure(categoryId);
 
                 if (categoryResponse == null)
                 {
@@ -184,6 +210,30 @@ namespace LibraryProject.API.Controllers
 
         }
 
+        [HttpDelete("{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete([FromRoute] int categoryId)
+        {
+            try
+            {
+                CategoryResponse categoryResponse = await _categoryService.Delete(categoryId);
+
+                if (categoryResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(categoryResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
 
     }
 }

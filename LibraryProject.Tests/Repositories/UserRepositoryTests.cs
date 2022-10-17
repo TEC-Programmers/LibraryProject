@@ -15,22 +15,23 @@ using Xunit;
 
 namespace LibraryProject.Tests.Repositories
 {
-    public class UsersRepositoryTests
+    public class UserRepositoryTests
     {
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
-        private readonly UsersRepository _UsersRepository;
+        private readonly UserRepository _userRepository;
         private readonly Mock<API.Authorization.IJwtUtils> jwt = new();
 
         
 
 
-        public UsersRepositoryTests()
+        public UserRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProject")
                 .Options;
             _context = new(_options);  
+            _userRepository = new(_context);
         }
 
         [Fact]
@@ -69,11 +70,11 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _UsersRepository.GetAll();
+            var result = await _userRepository.GetAllWithProcedure();
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<List<Users>>(result);
+            Assert.IsType<List<User>>(result);
             Assert.Equal(2, result.Count);
         }
 
@@ -84,21 +85,21 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _UsersRepository.GetAll();
+            var result = await _userRepository.GetAllWithProcedure();
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<List<Users>>(result);
+            Assert.IsType<List<User>>(result);
             Assert.Empty(result);
         }
 
         [Fact]
-        public async void SelectUsersById_ShouldReturnUsers_WhenUsersExists()
+        public async void SelectUserById_ShouldReturnUser_WhenUserExists()
         {
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int UsersId = 1;
+            int userId = 1;
 
 
             _context.Users.Add(new()
@@ -117,22 +118,22 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
 
-            var result = await _UsersRepository.GetByIdWithProcedure(UsersId);
+            var result = await _userRepository.GetById(userId);
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<Users>(result);
-            Assert.Equal(UsersId, result.Id);
+            Assert.IsType<User>(result);
+            Assert.Equal(userId, result.Id);
         }
 
         [Fact]
-        public async void SelectUsersById_ShouldReturnNull_WhenUsersDoesNotExist()
+        public async void SelectUserById_ShouldReturnNull_WhenUserDoesNotExist()
         {
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _UsersRepository.GetByIdWithProcedure(1);
+            var result = await _userRepository.GetById(1);
 
             //Assert
             Assert.Null(result);
@@ -140,7 +141,7 @@ namespace LibraryProject.Tests.Repositories
         }
 
         [Fact]
-        public async void InsertNewUsers_ShouldAddNewIdToUsers_WhenSavingToDatabase()
+        public async void InsertNewUser_ShouldAddNewIdToUser_WhenSavingToDatabase()
         {
             //Arrange
             await _context.Database.EnsureDeletedAsync();
@@ -148,7 +149,7 @@ namespace LibraryProject.Tests.Repositories
             int expectedNewId = 1;
 
 
-            Users newUsers = new()
+            User newUser = new()
             {
                 Id = expectedNewId,
                 FirstName = "Peter",
@@ -164,24 +165,24 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
 
-            var result = await _UsersRepository.registerWithProcedure(newUsers);
+            var result = await _userRepository.register(newUser);
 
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<Users>(result);
+            Assert.IsType<User>(result);
             Assert.Equal(expectedNewId, result.Id);
         }
 
         [Fact]
-        public async void InsertNewUsers_ShouldFailToAddNewUsers_WhenUsersIdAlreadyExists()
+        public async void InsertNewUser_ShouldFailToAddNewUser_WhenUserIdAlreadyExists()
         {
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
             int expectedNewId = 1;
 
-            Users Users = new()
+            User user = new()
             {
                 Id = 1,
                 FirstName = "Peter",
@@ -195,29 +196,29 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _UsersRepository.registerWithProcedure(Users);
+            var result = await _userRepository.register(user);
           
 
             //Assert       
             Assert.NotNull(result);
-            Assert.IsType<Users>(result);
+            Assert.IsType<User>(result);
             Assert.Equal(expectedNewId, result.Id);
      
         }
 
 
         [Fact]
-        public async void UpdateExistingUsers_ShouldChangeValuesOnUsers_WhenUsersExists()
+        public async void UpdateExistingUser_ShouldChangeValuesOnUser_WhenUserExists()
         {
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int UsersId = 1;
+            int userId = 1;
 
-            Users newUsers = new()
+            User newUser = new()
             {
 
-                Id = UsersId,
+                Id = userId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -226,48 +227,13 @@ namespace LibraryProject.Tests.Repositories
                 Role = Role.Administrator
             };
 
-            _context.Users.Add(newUsers);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            Users updateUsers = new()
+            User updateUser = new()
             {
 
-                Id = UsersId,
-                FirstName = "Peter",
-                MiddleName = "Per.",
-                LastName = "Aksten",
-                Email = "peter@abc.com",
-                Password = "password",
-                Role = Role.Administrator
-            };
-
-
-            //Act 
-            var result = await _UsersRepository.UpdateProfileWithProcedure(UsersId, updateUsers);
-
-            //Assert
-            Assert.NotNull(result);
-            Assert.IsType<Users>(result);
-            Assert.Equal(UsersId, result.Id);
-            Assert.Equal(updateUsers.FirstName, result.FirstName);
-            Assert.Equal(updateUsers.MiddleName, result.MiddleName);
-            Assert.Equal(updateUsers.LastName, result.LastName);
-            Assert.Equal(updateUsers.Email, result.Email);
-            Assert.Equal(updateUsers.Password, result.Password);
-        }
-
-        [Fact]
-        public async void UpdateExistingUsers_ShouldReturnNull_WhenUsersDoesNotExist()
-        {
-            //Arrange
-            await _context.Database.EnsureDeletedAsync();
-
-            int UsersId = 1;
-
-            Users updateUsers = new()
-            {
-
-                Id = UsersId,
+                Id = userId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -278,7 +244,42 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _UsersRepository.UpdateProfileWithProcedure(UsersId, updateUsers);
+            var result = await _userRepository.Update(userId, updateUser);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<User>(result);
+            Assert.Equal(userId, result.Id);
+            Assert.Equal(updateUser.FirstName, result.FirstName);
+            Assert.Equal(updateUser.MiddleName, result.MiddleName);
+            Assert.Equal(updateUser.LastName, result.LastName);
+            Assert.Equal(updateUser.Email, result.Email);
+            Assert.Equal(updateUser.Password, result.Password);
+        }
+
+        [Fact]
+        public async void UpdateExistingUser_ShouldReturnNull_WhenUserDoesNotExist()
+        {
+            //Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            int userId = 1;
+
+            User updateUser = new()
+            {
+
+                Id = userId,
+                FirstName = "Peter",
+                MiddleName = "Per.",
+                LastName = "Aksten",
+                Email = "peter@abc.com",
+                Password = "password",
+                Role = Role.Administrator
+            };
+
+
+            //Act
+            var result = await _userRepository.Update(userId, updateUser);
 
             //Asert
             Assert.Null(result);
@@ -286,17 +287,17 @@ namespace LibraryProject.Tests.Repositories
         }
 
         [Fact]
-        public async void DeleteUsersById_ShouldReturnDeletedUsers_WhenUsersIsDeleted()
+        public async void DeleteUserById_ShouldReturnDeletedUser_WhenUserIsDeleted()
         {
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int UsersId = 1;
+            int userId = 1;
 
-            Users newUsers = new()
+            User newUser = new()
             {
 
-                Id = UsersId,
+                Id = userId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -305,29 +306,29 @@ namespace LibraryProject.Tests.Repositories
                 Role = Role.Administrator
             };
 
-            _context.Users.Add(newUsers);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
 
             //Act
-            var result = await _UsersRepository.DeleteWithProcedure(UsersId);
-            var Users = await _UsersRepository.GetByIdWithProcedure(UsersId);
+            var result = await _userRepository.Delete(userId);
+            var user = await _userRepository.GetById(userId);
 
             //Assert
             Assert.NotNull(result);
-            Assert.IsType<Users>(result);
-            Assert.Equal(UsersId, result.Id);
-            Assert.Null(Users);
+            Assert.IsType<User>(result);
+            Assert.Equal(userId, result.Id);
+            Assert.Null(user);
         }
 
         [Fact]
-        public async void DeleteUsersById_ShouldReturnNull_WhenUsersDoesNotExist()
+        public async void DeleteUserById_ShouldReturnNull_WhenUserDoesNotExist()
         {
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _UsersRepository.DeleteWithProcedure(1);
+            var result = await _userRepository.Delete(1);
 
 
             //Assert

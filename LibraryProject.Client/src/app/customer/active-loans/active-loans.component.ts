@@ -125,15 +125,22 @@ export class ActiveLoansComponent implements OnInit {
           });
         }
 
-        // loop through [ this.yourLoans ] to get specific book in your loan
-        this.yourLoans.forEach(loan => {
+        if (this.yourLoans) {
+            // loop through [ this.yourLoans ] to get specific book in your loan
+          this.yourLoans.forEach(loan => {
+          var getLength = this.yourLoans.length;
           this.bookId = loan.bookId;
           this.array.push(loan)
 
-          if (this.array.length > 0) {
+          if (this.array.length <= getLength) {
             this.getActiveBookInLoan(this.bookId);
           }
         });
+        }
+        else {
+          this.yourLoans = [];
+        }
+      
       },
       error: (err: any) => {
         console.log('getActiveLoans() Error: ',err)

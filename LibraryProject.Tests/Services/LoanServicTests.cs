@@ -33,7 +33,7 @@ namespace LibraryProject.Tests.Services
             loans.Add(new()
             {
                 Id = 1,
-                UsersId = 1,
+                userId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -42,14 +42,14 @@ namespace LibraryProject.Tests.Services
             loans.Add(new()
             {
                 Id = 2,
-                UsersId = 2,
+                userId = 2,
                 bookId = 2,
                 loaned_At = "24/6/2022",
                 return_date= "24/7/2022"
             });
 
             _mockloanServiceRepository
-             .Setup(x => x.SelectAllLoans())
+             .Setup(x => x.SelectAllLoansWithProcedure())
              .ReturnsAsync(loans);
 
             //Act 
@@ -68,7 +68,7 @@ namespace LibraryProject.Tests.Services
             List<Loan> loans = new();
 
             _mockloanServiceRepository
-                .Setup(x => x.SelectAllLoans())
+                .Setup(x => x.SelectAllLoansWithProcedure())
                 .ReturnsAsync(loans);
 
             //Act
@@ -91,7 +91,7 @@ namespace LibraryProject.Tests.Services
             Loan loan = new()
             {
                 Id = 1,
-                UsersId = 1,
+                userId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -108,7 +108,7 @@ namespace LibraryProject.Tests.Services
             Assert.NotNull(result);
             Assert.IsType<LoanResponse>(result);
             Assert.Equal(loan.Id, result.Id);
-            Assert.Equal(loan.UsersId, result.UsersId);
+            Assert.Equal(loan.userId, result.userId);
             Assert.Equal(loan.bookId, result.bookId);
             Assert.Equal(loan.loaned_At, result.loaned_At);
             Assert.Equal(loan.return_date, result.return_date);
@@ -135,7 +135,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             LoanRequest newloan = new()
             {
-                UsersId = 1,
+                userId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -147,7 +147,7 @@ namespace LibraryProject.Tests.Services
             Loan createloan = new()
             {
                 Id = loanId,
-                UsersId = 1,
+                userId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -165,7 +165,7 @@ namespace LibraryProject.Tests.Services
             Assert.NotNull(result);
             Assert.IsType<LoanResponse>(result);
             Assert.Equal(loanId, result.Id);
-            Assert.Equal(newloan.UsersId, result.UsersId);
+            Assert.Equal(newloan.userId, result.userId);
             Assert.Equal(newloan.bookId, result.bookId);
             Assert.Equal(newloan.loaned_At, result.loaned_At);
             Assert.Equal(newloan.return_date, result.return_date);
@@ -176,7 +176,7 @@ namespace LibraryProject.Tests.Services
             // Arrange 
             LoanRequest newloan = new()
             {
-                UsersId = 1,
+                userId = 1,
                 bookId=1,
                 loaned_At = "11/5/2022",
                 return_date= "11/6/2022"
@@ -198,7 +198,7 @@ namespace LibraryProject.Tests.Services
         {
             LoanRequest loanRequest = new()
             {
-                UsersId = 1,
+               userId = 1,
                bookId = 1,
                loaned_At = "11/5/2022",
                return_date = "11/6/2022"
@@ -211,7 +211,7 @@ namespace LibraryProject.Tests.Services
             Loan loan = new()
             {
                 Id = loanId,
-                UsersId = 1,
+                userId = 1,
                 bookId= 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022" 
@@ -230,10 +230,10 @@ namespace LibraryProject.Tests.Services
         Assert.NotNull(result);
             Assert.IsType<LoanResponse>(result);
             Assert.Equal(loanId, result.Id);
-            Assert.Equal(loanRequest.UsersId, result.UsersId);
+            Assert.Equal(loanRequest.userId, result.userId);
             Assert.Equal(loanRequest.bookId, result.bookId);
-            Assert.Equal(loanRequest.loaned_At, result.return_date);
-            Assert.Equal(loanRequest.loaned_At, result.return_date);
+            Assert.Equal(loanRequest.return_date, result.return_date);
+            Assert.Equal(loanRequest.loaned_At, result.loaned_At);
         }
 
         [Fact]
@@ -242,7 +242,7 @@ namespace LibraryProject.Tests.Services
             // Arrange 
             LoanRequest loanRequest = new()
             {
-               UsersId=1,
+               userId=1,
                bookId=1,
                loaned_At= "11/5/2022",
                 return_date = "11/6/2022"
@@ -271,7 +271,7 @@ namespace LibraryProject.Tests.Services
             Loan deletedloan = new()
             {
                 Id= 1,
-                UsersId= 1,
+                userId= 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -296,7 +296,7 @@ namespace LibraryProject.Tests.Services
             int loanId = 1;
 
             _mockloanServiceRepository
-                .Setup(x => x.DeleteLoanById(It.IsAny<int>()))
+                .Setup(x => x.DeleteLoanByIdWithProcedure(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             // Act

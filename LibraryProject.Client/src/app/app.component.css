@@ -114,6 +114,7 @@ tr a:hover{
 
  .nav-item {
   display:inline-flex;
+  /* z-index: 1; */
 }
   .navbar-brand img{
     display:none;

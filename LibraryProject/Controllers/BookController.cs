@@ -109,6 +109,31 @@ namespace LibraryProject.API.Controllers
 
 
         //HTTPPOST method for sending data to the server from an http client
+        [HttpPost("WithProcedure")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateWithProcedure([FromBody] BookRequest newBook)
+        {
+            try
+            {
+                BookResponse bookResponse = await _bookService.CreateBookWithProcedure(newBook);
+
+                if (bookResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(bookResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

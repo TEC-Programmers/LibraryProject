@@ -36,11 +36,6 @@ export class LoanComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, private loanService: LoanService, private router: Router, private bookService: BookService, private categoryService: CategoryService,  private formBuilder: UntypedFormBuilder, private loanservice: LoanService, private route:ActivatedRoute, private authService: AuthService) {}
 
-  // range = new FormGroup({
-  //   fromDate: new FormControl('', Validators.required),
-  //   toDate: new FormControl('', Validators.required)
-  // });
-
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#472c19';
     this.dateRangeForm = this.formBuilder.group({
@@ -60,12 +55,6 @@ export class LoanComponent implements OnInit {
     })
   }
 
-  resetForm() {
-    // this.dateRangeForm = this.formBuilder.group({
-    //   fromDate: new FormControl('', Validators.required),
-    //   toDate: new FormControl('', Validators.required),
-    // });
-  }
 
   setLoanMinDate() {
     // convert minimum date: (loaned_at) to Date() format
