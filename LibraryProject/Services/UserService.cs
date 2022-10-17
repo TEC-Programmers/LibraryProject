@@ -174,8 +174,6 @@ namespace LibraryProject.API.Services
                 Role = Users.Role
             };
         }
-
-
         public async Task<UsersResponse> UpdateProfileWithProcedure(int UsersId, UsersRequest updateUsers)
         {
             Users Users = new()

@@ -15,8 +15,6 @@ namespace LibraryProject.API.DTO_s
     {
         public int Id { get; set; }
         public string Title { get; set; }
-
-
         public string Language { get; set; }
 
         public string Description { get; set; }
