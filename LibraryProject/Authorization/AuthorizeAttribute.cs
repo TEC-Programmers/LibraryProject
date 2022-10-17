@@ -27,7 +27,7 @@ namespace LibraryProject.API.Authorization
                 return;
 
             // authorization
-            var Users = (UsersResponse)context.HttpContext.Items["Customer"];
+            var Users = (UserResponse)context.HttpContext.Items["Customer"];
             if (Users == null || (_roles.Any() && !_roles.Contains(Users.Role)))
             {
                 // not logged in or role not authorized

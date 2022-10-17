@@ -56,12 +56,12 @@ namespace LibraryProject.API.Repositories
         }
         public async Task<Reservation> InsertNewReservationWithProcedure(Reservation reservation)
         {
-            var userId = new SqlParameter("@userId", reservation.userId);
+            var UserId = new SqlParameter("@UserId", reservation.UserId);
             var bookId = new SqlParameter("@bookId", reservation.bookId);
             var reservationed_At = new SqlParameter("@reservationed_At", reservation.reserved_At);
             var return_date = new SqlParameter("@return_date", reservation.reserved_To);
 
-            await _context.Database.ExecuteSqlRawAsync("exec insertReservation @userId, @bookId, @reservationed_At, @return_date", userId, bookId, reservationed_At, return_date);
+            await _context.Database.ExecuteSqlRawAsync("exec insertReservation @UserId, @bookId, @reservationed_At, @return_date", UserId, bookId, reservationed_At, return_date);
             return reservation;           
         }
         public async Task<Reservation> InsertNewReservation(Reservation reservation)
@@ -86,7 +86,7 @@ namespace LibraryProject.API.Repositories
 
             if (updateReservation != null)
             {
-                updateReservation.UsersId = reservation.UsersId;
+                updateReservation.UserId = reservation.UserId;
                 updateReservation.bookId = reservation.bookId;
                 updateReservation.reserved_At = reservation.reserved_At;
                 updateReservation.reserved_To = reservation.reserved_To;

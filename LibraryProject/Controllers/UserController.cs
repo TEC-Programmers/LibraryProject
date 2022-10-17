@@ -79,24 +79,24 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register([FromBody] UserRequest newUser)
-        {
-            try
-            {
-                UserResponse user = await _userService.register(newUser);
-                return Ok(user);
+        //[AllowAnonymous]
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> Register([FromBody] UserRequest newUser)
+        //{
+        //    try
+        //    {
+        //        UserResponse user = await _userService.register(newUser);
+        //        return Ok(user);
 
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Problem(ex.Message);
+        //    }
+        //}
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -126,20 +126,20 @@ namespace LibraryProject.API.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet("WithProcedure/{userId}")]
+        [HttpGet("WithProcedure/{UserId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
-        public async Task<IActionResult> GetByIdWithProcedure([FromRoute] int userId)
+        public async Task<IActionResult> GetByIdWithProcedure([FromRoute] int UserId)
         {
 
             try
             {
 
-                UserResponse user = await _userService.GetByIdWithProcedure(userId);
+                UserResponse user = await _userService.GetByIdWithProcedure(UserId);
 
                 if (user == null)
                 {
@@ -150,7 +150,7 @@ namespace LibraryProject.API.Controllers
 
                 UserResponse currentUser = (UserResponse)HttpContext.Items["User"];
 
-                if (userId != currentUser.Id && currentUser.Role != Role.Administrator)
+                if (UserId != currentUser.Id && currentUser.Role != Role.Administrator)
                 {
                     return Unauthorized(new { message = "Unauthorized" });      // only admins can access other user records
                 }
@@ -163,55 +163,55 @@ namespace LibraryProject.API.Controllers
         }
 
 
+        //[AllowAnonymous]
+        //[HttpGet("{UserId}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+        //public async Task<IActionResult> GetById([FromRoute] int UserId)
+        //{
+
+        //    try
+        //    {
+
+        //        UserResponse user = await _userService.GetById(UserId);
+
+        //        if (user == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        return Ok(user);
+
+        //        //UserResponse currentUser = (UserResponse)HttpContext.Items["User"];
+
+        //        //if (UserId != currentUser.Id && currentUser.Role != Role.Administrator)
+        //        //{
+        //        //    return Unauthorized(new { message = "Unauthorized" });      // only admins can access other user records
+        //        //}
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Problem(ex.Message);
+        //    }
+
+        //}
+
+
         [AllowAnonymous]
-        [HttpGet("{userId}")]
+        [HttpPut("updateUserPassword/{UserId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-
-        public async Task<IActionResult> GetById([FromRoute] int userId)
-        {
-
-            try
-            {
-
-                UserResponse user = await _userService.GetById(userId);
-
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(user);
-
-                //UserResponse currentUser = (UserResponse)HttpContext.Items["User"];
-
-                //if (userId != currentUser.Id && currentUser.Role != Role.Administrator)
-                //{
-                //    return Unauthorized(new { message = "Unauthorized" });      // only admins can access other user records
-                //}
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
-
-        }
-
-
-        [AllowAnonymous]
-        [HttpPut("updateUserPassword/{userId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdatePassword([FromRoute] int userId, [FromBody] UserRequest updateUser)
+        public async Task<IActionResult> UpdatePassword([FromRoute] int UserId, [FromBody] UserRequest updateUser)
         {
             try
             {
-                UserResponse user = await _userService.UpdatePasswordWithProcedure(userId, updateUser);
+                UserResponse user = await _userService.UpdatePasswordWithProcedure(UserId, updateUser);
 
                 if (user == null)
                 {
@@ -228,16 +228,16 @@ namespace LibraryProject.API.Controllers
 
 
         [AllowAnonymous]
-        [HttpPut("updateUserRole/{userId}")]
+        [HttpPut("updateUserRole/{UserId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateRole([FromRoute] int userId, [FromBody] UserRequest updateUser)
+        public async Task<IActionResult> UpdateRole([FromRoute] int UserId, [FromBody] UserRequest updateUser)
         {
             try
             {
-                UserResponse user = await _userService.UpdateRoleWithProcedure(userId, updateUser);
+                UserResponse user = await _userService.UpdateRoleWithProcedure(UserId, updateUser);
 
                 if (user == null)
                 {
@@ -256,16 +256,16 @@ namespace LibraryProject.API.Controllers
 
         //[Authorize(Role.Customer, Role.Administrator)]
         [AllowAnonymous]
-        [HttpPut("updateUserProfile/{userId}")]
+        [HttpPut("updateUserProfile/{UserId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateProfile([FromRoute] int userId, [FromBody] UserRequest updateUser)
+        public async Task<IActionResult> UpdateProfile([FromRoute] int UserId, [FromBody] UserRequest updateUser)
         {
             try
             {
-                UserResponse user = await _userService.UpdateProfileWithProcedure(userId, updateUser);
+                UserResponse user = await _userService.UpdateProfileWithProcedure(UserId, updateUser);
 
                 if (user == null)
                 {
@@ -280,44 +280,44 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPut("{userId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Update([FromRoute] int userId, [FromBody] UserRequest updateUser)
-        {
-            try
-            {
-                UserResponse user = await _userService.Update(userId, updateUser);
+        //[AllowAnonymous]
+        //[HttpPut("{UserId}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> Update([FromRoute] int UserId, [FromBody] UserRequest updateUser)
+        //{
+        //    try
+        //    {
+        //        UserResponse user = await _userService.Update(UserId, updateUser);
 
-                if (user == null)
-                {
-                    return Problem("User record didn't get updated, something went wrong.");
-                }
+        //        if (user == null)
+        //        {
+        //            return Problem("User record didn't get updated, something went wrong.");
+        //        }
 
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
-        }
+        //        return Ok(user);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Problem(ex.Message);
+        //    }
+        //}
 
         //[Authorize(Role.Administrator)]
         [AllowAnonymous]
-        [HttpDelete("WithProcedure/{userId}")]
+        [HttpDelete("WithProcedure/{UserId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteWithProcedure([FromRoute] int userId)
+        public async Task<IActionResult> DeleteWithProcedure([FromRoute] int UserId)
         {
 
             try
             {
-               UserResponse result = await _userService.DeleteWithProcedure(userId);
+               UserResponse result = await _userService.DeleteWithProcedure(UserId);
 
                 if (result == null)
                 {
@@ -332,31 +332,31 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpDelete("{userId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete([FromRoute] int userId)
-        {
+        //[AllowAnonymous]
+        //[HttpDelete("{UserId}")]
+        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> Delete([FromRoute] int UserId)
+        //{
 
-            try
-            {
-                UserResponse result = await _userService.Delete(userId);
+        //    try
+        //    {
+        //        UserResponse result = await _userService.Delete(UserId);
 
-                if (result == null)
-                {
-                    return NotFound();// Problem("Customer was not deleted, something went wrong");
-                }
+        //        if (result == null)
+        //        {
+        //            return NotFound();// Problem("Customer was not deleted, something went wrong");
+        //        }
 
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
-        }
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Problem(ex.Message);
+        //    }
+        //}
 
 
     }

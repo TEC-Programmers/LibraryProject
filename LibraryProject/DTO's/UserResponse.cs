@@ -3,7 +3,7 @@ using LibraryProject.API.Helpers;
 
 namespace LibraryProject.API.DTO_s
 {
-    public class UsersResponse
+    public class UserResponse
     {
         public int Id { get; set; }
         public string Email { get; set; }

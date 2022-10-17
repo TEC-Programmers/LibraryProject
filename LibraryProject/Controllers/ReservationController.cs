@@ -102,31 +102,31 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] ReservationRequest newReservation)
-        {
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> Create([FromBody] ReservationRequest newReservation)
+        //{
 
-            try
-            {
-                ReservationResponse reservationResponse = await _reservationService.CreateReservation(newReservation);
+        //    try
+        //    {
+        //        ReservationResponse reservationResponse = await _reservationService.CreateReservation(newReservation);
 
-                if (reservationResponse == null)
-                {
-                    return Problem("Reservation could not be created, something went wrong");
-                }
+        //        if (reservationResponse == null)
+        //        {
+        //            return Problem("Reservation could not be created, something went wrong");
+        //        }
 
-                return Ok(reservationResponse);
-            }
-            catch (Exception ex)
-            {
+        //        return Ok(reservationResponse);
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return Problem(ex.Message);
-            }
-        }
+        //        return Problem(ex.Message);
+        //    }
+        //}
 
         [HttpPut("{reservationId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -180,30 +180,30 @@ namespace LibraryProject.API.Controllers
             }
         }
 
-        [HttpDelete("{reservationId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete([FromRoute] int reservationId)
-        {
+        //[HttpDelete("{reservationId}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> Delete([FromRoute] int reservationId)
+        //{
 
-            try
-            {
-                ReservationResponse reservationResponse = await _reservationService.DeleteReservation(reservationId);
+        //    try
+        //    {
+        //        ReservationResponse reservationResponse = await _reservationService.DeleteReservation(reservationId);
 
-                if (reservationResponse == null)
-                {
-                    return NotFound();
-                }
+        //        if (reservationResponse == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-                return Ok(reservationResponse);
-            }
-            catch (Exception ex)
-            {
+        //        return Ok(reservationResponse);
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return Problem(ex.Message);
-            }
-        }
+        //        return Problem(ex.Message);
+        //    }
+        //}
     }
 }

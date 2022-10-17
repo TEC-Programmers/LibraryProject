@@ -38,7 +38,7 @@ namespace LibraryProject.Tests.Services
             Reservations.Add(new()
             {
                 Id = 1,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -47,7 +47,7 @@ namespace LibraryProject.Tests.Services
             Reservations.Add(new()
             {
                 Id = 2,
-                UsersId = 2,
+                UserId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
                 reserved_To = "27/05/22"
@@ -96,7 +96,7 @@ namespace LibraryProject.Tests.Services
             Reservation reservation = new()
             {
                 Id = reservationId,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"
@@ -113,7 +113,7 @@ namespace LibraryProject.Tests.Services
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
             Assert.Equal(reservation.Id,result.Id);
-            Assert.Equal(reservation.UsersId,result.UsersId);
+            Assert.Equal(reservation.UserId,result.UserId);
             Assert.Equal(reservation.bookId,result.bookId);
             Assert.Equal(reservation.reserved_At, result.reserved_At);
             Assert.Equal(reservation.reserved_To, result.reserved_To);
@@ -141,7 +141,7 @@ namespace LibraryProject.Tests.Services
         {
             ReservationRequest newReservation = new()
             {
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"
@@ -152,7 +152,7 @@ namespace LibraryProject.Tests.Services
             Reservation createdReservation = new()
             {
                 Id = reservationId,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"
@@ -169,7 +169,7 @@ namespace LibraryProject.Tests.Services
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
             Assert.Equal(reservationId, result.Id);
-            Assert.Equal(newReservation.UsersId, result.UsersId);
+            Assert.Equal(newReservation.UserId, result.UserId);
             Assert.Equal(newReservation.bookId, result.bookId);
             Assert.Equal(newReservation.reserved_At, result.reserved_At);
             Assert.Equal(newReservation.reserved_To, result.reserved_To);
@@ -182,7 +182,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             ReservationRequest newReservation = new()
             {
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"
@@ -209,7 +209,7 @@ namespace LibraryProject.Tests.Services
 
             ReservationRequest ReservationRequest = new()
             {
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"
@@ -220,7 +220,7 @@ namespace LibraryProject.Tests.Services
             Reservation reservation = new()
             {
                 Id = reservationId,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"
@@ -238,7 +238,7 @@ namespace LibraryProject.Tests.Services
             Assert.NotNull(result);
             Assert.IsType<ReservationResponse>(result);
             Assert.Equal(reservationId, result.Id);
-            Assert.Equal(ReservationRequest.UsersId, result.UsersId);
+            Assert.Equal(ReservationRequest.UserId, result.UserId);
             Assert.Equal(ReservationRequest.bookId, result.bookId);
             Assert.Equal(ReservationRequest.reserved_At, result.reserved_At);
             Assert.Equal(ReservationRequest.reserved_To, result.reserved_To);
@@ -250,7 +250,7 @@ namespace LibraryProject.Tests.Services
             //Arrange
             ReservationRequest ReservationRequest = new()
             {
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"
@@ -278,7 +278,7 @@ namespace LibraryProject.Tests.Services
             Reservation deletedReservation = new()
             {
                 Id = 1,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 reserved_At = "10/05/22",
                 reserved_To = "12/06/22"

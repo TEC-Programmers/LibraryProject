@@ -40,7 +40,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UsersId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     loaned_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     return_date = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -69,7 +69,7 @@ namespace LibraryProject.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UsersId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     bookId = table.Column<int>(type: "int", nullable: false),
                     reserved_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     reserved_To = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -155,7 +155,7 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Loan",
-                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "UsersId" },
+                columns: new[] { "Id", "bookId", "loaned_At", "return_date", "UserId" },
                 values: new object[,]
                 {
                     { 1, 2, "2022/05/07", "2022/05/08", 2 },
@@ -173,7 +173,7 @@ namespace LibraryProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reservation",
-                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "UsersId" },
+                columns: new[] { "Id", "bookId", "reserved_At", "reserved_To", "UserId" },
                 values: new object[,]
                 {
                     { 1, 2, "2022/08/08", "2022/09/09", 2 },

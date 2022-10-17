@@ -144,14 +144,14 @@ namespace LibraryProject.Tests.Controllers
         public async void GetById_ShouldReturnStatusCode404_WhenUserDoesNotExists()
         {
             //Arrange
-            int userId = 1;
+            int UserId = 1;
 
             _mockuserService
                 .Setup(x => x.GetById(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userController.GetById(userId);
+            var result = await _userController.GetById(UserId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -190,11 +190,11 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            int userId = 1;
+            int UserId = 1;
 
             UserResponse userResponse = new()
             {
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -255,11 +255,11 @@ namespace LibraryProject.Tests.Controllers
                 Password = "password",
             };
 
-            int userId = 1;
+            int UserId = 1;
 
             UserResponse userResponse = new()
             {
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter updated",
                 MiddleName = "Per updated",
                 LastName = "Aksten updated",
@@ -272,7 +272,7 @@ namespace LibraryProject.Tests.Controllers
                 .ReturnsAsync(userResponse);
 
             //Act
-            var result = await _userController.Update(userId, updateUser);
+            var result = await _userController.Update(UserId, updateUser);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -292,7 +292,7 @@ namespace LibraryProject.Tests.Controllers
                 Password = "password",
             };
 
-            int userId = 1;
+            int UserId = 1;
 
 
             _mockuserService
@@ -300,7 +300,7 @@ namespace LibraryProject.Tests.Controllers
                 .ReturnsAsync(() => throw new System.Exception("This is an exception"));
 
             //Act
-            var result = await _userController.Update(userId, updateUser);
+            var result = await _userController.Update(UserId, updateUser);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -312,11 +312,11 @@ namespace LibraryProject.Tests.Controllers
         public async void Delete_ShouldReturnStatusCode200_WhenUserIsDeleted()
         {
             //Arrange
-            int userId = 1;
+            int UserId = 1;
 
             UserResponse userResponse = new()
             {
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -331,7 +331,7 @@ namespace LibraryProject.Tests.Controllers
                .ReturnsAsync(userResponse);
 
             //Act
-            var result = await _userController.Delete(userId);
+            var result = await _userController.Delete(UserId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -342,14 +342,14 @@ namespace LibraryProject.Tests.Controllers
         public async void Delete_ShouldReturnStatusCode404_WhenTryingToDeleteUserWhichDoesNotExist()
         {
             //Arrange
-            int userId = 1;
+            int UserId = 1;
 
             _mockuserService
                  .Setup(x => x.Delete(It.IsAny<int>()))
                 .ReturnsAsync(() => null);
 
             //Act
-            var result = await _userController.Delete(userId);
+            var result = await _userController.Delete(UserId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -360,7 +360,7 @@ namespace LibraryProject.Tests.Controllers
         public async void Delete_ShouldReturnStatusCode500_WhenExceptionIsRaised()
         {
             //Arrange
-            int userId = 1;
+            int UserId = 1;
 
             _mockuserService
                 .Setup(x => x.Delete(It.IsAny<int>()))
@@ -368,7 +368,7 @@ namespace LibraryProject.Tests.Controllers
 
 
             //Act
-            var result = await _userController.Delete(userId);
+            var result = await _userController.Delete(UserId);
 
             //Assert
             var statusCodeResult = (IStatusCodeActionResult)result;
@@ -386,11 +386,11 @@ namespace LibraryProject.Tests.Controllers
 
             };
 
-            int userId = 1;
+            int UserId = 1;
 
             LoginResponse loginResponse = new()
             {
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",

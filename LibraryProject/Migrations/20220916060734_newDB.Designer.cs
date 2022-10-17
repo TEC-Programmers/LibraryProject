@@ -36,7 +36,7 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("return_date")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -50,7 +50,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 2,
                             loaned_At = "2022/05/07",
                             return_date = "2022/05/08",
-                            UsersId = 2
+                            UserId = 2
                         },
                         new
                         {
@@ -58,7 +58,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 5,
                             loaned_At = "2022/06/07",
                             return_date = "2022/07/08",
-                            UsersId = 4
+                            UserId = 4
                         });
                 });
 
@@ -105,7 +105,7 @@ namespace LibraryProject.API.Migrations
                     b.Property<string>("reserved_To")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -119,7 +119,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 2,
                             reserved_At = "2022/08/08",
                             reserved_To = "2022/09/09",
-                            UsersId = 2
+                            UserId = 2
                         },
                         new
                         {
@@ -127,7 +127,7 @@ namespace LibraryProject.API.Migrations
                             bookId = 5,
                             reserved_At = "2022/08/08",
                             reserved_To = "2022/08/09",
-                            UsersId = 2
+                            UserId = 2
                         });
                 });
 

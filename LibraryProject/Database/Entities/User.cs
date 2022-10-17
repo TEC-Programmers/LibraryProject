@@ -5,7 +5,7 @@ using LibraryProject.API.Helpers;
 namespace LibraryProject.Database.Entities
 {
     //Creating Users Entity for the database
-    public class Users
+    public class User
     {
         [Key]   //[Key]fortæller EntityFramworkat Idegenskaben skal være den primære nøgle.
         public int Id { get; set; }

@@ -234,10 +234,10 @@ namespace LibraryProject.API.Services
                 Role = user.Role
             };
         }
-        public async Task<UserResponse> DeleteWithProcedure(int userId)
+        public async Task<UserResponse> DeleteWithProcedure(int UserId)
 
         {
-            User user = await _userRepository.DeleteWithProcedure(userId);
+            User user = await _userRepository.DeleteWithProcedure(UserId);
 
             if (user != null)
             {
@@ -246,10 +246,10 @@ namespace LibraryProject.API.Services
 
             return null;
         }
-        public async Task<UserResponse> Delete(int userId)
+        public async Task<UserResponse> Delete(int UserId)
 
         {
-            User deletedUser = await _userRepository.Delete(userId);
+            User deletedUser = await _userRepository.Delete(UserId);
 
             if (deletedUser != null)
             {

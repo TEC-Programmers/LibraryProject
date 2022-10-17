@@ -40,12 +40,12 @@ namespace LibraryProject.API.Repositories
         }
         public async Task<Loan> InsertNewLoanWithProcedure(Loan loan)
         {
-            var userId = new SqlParameter("@userId", loan.userId);
+            var UserId = new SqlParameter("@UserId", loan.UserId);
             var bookId = new SqlParameter("@bookId", loan.bookId);
             var loaned_At = new SqlParameter("@loaned_At", loan.loaned_At);
             var return_date = new SqlParameter("@return_date", loan.return_date);
 
-            await _context.Database.ExecuteSqlRawAsync("exec insertLoan @userId, @bookId, @loaned_At, @return_date", userId, bookId, loaned_At, return_date);
+            await _context.Database.ExecuteSqlRawAsync("exec insertLoan @UserId, @bookId, @loaned_At, @return_date", UserId, bookId, loaned_At, return_date);
             return loan;
         }
         public async Task<Loan> DeleteLoanByIdWithProcedure(int loanId)
@@ -86,7 +86,7 @@ namespace LibraryProject.API.Repositories
             Loan updateLoan = await _context.Loan.FirstOrDefaultAsync(loan => loan.Id == loanId);
             if (updateLoan != null)
             {
-                updateLoan.UsersId = loan.UsersId;
+                updateLoan.UserId = loan.UserId;
                 updateLoan.bookId = loan.bookId;
                 updateLoan.loaned_At = loan.loaned_At;
                 updateLoan.return_date = loan.return_date;

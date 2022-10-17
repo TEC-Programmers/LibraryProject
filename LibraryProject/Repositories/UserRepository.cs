@@ -21,14 +21,14 @@ namespace LibraryProject.API.Repositories
         Task<User> register(User user);
 
         Task<User> GetByEmailWithProcedure(string email);
-        Task<User> GetByIdWithProcedure(int userId);
-        Task<User> GetById(int userId);
-        Task<User> DeleteWithProcedure(int userId);
-        Task<User> Delete(int userId);
-        Task<User> UpdateRoleWithProcedure(int userId, User user);
-        Task<User> UpdateProfileWithProcedure(int userId, User user);
-        Task<User> UpdatePasswordWithProcedure(int userId, User user);
-        Task<User> Update(int userId, User user);
+        Task<User> GetByIdWithProcedure(int UserId);
+        Task<User> GetById(int UserId);
+        Task<User> DeleteWithProcedure(int UserId);
+        Task<User> Delete(int UserId);
+        Task<User> UpdateRoleWithProcedure(int UserId, User user);
+        Task<User> UpdateProfileWithProcedure(int UserId, User user);
+        Task<User> UpdatePasswordWithProcedure(int UserId, User user);
+        Task<User> Update(int UserId, User user);
 
     }
 
@@ -69,22 +69,22 @@ namespace LibraryProject.API.Repositories
 
             return user;
         }
-        public async Task<User> GetByIdWithProcedure(int userId)
+        public async Task<User> GetByIdWithProcedure(int UserId)
         {   
             User getUser = await _context.Users
-                .FirstOrDefaultAsync(u => u.Id == userId);
+                .FirstOrDefaultAsync(u => u.Id == UserId);
 
             var parameter = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId)
+               new SqlParameter("@Id", UserId)
             };
 
             await _context.Database.ExecuteSqlRawAsync("EXEC selectUserById @Id", parameter.ToArray());
             return getUser;
         }
-        public async Task<User> GetById(int userId)
+        public async Task<User> GetById(int UserId)
         {
-            return await _context.Users.FirstOrDefaultAsync(user => user.Id == userId);
+            return await _context.Users.FirstOrDefaultAsync(user => user.Id == UserId);
         }
         public async Task<User> GetByEmailWithProcedure(string Email)
         {
@@ -101,10 +101,10 @@ namespace LibraryProject.API.Repositories
             await _context.Database.ExecuteSqlRawAsync("EXEC selectUserByEmail @Email", parameter.ToArray());
             return getUser;
         }
-        public async Task<User> Update(int userId, User user)
+        public async Task<User> Update(int UserId, User user)
         {
             User upateUser = await _context.Users
-                .FirstOrDefaultAsync(user => user.Id == userId);
+                .FirstOrDefaultAsync(user => user.Id == UserId);
 
             if (upateUser != null)
             {
@@ -119,11 +119,11 @@ namespace LibraryProject.API.Repositories
             return upateUser;
         }
 
-        public async Task<User> UpdatePasswordWithProcedure(int userId, User user)
+        public async Task<User> UpdatePasswordWithProcedure(int UserId, User user)
         {
             var parameters = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId),
+               new SqlParameter("@Id", UserId),
                new SqlParameter("@FirstName", user.FirstName),
                new SqlParameter("@MiddleName", user.MiddleName),
                new SqlParameter("@LastName", user.LastName),
@@ -134,11 +134,11 @@ namespace LibraryProject.API.Repositories
             await _context.Database.ExecuteSqlRawAsync("EXEC updateUserPassword @Id, @FirstName, @MiddleName, @LastName, @Email, @Password", parameters.ToArray());
             return user;
         }
-        public async Task<User> UpdateRoleWithProcedure(int userId, User user)
+        public async Task<User> UpdateRoleWithProcedure(int UserId, User user)
         {
             var parameters = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId),
+               new SqlParameter("@Id", UserId),
                new SqlParameter("@FirstName", user.FirstName),
                new SqlParameter("@MiddleName", user.MiddleName),
                new SqlParameter("@LastName", user.LastName),
@@ -149,11 +149,11 @@ namespace LibraryProject.API.Repositories
             await _context.Database.ExecuteSqlRawAsync("EXEC updateUserRole @Id, @FirstName, @MiddleName, @LastName, @Email, @Role", parameters.ToArray());
             return user;
         }
-        public async Task<User> UpdateProfileWithProcedure(int userId, User user)
+        public async Task<User> UpdateProfileWithProcedure(int UserId, User user)
         {
             var parameters = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId),
+               new SqlParameter("@Id", UserId),
                new SqlParameter("@FirstName", user.FirstName),
                new SqlParameter("@MiddleName", user.MiddleName),
                new SqlParameter("@LastName", user.LastName),
@@ -163,23 +163,23 @@ namespace LibraryProject.API.Repositories
             await _context.Database.ExecuteSqlRawAsync("EXEC updateUserProfile @Id, @FirstName, @MiddleName, @LastName, @Email", parameters.ToArray());
             return user;
         }      
-        public async Task<User> DeleteWithProcedure(int userId)
+        public async Task<User> DeleteWithProcedure(int UserId)
         {
             User deleteuser = await _context.Users
-                .FirstOrDefaultAsync(u => u.Id == userId);
+                .FirstOrDefaultAsync(u => u.Id == UserId);
 
             var parameter = new List<SqlParameter>
             {
-               new SqlParameter("@Id", userId)     
+               new SqlParameter("@Id", UserId)     
             };
 
             await _context.Database.ExecuteSqlRawAsync("EXEC deleteUser @Id", parameter.ToArray());
             return deleteuser;
         }
-        public async Task<User> Delete(int userId)
+        public async Task<User> Delete(int UserId)
         {     
             User deleteUser = await _context.Users
-                .FirstOrDefaultAsync(User => User.Id == userId);
+                .FirstOrDefaultAsync(User => User.Id == UserId);
             if (deleteUser != null)
             {
                 _context.Users.Remove(deleteUser);

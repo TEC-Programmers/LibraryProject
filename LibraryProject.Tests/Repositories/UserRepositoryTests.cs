@@ -1,8 +1,7 @@
 ﻿using Castle.Core.Configuration;
-using LibraryProject.API.Database.Entities;
+using LibraryProject.API.Authorization;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
-using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -20,7 +19,7 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly UserRepository _userRepository;
-        private readonly Mock<API.Authorization.IJwtUtils> jwt = new();
+        private readonly Mock<IJwtUtils> jwt = new();
 
         
 
@@ -99,7 +98,7 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int userId = 1;
+            int UserId = 1;
 
 
             _context.Users.Add(new()
@@ -118,12 +117,12 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
 
-            var result = await _userRepository.GetById(userId);
+            var result = await _userRepository.GetById(UserId);
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<User>(result);
-            Assert.Equal(userId, result.Id);
+            Assert.Equal(UserId, result.Id);
         }
 
         [Fact]
@@ -213,12 +212,12 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int userId = 1;
+            int UserId = 1;
 
             User newUser = new()
             {
 
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -233,7 +232,7 @@ namespace LibraryProject.Tests.Repositories
             User updateUser = new()
             {
 
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -244,12 +243,12 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Update(userId, updateUser);
+            var result = await _userRepository.Update(UserId, updateUser);
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<User>(result);
-            Assert.Equal(userId, result.Id);
+            Assert.Equal(UserId, result.Id);
             Assert.Equal(updateUser.FirstName, result.FirstName);
             Assert.Equal(updateUser.MiddleName, result.MiddleName);
             Assert.Equal(updateUser.LastName, result.LastName);
@@ -263,12 +262,12 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int userId = 1;
+            int UserId = 1;
 
             User updateUser = new()
             {
 
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -279,7 +278,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Update(userId, updateUser);
+            var result = await _userRepository.Update(UserId, updateUser);
 
             //Asert
             Assert.Null(result);
@@ -292,12 +291,12 @@ namespace LibraryProject.Tests.Repositories
             //Arrange
             await _context.Database.EnsureDeletedAsync();
 
-            int userId = 1;
+            int UserId = 1;
 
             User newUser = new()
             {
 
-                Id = userId,
+                Id = UserId,
                 FirstName = "Peter",
                 MiddleName = "Per.",
                 LastName = "Aksten",
@@ -311,13 +310,13 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.Delete(userId);
-            var user = await _userRepository.GetById(userId);
+            var result = await _userRepository.Delete(UserId);
+            var user = await _userRepository.GetById(UserId);
 
             //Assert
             Assert.NotNull(result);
             Assert.IsType<User>(result);
-            Assert.Equal(userId, result.Id);
+            Assert.Equal(UserId, result.Id);
             Assert.Null(user);
         }
 

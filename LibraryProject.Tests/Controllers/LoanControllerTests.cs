@@ -33,7 +33,7 @@ namespace LibraryProject.Tests.Controllers
             loans.Add(new()
             {
                 Id = 1,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -43,7 +43,7 @@ namespace LibraryProject.Tests.Controllers
             loans.Add(new()
             {
                 Id = 2,
-                UsersId = 2,
+                UserId = 2,
                 bookId = 2,
                 loaned_At = "24/6/2022",
                 return_date = "24/7/2022"
@@ -120,7 +120,7 @@ namespace LibraryProject.Tests.Controllers
             LoanResponse loan = new()
             {
                 Id = loanId,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -176,7 +176,7 @@ namespace LibraryProject.Tests.Controllers
             //Arrange
             LoanRequest newLoan = new()
             {
-               UsersId = 1,
+               UserId = 1,
                bookId = 1,
                loaned_At = "11/5/2022",
                return_date = "11/6/2022"
@@ -188,7 +188,7 @@ namespace LibraryProject.Tests.Controllers
             LoanResponse loanResponse = new()
             {
                 Id = loanId,
-                UsersId = 1,
+                UserId = 1,
                 bookId=1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -212,7 +212,7 @@ namespace LibraryProject.Tests.Controllers
             //Arrange
             LoanRequest newLoan = new()
             {
-               UsersId = 1,
+               UserId = 1,
                bookId = 1,
                loaned_At= "11/5/2022",
                return_date = "11/6/2022"
@@ -237,7 +237,7 @@ namespace LibraryProject.Tests.Controllers
             //Arrange
             LoanRequest updateloan = new()
             {
-                UsersId= 1,
+                UserId= 1,
                 bookId= 1,
                 loaned_At ="11/5/2022",
                 return_date = "11/6/2022"
@@ -248,7 +248,7 @@ namespace LibraryProject.Tests.Controllers
             LoanResponse loanResponse = new()
             {
                 Id = loanId,
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date= "11/6/2022"
@@ -272,7 +272,7 @@ namespace LibraryProject.Tests.Controllers
             //Arrange
             LoanRequest updateloan = new()
             {
-                UsersId = 1,
+                UserId = 1,
                 bookId = 1,
                 loaned_At = "11/5/2022",
                 return_date = "11/6/2022"
@@ -298,7 +298,7 @@ namespace LibraryProject.Tests.Controllers
             //Arrange
             LoanRequest updateloan = new()
             {
-                UsersId=1,
+                UserId=1,
                 bookId=1,
                 loaned_At = "11/5/2022",
                 return_date= "11/6/2022"
@@ -326,7 +326,7 @@ namespace LibraryProject.Tests.Controllers
             LoanResponse loanResponse = new()
             {
                 Id = loanId,
-                UsersId=1,
+                UserId=1,
                 bookId = 1,
                 loaned_At= "11/5/2022",
                 return_date = "11/5/2022"

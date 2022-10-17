@@ -31,7 +31,7 @@ namespace LibraryProject.API.Services
         {
             Reservation reservation = new()
             {
-                userId = newReservation.userId,
+                UserId = newReservation.UserId,
                 bookId = newReservation.bookId,
                 reserved_At = newReservation.reserved_At,
                 reserved_To = newReservation.reserved_To
@@ -45,7 +45,7 @@ namespace LibraryProject.API.Services
                 return new ReservationResponse()
                 {
                     Id = insertedReservation.Id,
-                    userId = insertedReservation.userId,
+                    UserId = insertedReservation.UserId,
                     bookId = insertedReservation.bookId,
                     reserved_At = newReservation.reserved_At,
                     reserved_To = newReservation.reserved_To
@@ -60,7 +60,7 @@ namespace LibraryProject.API.Services
         {
             Reservation reservation = new()
             {
-                UsersId = newReservation.UsersId,
+                UserId = newReservation.UserId,
                 bookId = newReservation.bookId,
                 reserved_At = newReservation.reserved_At,
                 reserved_To = newReservation.reserved_To
@@ -74,7 +74,7 @@ namespace LibraryProject.API.Services
                 return new ReservationResponse()
                 {
                     Id = insertedReservation.Id,
-                    UsersId = insertedReservation.UsersId,
+                    UserId = insertedReservation.UserId,
                     bookId = insertedReservation.bookId,
                     reserved_At = newReservation.reserved_At,
                     reserved_To = newReservation.reserved_To
@@ -94,7 +94,7 @@ namespace LibraryProject.API.Services
                 return new ReservationResponse()
                 {
                     Id = deletedReservation.Id,
-                    userId = deletedReservation.userId,
+                    UserId = deletedReservation.UserId,
                     bookId = deletedReservation.bookId,
                     reserved_At = deletedReservation.reserved_At,
                     reserved_To = deletedReservation.reserved_To
@@ -111,7 +111,7 @@ namespace LibraryProject.API.Services
                 return new ReservationResponse()
                 {
                     Id = deletedReservation.Id,
-                    UsersId = deletedReservation.UsersId,
+                    UserId = deletedReservation.UserId,
                     bookId = deletedReservation.bookId,
                     reserved_At = deletedReservation.reserved_At,
                     reserved_To = deletedReservation.reserved_To
@@ -134,7 +134,7 @@ namespace LibraryProject.API.Services
                 return new ReservationResponse()
                 {
                     Id = reservation.Id,
-                    UsersId = reservation.UsersId,
+                    UserId = reservation.UserId,
                     bookId = reservation.bookId,
                     reserved_At = reservation.reserved_At,
                     reserved_To = reservation.reserved_To
@@ -146,7 +146,7 @@ namespace LibraryProject.API.Services
         {
             Reservation reservation = new()
             {
-                UsersId = updateReservation.UsersId,
+                UserId = updateReservation.UserId,
                 bookId = updateReservation.bookId,
                 reserved_At = updateReservation.reserved_At,
                 reserved_To = updateReservation.reserved_To
@@ -160,7 +160,7 @@ namespace LibraryProject.API.Services
                 return new ReservationResponse()
                 {
                     Id = updatedReservation.Id,
-                    UsersId = updatedReservation.UsersId,
+                    UserId = updatedReservation.UserId,
                     bookId = updatedReservation.bookId,
                     reserved_At = updatedReservation.reserved_At,
                     reserved_To = updatedReservation.reserved_To
@@ -173,7 +173,7 @@ namespace LibraryProject.API.Services
         {
             return new Reservation()
             {
-                UsersId = ReservationRequest.UsersId,
+                UserId = ReservationRequest.UserId,
                 bookId = ReservationRequest.bookId,
                 reserved_At = ReservationRequest.reserved_At,
                 reserved_To = ReservationRequest.reserved_To
@@ -184,7 +184,7 @@ namespace LibraryProject.API.Services
             return new ReservationResponse()
             {
                 Id = Reservation.Id,
-                UsersId = Reservation.UsersId,
+                UserId = Reservation.UserId,
                 bookId = Reservation.bookId,
                 reserved_At = Reservation.reserved_At,
                 reserved_To = Reservation.reserved_To
