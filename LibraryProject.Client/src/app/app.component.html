@@ -14,45 +14,45 @@
                 <li class="nav-item active">
                     <a class="nav-link" routerLink="/" routerLinkActive="active-link "
                         [routerLinkActiveOptions]="{exact:true}"> <span
-                        class="glyphicon glyphicon-home" *ngIf="this.x === 0"> Home</span></a>
+                        class="glyphicon glyphicon-home"> Home</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active-link"><span
-                        class="glyphicon glyphicon-book" *ngIf="this.x === 0"> Categories</span></a>                   
-                    <ul class="col" style="list-style:disc">   
-                        <table>
+                        class="glyphicon glyphicon-book"> Categories</span></a>
+                    <ul class="col" style="list-style:disc">
+                        <table class="catDropdown">
                             <tbody class="dropdown">
-                                <tr>                                   
-                                    <td colspan="6" *ngFor="let category of categories |slice: 0:3; index as i"><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
-                                        <li>{{category.categoryName}}</li></a></td>                                        
+                                <tr>
+                                    <td colspan="6" *ngFor="let category of categories |slice: 0:4; index as i"><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                        <li>{{category.categoryName}}</li></a></td>
                                 </tr>
 
                                   <tr>
-                                    <td colspan="6" *ngFor="let category of categories |slice: 4:7; index as i" ><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                    <td colspan="6" *ngFor="let category of categories |slice: 4:8; index as i" ><a  class="dropdown-item" routerLink="/category_books/{{category.id}}">
                                         <li>{{category.categoryName}}</li></a></td>
-                                    
+
                                   </tr>
                                   <tr  >
-                                    <td colspan="6" *ngFor="let category of categories |slice: 8:11; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
+                                    <td colspan="6" *ngFor="let category of categories |slice: 8:12; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
                                     <li>  {{category.categoryName}}</li></a></td>
-                                    
+
                                   </tr>
                                   <tr >
                                     <td colspan="6" *ngFor="let category of categories |slice: 12:16; index as i" ><a class="dropdown-item" routerLink="/category_books/{{category.id}}">
                                         <li>{{category.categoryName}}</li></a></td>
-                                    
-                                  </tr>                            
+
+                                  </tr>
                             </tbody>
-                          </table>        
+                          </table>
                     </ul>
                 </li>
-                <!-- <li class="nav-item"> 
+                <!-- <li class="nav-item">
                     <a class="nav-link" routerLink="reserve/:id"><span class="glyphicon glyphicon-calendar"></span>Reservation</a>
                 </li> -->
             </ul>
 
             <ul class="nav navbar-nav ms-auto"  id="myNavbar">
-                <li class="nav-item nav-link" *ngIf= "router.url!=='/Frontpage'">                   
+                <li class="nav-item nav-link" *ngIf= "router.url!=='/Frontpage'">
                     <div class="search" *ngIf="this.x !== 1">
                         <i class="fa fa-search"  (click)="click()" (keydown.enter)="checkSearch($event)"></i>
                         <input type="text" name="searchInput" class="form-control" placeholder="Search Books"
@@ -70,20 +70,20 @@
                 <li class="nav-item" *ngIf="currentUser == null">
                     <a class="nav-link" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a>
                 </li>
-          
+
                 <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
                     <a class="nav-link" ><span class="glyphicon glyphicon-user">&nbsp;</span>{{currentUser.firstName+' '+currentUser.lastName}}</a>
-                    <ul>                     
+                    <ul>
                         <li style="display:inline-block" *ngIf="currentUser != null" class="nav-item">
                             <a class="nav-link" (click)="logout()">
                                 <span class="glyphicon glyphicon-log-out"></span>Logout</a>
                         </li>
                         <!-- routerLink="/profile/customerpanel" -->
                         <li style="display:inline-block" class="nav-item" *ngIf="currentUser != null">
-                            <a class="nav-link" (click)="navProfile()"> <span class="glyphicon glyphicon-cog"></span>Profile</a> 
-                        </li>                  
+                            <a class="nav-link" (click)="navProfile()"> <span class="glyphicon glyphicon-cog"></span>Profile</a>
+                        </li>
                     </ul>
-                </li>         
+                </li>
             </ul>
         </div>
     </div>
@@ -97,7 +97,7 @@
 </div>
 
 <router-outlet></router-outlet>
-     
+
 
 
 

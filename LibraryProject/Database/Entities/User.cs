@@ -18,7 +18,7 @@ namespace LibraryProject.Database.Entities
 
         [Column(TypeName = "nvarchar(32)")]
         public string LastName { get; set; }
-        [Column(TypeName = "nvarchar(128)")]
+        [Column(TypeName = "nvarchar(255)")]
         public string Email { get; set; }
 
         [Column(TypeName = "nvarchar(255)")]
