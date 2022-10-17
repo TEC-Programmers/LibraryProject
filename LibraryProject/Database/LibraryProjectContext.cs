@@ -115,6 +115,16 @@ namespace LibraryProject
                     Email = "riz@abc.com",
                     Password = BC.HashPassword("password"),
                     Role = Role.Customer
+                },
+                new()
+                {
+                    Id = 3,
+                    FirstName = "Fahim",
+                    MiddleName = "AFM",
+                    LastName = "Mahmood",
+                    Email = "AFM@elev.tec.dk",
+                    Password = BC.HashPassword("pa55w0rd"),
+                    Role = Role.Administrator
                 }
                 );
             modelBuilder.Entity<Loan>().HasData(
