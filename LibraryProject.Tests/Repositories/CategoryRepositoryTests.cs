@@ -2,7 +2,6 @@
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +16,14 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly CategoryRepository _categoryRepository;
-        private readonly IConfiguration _configuration;
-        public CategoryRepositoryTests(IConfiguration configuration)
+        public CategoryRepositoryTests()
         {
-            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProjectContext")
                 .Options;
 
             _context = new(_options);
-            _categoryRepository = new(_context, _configuration);
+            _categoryRepository = new(_context);
         }
         [Fact]
         public async void SelectAllCategories_ShouldReturnListOfCategories_WhenCategoryExists()
@@ -141,7 +138,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _categoryRepository.InsertNewCategoryWithProcedure(category);
+            var result = await _categoryRepository.InsertNewCategory(category);
 
             //Assert
             Assert.NotNull(result);
@@ -169,7 +166,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            async Task action() => await _categoryRepository.InsertNewCategoryWithProcedure(category);
+            async Task action() => await _categoryRepository.InsertNewCategory(category);
 
 
             //Assert
@@ -256,7 +253,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _categoryRepository.DeleteCategoryByIdWithProcedure(categoryId);
+            var result = await _categoryRepository.Delete(categoryId);
             var category = await _categoryRepository.SelectCategoryById(categoryId);
 
             //Assert
@@ -275,7 +272,7 @@ namespace LibraryProject.Tests.Repositories
 
             _context.Add(new Category { Id = 1, CategoryName = "Toy" });
             //Act
-            var result = await _categoryRepository.DeleteCategoryByIdWithProcedure(1);
+            var result = await _categoryRepository.Delete(1);
 
 
             //Assert

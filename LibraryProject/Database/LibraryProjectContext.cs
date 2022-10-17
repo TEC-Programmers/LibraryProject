@@ -20,7 +20,7 @@ namespace LibraryProject
         public LibraryProjectContext(DbContextOptions<LibraryProjectContext> options) : base(options) { }  //creating instances of the class 
         public DbSet<Book> Book { get; set; }   //represents the set of book enitity in EFC(Entity Framework Core)
         public DbSet<Category> Category { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
@@ -95,7 +95,7 @@ namespace LibraryProject
                     PublisherId = 2,
                 }
                 );
-            modelBuilder.Entity<User>().HasData(
+            modelBuilder.Entity<Users>().HasData(
                 new()
                 {
                     Id = 1,
@@ -121,7 +121,7 @@ namespace LibraryProject
                 new()
                 {
                     Id = 1,
-                    userId = 2,
+                    UsersId = 2,
                     bookId = 2,
                     loaned_At = "2022/05/07",
                     return_date = "2022/05/08"
@@ -129,7 +129,7 @@ namespace LibraryProject
                 new()
                 {
                     Id = 3,
-                    userId = 4,
+                    UsersId = 4,
                     bookId = 5,
                     loaned_At = "2022/06/07",
                     return_date = "2022/07/08",
@@ -139,7 +139,7 @@ namespace LibraryProject
                 new()
                 {
                     Id = 1,
-                    userId = 2,
+                    UsersId = 2,
                     bookId = 2,
                     reserved_At = "2022/08/08",
                     reserved_To = "2022/09/09"
@@ -147,7 +147,7 @@ namespace LibraryProject
                 new()
                 {
                     Id = 2,
-                    userId = 2,
+                    UsersId = 2,
                     bookId = 5,
                     reserved_At = "2022/08/08",
                     reserved_To = "2022/08/09"

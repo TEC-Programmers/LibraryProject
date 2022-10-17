@@ -2,7 +2,7 @@
 
 namespace LibraryProject.API.DTO_s
 {
-    public class UserRequest
+    public class UsersRequest
     {
         [Required]
         [StringLength(128, ErrorMessage = "Email must be less than 128 chars")]

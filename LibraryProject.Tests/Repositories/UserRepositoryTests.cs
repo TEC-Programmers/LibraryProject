@@ -1,10 +1,10 @@
-﻿
+﻿using Castle.Core.Configuration;
+using LibraryProject.API.Database.Entities;
 using LibraryProject.API.Helpers;
 using LibraryProject.API.Repositories;
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -20,22 +20,18 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly UserRepository _userRepository;
-        private readonly IConfiguration _configuration;
         private readonly Mock<API.Authorization.IJwtUtils> jwt = new();
 
         
 
 
-        public UserRepositoryTests(IConfiguration configuration)
+        public UserRepositoryTests()
         {
-            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProject")
                 .Options;
-            _context = new(_options);
-
-
-            _userRepository = new(_context, _configuration);
+            _context = new(_options);  
+            _userRepository = new(_context);
         }
 
         [Fact]
@@ -122,7 +118,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
 
-            var result = await _userRepository.GetByIdWithProcedure(userId);
+            var result = await _userRepository.GetById(userId);
 
             //Assert
             Assert.NotNull(result);
@@ -137,7 +133,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _userRepository.GetByIdWithProcedure(1);
+            var result = await _userRepository.GetById(1);
 
             //Assert
             Assert.Null(result);
@@ -169,7 +165,7 @@ namespace LibraryProject.Tests.Repositories
 
             //Act
 
-            var result = await _userRepository.registerWithProcedure(newUser);
+            var result = await _userRepository.register(newUser);
 
 
             //Assert
@@ -200,7 +196,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            var result = await _userRepository.registerWithProcedure(user);
+            var result = await _userRepository.register(user);
           
 
             //Assert       
@@ -248,7 +244,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.UpdateProfileWithProcedure(userId, updateUser);
+            var result = await _userRepository.Update(userId, updateUser);
 
             //Assert
             Assert.NotNull(result);
@@ -283,7 +279,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.UpdateProfileWithProcedure(userId, updateUser);
+            var result = await _userRepository.Update(userId, updateUser);
 
             //Asert
             Assert.Null(result);
@@ -315,8 +311,8 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _userRepository.DeleteWithProcedure(userId);
-            var user = await _userRepository.GetByIdWithProcedure(userId);
+            var result = await _userRepository.Delete(userId);
+            var user = await _userRepository.GetById(userId);
 
             //Assert
             Assert.NotNull(result);
@@ -332,7 +328,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.Database.EnsureDeletedAsync();
 
             //Act
-            var result = await _userRepository.DeleteWithProcedure(1);
+            var result = await _userRepository.Delete(1);
 
 
             //Assert

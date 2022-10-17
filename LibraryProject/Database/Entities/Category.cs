@@ -13,7 +13,6 @@ namespace LibraryProject.Database.Entities
         [Column(TypeName = "nvarchar(20)")]
         public string CategoryName { get; set; }
 
-
         public List<Book> Books { get; set; } = new();
     }
 }

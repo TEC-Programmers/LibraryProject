@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryProject.Database.Entities
 {
-    //Creating Author Entity for the database
+    // Database table for: Author
     public class Author
     {
         [Key]
@@ -17,10 +17,5 @@ namespace LibraryProject.Database.Entities
 
         [Column(TypeName = "nvarchar(32)")]
         public string LastName { get; set; }
-
-        //public int bookId { get; set; }
-
-        //[ForeignKey("bookId")]
-        //public Book Book { get; set; }
     }
 }

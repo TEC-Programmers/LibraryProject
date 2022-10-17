@@ -2,7 +2,6 @@
 using LibraryProject.Database;
 using LibraryProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +16,14 @@ namespace LibraryProject.Tests.Repositories
         private readonly DbContextOptions<LibraryProjectContext> _options;
         private readonly LibraryProjectContext _context;
         private readonly BookRepository _bookRepository;
-        private readonly IConfiguration _configuration;
-        public BookRepositoryTests(IConfiguration configuration)
+        public BookRepositoryTests()
         {
-            _configuration = configuration;
             _options = new DbContextOptionsBuilder<LibraryProjectContext>()
                 .UseInMemoryDatabase(databaseName: "LibraryProjectBooks")
                 .Options;
 
             _context = new(_options);
-            _bookRepository = new(_context,_configuration);
+            _bookRepository = new(_context);
         }
         [Fact]
         public async void SelectAllBooks_ShouldReturnListOfBooks_WhenBookExists()
@@ -216,8 +213,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            
-            var result = await _bookRepository.InsertNewBookWithProcedure(book);
+            var result = await _bookRepository.InsertNewBook(book);
 
             //Assert
             Assert.NotNull(result);
@@ -250,7 +246,7 @@ namespace LibraryProject.Tests.Repositories
             await _context.SaveChangesAsync();
 
             //Act
-            async Task action() => await _bookRepository.InsertNewBookWithProcedure(book);
+            async Task action() => await _bookRepository.InsertNewBook(book);
 
 
             //Assert
@@ -299,7 +295,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.UpdateExistingBookWithProcedure(bookId, updateBook);
+            var result = await _bookRepository.Update(bookId, updateBook);
 
             //Assert
             Assert.NotNull(result);
@@ -339,7 +335,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.UpdateExistingBookWithProcedure(bookId, updateBook);
+            var result = await _bookRepository.Update(bookId, updateBook);
 
             //Assert
             Assert.Null(result);
@@ -372,7 +368,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.DeleteBookByIdWithProcedure(bookId);
+            var result = await _bookRepository.Delete(bookId);
             var book = await _bookRepository.SelectBookById(bookId);
 
             //Assert
@@ -392,7 +388,7 @@ namespace LibraryProject.Tests.Repositories
 
 
             //Act
-            var result = await _bookRepository.DeleteBookByIdWithProcedure(1);
+            var result = await _bookRepository.Delete(1);
 
 
             //Assert

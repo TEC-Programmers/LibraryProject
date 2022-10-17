@@ -198,7 +198,7 @@ namespace LibraryProject.Tests.Services
         {
             LoanRequest loanRequest = new()
             {
-                userId = 1,
+               userId = 1,
                bookId = 1,
                loaned_At = "11/5/2022",
                return_date = "11/6/2022"
@@ -232,8 +232,8 @@ namespace LibraryProject.Tests.Services
             Assert.Equal(loanId, result.Id);
             Assert.Equal(loanRequest.userId, result.userId);
             Assert.Equal(loanRequest.bookId, result.bookId);
-            Assert.Equal(loanRequest.loaned_At, result.return_date);
-            Assert.Equal(loanRequest.loaned_At, result.return_date);
+            Assert.Equal(loanRequest.return_date, result.return_date);
+            Assert.Equal(loanRequest.loaned_At, result.loaned_At);
         }
 
         [Fact]

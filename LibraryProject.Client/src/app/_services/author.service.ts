@@ -27,7 +27,7 @@ export class AuthorService {
   }
 
   addAuthor(author: Author): Observable<Author>{
-    return this.http.post<Author>(this.apiUrl, author, this.httpOptions);
+    return this.http.post<Author>(this.apiUrl + `/WithProcedure`, author, this.httpOptions);
   }
 
   updateAuthor(authorId: number, author:Author): Observable<Author> {
@@ -36,6 +36,6 @@ export class AuthorService {
 
 
   deleteAuthor(authorid: number): Observable<Author> {
-    return this.http.delete<Author>(`${this.apiUrl}/${authorid}`, this.httpOptions);
+    return this.http.delete<Author>(`${this.apiUrl}/WithProcedure/${authorid}`, this.httpOptions);
   }
 }

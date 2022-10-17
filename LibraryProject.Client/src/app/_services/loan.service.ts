@@ -22,7 +22,7 @@ export class LoanService {
   }
 
    addLoan(loan: Loan ): Observable<Loan>{
-    return this.http.post<Loan>(this.apiUrl, loan, this.httpOptions);
+    return this.http.post<Loan>(this.apiUrl + `WithProcedure`, loan, this.httpOptions);
    }
 
    updateLoan(loanId: number, loan: Loan ): Observable<Loan>{
@@ -30,7 +30,7 @@ export class LoanService {
    }
 
    DeleteLoan(loanId: number): Observable<Loan>{
-    return this.http.delete<Loan>(`${this.apiUrl}/${loanId}`, this.httpOptions);
+    return this.http.delete<Loan>(`${this.apiUrl}/WithProcedure/${loanId}`, this.httpOptions);
    }
    
   }

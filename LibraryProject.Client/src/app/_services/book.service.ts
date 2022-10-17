@@ -33,7 +33,7 @@ export class BookService {
     return this.http.get<Book[]>(`${this.apiUrl}/category/${categoryId} `)
   }
   addBook(book: Book): Observable<Book>{                                     //Method for adding one book in the database using API
-    return this.http.post<Book>(this.apiUrl, book, this.httpOptions);
+    return this.http.post<Book>(this.apiUrl + `WithProcedure`, book, this.httpOptions);
   }
 
   updateBook(bookId: number, book:Book): Observable<Book> {                                        //Method for updating  book's info in the database using API

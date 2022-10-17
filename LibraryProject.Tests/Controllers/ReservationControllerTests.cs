@@ -30,7 +30,7 @@ namespace LibraryProject.Tests.Controllers
             Reservations.Add(new()
             {
                 Id = 1,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -39,7 +39,7 @@ namespace LibraryProject.Tests.Controllers
             Reservations.Add(new()
             {
                 Id = 2,
-                userId = 2,
+                UsersId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
                 reserved_To = "27/05/22"
@@ -120,7 +120,7 @@ namespace LibraryProject.Tests.Controllers
 
             ReservationRequest newRerservation = new()
             {
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -131,7 +131,7 @@ namespace LibraryProject.Tests.Controllers
             ReservationResponse reservationResponse = new()
             {
                 Id = Id,
-                userId = 2,
+                UsersId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
                 reserved_To = "27/05/22"
@@ -156,7 +156,7 @@ namespace LibraryProject.Tests.Controllers
 
             ReservationRequest newRerservation = new()
             {
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -183,7 +183,7 @@ namespace LibraryProject.Tests.Controllers
             ReservationResponse Reservation = new()
             {
                 Id = ReservationId,
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "06/05/22",
                 reserved_To = "13/05/22"
@@ -243,7 +243,7 @@ namespace LibraryProject.Tests.Controllers
 
             ReservationRequest updateRerservation = new()
             {
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -254,7 +254,7 @@ namespace LibraryProject.Tests.Controllers
             ReservationResponse reservationResponse = new()
             {
                 Id = Id,
-                userId = 2,
+                UsersId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
                 reserved_To = "27/05/22"
@@ -279,7 +279,7 @@ namespace LibraryProject.Tests.Controllers
 
             ReservationRequest updateRerservation = new()
             {
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -306,7 +306,7 @@ namespace LibraryProject.Tests.Controllers
 
             ReservationRequest updateRerservation = new()
             {
-                userId = 1,
+                UsersId = 1,
                 bookId = 1,
                 reserved_At = "09/05/22",
                 reserved_To = "25/05/22"
@@ -337,7 +337,7 @@ namespace LibraryProject.Tests.Controllers
             ReservationResponse reservationResponse = new()
             {
                 Id = Id,
-                userId = 2,
+                UsersId = 2,
                 bookId = 2,
                 reserved_At = "11/05/22",
                 reserved_To = "27/05/22"

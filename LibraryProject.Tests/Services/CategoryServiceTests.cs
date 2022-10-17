@@ -234,7 +234,7 @@ namespace LibraryProject.Tests.Services
                 .ReturnsAsync(deletedCategory);
 
             // Act
-            var result = await _categoryService.DeleteCategory(categoryId);
+            var result = await _categoryService.Delete(categoryId);
 
             // Assert
             Assert.NotNull(result);
@@ -252,7 +252,7 @@ namespace LibraryProject.Tests.Services
                 .ReturnsAsync(() => null);
 
             // Act
-            var result = await _categoryService.DeleteCategory(categoryId);
+            var result = await _categoryService.Delete(categoryId);
 
             // Assert
             Assert.Null(result);

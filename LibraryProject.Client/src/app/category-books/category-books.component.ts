@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'app/_models/Category';
+import { CategoryService } from 'app/_services/category.service';
 import { Book } from '../_models/Book';
 import { BookService } from '../_services/book.service';
 
@@ -13,7 +15,7 @@ export class CategoryBooksComponent implements OnInit {
   private sub: any;
   books: Book[] = [];
 
-  constructor(private bookService:BookService, private route:ActivatedRoute, private elementRef: ElementRef) { }  //Dependency Injection
+  constructor(private bookService:BookService, private categoryService:CategoryService, private route:ActivatedRoute, private elementRef: ElementRef) { }  //Dependency Injection
 
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#AFEEEE';

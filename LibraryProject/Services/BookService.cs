@@ -13,7 +13,9 @@ namespace LibraryProject.API.Services
         Task<List<BookResponse>> GetAllBooks();
         Task<BookResponse> GetBookById(int bookId);
         Task<List<BookResponse>> GetBooksByCategoryId(int categoryId);
+        Task<BookResponse> CreateBookWithProcedure(BookRequest newBook);
         Task<BookResponse> CreateBook(BookRequest newBook);
+
         Task<BookResponse> UpdateBook(int BookId, BookRequest updateBook);
         Task<BookResponse> DeleteBook(int bookId);
     }
@@ -41,7 +43,6 @@ namespace LibraryProject.API.Services
         public async Task<List<BookResponse>> GetAllBooks()
         {
             List<Book> books = await _bookRepository.SelectAllBooks();
-
             return books.Select(book => MapBookToBookResponse(book)).ToList();
         }
         public async Task<BookResponse> GetBookById(int bookId)
@@ -63,7 +64,7 @@ namespace LibraryProject.API.Services
 
             return books.Select(book => MapBookToBookResponse(book)).ToList();
         }
-        public async Task<BookResponse> CreateBook(BookRequest newBook)
+        public async Task<BookResponse> CreateBookWithProcedure(BookRequest newBook)
         {
             Book book = MapBookRequestToBook(newBook);
 
@@ -79,6 +80,19 @@ namespace LibraryProject.API.Services
 
             return null;
         }
+        public async Task<BookResponse> CreateBook(BookRequest newBook)
+        {
+            Book book = MapBookRequestToBook(newBook);
+
+            Book insertedBook = await _bookRepository.InsertNewBook(book);
+
+            if (insertedBook != null)
+            {
+                return MapBookToBookResponse(insertedBook);
+            }
+            return null;
+        }
+
         public async Task<BookResponse> UpdateBook(int bookId, BookRequest updateBook)
         {
             Book book = MapBookRequestToBook(updateBook);

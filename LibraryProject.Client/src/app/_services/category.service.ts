@@ -31,7 +31,7 @@ export class CategoryService {
  }
 
   addCategory(category: Category): Observable<Category>{                  //Method for adding one Category in the database using API
-    return this.http.post<Category>(this.apiUrl, category, this.httpOptions);
+    return this.http.post<Category>(this.apiUrl + `WithProcedure`, category, this.httpOptions);
   }
 
   updateCategory(categoryId: number, Category:Category): Observable<Category> {           //Method for updating  category's info in the database using API
@@ -39,7 +39,7 @@ export class CategoryService {
   }
 
   deleteCategory(categoryId: number): Observable<Category> {                                        //Method for deleting one category from the database using API
-    return this.http.delete<Category>(`${this.apiUrl}/${categoryId}`, this.httpOptions);
+    return this.http.delete<Category>(`${this.apiUrl}/WithProcedure/${categoryId}`, this.httpOptions);
   }
 
 

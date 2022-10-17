@@ -45,7 +45,7 @@ namespace LibraryProject.Tests.Services
             });
 
             _mockAuthorRepository
-                .Setup(x => x.SelectAllAuthors())
+                .Setup(x => x.SelectAllAuthorsWithProcedure())
                 .ReturnsAsync(Authors);
 
             // Act
@@ -64,7 +64,7 @@ namespace LibraryProject.Tests.Services
             List<Author> Authors = new();
 
             _mockAuthorRepository
-                .Setup(x => x.SelectAllAuthors())
+                .Setup(x => x.SelectAllAuthorsWithProcedure())
                 .ReturnsAsync(Authors);
 
             // Act

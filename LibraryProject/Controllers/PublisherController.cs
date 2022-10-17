@@ -74,6 +74,30 @@ namespace LibraryProject.API.Controllers
             }
         }
 
+        [HttpPost("WithProcedure")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> CreateWithProcedure([FromBody] PublisherRequest newPublisher)
+        {
+            try
+            {
+                PublisherResponse PublisherResponse = await _publisherService.CreatePublisherWithProcedure(newPublisher);
+
+                if (PublisherResponse == null)
+                {
+                    return Problem(" Publisher was NOT created, something went wrong");
+                }
+
+                return Ok(PublisherResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -108,6 +132,30 @@ namespace LibraryProject.API.Controllers
             try
             {
                 PublisherResponse PublisherResponse = await _publisherService.UpdatePublisher(publisherId, updatePublisher);
+
+                if (PublisherResponse == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(PublisherResponse);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+        [HttpDelete("WithProcedure/{publisherId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteWithProcedure([FromRoute] int publisherId)
+        {
+            try
+            {
+                PublisherResponse PublisherResponse = await _publisherService.DeletePublisherWithProcedure(publisherId);
 
                 if (PublisherResponse == null)
                 {

@@ -4,7 +4,7 @@ import { Role } from 'app/_models/Role';
 import { UserService } from '../../_services/user.service';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2'
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { AuthService } from 'app/_services/auth.service';
@@ -42,7 +42,7 @@ export class AdminCustomerComponent implements OnInit {
   toggle2: boolean = false;
   password: string = '';
 
-  constructor(private userService: UserService, private http: HttpClient, private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(private userService: UserService, private http: HttpClient, private formBuilder: UntypedFormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     setTimeout(() => {

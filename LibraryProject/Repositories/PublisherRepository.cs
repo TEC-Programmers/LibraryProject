@@ -12,21 +12,22 @@ namespace LibraryProject.API.Repositories
 {
     public interface IPublisherRepository
     {
-        Task<List<Publisher>> SelectAllPublishers();
+        Task<List<Publisher>> SelectAllPublishersWithProcedure();
         Task<Publisher> SelectPublisherById(int publisherId);
         Task<Publisher> InsertNewPublisherWithProcedure(Publisher publisher);
+        Task<Publisher> InsertNewPublisher(Publisher publisher);
         Task<Publisher> UpdateExistingPublisher(int publisherId, Publisher publisher);
         Task<Publisher> DeletePublisherWithProcedure(int publisherId);
+        Task<Publisher> DeletePublisher(int publisherId);
+
     }
     public class PublisherRepository : IPublisherRepository
     {
         private readonly LibraryProjectContext _context;
-        public string _connectionString;
 
-        public PublisherRepository(LibraryProjectContext context, IConfiguration configuration)
+        public PublisherRepository(LibraryProjectContext context)
         {
             _context = context;
-            _connectionString = configuration.GetConnectionString("Default");
         }
 
         public async Task<Publisher> DeletePublisherWithProcedure(int publisherId)
@@ -42,31 +43,41 @@ namespace LibraryProject.API.Repositories
             await _context.Database.ExecuteSqlRawAsync("EXEC deletePublisher @Id", parameter.ToArray());
             return deletePublisher;
         }
+        public async Task<Publisher> DeletePublisher(int publisherId)
+        {
+            Publisher deletePublisher = await _context.Publisher
+                .FirstOrDefaultAsync(publisher => publisher.Id == publisherId);
+            if (deletePublisher != null)
+            {
+                _context.Publisher.Remove(deletePublisher);
+                await _context.SaveChangesAsync();
+            }
+            return deletePublisher;
+        }
 
         public async Task<Publisher> InsertNewPublisherWithProcedure(Publisher publisher)
-        {         
-            using SqlConnection sql = new SqlConnection(_connectionString);
-            using SqlCommand cmd = new SqlCommand("insertPublisher", sql);
+        {
+            var name = new SqlParameter("@Name", publisher.Name);
 
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@Name", publisher.Name));            
+            await _context.Database.ExecuteSqlRawAsync("exec insertPublisher @Name", name);
+            return publisher;          
+        }
+        public async Task<Publisher> InsertNewPublisher(Publisher publisher)
+        {
+            _context.Publisher.Add(publisher);
+            await _context.SaveChangesAsync();
 
-            await sql.OpenAsync();
-            await cmd.ExecuteNonQueryAsync();
             return publisher;
         }
-
-        public async Task<List<Publisher>> SelectAllPublishers()
+        public async Task<List<Publisher>> SelectAllPublishersWithProcedure()
         {
-            return await _context.Publisher.ToListAsync();
+            return await _context.Publisher.FromSqlRaw("selectAllPublishers").ToListAsync();
         }
-
         public async Task<Publisher> SelectPublisherById(int publisherId)
         {
             return await _context.Publisher
                 .FirstOrDefaultAsync(Publisher => Publisher.Id == publisherId);
         }
-
         public async Task<Publisher> UpdateExistingPublisher(int publisherId, Publisher Publisher)
         {
             Publisher upatePublisher = await _context.Publisher

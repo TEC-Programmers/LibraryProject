@@ -31,11 +31,11 @@ export class UserService {
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`)
+    return this.http.get<User>(`${this.apiUrl}/WithProcedure/${id}`)
   }
 
   registerWithProcedure(user: User): Observable<User>{
-    return this.http.post<User>(this.apiUrl + `/register`, user, this.httpOptions);
+    return this.http.post<User>(this.apiUrl + `/WithProcedure`, user, this.httpOptions);
   }
 
   updateProfileWithProcedure(id: number, user:User): Observable<User> {
@@ -52,7 +52,7 @@ export class UserService {
 
 
   deleteUser(id: number): Observable<User> {
-    return this.http.delete<User>(`${this.apiUrl}/${id}`, this.httpOptions);
+    return this.http.delete<User>(`${this.apiUrl}/WithProcedure/${id}`, this.httpOptions);
   }
 
 
