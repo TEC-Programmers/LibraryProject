@@ -27,7 +27,7 @@ export class ReservationService {
   }
 
   addReservation(reservation: Reservation): Observable<Reservation>{
-    return this.http.post<Reservation>(this.apiUrl + `WithProcedure`, reservation, this.httpOptions);
+    return this.http.post<Reservation>(this.apiUrl + `/WithProcedure`, reservation, this.httpOptions);
   }
 
   updateReservation(reservationId: number, Reservation:Reservation): Observable<Reservation> {

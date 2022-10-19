@@ -24,12 +24,12 @@
     <br><br>
     <div class="row">
         <ng-container *ngFor="let item of searchBooks | filter:filterTerm">
-            <div class="card col-md-2 auto align-items-center bg-success" style="border: none; max-width: 250px;">
+            <div class="card col-md-2 auto align-items-center" style="border: none; max-width: 250px; background-color: rgb(119, 79, 26);">
                 <a routerLink="/book_details/{{item.id}}"><img src="/assets/images/{{item.image}}"
                         alt="picture of products"></a>
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}
-                </h5>
-
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch; color: aliceblue; font-size: 14px;">{{item.title}}</h5>
+                <h4>{{this.checkIfBookIsInLoan(item)}}</h4>
+                <i class='fas fa-book' style='font-size:16px; color: #FFF;'><a *ngIf="this.yourLoan" style="font-family: Garamond, serif; font-size: 20px;"> Available: <i class='fas fa-ban' style='font-size:20px; color: red;'></i></a><a style="font-family: Garamond, serif; font-size: 20px;" *ngIf="!this.yourLoan"> Available: <i class='fas fa-check-circle' style='font-size:24px; color: rgb(50, 205, 50)'></i></a></i>
             </div>
         </ng-container>
     </div>

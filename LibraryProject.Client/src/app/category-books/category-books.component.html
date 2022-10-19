@@ -16,9 +16,10 @@
 <br><br><br>
     <div class="row">
         <ng-container *ngFor="let item of books">
-            <div class="card col-md-3" style="border-radius: 8px; max-width: 217px;" id="cards">
+            <div class="card col-md-3 auto align-items-center" style="max-width: 217px;" id="cards">
                 <a routerLink="/book_details/{{item.id}}"> <img src="/assets/images/{{item.image}}" alt="picture of book"> </a>
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch; font-size: 14px;">{{item.title}}</h5>
+                <h4 *ngIf=""></h4>
             </div>
         </ng-container>
     </div>

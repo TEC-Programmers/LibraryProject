@@ -20,7 +20,7 @@ import { ActiveLoansComponent } from './customer/active-loans/active-loans.compo
 import { ActiveReservationsComponent } from './customer/active-reservations/active-reservations.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/Frontpage', pathMatch: 'full' },   //route for the frontpage
+  {path: '', redirectTo: '/login', pathMatch: 'full' },   //route for the frontpage
   {path: 'Frontpage', component: FrontpageComponent},
   {path: 'Category', component: CategoryComponent},   // it displays the Category component
   {path: 'category_books/:id', component: CategoryBooksComponent },  //this is the url which displays the books of the  specific categoryID

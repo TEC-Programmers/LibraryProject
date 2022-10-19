@@ -17,7 +17,7 @@ export class AdminCategoryComponent implements OnInit {
   searchText!: string;
   message!: string;
   categorys: Category[] = [];
-  category: Category = { id: 0, categoryName: '' }
+  public category: Category = { id: 0, categoryName: '' }
   p: any;
   currentUser: User = { id: 0, firstName: '', middleName: '', lastName: '', email: '', password: '', role: 0};
   x:any;
@@ -54,19 +54,18 @@ export class AdminCategoryComponent implements OnInit {
   edit(category: Category): void {
     this.message = '';
     this.category = category;
-    this.category.id = category.id || 0;
-    this.categoryName = category.categoryName;
-    console.log(this.category);
+    console.log('edit: ',this.category);
   }
 
   save(): void {
-    console.log(this.category)
+    console.log('save: ',this.category)
     this.message = '';
 
     if(this.category.id == 0) {
       this.categoryService.addCategory(this.category)
       .subscribe({
         next: (x) => {
+          
           this.categorys.push(x);
           this.category = { id: 0, categoryName: '' }
           this.message = '';
@@ -75,7 +74,9 @@ export class AdminCategoryComponent implements OnInit {
             text: 'Category added successfully',
             icon: 'success',
             confirmButtonText: 'Continue'
-          });
+          }).then(() => {
+            this.categoryService.getAllCategories().subscribe(c => this.categorys = c);
+          })                  
         },
         error: (err) => {
           console.log(err.error);

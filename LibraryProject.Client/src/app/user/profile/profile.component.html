@@ -47,6 +47,7 @@
       <p class="text-center mt-4" (click)="hideForm(currentUser)" *ngIf="showForm"><a routerLink="/profile">Forgot password?</a></p>
       <div class="changePass" *ngIf="!showForm">
         <h1 class="titleForResetPass">Reset Password</h1><br><br><br>
+        <p class="text-center mt-4 w3-red" *ngIf="!user.password || !confirmPass || user.password !== confirmPass" style="color: red; width: 200px; margin-left: 317px">Passwords must match</p>
           <div class="forgotPass">
             <br>
             <label>(enter) new password</label>

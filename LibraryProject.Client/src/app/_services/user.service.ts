@@ -55,5 +55,4 @@ export class UserService {
     return this.http.delete<User>(`${this.apiUrl}/WithProcedure/${id}`, this.httpOptions);
   }
 
-
 }

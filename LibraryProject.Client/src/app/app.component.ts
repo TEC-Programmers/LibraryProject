@@ -35,9 +35,7 @@ export class AppComponent {
     private authService: AuthService,
     public router: Router, private route: ActivatedRoute,
     private userService: UserService) {   // get the current user from authentication service
-
     this.authService.currentUser.subscribe(x => this.currentUser = x);
-
   }
 
   navProfile() {
@@ -74,12 +72,8 @@ export class AppComponent {
 
 
   ngOnInit(): void {
-    // this.categoryService.getAllCategories()
-    // .subscribe(c => this.categories = c);
-
-      this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);
-      
-      this.showOrhideAdminBtn();
+    this.categoryService.getCategoriesWithoutBooks().subscribe(x => this.categories = x);     
+    this.showOrhideAdminBtn();
 
     this.route.params.subscribe(params => {
       if (params['searchTerm'])
@@ -111,12 +105,6 @@ export class AppComponent {
         } 
       });
     }
-
-    
-    itemClicked(item){
-      
-    }
-
 
   
   click() {

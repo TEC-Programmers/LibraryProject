@@ -13,6 +13,7 @@ import { Category } from 'app/_models/Category';
 import { User } from 'app/_models/User';
 import { AuthService } from 'app/_services/auth.service';
 import { UserService } from 'app/_services/user.service';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -34,10 +35,42 @@ export class FrontpageComponent implements OnInit {
   bookId: number = 0;
   public searchTerm: string = "";
   searchBooks: Book[] = [];
+  loans: Loan[] = [];
+  total_books: Book[] = [];
+  yourBook: Book | undefined = { id: 0, title: '', language: '', description: '', publishYear: 0, categoryId: 0, authorId: 0, publisherId: 0, image: '', category: []};
+  public bookArray: Array<Book> = [];
+  total_loans: Loan[] = [];
+  yourId: number = 0;
+  activeLoans: Loan[] = [];
+  allLoans: Loan[] = [];
+  public array: Array<Loan> = [];
+  convertReturnDate;
+  yourLoan: Loan | undefined = { id: 0, bookId: 0, userId: 0, return_date: '', loaned_At: ''}
+  getReturnDate;
+  date = new Date();
+  dateToday = formatDate(this.date, 'yyyy/MM/dd', 'en-US');
+  bookLoanedOut;
+  bookReadyForBurrow;
+  bookStatus;
+  
 
-    constructor(private bookService: BookService, private categoryService: CategoryService, private route: ActivatedRoute, private router: Router, private ref: ChangeDetectorRef, private authService: AuthService, private userService: UserService, private elementRef: ElementRef) {}
+    constructor(private loanService: LoanService, private bookService: BookService, private categoryService: CategoryService, private route: ActivatedRoute, private router: Router, private ref: ChangeDetectorRef, private authService: AuthService, private userService: UserService, private elementRef: ElementRef) {}
 
   ngOnInit(): void {
+    // this.bookService.getAllBooks().subscribe(x => {
+    //   this.books = x;
+    //   this.searchBooks = this.books;
+    //   this.books.forEach(book => {
+    //     this.loanService.getLoanById(this.book.id).subscribe(activeLoan => {
+    //       this.bookStatus = new Date(activeLoan.return_date)
+          // if (this.dateToday > bookStatus) {
+            // Book Status: Out of stock
+            
+          // }
+    //     })
+    //   });
+    // });
+
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
     this.route.params.subscribe(params => {
       if (params['filterTerm']) {
@@ -61,12 +94,53 @@ export class FrontpageComponent implements OnInit {
         this.bookService.getAllBooks().subscribe(x => {
           this.books = x;
           this.searchBooks = this.books;
+          this.loanService.getAllLoans().subscribe(loans => this.allLoans = loans);
         });
       }
     })
 
   }
 
+
+  checkIfBookIsInLoan(book: Book) {
+      // catch loan assosiated with current book
+      this.yourLoan = this.allLoans.find((loan) => {
+        return ((loan.bookId === book.id))
+      })
+  }
+
+  // getReturnDateFromLoan() {
+  //   this.books.forEach(book => {
+  //     this.loanService.getAllLoans().subscribe({
+  //       next: (loans) => {
+  //         this.total_loans = loans;
+  //         if (this.total_loans) {
+  //           var convertDateToday = formatDate(this.date, 'yyyy/MM/dd', 'en-US');            
+
+  //           this.yourLoan = this.total_loans.find((loan) => {
+  //             return ((loan.bookId === book.id))
+  //           })
+  //           console.log('yourLoan: ',this.yourLoan)
+
+  //           if (this.yourLoan) {
+  //             console.log(this.yourLoan.return_date,' > ',convertDateToday)
+              
+  //             if (this.yourLoan.return_date > convertDateToday) {
+  //               this.bookLoanedOut = `book: ${book.id}, Loaned Out`;
+  //             }
+  //             else {
+  //               this.bookReadyForBurrow = `book: ${book.id}, Burrow - Ready`;
+  //             }
+  //           }              
+
+  //         }
+  //       }
+  //     })
+      
+
+  //   });
+  // }
+   
 
   click() {
     if (this.filterTerm == null || this.filterTerm == '') {

@@ -13,9 +13,5 @@ export interface Book
     categoryId: number;
     category: Category[];
     authorId: number;
-    //author:{id: number, firstName:string, lastName:string};
     publisherId: number;
-    //publisher:{id:number, name:string};
 }
-
-// fjern {author} & {publisher} objects

@@ -192,28 +192,36 @@ export class ProfileComponent implements OnInit {
 
     if (this.message.length == 0) {
       if (this.user.id == 0) {
-        this.userService.registerWithProcedure(this.user)
-           .subscribe(a => {
-          this.users.push(a)
-          this.user= this.newUser();
-          });
+        console.log('cant find user...')
       }
       else if ((confirm('Update profile?')))
       {    
-        if(this.user.role.toString() === 'Customer') {
+        if(this.user.role.toString() === 'Customer' || this.user.role.toString() === 'Administrator') {
           console.log('customer before profile update: ',this.user)
           this.userService.updateProfileWithProcedure(this.user.id, this.user)
               .subscribe(() => {
                 this.user = this.newUser();
+                Swal.fire({
+                  title: 'Success!',
+                  text: 'Profile updated successfully',
+                  icon: 'success',
+                  confirmButtonText: 'Continue'
+                })
               });
         }
-        else if(this.user.role.toString() === 'Administrator') {
-          console.log('admin before profile update: ',this.user)
-          this.userService.updateProfileWithProcedure(this.user.id, this.user)
-              .subscribe(() => {
-                this.user = this.newUser();
-              });
-        }
+        // else if(this.user.role.toString() === 'Administrator') {
+        //   console.log('admin before profile update: ',this.user)
+        //   this.userService.updateProfileWithProcedure(this.user.id, this.user)
+        //       .subscribe(() => {
+        //         this.user = this.newUser();
+        //         Swal.fire({
+        //           title: 'Success!',
+        //           text: 'Category added successfully',
+        //           icon: 'success',
+        //           confirmButtonText: 'Continue'
+        //         })
+        //       });
+        // }
         
       }
       else {

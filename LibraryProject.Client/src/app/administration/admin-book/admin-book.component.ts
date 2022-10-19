@@ -291,12 +291,8 @@ export class AdminBookComponent implements OnInit {
 
   edit_book(book: Book): void {
     this.message = '';
-    // this.book.image = this.book.image + '.jpg';
     this.book = book;
     this.book.id = book.id || 0;
-    
-    console.log(this.book);
-    console.log('image format: ',this.book.image) 
   }
 
   delete_book(book: Book): void {
@@ -309,7 +305,7 @@ export class AdminBookComponent implements OnInit {
   }
 
   update_Book(): void {
-    console.log(this.book)
+    console.log('update book: ',this.book)
     this.message = '';
 
     // check if book exsist's
